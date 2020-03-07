@@ -6,6 +6,6 @@ public abstract class Balloon {
     private int money;
     private int damage;
     private int speed;
-    private
+//    private
 
 }
