@@ -39,7 +39,7 @@ public class Tower {
             specialAbility.specialAttack(b);
     }
 
-    public void attackBaloon(Balloon b){
+    public void attackBalloon(Balloon b){
         //
     }
 
