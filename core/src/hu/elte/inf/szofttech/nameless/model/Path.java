@@ -16,11 +16,15 @@ public final class Path {
         this.pointSet = new HashSet<GridPoint2>(points);
     }
 
-    public boolean onPath(GridPoint2 point) {
-        return this.pointSet.contains(point);
+    public int length() {
+        return this.points.size();
     }
 
-    public Vector2 movePos(Vector2 oldPos, int speed) {
-        return null; // TODO
+    public GridPoint2 get(int index) {
+        return this.points.get(index);
+    }
+
+    public boolean onPath(GridPoint2 point) {
+        return this.pointSet.contains(point);
     }
 }
