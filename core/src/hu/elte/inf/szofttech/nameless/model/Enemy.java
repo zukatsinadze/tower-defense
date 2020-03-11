@@ -2,7 +2,7 @@ package hu.elte.inf.szofttech.nameless.model;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class Balloon {
+public class Enemy {
     private int XP;
     private int money;
     private int damage;
@@ -18,7 +18,7 @@ public class Balloon {
         YELLOW
     }
 
-    private Balloon(int XP, int money, int damage, int speed, int health, Vector2 pos) {
+    private Enemy(int XP, int money, int damage, int speed, int health, Vector2 pos) {
         this.XP = XP;
         this.money = money;
         this.damage = damage;
@@ -59,13 +59,13 @@ public class Balloon {
 //        this.pos = pos;
 //    }
 
-    public static Balloon createBalloon(Vector2 pos,BalloonType type) {
+    public static Enemy createBalloon(Vector2 pos, BalloonType type) {
         int XP;
         int money;
         int damage;
         int speed;
         int health;
-        Balloon balloon = null;
+        Enemy enemy = null;
 
         switch (type) {
             case RED:
@@ -74,8 +74,8 @@ public class Balloon {
                 damage = 3;
                 speed = 10;
                 health = 10;
-                balloon = new Balloon(XP,money,damage,speed,health,pos);
-                return balloon;
+                enemy = new Enemy(XP,money,damage,speed,health,pos);
+                return enemy;
 
             case PINK:
                 XP = 2;
@@ -83,8 +83,8 @@ public class Balloon {
                 damage = 5;
                 speed = 15;
                 health = 15;
-                balloon = new Balloon(XP,money,damage,speed,health,pos);
-                return balloon;
+                enemy = new Enemy(XP,money,damage,speed,health,pos);
+                return enemy;
 
             case BLUE:
                 XP = 4;
@@ -92,8 +92,8 @@ public class Balloon {
                 damage = 10;
                 speed = 8;
                 health = 30;
-                balloon = new Balloon(XP,money,damage,speed,health,pos);
-                return balloon;
+                enemy = new Enemy(XP,money,damage,speed,health,pos);
+                return enemy;
 
             case WHITE:
                 XP = 4;
@@ -101,8 +101,8 @@ public class Balloon {
                 damage = 10;
                 speed = 30;
                 health = 8;
-                balloon = new Balloon(XP,money,damage,speed,health,pos);
-                return balloon;
+                enemy = new Enemy(XP,money,damage,speed,health,pos);
+                return enemy;
 
             case YELLOW:
                 XP = 5;
@@ -110,11 +110,11 @@ public class Balloon {
                 damage = 15;
                 speed = 25;
                 health = 25;
-                balloon = new Balloon(XP,money,damage,speed,health,pos);
-                return balloon;
+                enemy = new Enemy(XP,money,damage,speed,health,pos);
+                return enemy;
 
             default:
-                return balloon;
+                return enemy;
 
         }
     }

@@ -1,8 +1,7 @@
 package hu.elte.inf.szofttech.nameless.model.tower;
 
-import hu.elte.inf.szofttech.nameless.model.Balloon;
+import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.GDSprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 public class Tower {
@@ -34,12 +33,12 @@ public class Tower {
 
 
 
-    public void specialAttack(Balloon b){
+    public void specialAttack(Enemy b){
         if (upgraded)
             specialAbility.specialAttack(b);
     }
 
-    public void attackBalloon(Balloon b){
+    public void attackBalloon(Enemy b){
         //
     }
 

@@ -1,10 +1,10 @@
 package hu.elte.inf.szofttech.nameless.model.tower;
 
-import hu.elte.inf.szofttech.nameless.model.Balloon;
+import hu.elte.inf.szofttech.nameless.model.Enemy;
 
 public class FreezeBalloons implements SpecialAbility{
     @Override
-    public void specialAttack(Balloon b){
+    public void specialAttack(Enemy b){
         // ...
     }
 }

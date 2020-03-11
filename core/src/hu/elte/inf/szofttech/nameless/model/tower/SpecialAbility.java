@@ -1,7 +1,7 @@
 package hu.elte.inf.szofttech.nameless.model.tower;
 
-import hu.elte.inf.szofttech.nameless.model.Balloon;
+import hu.elte.inf.szofttech.nameless.model.Enemy;
 
 public interface SpecialAbility {
-    void specialAttack(Balloon b);
+    void specialAttack(Enemy b);
 }
