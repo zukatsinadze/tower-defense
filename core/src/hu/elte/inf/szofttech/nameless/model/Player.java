@@ -8,16 +8,16 @@ public class Player {
         return money;
     }
 
-    public int getHealth() {
-        return health;
-    }
-
     public void setMoney(int money) {
         this.money = money;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public void loseHealth(int damage) {
+        this.health -= damage;
+    }
+
+    public boolean isAlive() {
+        return this.health > 0;
     }
 
     public void placeTower() {

@@ -43,21 +43,21 @@ public class Balloon {
         return speed;
     }
 
-    public int getHealth() {
-        return health;
-    }
+//    public int getHealth() {
+//        return health;
+//    }
+//
+//    public Vector2 getPos() {
+//        return pos;
+//    }
 
-    public Vector2 getPos() {
-        return pos;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public void setPos(Vector2 pos) {
-        this.pos = pos;
-    }
+//    public void setHealth(int health) {
+//        this.health = health;
+//    }
+//
+//    public void setPos(Vector2 pos) {
+//        this.pos = pos;
+//    }
 
     public static Balloon createBalloon(Vector2 pos,BalloonType type) {
         int XP;
@@ -117,6 +117,18 @@ public class Balloon {
                 return balloon;
 
         }
+    }
+
+    public void attacked(int damage) {
+        this.health -= damage;
+    }
+
+    public boolean isAlive() {
+        return this.health > 0;
+    }
+
+    public void move() {
+
     }
 
 }
