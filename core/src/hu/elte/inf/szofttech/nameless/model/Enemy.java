@@ -10,7 +10,7 @@ public class Enemy {
     private int health;
     private Vector2 pos;
 
-    public static enum BalloonType {
+    public static enum EnemyType {
         RED,
         PINK,
         BLUE,
@@ -59,7 +59,7 @@ public class Enemy {
 //        this.pos = pos;
 //    }
 
-    public static Enemy createBalloon(Vector2 pos, BalloonType type) {
+    public static Enemy createEnemy(Vector2 pos, EnemyType type) {
         int XP;
         int money;
         int damage;
