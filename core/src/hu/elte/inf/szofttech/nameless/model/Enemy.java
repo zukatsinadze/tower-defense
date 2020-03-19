@@ -8,7 +8,7 @@ public class Enemy {
     private int damage;
     private int speed;
     private int health;
-    private Vector2 pos;
+    private EnemyPos pos;
 
     public static enum EnemyType {
         RED,
@@ -18,7 +18,7 @@ public class Enemy {
         YELLOW
     }
 
-    private Enemy(int XP, int money, int damage, int speed, int health, Vector2 pos) {
+    private Enemy(int XP, int money, int damage, int speed, int health, EnemyPos pos) {
         this.XP = XP;
         this.money = money;
         this.damage = damage;
@@ -43,29 +43,16 @@ public class Enemy {
         return speed;
     }
 
-//    public int getHealth() {
-//        return health;
-//    }
-//
-//    public Vector2 getPos() {
-//        return pos;
-//    }
+    public Vector2 getPos() { return this.pos.getPos(); }
 
-//    public void setHealth(int health) {
-//        this.health = health;
-//    }
-//
-//    public void setPos(Vector2 pos) {
-//        this.pos = pos;
-//    }
-
-    public static Enemy createEnemy(Vector2 pos, EnemyType type) {
+    public static Enemy createEnemy(Path path, EnemyType type) {
         int XP;
         int money;
         int damage;
         int speed;
         int health;
         Enemy enemy = null;
+        EnemyPos pos = new EnemyPos(path);
 
         switch (type) {
             case RED:
@@ -127,8 +114,10 @@ public class Enemy {
         return this.health > 0;
     }
 
-    public void move() {
-
+    public void move(long time) {
+        pos.move(this.speed,time);
     }
+
+    public boolean end() { return this.pos.end(); }
 
 }
