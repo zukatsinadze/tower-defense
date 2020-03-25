@@ -30,7 +30,7 @@ public class EnemyPos {
         if (this.pos.x == nextPos.x) {
             //already end
             if (this.pos.y == nextPos.y) {
-                if (this.nextPos != this.path.length()) {
+                if (this.nextPos != this.path.length() - 1) {
                     this.nextPos ++;
                 }
             } else if (this.pos.y > nextPos.y) {
