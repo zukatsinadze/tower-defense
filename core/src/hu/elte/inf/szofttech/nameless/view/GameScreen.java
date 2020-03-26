@@ -17,6 +17,7 @@ public class GameScreen extends ScreenAdapter {
     private final Main game;
     private final OrthographicCamera camera;
     private final Texture balloon;
+    private final Texture tower;
     private final Path path;
     private final List<Enemy> enemies;
 
@@ -26,6 +27,7 @@ public class GameScreen extends ScreenAdapter {
         this.camera.setToOrtho(false, 800, 480);
 
         this.balloon = new Texture("pink_balloon.png");
+        this.tower = new Texture("tower1.png");
 
         List<GridPoint2> pathList = new ArrayList<>();
         pathList.add(new GridPoint2(0, 2));
@@ -58,6 +60,7 @@ public class GameScreen extends ScreenAdapter {
                     this.enemies.get(i).getPos().x * 100,
                     this.enemies.get(i).getPos().y * 100);
         }
+        this.game.getBatch().draw(this.tower, 100,100);
         this.game.getBatch().end();
 
         this.enemies.forEach(enemy -> enemy.move(Math.round(delta * Math.pow(10, 9))));
