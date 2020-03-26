@@ -114,7 +114,7 @@ public class Enemy {
         return this.health > 0;
     }
 
-    public void move(long time) {
+    public void move(float time) {
         pos.move(this.speed,time);
     }
 

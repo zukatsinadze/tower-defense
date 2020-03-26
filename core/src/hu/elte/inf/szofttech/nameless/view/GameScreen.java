@@ -60,6 +60,11 @@ public class GameScreen extends ScreenAdapter {
         }
         this.game.getBatch().end();
 
-        this.enemies.forEach(enemy -> enemy.move(Math.round(delta * Math.pow(10, 9))));
+        this.enemies.forEach(enemy -> enemy.move(delta));
+    }
+
+    @Override
+    public void dispose() {
+        this.balloon.dispose();
     }
 }
