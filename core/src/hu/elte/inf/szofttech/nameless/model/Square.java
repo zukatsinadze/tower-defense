@@ -1,11 +1,13 @@
 package hu.elte.inf.szofttech.nameless.model;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 
 import java.util.Optional;
 
 public final class Square {
     private Optional<Tower> tower;
+    private GDSprite sprite;
 
     public Square() {
         this.tower = Optional.empty();
@@ -21,5 +23,17 @@ public final class Square {
 
     public void destroyTower() {
         this.tower = Optional.empty();
+    }
+
+    public GDSprite getSprite() {
+        return sprite;
+    }
+
+    public void setSprite(GDSprite sprite) {
+        this.sprite = sprite;
+    }
+
+    public void draw(SpriteBatch spriteBatch) {
+        sprite.draw(spriteBatch);
     }
 }
