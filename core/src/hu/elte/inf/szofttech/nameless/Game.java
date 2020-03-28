@@ -1,6 +1,7 @@
 package hu.elte.inf.szofttech.nameless;
 
 import hu.elte.inf.szofttech.nameless.model.Enemy;
+import hu.elte.inf.szofttech.nameless.model.Square;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Utils;
@@ -29,7 +30,7 @@ public class Game {
     private int playerLife = 10;
     private int spawnedEnemies;
 
-//    private TileType grid[][];
+    private Square grid[][];
     private float roundTime, spawnDelay;
 
     private List<Enemy> enemies;
@@ -55,7 +56,7 @@ public class Game {
     }
 
     private void createMap() {
-//        grid = new TileType[GRIDX][GRIDY];
+        grid = new Square[GRIDX][GRIDY];
 //        for (int i = 0; i < GRIDX; i++) {
 //            for (int j = 0; j < GRIDY; j++) {
 //                grid[i][j] = TileType.Used;
@@ -80,7 +81,6 @@ public class Game {
         enemiesToBeSpawned = new ArrayList<Integer>();
         enemies = new ArrayList<Enemy>();
 //        projectiles = new ArrayList<Projectile>();
-
     }
 
     public void update(float delta) {
@@ -115,12 +115,12 @@ public class Game {
         }
     }
 
-    public void render(SpriteBatch spriteBatch) {
-        displayMap(spriteBatch);
-        displayEnemies(spriteBatch);
-        displayTowers(spriteBatch);
-        displayProjectiles(spriteBatch);
-    }
+//    public void render(SpriteBatch spriteBatch) {
+//        displayMap(spriteBatch);
+//        displayEnemies(spriteBatch);
+//        displayTowers(spriteBatch);
+//        displayProjectiles(spriteBatch);
+//    }
 
     private void displayProjectiles(SpriteBatch spriteBatch) {
         spriteBatch.begin();
@@ -131,26 +131,26 @@ public class Game {
 
     }
 
-    private void displayTowers(SpriteBatch spriteBatch) {
-        spriteBatch.begin();
-        for(Tower tower : deployedTowers) {
-//            tower.draw(spriteBatch);
-        }
+//    private void displayTowers(SpriteBatch spriteBatch) {
+//        spriteBatch.begin();
+//        for(Tower tower : deployedTowers) {
+////            tower.draw(spriteBatch);
+//        }
+//
+//        spriteBatch.end();
+//    }
 
-        spriteBatch.end();
-    }
+//    private void displayEnemies(SpriteBatch spriteBatch){
+//        spriteBatch.begin();
+//        for(Enemy enemy : enemies){
+////            enemy.draw(spriteBatch);
+//        }
+//
+//        spriteBatch.end();
+//    }
 
-    private void displayEnemies(SpriteBatch spriteBatch){
-        spriteBatch.begin();
-        for(Enemy enemy : enemies){
-//            enemy.draw(spriteBatch);
-        }
-
-        spriteBatch.end();
-    }
-
-    private void displayMap(SpriteBatch spriteBatch) {
-        spriteBatch.begin();
+//    private void displayMap(SpriteBatch spriteBatch) {
+//        spriteBatch.begin();
 //        for (int i = 0; i < grid.length; i++) {
 //            for (int j = 0; j < grid[i].length; j++) {
 //                TileType type = grid[i][j];
@@ -161,8 +161,8 @@ public class Game {
 //                newTile.draw(spriteBatch);
 //            }
 //        }
-        spriteBatch.end();
-    }
+//        spriteBatch.end();
+//    }
 
     public boolean checkProjectileCollision() {
 
