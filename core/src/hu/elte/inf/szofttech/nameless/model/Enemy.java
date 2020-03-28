@@ -128,12 +128,12 @@ public class Enemy {
     }
 
     public void draw(SpriteBatch spriteBatch) {
-        if(isAlive() && !end()){
+        if(isAlive() && !end()) {
             sprite.setX(pos.getPos().x * 100);
             sprite.setY(pos.getPos().y * 100);
             sprite.draw(spriteBatch);
+            System.out.println(this.health);
         }
-        System.out.println(this.health);
     }
 
     public boolean end() { return this.pos.end(); }

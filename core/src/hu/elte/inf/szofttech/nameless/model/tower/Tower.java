@@ -3,9 +3,13 @@ package hu.elte.inf.szofttech.nameless.model.tower;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.GDSprite;
 import hu.elte.inf.szofttech.nameless.Config;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.Gdx;
 
 import java.awt.geom.Point2D;
+import java.net.StandardSocketOptions;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,21 +17,30 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Tower {
     private SpecialAbility specialAbility;
+    private int attackTimer = 1;
     private int XP;
     private int price;
     private int damage;
     private float range;
-    private float attack_speed;
+    private int attackSpeed;
     private Boolean upgraded = false;
     private Vector2 position;
     private GDSprite sprite;
     private Point2D.Float center;
     private ArrayList<Enemy> targets = null;
+    private long start = System.currentTimeMillis();
 
-    public Tower(GDSprite sprite, int damage, float range, float attack_speed, int price, int XP) {
-        this.sprite = sprite;
+    public Tower(String path, int damage, float range, int attackSpeed, int price, int XP) {
+        Pixmap pixmap200 = new Pixmap(Gdx.files.internal(path));
+        Pixmap pixmap100 = new Pixmap(100, 100, pixmap200.getFormat());
+        pixmap100.drawPixmap(pixmap200,
+                0, 0, pixmap200.getWidth(), pixmap200.getHeight(),
+                0, 0, pixmap100.getWidth(), pixmap100.getHeight()
+        );
+        Texture t = new Texture(pixmap100);
+        this.sprite = new GDSprite(t);
         this.damage = damage;
-        this.attack_speed = attack_speed;
+        this.attackSpeed = attackSpeed;
         this.range = range;
         this.price = price;
         this.XP = XP;
@@ -59,6 +72,9 @@ public class Tower {
         sprite.setY(position.y);
     }
 
+    public int getAttackTimer() { return attackTimer; }
+    public void setAttackTimer(int attackTimer) { this.attackTimer = attackTimer; }
+
     public Vector2 getPosition() {
         return position;
     }
@@ -88,14 +104,16 @@ public class Tower {
     }
 
     public float getAttackSpeed() {
-        return attack_speed;
+        return attackSpeed;
     }
 
     public ArrayList<Enemy> getTarget() {
         return targets;
     }
 
-    public void setTargets(ArrayList<Enemy> targets) { this.targets = targets; }
+    public void setTargets(ArrayList<Enemy> targets) {
+        this.targets = targets;
+    }
 
 
     public void specialAttack(Enemy b) {
@@ -103,7 +121,7 @@ public class Tower {
             specialAbility.specialAttack(b);
     }
 
-    public void shoot(float delta) {
+    public void shoot(int delta) {
 //        attackTimer += delta;
 //        if(targets.size() > 0){
 //            List<Projectile> projectiles = GameState.getInstance().getProjectiles();
@@ -114,10 +132,16 @@ public class Tower {
 //                projectiles.add(shotProjectile);
 //            }
 //        }
+//        this.attackTimer += delta;
+//        System.out.println("AttackTimer: " + attackTimer);
+        long end = System.currentTimeMillis();
         for (Enemy enemy : this.targets) {
             if (intersects(enemy)) {
-                System.out.println("Attacked");
-                enemy.attacked(this.damage);
+                if (enemy.isAlive() && !enemy.end() && (end - this.start) > 100*attackSpeed) {
+                    System.out.println("Attacked!");
+                    enemy.attacked(damage);
+                    this.start = end;
+                }
             }
         }
     }

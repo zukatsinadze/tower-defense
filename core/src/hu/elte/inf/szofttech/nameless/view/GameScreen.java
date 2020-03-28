@@ -13,6 +13,7 @@ import hu.elte.inf.szofttech.nameless.model.GDSprite;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 import hu.elte.inf.szofttech.nameless.model.Path;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +21,9 @@ public class GameScreen extends ScreenAdapter {
     private final Main game;
     private final OrthographicCamera camera;
     private final Texture balloon;
-    private final Texture tower;
+    private final Tower tower;
     private final Path path;
-    private final List<Enemy> enemies;
+    private final ArrayList<Enemy> enemies;
 
     public GameScreen(Main game) {
         this.game = game;
@@ -30,7 +31,7 @@ public class GameScreen extends ScreenAdapter {
         this.camera.setToOrtho(false, 800, 480);
 
         this.balloon = new Texture("pink_balloon.png");
-        this.tower = new Texture("tower1.png");
+//        this.tower = new Texture("tower1.png");
 
 
         List<GridPoint2> pathList = new ArrayList<>();
@@ -49,6 +50,9 @@ public class GameScreen extends ScreenAdapter {
         this.enemies.add(Enemy.createEnemy(this.path, Enemy.EnemyType.RED));
         this.enemies.add(Enemy.createEnemy(this.path, Enemy.EnemyType.RED));
         this.enemies.add(Enemy.createEnemy(this.path, Enemy.EnemyType.PINK));
+        this.tower = new Tower("tower1.png", 1, 10,3,10,10);
+        this.tower.setPosition(new Vector2(300,100));
+        this.tower.setTargets(this.enemies);
     }
 
     @Override
@@ -60,17 +64,18 @@ public class GameScreen extends ScreenAdapter {
 
         this.game.getBatch().begin();
 
+        this.tower.draw(this.game.getBatch());
+
+
+
         for (int i = 0; i < this.enemies.size(); ++i) {
             this.enemies.get(i).setSprite(new GDSprite(this.balloon));
             this.enemies.get(i).draw(this.game.getBatch());
         }
 
-        Tower t = new Tower(new GDSprite(this.tower), 10, 10,10,10,10);
-        t.setPosition(new Vector2(300,100));
-        t.draw(this.game.getBatch());
         this.game.getBatch().end();
         this.enemies.forEach(enemy -> enemy.move(delta));
-
+        this.tower.shoot(1);
     }
 
     @Override
