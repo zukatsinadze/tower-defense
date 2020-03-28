@@ -24,6 +24,10 @@ public class GameScreen extends ScreenAdapter {
     private final Tower tower;
     private final Path path;
     private final ArrayList<Enemy> enemies;
+    private final int screen_size_width;
+    private final int screen_size_height;
+    private final int grid_size_width;
+    private final int grid_size_height;
 
     public GameScreen(Main game) {
         this.game = game;
@@ -32,6 +36,12 @@ public class GameScreen extends ScreenAdapter {
 
         this.balloon = new Texture("pink_balloon.png");
 //        this.tower = new Texture("tower1.png");
+
+        this.screen_size_width = 800;
+        this.screen_size_height = 480;
+
+        this.grid_size_width = 15;
+        this.grid_size_height = 9;
 
 
         List<GridPoint2> pathList = new ArrayList<>();
@@ -81,5 +91,9 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void dispose() {
         this.balloon.dispose();
+    }
+
+    public GridPoint2 convert(GridPoint2 pos) {
+        return new GridPoint2(pos.x*800/15, pos.y*480/9);
     }
 }
