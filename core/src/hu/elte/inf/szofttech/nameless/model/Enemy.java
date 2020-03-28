@@ -1,8 +1,10 @@
 package hu.elte.inf.szofttech.nameless.model;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 public class Enemy {
+    private GDSprite sprite;
     private int XP;
     private int money;
     private int damage;
@@ -18,7 +20,8 @@ public class Enemy {
         YELLOW
     }
 
-    private Enemy(int XP, int money, int damage, int speed, int health, EnemyPos pos) {
+    private Enemy(GDSprite sprite, int XP, int money, int damage, int speed, int health, EnemyPos pos) {
+        this.sprite = sprite;
         this.XP = XP;
         this.money = money;
         this.damage = damage;
@@ -26,6 +29,10 @@ public class Enemy {
         this.health = health;
         this.pos = pos;
     }
+
+    public GDSprite getSprite() { return sprite; }
+
+    public void setSprite(GDSprite sprite) { this.sprite = sprite; }
 
     public int getXP() {
         return XP;
@@ -53,6 +60,7 @@ public class Enemy {
         int health;
         Enemy enemy = null;
         EnemyPos pos = new EnemyPos(path);
+        GDSprite sprite = null;
 
         switch (type) {
             case RED:
@@ -61,7 +69,7 @@ public class Enemy {
                 damage = 3;
                 speed = 10;
                 health = 10;
-                enemy = new Enemy(XP,money,damage,speed,health,pos);
+                enemy = new Enemy(sprite,XP,money,damage,speed,health,pos);
                 return enemy;
 
             case PINK:
@@ -70,7 +78,7 @@ public class Enemy {
                 damage = 5;
                 speed = 15;
                 health = 15;
-                enemy = new Enemy(XP,money,damage,speed,health,pos);
+                enemy = new Enemy(sprite,XP,money,damage,speed,health,pos);
                 return enemy;
 
             case BLUE:
@@ -79,7 +87,7 @@ public class Enemy {
                 damage = 10;
                 speed = 8;
                 health = 30;
-                enemy = new Enemy(XP,money,damage,speed,health,pos);
+                enemy = new Enemy(sprite,XP,money,damage,speed,health,pos);
                 return enemy;
 
             case WHITE:
@@ -88,7 +96,7 @@ public class Enemy {
                 damage = 10;
                 speed = 30;
                 health = 8;
-                enemy = new Enemy(XP,money,damage,speed,health,pos);
+                enemy = new Enemy(sprite,XP,money,damage,speed,health,pos);
                 return enemy;
 
             case YELLOW:
@@ -97,7 +105,7 @@ public class Enemy {
                 damage = 15;
                 speed = 25;
                 health = 25;
-                enemy = new Enemy(XP,money,damage,speed,health,pos);
+                enemy = new Enemy(sprite,XP,money,damage,speed,health,pos);
                 return enemy;
 
             default:
@@ -115,7 +123,17 @@ public class Enemy {
     }
 
     public void move(float time) {
-        pos.move(this.speed,time);
+        if (isAlive())
+            pos.move(this.speed,time);
+    }
+
+    public void draw(SpriteBatch spriteBatch) {
+        if(isAlive() && !end()){
+            sprite.setX(pos.getPos().x * 100);
+            sprite.setY(pos.getPos().y * 100);
+            sprite.draw(spriteBatch);
+        }
+        System.out.println(this.health);
     }
 
     public boolean end() { return this.pos.end(); }

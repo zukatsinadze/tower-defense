@@ -95,13 +95,15 @@ public class Tower {
         return targets;
     }
 
+    public void setTargets(ArrayList<Enemy> targets) { this.targets = targets; }
+
 
     public void specialAttack(Enemy b) {
         if (upgraded)
             specialAbility.specialAttack(b);
     }
 
-    private void shoot(float delta) {
+    public void shoot(float delta) {
 //        attackTimer += delta;
 //        if(targets.size() > 0){
 //            List<Projectile> projectiles = GameState.getInstance().getProjectiles();
@@ -112,6 +114,12 @@ public class Tower {
 //                projectiles.add(shotProjectile);
 //            }
 //        }
+        for (Enemy enemy : this.targets) {
+            if (intersects(enemy)) {
+                System.out.println("Attacked");
+                enemy.attacked(this.damage);
+            }
+        }
     }
 
 

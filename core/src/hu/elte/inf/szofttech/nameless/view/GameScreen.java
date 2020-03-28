@@ -6,8 +6,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.GridPoint2;
+import com.badlogic.gdx.math.Vector2;
 import hu.elte.inf.szofttech.nameless.Main;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
+import hu.elte.inf.szofttech.nameless.model.GDSprite;
+import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 import hu.elte.inf.szofttech.nameless.model.Path;
 
 import java.util.ArrayList;
@@ -28,6 +31,7 @@ public class GameScreen extends ScreenAdapter {
 
         this.balloon = new Texture("pink_balloon.png");
         this.tower = new Texture("tower1.png");
+
 
         List<GridPoint2> pathList = new ArrayList<>();
         pathList.add(new GridPoint2(0, 2));
@@ -55,15 +59,18 @@ public class GameScreen extends ScreenAdapter {
         this.game.getBatch().setProjectionMatrix(camera.combined);
 
         this.game.getBatch().begin();
-        for (int i = 0; i < this.enemies.size(); ++i) {
-            this.game.getBatch().draw(this.balloon,
-                    this.enemies.get(i).getPos().x * 100,
-                    this.enemies.get(i).getPos().y * 100);
-        }
-        this.game.getBatch().draw(this.tower, 100,100);
-        this.game.getBatch().end();
 
+        for (int i = 0; i < this.enemies.size(); ++i) {
+            this.enemies.get(i).setSprite(new GDSprite(this.balloon));
+            this.enemies.get(i).draw(this.game.getBatch());
+        }
+
+        Tower t = new Tower(new GDSprite(this.tower), 10, 10,10,10,10);
+        t.setPosition(new Vector2(300,100));
+        t.draw(this.game.getBatch());
+        this.game.getBatch().end();
         this.enemies.forEach(enemy -> enemy.move(delta));
+
     }
 
     @Override
