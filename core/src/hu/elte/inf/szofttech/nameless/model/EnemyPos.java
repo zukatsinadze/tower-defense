@@ -4,14 +4,14 @@ import com.badlogic.gdx.math.Vector2;
 import hu.elte.inf.szofttech.nameless.Utils;
 
 public class EnemyPos {
-    private int nextPos;
+    private int next;
     private Vector2 pos;
     private Path path;
 
     public EnemyPos(Path path) {
         //first element of path
-        this.pos = Utils.gridToVector(path.get(0));
-        this.nextPos = 1;
+        this.pos = Utils.gridToVector(path.getFirst());
+        this.next = 1;
         this.path = path;
     }
 
@@ -19,19 +19,19 @@ public class EnemyPos {
         return this.pos;
     }
 
-    public void move(int speed,float time) {
+    public void move(int speed, float time) {
         //time in seconds
         //speed in 0.1 square/second
         //distance in square
         double distance;
-        Vector2 nextPos = Utils.gridToVector(this.path.get(this.nextPos));
+        Vector2 nextPos = Utils.gridToVector(this.path.get(this.next));
         distance = speed * 0.1 * time;
 
         if (this.pos.x == nextPos.x) {
             //already end
             if (this.pos.y == nextPos.y) {
-                if (this.nextPos != this.path.length() - 1) {
-                    this.nextPos ++;
+                if (this.next != this.path.length() - 1) {
+                    this.next++;
                 }
             } else if (this.pos.y > nextPos.y) {
                 //moves over the destination
@@ -63,7 +63,7 @@ public class EnemyPos {
     }
 
     public boolean end() {
-        return this.pos.equals(Utils.gridToVector(this.path.get(this.path.length()-1)));
+        return this.pos.equals(Utils.gridToVector(this.path.getLast()));
     }
 
 }

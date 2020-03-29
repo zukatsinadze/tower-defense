@@ -10,6 +10,18 @@ public final class Wave {
         this.enemies = enemies;
     }
 
+    public int size() {
+        return this.enemies.size();
+    }
+
+    public Enemy get(int index) {
+        return this.enemies.get(index);
+    }
+
+    public List<Enemy> getEnemies() {
+        return this.enemies;
+    }
+
     public void moveAll(float time) {
         this.enemies.forEach(enemy -> enemy.move(time));
     }
