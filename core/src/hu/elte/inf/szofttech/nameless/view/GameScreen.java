@@ -17,6 +17,9 @@ import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 import java.time.Clock;
 import java.util.ArrayList;
 
+/**
+ * rendering game
+ */
 public class GameScreen extends ScreenAdapter {
     private final Main game;
     private final OrthographicCamera camera;
@@ -56,6 +59,7 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+
         Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         this.camera.update();
@@ -64,8 +68,10 @@ public class GameScreen extends ScreenAdapter {
         // drawing begins
         this.game.getBatch().begin();
 
+        // rendering towers
         this.tower.draw(this.game.getBatch());
 
+        // rendering ballons
         for (int i = 0; i < this.wave.size(); ++i) {
             this.wave.get(i).setSprite(new GDSprite(this.balloon));
             this.wave.get(i).draw(this.game.getBatch());
@@ -83,7 +89,11 @@ public class GameScreen extends ScreenAdapter {
         this.balloon.dispose();
     }
 
-    // mapping position to screen
+
+    /**
+     * @param pos position of points on the grid
+     * @return the position of points on the screen
+     */
     public GridPoint2 convert(GridPoint2 pos) {
         return new GridPoint2(
                 pos.x * this.screenWidth / this.gridWidth,

@@ -2,6 +2,9 @@ package hu.elte.inf.szofttech.nameless;
 
 import com.badlogic.gdx.graphics.Color;
 
+/**
+ * colors for use
+ */
 public class Config {
     public static final int tileSize = 40;
 

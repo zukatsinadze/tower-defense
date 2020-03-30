@@ -10,6 +10,9 @@ public final class Wave {
         this.enemies = enemies;
     }
 
+    /**
+     * @return the number of enemies in a wave
+     */
     public int size() {
         return this.enemies.size();
     }
@@ -26,6 +29,9 @@ public final class Wave {
         this.enemies.forEach(enemy -> enemy.move(time));
     }
 
+    /**
+     * create a list of enemies
+     */
     public static class Builder {
         private final Path path;
         private final List<Enemy> enemies;

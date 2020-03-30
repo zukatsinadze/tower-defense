@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import hu.elte.inf.szofttech.nameless.Main;
 
+/**
+ * rendering menu
+ */
 public final class MainMenuScreen extends ScreenAdapter {
     private final Main game;
     private final OrthographicCamera camera;

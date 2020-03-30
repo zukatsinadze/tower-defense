@@ -36,7 +36,10 @@ public final class Path {
         return this.pointSet.contains(point);
     }
 
-    // build a path and add points to it
+
+    /**
+     * build a path and add points to it
+     */
     public static class Builder {
         private final List<GridPoint2> points;
 

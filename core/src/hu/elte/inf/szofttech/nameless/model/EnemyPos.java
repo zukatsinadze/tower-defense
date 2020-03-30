@@ -3,6 +3,9 @@ package hu.elte.inf.szofttech.nameless.model;
 import com.badlogic.gdx.math.Vector2;
 import hu.elte.inf.szofttech.nameless.Utils;
 
+/**
+ * handle the position of enemy
+ */
 public class EnemyPos {
     private int next;
     private Vector2 pos;

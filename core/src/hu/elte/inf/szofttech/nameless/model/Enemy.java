@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- *
+ *the behavior of enemy
  */
 public class Enemy {
     private GDSprite sprite;
@@ -117,14 +117,25 @@ public class Enemy {
         }
     }
 
+    /**
+     * @param damage
+     * handle the situation that the enemy got attacked
+     */
     public void attacked(int damage) {
         this.health -= damage;
     }
 
+    /**
+     * @return whether the enemy is alive or not
+     */
     public boolean isAlive() {
         return this.health > 0;
     }
 
+    /**
+     * @param time
+     * moves the enemy
+     */
     public void move(float time) {
         if (isAlive())
             pos.move(this.speed,time);
@@ -142,6 +153,9 @@ public class Enemy {
         }
     }
 
+    /**
+     * @return whether enemy moves to an end
+     */
     public boolean end() { return this.pos.end(); }
 
 }

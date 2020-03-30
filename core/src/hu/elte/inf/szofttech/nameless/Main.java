@@ -26,10 +26,18 @@ public final class Main extends Game {
         batch.dispose();
     }
 
+    /**
+     * for drawing
+     * @return batch
+     */
     public SpriteBatch getBatch() {
         return this.batch;
     }
 
+    /**
+     * write text one the screen
+     * @return font
+     */
     public BitmapFont getFont() {
         return this.font;
     }

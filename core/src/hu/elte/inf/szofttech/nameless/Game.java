@@ -13,6 +13,9 @@ import java.util.List;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * connect all other classes
+ */
 public class Game {
     private static Game instance;
 
@@ -48,7 +51,8 @@ public class Game {
     }
 
     /**
-     * Game state cannot be instantiated outside of the class. To get a reference to this object, call the static method getInstance().
+     * Game state cannot be instantiated outside of the class.
+     * To get a reference to this object, call the static method getInstance().
      */
     private Game() {
         instance = this;
