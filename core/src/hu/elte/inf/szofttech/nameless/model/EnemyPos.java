@@ -9,7 +9,7 @@ public class EnemyPos {
     private Path path;
 
     public EnemyPos(Path path) {
-        //first element of path
+        // first element of path
         this.pos = Utils.gridToVector(path.getFirst());
         this.next = 1;
         this.path = path;
@@ -20,21 +20,21 @@ public class EnemyPos {
     }
 
     public void move(int speed, float time) {
-        //time in seconds
-        //speed in 0.1 square/second
-        //distance in square
+        // time in seconds
+        // speed in 0.1 square/second
+        // distance in square
         double distance;
         Vector2 nextPos = Utils.gridToVector(this.path.get(this.next));
         distance = speed * 0.1 * time;
 
         if (this.pos.x == nextPos.x) {
-            //already end
+            // already moves to the end
             if (this.pos.y == nextPos.y) {
                 if (this.next != this.path.length() - 1) {
                     this.next++;
                 }
             } else if (this.pos.y > nextPos.y) {
-                //moves over the destination
+                // moves over the destination
                 if (this.pos.y - distance < nextPos.y) {
                     this.pos = nextPos;
                 } else {

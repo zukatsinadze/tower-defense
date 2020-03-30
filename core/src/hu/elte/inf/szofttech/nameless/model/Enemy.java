@@ -3,6 +3,9 @@ package hu.elte.inf.szofttech.nameless.model;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ *
+ */
 public class Enemy {
     private GDSprite sprite;
     private int XP;
@@ -127,6 +130,9 @@ public class Enemy {
             pos.move(this.speed,time);
     }
 
+    /**
+     * @param spriteBatch
+     */
     public void draw(SpriteBatch spriteBatch) {
         if(isAlive() && !end()) {
             sprite.setX(pos.getPos().x * 100);

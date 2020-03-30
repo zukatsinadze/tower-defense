@@ -14,6 +14,7 @@ import hu.elte.inf.szofttech.nameless.model.Path;
 import hu.elte.inf.szofttech.nameless.model.Wave;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 
+import java.time.Clock;
 import java.util.ArrayList;
 
 public class GameScreen extends ScreenAdapter {
@@ -55,11 +56,12 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 1, 0, 1);
+        Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         this.camera.update();
         this.game.getBatch().setProjectionMatrix(camera.combined);
 
+        // drawing begins
         this.game.getBatch().begin();
 
         this.tower.draw(this.game.getBatch());
@@ -70,6 +72,8 @@ public class GameScreen extends ScreenAdapter {
         }
 
         this.game.getBatch().end();
+        // drawing ends
+
         this.wave.moveAll(delta);
         this.tower.shoot(1);
     }
@@ -79,6 +83,7 @@ public class GameScreen extends ScreenAdapter {
         this.balloon.dispose();
     }
 
+    // mapping position to screen
     public GridPoint2 convert(GridPoint2 pos) {
         return new GridPoint2(
                 pos.x * this.screenWidth / this.gridWidth,

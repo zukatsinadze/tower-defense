@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public final class Grid {
+public final class  Grid {
     private final int width;
     private final int height;
     private final List<List<Square>> squares;
@@ -15,6 +15,7 @@ public final class Grid {
     public Grid(int width, int height) {
         this.width = width;
         this.height = height;
+        // (functional style of) 2 dimensional ArrayList
         this.squares = IntStream.range(0, height)
                 .mapToObj(i -> IntStream.range(0, height)
                         .mapToObj(j -> new Square())
