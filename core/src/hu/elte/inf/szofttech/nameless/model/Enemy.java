@@ -67,7 +67,7 @@ public class Enemy {
         Enemy enemy = null;
         EnemyPos pos = new EnemyPos(path);
         Pixmap pixmap200 = new Pixmap(Gdx.files.internal(image_path));
-        Pixmap pixmap100 = new Pixmap(100, 100, pixmap200.getFormat());
+        Pixmap pixmap100 = new Pixmap(60, 100, pixmap200.getFormat());
         pixmap100.drawPixmap(pixmap200,
                 0, 0, pixmap200.getWidth(), pixmap200.getHeight(),
                 0, 0, pixmap100.getWidth(), pixmap100.getHeight()

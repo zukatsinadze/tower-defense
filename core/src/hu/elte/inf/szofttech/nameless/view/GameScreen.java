@@ -15,6 +15,7 @@ import hu.elte.inf.szofttech.nameless.model.Wave;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * rendering game
@@ -22,8 +23,7 @@ import java.util.ArrayList;
 public class GameScreen extends ScreenAdapter {
     private final Main game;
     private final OrthographicCamera camera;
-    //private final Texture balloon;
-    private final Tower tower;
+    private final List<Tower> towers;
     private final Path path;
     private final Wave wave;
     private final int screenWidth;
@@ -32,14 +32,13 @@ public class GameScreen extends ScreenAdapter {
     private final int gridHeight;
 
     public GameScreen(Main game) {
+        this.towers = new ArrayList<>();
         this.screenWidth = 800;
         this.screenHeight = 480;
 
         this.game = game;
         this.camera = new OrthographicCamera();
         this.camera.setToOrtho(false, this.screenWidth, this.screenHeight);
-
-        //this.balloon = new Texture("pink_balloon.png");
 
         this.gridWidth = 15;
         this.gridHeight = 9;
@@ -51,9 +50,9 @@ public class GameScreen extends ScreenAdapter {
         this.wave = new Wave.Builder(this.path)
                 .add(Enemy.EnemyType.RED).add(Enemy.EnemyType.PINK).add(Enemy.EnemyType.WHITE).build();
 
-        this.tower = new Tower("tower1.png", 1, 10, 3, 10, 10);
-        this.tower.setPosition(new Vector2(300, 100));
-        this.tower.setTargets(new ArrayList<>(this.wave.getEnemies()));
+        this.towers.add(new Tower("tower1.png", 1, 10, 3, 10, 10));
+        this.towers.get(0).setPosition(new Vector2(300, 100));
+        this.towers.get(0).setTargets(new ArrayList<>(this.wave.getEnemies()));
     }
 
     @Override
@@ -68,11 +67,9 @@ public class GameScreen extends ScreenAdapter {
         this.game.getBatch().begin();
 
         // rendering towers
-        this.tower.draw(this.game.getBatch());
-
+        this.towers.get(0).draw(this.game.getBatch());
         // rendering ballons
         for (int i = 0; i < this.wave.size(); ++i) {
-            //this.wave.get(i).setSprite(new GDSprite(this.balloon));
             this.wave.get(i).draw(this.game.getBatch());
         }
 
@@ -80,14 +77,8 @@ public class GameScreen extends ScreenAdapter {
         // drawing ends
 
         this.wave.moveAll(delta);
-        this.tower.shoot(1);
+        this.towers.get(0).shoot(1);
     }
-
-//    @Override
-//    public void dispose() {
-//        this.balloon.dispose();
-//    }
-
 
     /**
      * @param pos position of points on the grid
