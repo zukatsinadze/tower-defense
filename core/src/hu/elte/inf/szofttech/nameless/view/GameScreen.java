@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class GameScreen extends ScreenAdapter {
     private final Main game;
     private final OrthographicCamera camera;
-    private final Texture balloon;
+    //private final Texture balloon;
     private final Tower tower;
     private final Path path;
     private final Wave wave;
@@ -40,7 +40,7 @@ public class GameScreen extends ScreenAdapter {
         this.camera = new OrthographicCamera();
         this.camera.setToOrtho(false, this.screenWidth, this.screenHeight);
 
-        this.balloon = new Texture("pink_balloon.png");
+        //this.balloon = new Texture("pink_balloon.png");
 
         this.gridWidth = 15;
         this.gridHeight = 9;
@@ -72,7 +72,7 @@ public class GameScreen extends ScreenAdapter {
 
         // rendering ballons
         for (int i = 0; i < this.wave.size(); ++i) {
-            this.wave.get(i).setSprite(new GDSprite(this.balloon));
+            //this.wave.get(i).setSprite(new GDSprite(this.balloon));
             this.wave.get(i).draw(this.game.getBatch());
         }
 
@@ -83,10 +83,10 @@ public class GameScreen extends ScreenAdapter {
         this.tower.shoot(1);
     }
 
-    @Override
-    public void dispose() {
-        this.balloon.dispose();
-    }
+//    @Override
+//    public void dispose() {
+//        this.balloon.dispose();
+//    }
 
 
     /**
