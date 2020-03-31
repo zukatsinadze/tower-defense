@@ -1,5 +1,8 @@
 package hu.elte.inf.szofttech.nameless.model;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
@@ -24,6 +27,13 @@ public class Enemy {
     }
 
     private Enemy(GDSprite sprite, int XP, int money, int damage, int speed, int health, EnemyPos pos) {
+//        Pixmap pixmap200 = new Pixmap(Gdx.files.internal(path));
+//        Pixmap pixmap100 = new Pixmap(100, 100, pixmap200.getFormat());
+//        pixmap100.drawPixmap(pixmap200,
+//                0, 0, pixmap200.getWidth(), pixmap200.getHeight(),
+//                0, 0, pixmap100.getWidth(), pixmap100.getHeight()
+//        );
+//        Texture t = new Texture(pixmap100);
         this.sprite = sprite;
         this.XP = XP;
         this.money = money;
@@ -143,13 +153,14 @@ public class Enemy {
 
     /**
      * @param spriteBatch
+     * convert game grid position to screen position
      */
     public void draw(SpriteBatch spriteBatch) {
         if(isAlive() && !end()) {
-            sprite.setX(pos.getPos().x * 100);
-            sprite.setY(pos.getPos().y * 100);
+            sprite.setX(pos.getPos().x * 800 / 15);
+            sprite.setY(pos.getPos().y * 480 / 9);
             sprite.draw(spriteBatch);
-            System.out.println(this.health);
+            //System.out.println(this.health);
         }
     }
 

@@ -14,7 +14,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * connect all other classes
+ * connecting all other classes
  */
 public class Game {
     private static Game instance;

@@ -41,7 +41,6 @@ public class GameScreen extends ScreenAdapter {
         this.camera.setToOrtho(false, this.screenWidth, this.screenHeight);
 
         this.balloon = new Texture("pink_balloon.png");
-//        this.tower = new Texture("tower1.png");
 
         this.gridWidth = 15;
         this.gridHeight = 9;
