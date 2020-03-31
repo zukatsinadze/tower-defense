@@ -4,12 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import hu.elte.inf.szofttech.nameless.Main;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
-import hu.elte.inf.szofttech.nameless.model.GDSprite;
 import hu.elte.inf.szofttech.nameless.model.Path;
 import hu.elte.inf.szofttech.nameless.model.Wave;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
@@ -48,7 +46,8 @@ public class GameScreen extends ScreenAdapter {
                 .add(12, 5).add(12, 2).build();
 
         this.wave = new Wave.Builder(this.path)
-                .add(Enemy.EnemyType.RED).add(Enemy.EnemyType.PINK).add(Enemy.EnemyType.WHITE).build();
+                .add(Enemy.EnemyType.RED).add(Enemy.EnemyType.PINK).add(Enemy.EnemyType.BLUE)
+                .add(Enemy.EnemyType.YELLOW).add(Enemy.EnemyType.WHITE).build();
 
         this.towers.add(new Tower("tower1.png", 1, 10, 3, 10, 10));
         this.towers.get(0).setPosition(new Vector2(300, 100));

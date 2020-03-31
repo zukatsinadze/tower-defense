@@ -46,7 +46,7 @@ public final class Wave {
         }
 
         public Builder add(Enemy.EnemyType enemyType) {
-            this.enemies.add(Enemy.createEnemy("pink_balloon.png",this.path, enemyType));
+            this.enemies.add(Enemy.createEnemy(this.path, enemyType));
             return this;
         }
     }
