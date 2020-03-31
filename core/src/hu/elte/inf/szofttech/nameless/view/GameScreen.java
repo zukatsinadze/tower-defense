@@ -14,7 +14,6 @@ import hu.elte.inf.szofttech.nameless.model.Path;
 import hu.elte.inf.szofttech.nameless.model.Wave;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 
-import java.time.Clock;
 import java.util.ArrayList;
 
 /**
@@ -46,10 +45,11 @@ public class GameScreen extends ScreenAdapter {
         this.gridHeight = 9;
 
         this.path = new Path.Builder()
-                .add(0, 2).add(1, 2).add(2, 2).add(2, 3).add(3, 3)
-                .add(4, 3).add(5, 3).add(5, 2).add(6, 2).build();
+                .add(0, 2).add(3, 2).add(3, 5)
+                .add(12, 5).add(12, 2).build();
 
-        this.wave = new Wave.Builder(this.path).add(Enemy.EnemyType.RED).add(Enemy.EnemyType.PINK).build();
+        this.wave = new Wave.Builder(this.path)
+                .add(Enemy.EnemyType.RED).add(Enemy.EnemyType.PINK).add(Enemy.EnemyType.WHITE).build();
 
         this.tower = new Tower("tower1.png", 1, 10, 3, 10, 10);
         this.tower.setPosition(new Vector2(300, 100));
