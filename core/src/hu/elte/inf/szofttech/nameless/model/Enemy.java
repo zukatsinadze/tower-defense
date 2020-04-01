@@ -147,6 +147,7 @@ public class Enemy {
     /**
      * @param spriteBatch
      * convert game grid position to screen position
+     * and draw enemy if it is alive and not finished the path yet/
      */
     public void draw(SpriteBatch spriteBatch) {
         if(isAlive() && !end()) {
@@ -156,6 +157,12 @@ public class Enemy {
         }
     }
 
+    /**
+     *
+     * @param image_path
+     * @return GDSprite
+     * Creates sprite with fixed size, independent of actual image size
+     */
     public static GDSprite createSprite(String image_path) {
         Pixmap pixmap200 = new Pixmap(Gdx.files.internal(image_path));
         Pixmap pixmap100 = new Pixmap(60, 100, pixmap200.getFormat());
