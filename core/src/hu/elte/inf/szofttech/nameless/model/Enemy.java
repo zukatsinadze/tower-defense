@@ -154,6 +154,7 @@ public class Enemy {
     /**
      * @param spriteBatch
      * convert game grid position to screen position
+     * and draw enemy if it is alive and not finished the path yet/
      */
     public void draw(SpriteBatch spriteBatch) {
         if(isAlive() && !end()) {
@@ -162,7 +163,6 @@ public class Enemy {
             sprite.draw(spriteBatch);
         }
     }
-
 
     /**
      * @return whether enemy moves to an end

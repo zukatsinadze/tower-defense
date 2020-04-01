@@ -56,6 +56,10 @@ public class Tower {
         sprite.draw(spriteBatch);
     }
 
+    /**
+     * @param enemies
+     * Adds enemies which are in shooting range to 'targets' array.
+     */
     private void acquireTarget(List<Enemy> enemies) {
         for (Enemy enemy : enemies) {
             if (!targets.contains(enemy)) {
@@ -66,62 +70,39 @@ public class Tower {
         }
     }
 
-
+    public Vector2 getPosition() { return position; }
     public void setPosition(Vector2 position) {
         this.position = position;
         sprite.setX(position.x);
         sprite.setY(position.y);
     }
-
     public int getAttackTimer() { return attackTimer; }
     public void setAttackTimer(int attackTimer) { this.attackTimer = attackTimer; }
-
-    public Vector2 getPosition() {
-        return position;
-    }
-
-    public GDSprite getSprite() {
-        return sprite;
-    }
-
-    public void setSprite(GDSprite sprite) {
-        this.sprite = sprite;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public float getRange() {
-        return range;
-    }
-
-    public float getAttackSpeed() {
-        return attackSpeed;
-    }
-
-    public ArrayList<Enemy> getTarget() {
-        return targets;
-    }
-
-    public void setTargets(ArrayList<Enemy> targets) {
-        this.targets = targets;
-    }
+    public GDSprite getSprite() { return sprite; }
+    public void setSprite(GDSprite sprite) { this.sprite = sprite; }
+    public int getPrice() { return price; }
+    public void setPrice(int price) { this.price = price; }
+    public int getDamage() { return damage; }
+    public float getRange() { return range; }
+    public float getAttackSpeed() { return attackSpeed; }
+    public ArrayList<Enemy> getTarget() { return targets; }
+    public void setTargets(ArrayList<Enemy> targets) { this.targets = targets; }
 
 
+    /**
+     * @param Enemy b
+     *  If tower is upgraded, it has specialAbility, which is called by this method.
+     */
     public void specialAttack(Enemy b) {
         if (upgraded)
             specialAbility.specialAttack(b);
     }
 
+    /**
+     *
+     * @param int delta
+     * Shooting at the enemies
+     */
     public void shoot(int delta) {
 //        attackTimer += delta;
 //        if(targets.size() > 0){
@@ -147,11 +128,19 @@ public class Tower {
         }
     }
 
-
+    /**
+     * Upgrading tower
+     */
     public void upgradeTower() {
         //
     }
 
+    /**
+     *
+     * @param enemy
+     * @return boolean
+     * Decides if enemy is in tower's shooting range
+     */
     public boolean intersects(Enemy enemy) {
         float circleDistanceX = (float) Math.abs(center.getX() - enemy.getPos().x);
         float circleDistanceY = (float) Math.abs(center.getY() - enemy.getPos().y);
