@@ -30,7 +30,7 @@ public class Tower {
     private ArrayList<Enemy> targets = null;
     private long start = System.currentTimeMillis();
 
-    public Tower(String path, int damage, float range, int attackSpeed, int price, int XP) {
+    public Tower(String path, int XP, int price, int damage, float range, int attackSpeed,SpecialAbility specialAbility) {
         Pixmap pixmap200 = new Pixmap(Gdx.files.internal(path));
         Pixmap pixmap100 = new Pixmap(100, 100, pixmap200.getFormat());
         pixmap100.drawPixmap(pixmap200,
@@ -47,6 +47,7 @@ public class Tower {
         this.position = Vector2.Zero;
         targets = new ArrayList<Enemy>();
         center = new Point2D.Float();
+        this.specialAbility = specialAbility;
     }
 
     public void draw(SpriteBatch spriteBatch) {

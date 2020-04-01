@@ -50,8 +50,11 @@ public class GameScreen extends ScreenAdapter {
                 .add(Enemy.EnemyType.YELLOW).add(Enemy.EnemyType.WHITE).build();
 
         this.towers.add(new Tower("tower1.png", 1, 10, 3, 10, 10));
+        //this.towers.add(new Tower("tower2.png", 1, 10, 3, 10, 10));
         this.towers.get(0).setPosition(new Vector2(300, 100));
         this.towers.get(0).setTargets(new ArrayList<>(this.wave.getEnemies()));
+//        this.towers.get(1).setPosition(new Vector2(500, 200));
+//        this.towers.get(1).setTargets(new ArrayList<>(this.wave.getEnemies()));
     }
 
     @Override

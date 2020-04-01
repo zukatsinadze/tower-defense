@@ -26,14 +26,21 @@ public class Enemy {
         YELLOW
     }
 
-    private Enemy(GDSprite sprite, int XP, int money, int damage, int speed, int health, EnemyPos pos) {
-        this.sprite = sprite;
+    private Enemy(String image_path, int XP, int money, int damage, int speed, int health, EnemyPos pos) {
         this.XP = XP;
         this.money = money;
         this.damage = damage;
         this.speed = speed;
         this.health = health;
         this.pos = pos;
+        Pixmap pixmap200 = new Pixmap(Gdx.files.internal(image_path));
+        Pixmap pixmap100 = new Pixmap(30, 50, pixmap200.getFormat());
+        pixmap100.drawPixmap(pixmap200,
+                0, 0, pixmap200.getWidth(), pixmap200.getHeight(),
+                0, 0, pixmap100.getWidth(), pixmap100.getHeight()
+        );
+        Texture t = new Texture(pixmap100);
+        this.sprite = new GDSprite(t);
     }
 
     public GDSprite getSprite() { return sprite; }
@@ -75,7 +82,7 @@ public class Enemy {
                 damage = 3;
                 speed = 10;
                 health = 10;
-                enemy = new Enemy(createSprite("red.png"),XP,money,damage,speed,health,pos);
+                enemy = new Enemy("red.png",XP,money,damage,speed,health,pos);
                 return enemy;
 
             case PINK:
@@ -84,7 +91,7 @@ public class Enemy {
                 damage = 5;
                 speed = 15;
                 health = 15;
-                enemy = new Enemy(createSprite("pink.png"),XP,money,damage,speed,health,pos);
+                enemy = new Enemy("pink.png",XP,money,damage,speed,health,pos);
                 return enemy;
 
             case BLUE:
@@ -93,7 +100,7 @@ public class Enemy {
                 damage = 10;
                 speed = 8;
                 health = 30;
-                enemy = new Enemy(createSprite("blue.png"),XP,money,damage,speed,health,pos);
+                enemy = new Enemy("blue.png",XP,money,damage,speed,health,pos);
                 return enemy;
 
             case WHITE:
@@ -102,7 +109,7 @@ public class Enemy {
                 damage = 10;
                 speed = 30;
                 health = 8;
-                enemy = new Enemy(createSprite("white1.png"),XP,money,damage,speed,health,pos);
+                enemy = new Enemy("white1.png",XP,money,damage,speed,health,pos);
                 return enemy;
 
             case YELLOW:
@@ -111,7 +118,7 @@ public class Enemy {
                 damage = 15;
                 speed = 25;
                 health = 25;
-                enemy = new Enemy(createSprite("yellow.png"),XP,money,damage,speed,health,pos);
+                enemy = new Enemy("yellow.png",XP,money,damage,speed,health,pos);
                 return enemy;
 
             default:
@@ -156,16 +163,6 @@ public class Enemy {
         }
     }
 
-    public static GDSprite createSprite(String image_path) {
-        Pixmap pixmap200 = new Pixmap(Gdx.files.internal(image_path));
-        Pixmap pixmap100 = new Pixmap(60, 100, pixmap200.getFormat());
-        pixmap100.drawPixmap(pixmap200,
-                0, 0, pixmap200.getWidth(), pixmap200.getHeight(),
-                0, 0, pixmap100.getWidth(), pixmap100.getHeight()
-        );
-        Texture t = new Texture(pixmap100);
-        return new GDSprite(t);
-    }
 
     /**
      * @return whether enemy moves to an end

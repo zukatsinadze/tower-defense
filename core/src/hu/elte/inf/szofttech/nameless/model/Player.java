@@ -1,5 +1,8 @@
 package hu.elte.inf.szofttech.nameless.model;
 
+/**
+ * player's behavior
+ */
 public class Player {
     private int money;
     private int health;
