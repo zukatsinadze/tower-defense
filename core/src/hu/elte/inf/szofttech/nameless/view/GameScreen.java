@@ -11,9 +11,12 @@ import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.Path;
 import hu.elte.inf.szofttech.nameless.model.Wave;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
+import hu.elte.inf.szofttech.nameless.model.tower.TowerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static hu.elte.inf.szofttech.nameless.model.tower.TowerFactory.TowerType.Basic1;
 
 /**
  * rendering game
@@ -49,7 +52,7 @@ public class GameScreen extends ScreenAdapter {
                 .add(Enemy.EnemyType.RED).add(Enemy.EnemyType.PINK).add(Enemy.EnemyType.BLUE)
                 .add(Enemy.EnemyType.YELLOW).add(Enemy.EnemyType.WHITE).build();
 
-        this.towers.add(new Tower("tower1.png", 1, 10, 3, 10, 10));
+        this.towers.add(TowerFactory.createTower(Basic1));
         //this.towers.add(new Tower("tower2.png", 1, 10, 3, 10, 10));
         this.towers.get(0).setPosition(new Vector2(300, 100));
         this.towers.get(0).setTargets(new ArrayList<>(this.wave.getEnemies()));
