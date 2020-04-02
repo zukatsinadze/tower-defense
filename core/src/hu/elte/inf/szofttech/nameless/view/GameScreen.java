@@ -10,6 +10,7 @@ import hu.elte.inf.szofttech.nameless.Main;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.Path;
 import hu.elte.inf.szofttech.nameless.model.Wave;
+import hu.elte.inf.szofttech.nameless.model.tower.NoSpecialAbility;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 import hu.elte.inf.szofttech.nameless.model.tower.TowerFactory;
 
@@ -53,11 +54,8 @@ public class GameScreen extends ScreenAdapter {
                 .add(Enemy.EnemyType.YELLOW).add(Enemy.EnemyType.WHITE).build();
 
         this.towers.add(TowerFactory.createTower(Basic1));
-        //this.towers.add(new Tower("tower2.png", 1, 10, 3, 10, 10));
         this.towers.get(0).setPosition(new Vector2(300, 100));
         this.towers.get(0).setTargets(new ArrayList<>(this.wave.getEnemies()));
-//        this.towers.get(1).setPosition(new Vector2(500, 200));
-//        this.towers.get(1).setTargets(new ArrayList<>(this.wave.getEnemies()));
     }
 
     @Override

@@ -25,7 +25,7 @@ public class TowerFactory {
         int XP;
         int price;
         int damage;
-        float range;
+        int range;
         int attackspeed;
         GDSprite sprite;
         Tower tower = null;
