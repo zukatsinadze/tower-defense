@@ -21,7 +21,7 @@ public class Tower {
     private int XP;
     private int price;
     private int damage;
-    private float range;
+    private int range;
     private int attackSpeed;
     private Boolean upgraded = false;
     private Vector2 position;
@@ -30,7 +30,7 @@ public class Tower {
     private ArrayList<Enemy> targets = null;
     private long start = System.currentTimeMillis();
 
-    public Tower(String path, int XP, int price, int damage, float range, int attackSpeed,SpecialAbility specialAbility) {
+    public Tower(String path, int XP, int price, int damage, int range, int attackSpeed,SpecialAbility specialAbility) {
         Pixmap pixmap200 = new Pixmap(Gdx.files.internal(path));
         Pixmap pixmap100 = new Pixmap(100, 100, pixmap200.getFormat());
         pixmap100.drawPixmap(pixmap200,
@@ -83,7 +83,7 @@ public class Tower {
     public int getPrice() { return price; }
     public void setPrice(int price) { this.price = price; }
     public int getDamage() { return damage; }
-    public float getRange() { return range; }
+    public int getRange() { return range; }
     public float getAttackSpeed() { return attackSpeed; }
     public ArrayList<Enemy> getTarget() { return targets; }
     public void setTargets(ArrayList<Enemy> targets) { this.targets = targets; }
