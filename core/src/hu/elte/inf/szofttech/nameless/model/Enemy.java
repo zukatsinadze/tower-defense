@@ -1,7 +1,5 @@
 package hu.elte.inf.szofttech.nameless.model;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -35,14 +33,9 @@ public class Enemy {
         this.speed = speed;
         this.health = health;
         this.pos = pos;
-        Pixmap pixmap200 = new Pixmap(Gdx.files.internal(image_path));
-        Pixmap pixmap100 = new Pixmap(Config.tileSize / 2, Config.tileSize, pixmap200.getFormat());
-        pixmap100.drawPixmap(pixmap200,
-                0, 0, pixmap200.getWidth(), pixmap200.getHeight(),
-                0, 0, pixmap100.getWidth(), pixmap100.getHeight()
-        );
-        Texture t = new Texture(pixmap100);
+        Texture t = new Texture(image_path);
         this.sprite = new GDSprite(t);
+        this.sprite.setSize(Config.tileSize / 2, Config.tileSize);
     }
 
     public GDSprite getSprite() { return sprite; }
