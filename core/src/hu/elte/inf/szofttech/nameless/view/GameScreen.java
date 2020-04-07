@@ -29,6 +29,7 @@ public class GameScreen extends ScreenAdapter {
     private final Path path;
     private final Wave wave;
     private final Texture tile;
+    private final Texture pathTile;
 
     public GameScreen(Main game) {
         this.towers = new ArrayList<>();
@@ -50,6 +51,7 @@ public class GameScreen extends ScreenAdapter {
         this.towers.get(0).setTargets(new ArrayList<>(this.wave.getEnemies()));
 
         this.tile = new Texture("tile.png");
+        this.pathTile = new Texture("path.jpg");
     }
 
     @Override
@@ -66,11 +68,19 @@ public class GameScreen extends ScreenAdapter {
         // rendering tiles
         for (int i = 0; i < Config.gridWidth; ++i) {
             for (int j = 0; j < Config.gridHeight; ++j) {
-                this.game.getBatch().draw(this.tile,
-                        i * Config.tileSize, j * Config.tileSize,
-                        Config.tileSize, Config.tileSize);
+                if (!path.onPath(i, j)) {
+                    this.game.getBatch().draw(this.tile,
+                            i * Config.tileSize, j * Config.tileSize,
+                            Config.tileSize, Config.tileSize);
+                }
             }
         }
+        // rendering path tiles
+        this.path.forEach(p -> {
+            this.game.getBatch().draw(this.pathTile,
+                    p.x * Config.tileSize, p.y * Config.tileSize,
+                    Config.tileSize, Config.tileSize);
+        });
 
         // rendering towers
         this.towers.get(0).draw(this.game.getBatch());

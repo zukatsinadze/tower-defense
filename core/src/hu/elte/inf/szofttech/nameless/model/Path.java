@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 public final class Path {
     private final List<GridPoint2> points;
@@ -32,8 +33,16 @@ public final class Path {
         return this.get(this.length() - 1);
     }
 
+    public void forEach(Consumer<GridPoint2> func) {
+        this.points.forEach(func);
+    }
+
     public boolean onPath(GridPoint2 point) {
         return this.pointSet.contains(point);
+    }
+
+    public boolean onPath(int x, int y) {
+        return this.onPath(new GridPoint2(x, y));
     }
 
 
@@ -51,13 +60,32 @@ public final class Path {
             return new Path(this.points);
         }
 
-        public Builder add(GridPoint2 point) {
-            this.points.add(point);
+        public Builder add(int x, int y) {
+            if (!this.points.isEmpty()) {
+                GridPoint2 last = this.points.get(this.points.size() - 1);
+                int lastX = last.x;
+                int lastY = last.y;
+                while (lastX != x || lastY != y) {
+                    if (lastX < x) {
+                        ++lastX;
+                    } else if (lastX > x) {
+                        --lastX;
+                    }
+                    if (lastY < y) {
+                        ++lastY;
+                    } else if (lastY > y) {
+                        --lastY;
+                    }
+                    this.points.add(new GridPoint2(lastX, lastY));
+                }
+            } else {
+                this.points.add(new GridPoint2(x, y));
+            }
             return this;
         }
 
-        public Builder add(int x, int y) {
-            return this.add(new GridPoint2(x, y));
+        public Builder add(GridPoint2 point) {
+            return this.add(point.x, point.y);
         }
     }
 }
