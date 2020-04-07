@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import hu.elte.inf.szofttech.nameless.Config;
+import hu.elte.inf.szofttech.nameless.Utils;
 
 /**
  *the behavior of enemy
@@ -34,7 +36,7 @@ public class Enemy {
         this.health = health;
         this.pos = pos;
         Pixmap pixmap200 = new Pixmap(Gdx.files.internal(image_path));
-        Pixmap pixmap100 = new Pixmap(30, 50, pixmap200.getFormat());
+        Pixmap pixmap100 = new Pixmap(Config.tileSize / 2, Config.tileSize, pixmap200.getFormat());
         pixmap100.drawPixmap(pixmap200,
                 0, 0, pixmap200.getWidth(), pixmap200.getHeight(),
                 0, 0, pixmap100.getWidth(), pixmap100.getHeight()
@@ -158,8 +160,7 @@ public class Enemy {
      */
     public void draw(SpriteBatch spriteBatch) {
         if(isAlive() && !end()) {
-            sprite.setX(pos.getPos().x * 800 / 15);
-            sprite.setY(pos.getPos().y * 480 / 9);
+            sprite.setVec(Utils.convertFromGrid(pos.getPos()));
             sprite.draw(spriteBatch);
         }
     }

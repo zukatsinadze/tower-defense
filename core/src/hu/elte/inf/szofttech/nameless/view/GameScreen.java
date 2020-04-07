@@ -4,13 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
+import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Main;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.Path;
 import hu.elte.inf.szofttech.nameless.model.Wave;
-import hu.elte.inf.szofttech.nameless.model.tower.NoSpecialAbility;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 import hu.elte.inf.szofttech.nameless.model.tower.TowerFactory;
 
@@ -28,22 +27,13 @@ public class GameScreen extends ScreenAdapter {
     private final List<Tower> towers;
     private final Path path;
     private final Wave wave;
-    private final int screenWidth;
-    private final int screenHeight;
-    private final int gridWidth;
-    private final int gridHeight;
 
     public GameScreen(Main game) {
         this.towers = new ArrayList<>();
-        this.screenWidth = 800;
-        this.screenHeight = 480;
 
         this.game = game;
         this.camera = new OrthographicCamera();
-        this.camera.setToOrtho(false, this.screenWidth, this.screenHeight);
-
-        this.gridWidth = 15;
-        this.gridHeight = 9;
+        this.camera.setToOrtho(false, Config.screenWidth, Config.screenHeight);
 
         this.path = new Path.Builder()
                 .add(0, 2).add(3, 2).add(3, 5)
@@ -81,16 +71,5 @@ public class GameScreen extends ScreenAdapter {
 
         this.wave.moveAll(delta);
         this.towers.get(0).shoot(1);
-    }
-
-    /**
-     * @param pos position of points on the grid
-     * @return the position of points on the screen
-     */
-    public GridPoint2 convert(GridPoint2 pos) {
-        return new GridPoint2(
-                pos.x * this.screenWidth / this.gridWidth,
-                pos.y * this.screenHeight / this.gridHeight
-        );
     }
 }

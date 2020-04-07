@@ -1,10 +1,5 @@
 package hu.elte.inf.szofttech.nameless.model.tower;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import hu.elte.inf.szofttech.nameless.model.Enemy;
-import hu.elte.inf.szofttech.nameless.model.EnemyPos;
 import hu.elte.inf.szofttech.nameless.model.GDSprite;
 
 public class TowerFactory {
@@ -37,7 +32,7 @@ public class TowerFactory {
                 range = 10;
                 damage = 10;
                 attackspeed = 10;
-                tower = new Tower("basic1.png",XP,price,damage,range,attackspeed,new NoSpecialAbility());
+                tower = new Tower("tower1.png",XP,price,damage,range,attackspeed,new NoSpecialAbility());
                 return tower;
             case Basic2:
                 XP = 0;
@@ -45,7 +40,7 @@ public class TowerFactory {
                 range = 12;
                 damage = 15;
                 attackspeed = 8;
-                tower = new Tower("basic2.png",XP,price,damage,range,attackspeed,new NoSpecialAbility());
+                tower = new Tower("tower2.png",XP,price,damage,range,attackspeed,new NoSpecialAbility());
                 return tower;
             case Basic3:
                 XP = 0;
@@ -53,7 +48,7 @@ public class TowerFactory {
                 range = 8;
                 damage = 8;
                 attackspeed = 20;
-                tower = new Tower("basic3.png",XP,price,damage,range,attackspeed,new NoSpecialAbility());
+                tower = new Tower("tower3.png",XP,price,damage,range,attackspeed,new NoSpecialAbility());
                 return tower;
             case AdvancedTeleport:
                 XP = 15;
@@ -61,7 +56,7 @@ public class TowerFactory {
                 range = 20;
                 damage = 10;
                 attackspeed = 12;
-                tower = new Tower("AdvancedTeleport.png",XP,price,damage,range,attackspeed,new Teleport());
+                tower = new Tower("tower4.png",XP,price,damage,range,attackspeed,new Teleport());
                 return tower;
             case AdvancedExplosion:
                 XP = 20;
@@ -69,7 +64,7 @@ public class TowerFactory {
                 range = 10;
                 damage = 18;
                 attackspeed = 10;
-                tower = new Tower("AdvancedExplosion.png",XP,price,damage,range,attackspeed,new Explosion());
+                tower = new Tower("tower5.png",XP,price,damage,range,attackspeed,new Explosion());
                 return tower;
             case AdvancedCatchFire:
                 XP = 20;
@@ -77,7 +72,7 @@ public class TowerFactory {
                 range = 18;
                 damage = 15;
                 attackspeed = 12;
-                tower = new Tower("AdvancedCatchFire.png",XP,price,damage,range,attackspeed,new CatchFire());
+                tower = new Tower("tower6.png",XP,price,damage,range,attackspeed,new CatchFire());
                 return tower;
             case AdvancedRingOfFire:
                 XP = 25;
@@ -85,7 +80,7 @@ public class TowerFactory {
                 range = 12;
                 damage = 20;
                 attackspeed = 8;
-                tower = new Tower("AdvancedRingOfFire.png",XP,price,damage,range,attackspeed,new RingOfFire());
+                tower = new Tower("tower7.png",XP,price,damage,range,attackspeed,new RingOfFire());
                 return tower;
             case AdvancedSlowBalloons:
                 XP = 25;
@@ -93,7 +88,7 @@ public class TowerFactory {
                 range = 15;
                 damage = 10;
                 attackspeed = 20;
-                tower = new Tower("AdvancedSlowBalloons.png",XP,price,damage,range,attackspeed,new SlowBalloons());
+                tower = new Tower("tower8.png",XP,price,damage,range,attackspeed,new SlowBalloons());
                 return tower;
             case AdvancedFreezeBalloons:
                 XP = 30;
@@ -101,7 +96,7 @@ public class TowerFactory {
                 range = 8;
                 damage = 8;
                 attackspeed = 30;
-                tower = new Tower("AdvancedFreezeBalloons",XP,price,damage,range,attackspeed,new FreezeBalloons());
+                tower = new Tower("tower9.png",XP,price,damage,range,attackspeed,new FreezeBalloons());
                 return tower;
             default:
                 return tower;

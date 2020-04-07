@@ -6,7 +6,11 @@ import com.badlogic.gdx.graphics.Color;
  * colors for use
  */
 public class Config {
-    public static final int tileSize = 40;
+    public static final int screenWidth = 1280;
+    public static final int screenHeight = 720;
+    public static final int gridWidth = 16;
+    public static final int gridHeight = 9;
+    public static final int tileSize = 80;
 
     public static Color white = new Color(1f,1f,1f,.5f);
     public static Color green = new Color(.5f, 1, .5f, 1f); //slowed ailment

@@ -16,6 +16,14 @@ public class Utils {
         return new Vector2(p.x, p.y);
     }
 
+    /**
+     * @param pos position of points on the grid
+     * @return the position of points on the screen
+     */
+    public static Vector2 convertFromGrid(Vector2 pos) {
+        return new Vector2(pos.x * Config.tileSize, pos.y * Config.tileSize);
+    }
+
     public static Point convertToGrid(float x, float y){
         int newX = (int) x / Config.tileSize * Config.tileSize;
         int newY = (int) y / Config.tileSize * Config.tileSize;

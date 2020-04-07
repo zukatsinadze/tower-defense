@@ -1,19 +1,17 @@
 package hu.elte.inf.szofttech.nameless.model.tower;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.GDSprite;
-import hu.elte.inf.szofttech.nameless.Config;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.Gdx;
 
 import java.awt.geom.Point2D;
-import java.net.StandardSocketOptions;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Tower {
     private SpecialAbility specialAbility;
@@ -32,7 +30,7 @@ public class Tower {
 
     public Tower(String path, int XP, int price, int damage, int range, int attackSpeed,SpecialAbility specialAbility) {
         Pixmap pixmap200 = new Pixmap(Gdx.files.internal(path));
-        Pixmap pixmap100 = new Pixmap(100, 100, pixmap200.getFormat());
+        Pixmap pixmap100 = new Pixmap(Config.tileSize, Config.tileSize, pixmap200.getFormat());
         pixmap100.drawPixmap(pixmap200,
                 0, 0, pixmap200.getWidth(), pixmap200.getHeight(),
                 0, 0, pixmap100.getWidth(), pixmap100.getHeight()
