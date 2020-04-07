@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Main;
@@ -27,6 +28,7 @@ public class GameScreen extends ScreenAdapter {
     private final List<Tower> towers;
     private final Path path;
     private final Wave wave;
+    private final Texture tile;
 
     public GameScreen(Main game) {
         this.towers = new ArrayList<>();
@@ -46,6 +48,8 @@ public class GameScreen extends ScreenAdapter {
         this.towers.add(TowerFactory.createTower(Basic1));
         this.towers.get(0).setPosition(new Vector2(300, 100));
         this.towers.get(0).setTargets(new ArrayList<>(this.wave.getEnemies()));
+
+        this.tile = new Texture("tile.png");
     }
 
     @Override
@@ -58,6 +62,15 @@ public class GameScreen extends ScreenAdapter {
 
         // drawing begins
         this.game.getBatch().begin();
+
+        // rendering tiles
+        for (int i = 0; i < Config.gridWidth; ++i) {
+            for (int j = 0; j < Config.gridHeight; ++j) {
+                this.game.getBatch().draw(this.tile,
+                        i * Config.tileSize, j * Config.tileSize,
+                        Config.tileSize, Config.tileSize);
+            }
+        }
 
         // rendering towers
         this.towers.get(0).draw(this.game.getBatch());
