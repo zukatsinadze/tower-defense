@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import java.awt.*;
 
-public class GDSprite extends Sprite {
+prite extends Sprite {
 
     public GDSprite(Texture texture) {
         super(texture);
