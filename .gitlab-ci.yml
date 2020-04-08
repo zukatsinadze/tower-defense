@@ -3,7 +3,6 @@ image: java:8-jdk
 stages:
   - build
   - test
-  - deploy
 
 before_script:
   #  - echo `pwd` # debug
@@ -19,23 +18,13 @@ build:
   stage: build
   script:
     - ./gradlew assemble
-  artifacts:
-    paths:
-      - build/libs/*.jar
-    expire_in: 1 week
   only:
     - master
-    - ci
 
 test:
   stage: test
   script:
     - ./gradlew check
-
-deploy:
-  stage: deploy
-  script:
-    - ./deploy
 
 after_script:
   - echo "End CI"
