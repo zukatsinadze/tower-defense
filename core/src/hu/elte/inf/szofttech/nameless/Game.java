@@ -20,6 +20,7 @@ public class Game {
     private static Game instance;
     private static final float PRE_ROUND_WAIT_DURATION = 5;
 
+//<<<<<<< Updated upstream
     private int money = 100;
     private int playerLife = 100;
     private final Path path;
@@ -28,6 +29,7 @@ public class Game {
     private final Texture pathTile;
     private List<Enemy> enemies = new ArrayList<>();
     private List<Tower> deployedTowers =  new ArrayList<>();
+    private final ReadLevels readFile = new ReadLevels();
 
     public static Game getInstance() {
         if (instance == null) {
@@ -41,6 +43,7 @@ public class Game {
      * To get a reference to this object, call the static method getInstance().
      */
     private Game() {
+        this.readFile.read();
         instance = this;
         this.tile = new Texture("tile.png");
         this.pathTile = new Texture("path.jpg");

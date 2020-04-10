@@ -29,7 +29,7 @@ public class TowerFactory {
                 range = 10;
                 damage = 10;
                 attackspeed = 10;
-                tower = new Tower("tower1.png",XP,price,damage,range,attackspeed,x,y,new NoSpecialAbility());
+                tower = new Tower("basic1.png",XP,price,damage,range,attackspeed,x,y,new NoSpecialAbility());
                 return tower;
             case Basic2:
                 XP = 0;
@@ -37,7 +37,7 @@ public class TowerFactory {
                 range = 12;
                 damage = 15;
                 attackspeed = 8;
-                tower = new Tower("tower2.png",XP,price,damage,range,attackspeed,x,y,new NoSpecialAbility());
+                tower = new Tower("basic2.png",XP,price,damage,range,attackspeed,x,y,new NoSpecialAbility());
                 return tower;
             case Basic3:
                 XP = 0;
@@ -45,7 +45,7 @@ public class TowerFactory {
                 range = 8;
                 damage = 8;
                 attackspeed = 20;
-                tower = new Tower("tower3.png",XP,price,damage,range,attackspeed,x,y,new NoSpecialAbility());
+                tower = new Tower("basic3.png",XP,price,damage,range,attackspeed,x,y,new NoSpecialAbility());
                 return tower;
             case AdvancedTeleport:
                 XP = 15;
@@ -53,7 +53,7 @@ public class TowerFactory {
                 range = 20;
                 damage = 10;
                 attackspeed = 12;
-                tower = new Tower("tower4.png",XP,price,damage,range,attackspeed,x,y,new Teleport());
+                tower = new Tower("advance11.png",XP,price,damage,range,attackspeed,x,y,new Teleport());
                 return tower;
             case AdvancedExplosion:
                 XP = 20;
@@ -61,7 +61,7 @@ public class TowerFactory {
                 range = 10;
                 damage = 18;
                 attackspeed = 10;
-                tower = new Tower("tower5.png",XP,price,damage,range,attackspeed,x,y,new Explosion());
+                tower = new Tower("advance12.png",XP,price,damage,range,attackspeed,x,y,new Explosion());
                 return tower;
             case AdvancedCatchFire:
                 XP = 20;
@@ -69,7 +69,7 @@ public class TowerFactory {
                 range = 18;
                 damage = 15;
                 attackspeed = 12;
-                tower = new Tower("tower6.png",XP,price,damage,range,attackspeed,x,y,new CatchFire());
+                tower = new Tower("advance21.png",XP,price,damage,range,attackspeed,x,y,new CatchFire());
                 return tower;
             case AdvancedRingOfFire:
                 XP = 25;
@@ -77,7 +77,7 @@ public class TowerFactory {
                 range = 12;
                 damage = 20;
                 attackspeed = 8;
-                tower = new Tower("tower7.png",XP,price,damage,range,attackspeed,x,y,new RingOfFire());
+                tower = new Tower("advance22.png",XP,price,damage,range,attackspeed,x,y,new RingOfFire());
                 return tower;
             case AdvancedSlowBalloons:
                 XP = 25;
@@ -85,7 +85,7 @@ public class TowerFactory {
                 range = 15;
                 damage = 10;
                 attackspeed = 20;
-                tower = new Tower("tower8.png",XP,price,damage,range,attackspeed,x,y,new SlowBalloons());
+                tower = new Tower("advance31.png",XP,price,damage,range,attackspeed,x,y,new SlowBalloons());
                 return tower;
             case AdvancedFreezeBalloons:
                 XP = 30;
@@ -93,7 +93,7 @@ public class TowerFactory {
                 range = 8;
                 damage = 8;
                 attackspeed = 30;
-                tower = new Tower("tower9.png",XP,price,damage,range,attackspeed,x,y,new FreezeBalloons());
+                tower = new Tower("advance32.png",XP,price,damage,range,attackspeed,x,y,new FreezeBalloons());
                 return tower;
             default:
                 return tower;

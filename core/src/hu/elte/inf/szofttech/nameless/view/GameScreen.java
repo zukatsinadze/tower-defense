@@ -33,5 +33,6 @@ public class GameScreen extends ScreenAdapter {
         g.render(this.game.getBatch());
         g.moveWave(delta);
         g.startShooting();
+
     }
 }

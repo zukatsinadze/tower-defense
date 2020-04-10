@@ -104,7 +104,7 @@ public class Enemy {
                 damage = 10;
                 speed = 30;
                 health = 8;
-                enemy = new Enemy("white1.png",XP,money,damage,speed,health,pos);
+                enemy = new Enemy("white.png",XP,money,damage,speed,health,pos);
                 return enemy;
 
             case YELLOW:
