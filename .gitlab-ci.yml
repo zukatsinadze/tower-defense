@@ -20,6 +20,7 @@ build:
     - ./gradlew assemble
   only:
     - master
+    - develop
 
 test:
   stage: test
