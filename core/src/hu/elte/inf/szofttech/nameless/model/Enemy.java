@@ -3,6 +3,7 @@ package hu.elte.inf.szofttech.nameless.model;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Utils;
 
@@ -144,6 +145,8 @@ public class Enemy {
     public void move(float time) {
         if (isAlive())
             pos.move(this.speed,time);
+        if (end())
+            Game.getInstance().getDamaged(this.damage);
     }
 
     /**

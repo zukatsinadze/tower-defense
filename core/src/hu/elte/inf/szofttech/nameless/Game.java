@@ -18,9 +18,7 @@ import static hu.elte.inf.szofttech.nameless.model.tower.TowerFactory.TowerType;
  */
 public class Game {
     private static Game instance;
-    private static final float PRE_ROUND_WAIT_DURATION = 5;
 
-//<<<<<<< Updated upstream
     private int money = 100;
     private int playerLife = 100;
     private final Path path;
@@ -114,8 +112,8 @@ public class Game {
         return money >= tower.getPrice();
     }
 
-    public void getDamaged() {
-        playerLife--;
+    public void getDamaged(int damage) {
+        playerLife -= damage;
     }
 
     public void buildTower(Tower towerToBuild, Point point) {
