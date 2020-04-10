@@ -1,47 +1,33 @@
 package hu.elte.inf.szofttech.nameless;
 
+import com.badlogic.gdx.graphics.Texture;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
-import hu.elte.inf.szofttech.nameless.model.Square;
+import hu.elte.inf.szofttech.nameless.model.Path;
+import hu.elte.inf.szofttech.nameless.model.Wave;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
-import hu.elte.inf.szofttech.nameless.Config;
-import hu.elte.inf.szofttech.nameless.Utils;
-
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import hu.elte.inf.szofttech.nameless.model.tower.TowerFactory;
+import static hu.elte.inf.szofttech.nameless.model.tower.TowerFactory.TowerType;
 
 /**
  * connecting all other classes
  */
 public class Game {
     private static Game instance;
-
-    public static final int GRIDX = 17, GRIDY = 12;
-
-    private static final float ROUND_DURATION = 30;
-
     private static final float PRE_ROUND_WAIT_DURATION = 5;
 
-//    private Level currentLevel;
-    private int mapType;
-
-    private int level;
-    private int money = 0;
-    private int playerLife = 10;
-    private int spawnedEnemies;
-
-    private Square grid[][];
-    private float roundTime, spawnDelay;
-
-    private List<Enemy> enemies;
-    private List<Integer> enemiesToBeSpawned;
-    private List<Tower> deployedTowers;
-//    private List<Projectile> projectiles;
-
-    private boolean roundHasStarted;
+    private int money = 100;
+    private int playerLife = 100;
+    private final Path path;
+    private final Wave wave;
+    private final Texture tile;
+    private final Texture pathTile;
+    private List<Enemy> enemies = new ArrayList<>();
+    private List<Tower> deployedTowers =  new ArrayList<>();
 
     public static Game getInstance() {
         if (instance == null) {
@@ -56,135 +42,62 @@ public class Game {
      */
     private Game() {
         instance = this;
-        createMap();
+        this.tile = new Texture("tile.png");
+        this.pathTile = new Texture("path.jpg");
+        this.path = new Path.Builder()
+                .add(0, 2).add(3, 2).add(3, 5)
+                .add(12, 5).add(12, 2).build();
+
+        this.wave = new Wave.Builder(this.path)
+                .add(Enemy.EnemyType.RED).add(Enemy.EnemyType.PINK).add(Enemy.EnemyType.BLUE)
+                .add(Enemy.EnemyType.YELLOW).add(Enemy.EnemyType.WHITE).build();
+
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1,3,1));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2,10,5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic3,6,2));
+        this.deployedTowers.get(0).setTargets(new ArrayList<>(this.wave.getEnemies()));
     }
 
-    private void createMap() {
-        grid = new Square[GRIDX][GRIDY];
-//        for (int i = 0; i < GRIDX; i++) {
-//            for (int j = 0; j < GRIDY; j++) {
-//                grid[i][j] = TileType.Used;
-//            }
-//        }
+    public void render(SpriteBatch spriteBatch) {
+        displayMap(spriteBatch);
+        displayEnemies(spriteBatch);
+        displayTowers(spriteBatch);
     }
 
-    public void initialize() {
-        newRoundInitialization();
-        level = 1;
-//        currentLevel = Level.generateLevel(level);
-        money = 100;
-        playerLife = 10;
-        roundTime = PRE_ROUND_WAIT_DURATION;
-        deployedTowers = new ArrayList<Tower>();
-
-    }
-
-    public void newRoundInitialization(){
-        spawnDelay = 0;
-        spawnedEnemies = 0;
-        enemiesToBeSpawned = new ArrayList<Integer>();
-        enemies = new ArrayList<Enemy>();
-//        projectiles = new ArrayList<Projectile>();
-    }
-
-    public void update(float delta) {
-        updateRoundTimer(delta);
-
-        if (roundHasStarted) {
-//            checkForEnemySpawn(delta);
-
-//            for (Enemy enemy : enemies)
-//                enemy.update(delta);
-
-//            for (Tower tower : deployedTowers)
-//                tower.update(delta);
-
-//            for(Projectile projectile : projectiles)
-//                projectile.update(delta);
-
-        }
-
-    }
-
-    private void updateRoundTimer(float delta) {
-        if (roundTime > 0) {
-            roundTime -= delta;
-        }
-        else {
-            roundHasStarted = true;
-            roundTime = ROUND_DURATION;
-
-            prepareLevel(level++);
-            spawnedEnemies = 0;
-        }
-    }
-
-//    public void render(SpriteBatch spriteBatch) {
-//        displayMap(spriteBatch);
-//        displayEnemies(spriteBatch);
-//        displayTowers(spriteBatch);
-//        displayProjectiles(spriteBatch);
-//    }
-
-    private void displayProjectiles(SpriteBatch spriteBatch) {
+    private void displayTowers(SpriteBatch spriteBatch) {
         spriteBatch.begin();
-//        for(Projectile projectile : projectiles){
-//            projectile.draw(spriteBatch);
-//        }
+        for (Tower tower : deployedTowers)
+            tower.draw(spriteBatch);
         spriteBatch.end();
-
     }
 
-//    private void displayTowers(SpriteBatch spriteBatch) {
-//        spriteBatch.begin();
-//        for(Tower tower : deployedTowers) {
-////            tower.draw(spriteBatch);
-//        }
-//
-//        spriteBatch.end();
-//    }
-
-//    private void displayEnemies(SpriteBatch spriteBatch){
-//        spriteBatch.begin();
-//        for(Enemy enemy : enemies){
-////            enemy.draw(spriteBatch);
-//        }
-//
-//        spriteBatch.end();
-//    }
-
-//    private void displayMap(SpriteBatch spriteBatch) {
-//        spriteBatch.begin();
-//        for (int i = 0; i < grid.length; i++) {
-//            for (int j = 0; j < grid[i].length; j++) {
-//                TileType type = grid[i][j];
-//
-//                Tile newTile = Tile.create(type);
-//                Vector2 position = new Vector2(i * Config.tileSize, j * Config.tileSize);
-//                newTile.setPosition(position);
-//                newTile.draw(spriteBatch);
-//            }
-//        }
-//        spriteBatch.end();
-//    }
-
-    public boolean checkProjectileCollision() {
-
-        return false;
+    private void displayEnemies(SpriteBatch spriteBatch) {
+        spriteBatch.begin();
+        for (int i = 0; i < this.wave.size(); ++i) {
+            this.wave.get(i).draw(spriteBatch);
+        }
+        spriteBatch.end();
     }
 
-    /**
-     * This should be called after every round.
-     */
-    public void prepareLevel(int lvl) {
-        newRoundInitialization();
-//        currentLevel = Level.generateLevel(lvl);
-//        if((enemiesToBeSpawned = currentLevel.getEnemiesToBeSpawned()) == null){
-//            prepareLevel(lvl++);
-//        }else enemiesToBeSpawned = currentLevel.getEnemiesToBeSpawned();
-
+    private void displayMap(SpriteBatch spriteBatch) {
+        spriteBatch.begin();
+        for (int i = 0; i < Config.gridWidth; ++i) {
+            for (int j = 0; j < Config.gridHeight; ++j) {
+                if (!path.onPath(i, j)) {
+                    spriteBatch.draw(this.tile,
+                            i * Config.tileSize, j * Config.tileSize,
+                            Config.tileSize, Config.tileSize);
+                }
+            }
+        }
+        // rendering path tiles
+        this.path.forEach(p -> {
+            spriteBatch.draw(this.pathTile,
+                    p.x * Config.tileSize, p.y * Config.tileSize,
+                    Config.tileSize, Config.tileSize);
+        });
+        spriteBatch.end();
     }
-
 
     public void deployTower(Tower tower) {
         if (canBuyTower(tower)) {
@@ -197,24 +110,26 @@ public class Game {
         return money >= tower.getPrice();
     }
 
-    public void setWaveSpawnTime(float waveSpawnTime) {
-        if (waveSpawnTime < 0)
-            this.roundTime = 10;
-        else
-            this.roundTime = waveSpawnTime;
-    }
-
     public void getDamaged() {
         playerLife--;
     }
 
-//    public List<Projectile> getProjectiles(){
-//        return projectiles;
-//    }
-//
-//    public Level getCurrentLevel() {
-//        return currentLevel;
-//    }
+    public void buildTower(Tower towerToBuild, Point point) {
+        Vector2 position = Utils.PointToVector2(point);
+        towerToBuild.setPosition(position);
+        towerToBuild.setCenter((float) point.x + Config.tileSize / 2, (float) point.y + Config.tileSize / 2);
+        towerToBuild.getPosition().set(Utils.PointToVector2(point));
+        deployTower(towerToBuild);
+    }
+
+    public void moveWave(float delta) {
+        this.wave.moveAll(delta);
+    }
+
+    public void startShooting() {
+        for (Tower tower : deployedTowers)
+            tower.shoot();
+    }
 
     public int getPlayerLife() {
         return playerLife;
@@ -224,15 +139,11 @@ public class Game {
         return enemies;
     }
 
-    public float getRoundTime() {
-        return roundTime;
-    }
-
     public int getMoney() {
         return money;
     }
 
-    public void addMoney(int bounty){
+    public void addMoney(int bounty) {
         this.money += bounty;
     }
 
@@ -240,35 +151,4 @@ public class Game {
         return deployedTowers;
     }
 
-    public List<Point> getWaypoints(){
-//        return Map.getInstance().getWaypoints(mapType);
-        return null;
-    }
-
-    public void setMap(int type){
-//        mapType = type;
-//        this.grid = Map.generateMap(type);
-
-    }
-
-
-    public boolean isTowerPlaceable(Point point) {
-//        try {
-//            return point.x > 0 && point.y > 0 && grid[point.x / 40][point.y / 40] != TileType.Dirt;
-//        }catch (Exception e){
-
-//        }
-        return false;
-    }
-
-    public void buildTower(Tower towerToBuild, Point point) {
-        // grid[point.x / 40][point.y / 40] = TileType.Used;
-
-        Vector2 position = Utils.PointToVector2(point);
-        towerToBuild.setPosition(position);
-
-        towerToBuild.setCenter((float) point.x + Config.tileSize / 2, (float) point.y + Config.tileSize / 2);
-        towerToBuild.getPosition().set(Utils.PointToVector2(point));
-        deployTower(towerToBuild);
-    }
 }
