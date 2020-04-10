@@ -4,7 +4,7 @@
 
 - [x] Set up CI
 - [ ] Integrate JUnit
-- [ ] Finish up `Game` class
+- [x] Finish up `Game` class
 - [ ] Set up GUI
 - [ ] Add levels
 - [ ] Show weapons while attacking enemies
