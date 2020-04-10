@@ -47,14 +47,15 @@ public class Game {
         instance = this;
         this.tile = new Texture("tile.png");
         this.pathTile = new Texture("path.jpg");
-        this.path = new Path.Builder()
-                .add(0, 2).add(3, 2).add(3, 5)
-                .add(12, 5).add(12, 2).build();
-
-        this.wave = new Wave.Builder(this.path)
-                .add(Enemy.EnemyType.RED).add(Enemy.EnemyType.PINK).add(Enemy.EnemyType.BLUE)
-                .add(Enemy.EnemyType.YELLOW).add(Enemy.EnemyType.WHITE).build();
-
+//        this.path = new Path.Builder()
+//                .add(0, 2).add(3, 2).add(3, 5)
+//                .add(12, 5).add(12, 2).build();
+//
+//        this.wave = new Wave.Builder(this.path)
+//                .add(Enemy.EnemyType.RED).add(Enemy.EnemyType.PINK).add(Enemy.EnemyType.BLUE)
+//                .add(Enemy.EnemyType.YELLOW).add(Enemy.EnemyType.WHITE).build();
+        this.path = this.readFile.getPath();
+        this.wave = this.readFile.getWave();
         this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1,3,1));
         this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2,10,5));
         this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic3,6,2));

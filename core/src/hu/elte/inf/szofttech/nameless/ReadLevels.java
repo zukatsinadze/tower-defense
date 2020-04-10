@@ -17,12 +17,25 @@ public class ReadLevels {
     private Path.Builder path;
     private Wave.Builder wave;
 
+    public ReadLevels() {
+        this.path = new Path.Builder();
+        this.wave = new Wave.Builder(this.path.build());
+    }
+
+    public Path getPath() {
+        return this.path.build();
+    }
+
+    public Wave getWave() {
+        return this.wave.build();
+    }
+
     public void read() {
         try {
-            File myObj = new File("./assets/readLevels.txt");
+            File myObj = new File("core/assets/levels.txt");
             Scanner myReader = new Scanner(myObj);
             int num = Integer.parseInt(myReader.next());
-            for (int i = 0; i < num; i++) {
+            for (int i = 0; i < num / 2; i++) {
                 path.add(Integer.parseInt(myReader.next()),Integer.parseInt(myReader.next()));
             }
             for (int i = 0; i < 5; i++) {
