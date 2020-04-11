@@ -1,16 +1,17 @@
 package hu.elte.inf.szofttech.nameless;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.Path;
 import hu.elte.inf.szofttech.nameless.model.Wave;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
-import java.awt.Point;
+import hu.elte.inf.szofttech.nameless.model.tower.TowerFactory;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-import hu.elte.inf.szofttech.nameless.model.tower.TowerFactory;
+
 import static hu.elte.inf.szofttech.nameless.model.tower.TowerFactory.TowerType;
 
 /**
@@ -23,10 +24,8 @@ public class Game {
     private int playerLife = 100;
     private final Path path;
     private final Wave wave;
-    private final Texture tile;
-    private final Texture pathTile;
     private List<Enemy> enemies = new ArrayList<>();
-    private List<Tower> deployedTowers =  new ArrayList<>();
+    private List<Tower> deployedTowers = new ArrayList<>();
     private final ReadLevels readFile = new ReadLevels();
 
     public static Game getInstance() {
@@ -43,13 +42,11 @@ public class Game {
     private Game() {
         this.readFile.read();
         instance = this;
-        this.tile = new Texture("tile.png");
-        this.pathTile = new Texture("path.jpg");
         this.path = this.readFile.getLevelList().get(0).getPath();
         this.wave = this.readFile.getLevelList().get(0).getWaves().get(0);
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1,3,1));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2,10,5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic3,6,2));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1, 3, 1));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 10, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic3, 6, 2));
         this.deployedTowers.get(0).setTargets(new ArrayList<>(this.wave.getEnemies()));
     }
 
@@ -75,11 +72,12 @@ public class Game {
     }
 
     private void displayMap(SpriteBatch spriteBatch) {
+        // rendering tiles
         spriteBatch.begin();
         for (int i = 0; i < Config.gridWidth; ++i) {
             for (int j = 0; j < Config.gridHeight; ++j) {
                 if (!path.onPath(i, j)) {
-                    spriteBatch.draw(this.tile,
+                    spriteBatch.draw(Textures.tile,
                             i * Config.tileSize, j * Config.tileSize,
                             Config.tileSize, Config.tileSize);
                 }
@@ -87,7 +85,7 @@ public class Game {
         }
         // rendering path tiles
         this.path.forEach(p -> {
-            spriteBatch.draw(this.pathTile,
+            spriteBatch.draw(Textures.path,
                     p.x * Config.tileSize, p.y * Config.tileSize,
                     Config.tileSize, Config.tileSize);
         });

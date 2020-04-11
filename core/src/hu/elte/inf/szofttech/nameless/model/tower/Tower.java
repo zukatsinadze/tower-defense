@@ -1,19 +1,19 @@
 package hu.elte.inf.szofttech.nameless.model.tower;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.GDSprite;
 
-import static hu.elte.inf.szofttech.nameless.Utils.convertFromGrid;
-
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+
+import static hu.elte.inf.szofttech.nameless.Utils.convertFromGrid;
 
 
 public class Tower {
@@ -31,10 +31,9 @@ public class Tower {
     private ArrayList<Enemy> targets = null;
     private long start = System.currentTimeMillis();
 
-    public Tower(String path, int XP, int price, int damage, int range, int attackSpeed, int x, int y,
+    public Tower(Texture texture, int XP, int price, int damage, int range, int attackSpeed, int x, int y,
                  SpecialAbility specialAbility) {
-        Texture t = new Texture(path);
-        this.sprite = new GDSprite(t);
+        this.sprite = new GDSprite(texture);
         this.sprite.setSize(Config.tileSize, Config.tileSize);
         this.damage = damage;
         this.attackSpeed = attackSpeed;

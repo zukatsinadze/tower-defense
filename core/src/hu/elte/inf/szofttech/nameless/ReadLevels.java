@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 
 /**
- *  read path coordinates and enemies information from a file
+ * read path coordinates and enemies information from a file
  */
 public class ReadLevels {
 
@@ -27,27 +27,28 @@ public class ReadLevels {
         return this.levelList;
     }
 
-
     public void read() {
         try {
             File myObj = new File("core/assets/levels.txt");
             Scanner myReader = new Scanner(myObj);
-            List<Wave> waveList = new ArrayList<>();
-            Path.Builder path = new Path.Builder();
             for (int k = 0; k < 5; k++) {
+                Path.Builder path = new Path.Builder();
+                List<Wave> waveList = new ArrayList<>();
                 int num = Integer.parseInt(myReader.next());
                 for (int i = 0; i < num / 2; i++) {
-                    path.add(Integer.parseInt(myReader.next()),Integer.parseInt(myReader.next()));
+                    path.add(Integer.parseInt(myReader.next()), Integer.parseInt(myReader.next()));
                 }
-                Wave.Builder wave = new Wave.Builder(path.build());
-                for (int i = 0; i < 5; i++) {
-                    int enemyNum = Integer.parseInt(myReader.next());
-                    for (int j = 0; j < enemyNum; j++) {
-                        wave.add(Enemy.EnemyType.values()[i]);
+                for (int h = 0; h < 10; h++) {
+                    Wave.Builder wave = new Wave.Builder(path.build());
+                    for (int i = 0; i < 5; i++) {
+                        int enemyNum = Integer.parseInt(myReader.next());
+                        for (int j = 0; j < enemyNum; j++) {
+                            wave.add(Enemy.EnemyType.values()[i]);
+                        }
                     }
                     waveList.add(wave.build());
                 }
-                levelList.add(new Level(path.build(),waveList));
+                levelList.add(new Level(path.build(), waveList));
             }
             myReader.close();
         } catch (FileNotFoundException e) {

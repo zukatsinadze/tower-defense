@@ -5,10 +5,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.Config;
+import hu.elte.inf.szofttech.nameless.Textures;
 import hu.elte.inf.szofttech.nameless.Utils;
 
 /**
- *the behavior of enemy
+ * the behavior of enemy
  */
 public class Enemy {
     private GDSprite sprite;
@@ -27,21 +28,24 @@ public class Enemy {
         YELLOW
     }
 
-    private Enemy(String image_path, int XP, int money, int damage, int speed, int health, EnemyPos pos) {
+    private Enemy(Texture texture, int XP, int money, int damage, int speed, int health, EnemyPos pos) {
         this.XP = XP;
         this.money = money;
         this.damage = damage;
         this.speed = speed;
         this.health = health;
         this.pos = pos;
-        Texture t = new Texture(image_path);
-        this.sprite = new GDSprite(t);
+        this.sprite = new GDSprite(texture);
         this.sprite.setSize(Config.tileSize / 2, Config.tileSize);
     }
 
-    public GDSprite getSprite() { return sprite; }
+    public GDSprite getSprite() {
+        return sprite;
+    }
 
-    public void setSprite(GDSprite sprite) { this.sprite = sprite; }
+    public void setSprite(GDSprite sprite) {
+        this.sprite = sprite;
+    }
 
     public int getXP() {
         return XP;
@@ -59,7 +63,9 @@ public class Enemy {
         return speed;
     }
 
-    public Vector2 getPos() { return this.pos.getPos(); }
+    public Vector2 getPos() {
+        return this.pos.getPos();
+    }
 
     public static Enemy createEnemy(Path path, EnemyType type) {
         int XP;
@@ -78,7 +84,7 @@ public class Enemy {
                 damage = 3;
                 speed = 10;
                 health = 10;
-                enemy = new Enemy("red.png",XP,money,damage,speed,health,pos);
+                enemy = new Enemy(Textures.redBalloon, XP, money, damage, speed, health, pos);
                 return enemy;
 
             case PINK:
@@ -87,7 +93,7 @@ public class Enemy {
                 damage = 5;
                 speed = 15;
                 health = 15;
-                enemy = new Enemy("pink.png",XP,money,damage,speed,health,pos);
+                enemy = new Enemy(Textures.pinkBalloon, XP, money, damage, speed, health, pos);
                 return enemy;
 
             case BLUE:
@@ -96,7 +102,7 @@ public class Enemy {
                 damage = 10;
                 speed = 8;
                 health = 30;
-                enemy = new Enemy("blue.png",XP,money,damage,speed,health,pos);
+                enemy = new Enemy(Textures.blueBalloon, XP, money, damage, speed, health, pos);
                 return enemy;
 
             case WHITE:
@@ -105,7 +111,7 @@ public class Enemy {
                 damage = 10;
                 speed = 30;
                 health = 8;
-                enemy = new Enemy("white.png",XP,money,damage,speed,health,pos);
+                enemy = new Enemy(Textures.whiteBalloon, XP, money, damage, speed, health, pos);
                 return enemy;
 
             case YELLOW:
@@ -114,7 +120,7 @@ public class Enemy {
                 damage = 15;
                 speed = 25;
                 health = 25;
-                enemy = new Enemy("yellow.png",XP,money,damage,speed,health,pos);
+                enemy = new Enemy(Textures.yellowBalloon, XP, money, damage, speed, health, pos);
                 return enemy;
 
             default:
@@ -124,8 +130,7 @@ public class Enemy {
     }
 
     /**
-     * @param damage
-     * handle the situation that the enemy got attacked
+     * @param damage handle the situation that the enemy got attacked
      */
     public void attacked(int damage) {
         this.health -= damage;
@@ -139,23 +144,21 @@ public class Enemy {
     }
 
     /**
-     * @param time
-     * moves the enemy
+     * @param time moves the enemy
      */
     public void move(float time) {
         if (isAlive())
-            pos.move(this.speed,time);
+            pos.move(this.speed, time);
         if (end())
             Game.getInstance().getDamaged(this.damage);
     }
 
     /**
-     * @param spriteBatch
-     * convert game grid position to screen position
-     * and draw enemy if it is alive and not finished the path yet/
+     * @param spriteBatch convert game grid position to screen position
+     *                    and draw enemy if it is alive and not finished the path yet/
      */
     public void draw(SpriteBatch spriteBatch) {
-        if(isAlive() && !end()) {
+        if (isAlive() && !end()) {
             sprite.setVec(Utils.convertFromGrid(pos.getPos()));
             sprite.draw(spriteBatch);
         }
@@ -164,6 +167,8 @@ public class Enemy {
     /**
      * @return whether enemy moves to an end
      */
-    public boolean end() { return this.pos.end(); }
+    public boolean end() {
+        return this.pos.end();
+    }
 
 }
