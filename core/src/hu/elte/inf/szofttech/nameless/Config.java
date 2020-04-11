@@ -6,16 +6,16 @@ import com.badlogic.gdx.graphics.Color;
  * colors for use
  */
 public class Config {
-    public static final int screenWidth = 1280;
-    public static final int screenHeight = 720;
+    public static final int screenWidth = 1120;
+    public static final int screenHeight = 630;
     public static final int gridWidth = 16;
     public static final int gridHeight = 9;
-    public static final int tileSize = 80;
+    public static final int tileSize = 70;
 
-    public static Color white = new Color(1f,1f,1f,.5f);
+    public static Color white = new Color(1f, 1f, 1f, .5f);
     public static Color green = new Color(.5f, 1, .5f, 1f); //slowed ailment
-    public static Color red = new Color(1,0,0,.5f);
-    public static Color normal = new Color(1f,1f,1f, 1f);
-    public static Color clear = new Color(0,0,0,1f);
-    public static Color clearer = new Color(0,0,0,0f);
+    public static Color red = new Color(1, 0, 0, .5f);
+    public static Color normal = new Color(1f, 1f, 1f, 1f);
+    public static Color clear = new Color(0, 0, 0, 1f);
+    public static Color clearer = new Color(0, 0, 0, 0f);
 }
