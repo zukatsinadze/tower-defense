@@ -40,7 +40,7 @@ public class Tower {
         this.range = range;
         this.price = price;
         this.XP = XP;
-        this.position = Vector2.Zero;
+        this.position = new Vector2(0,0);
         targets = new ArrayList<Enemy>();
         center = new Point2D.Float();
         this.setPosition(new Vector2(x, y));
