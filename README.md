@@ -20,7 +20,7 @@
 
 ## Su and Szumi:
 - [ ] GUI
-- [ ] Levels
+- [x] Levels
 
 
 ## Resources:
