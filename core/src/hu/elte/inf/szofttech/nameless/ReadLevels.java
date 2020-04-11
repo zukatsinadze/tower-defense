@@ -1,12 +1,11 @@
 package hu.elte.inf.szofttech.nameless;
 
+import com.badlogic.gdx.Gdx;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.Level;
 import hu.elte.inf.szofttech.nameless.model.Path;
 import hu.elte.inf.szofttech.nameless.model.Wave;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,27 +14,18 @@ import java.util.Scanner;
 /**
  * read path coordinates and enemies information from a file
  */
-public class ReadLevels {
-
-    private final List<Level> levelList;
-
-    public ReadLevels() {
-        this.levelList = new ArrayList<>();
+public final class ReadLevels {
+    private ReadLevels() {
     }
 
-    public List<Level> getLevelList() {
-        return this.levelList;
-    }
-
-    public void read() {
-        try {
-            File myObj = new File("core/assets/levels.txt");
-            Scanner myReader = new Scanner(myObj);
+    public static List<Level> read() {
+        List<Level> levels = new ArrayList<>(5);
+        try (Scanner myReader = new Scanner(Gdx.files.internal("levels.txt").reader())) {
             for (int k = 0; k < 5; k++) {
                 Path.Builder path = new Path.Builder();
                 List<Wave> waveList = new ArrayList<>();
                 int num = Integer.parseInt(myReader.next());
-                for (int i = 0; i < num / 2; i++) {
+                for (int i = 0; i < num; i++) {
                     path.add(Integer.parseInt(myReader.next()), Integer.parseInt(myReader.next()));
                 }
                 for (int h = 0; h < 10; h++) {
@@ -48,12 +38,9 @@ public class ReadLevels {
                     }
                     waveList.add(wave.build());
                 }
-                levelList.add(new Level(path.build(), waveList));
+                levels.add(new Level(path.build(), waveList));
             }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
         }
+        return levels;
     }
 }

@@ -3,6 +3,7 @@ package hu.elte.inf.szofttech.nameless;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
+import hu.elte.inf.szofttech.nameless.model.Level;
 import hu.elte.inf.szofttech.nameless.model.Path;
 import hu.elte.inf.szofttech.nameless.model.Wave;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
@@ -26,7 +27,7 @@ public class Game {
     private final Wave wave;
     private List<Enemy> enemies = new ArrayList<>();
     private List<Tower> deployedTowers = new ArrayList<>();
-    private final ReadLevels readFile = new ReadLevels();
+    private final List<Level> levels = ReadLevels.read();
 
     public static Game getInstance() {
         if (instance == null) {
@@ -40,10 +41,9 @@ public class Game {
      * To get a reference to this object, call the static method getInstance().
      */
     private Game() {
-        this.readFile.read();
         instance = this;
-        this.path = this.readFile.getLevelList().get(0).getPath();
-        this.wave = this.readFile.getLevelList().get(0).getWaves().get(0);
+        this.path = this.levels.get(0).getPath();
+        this.wave = this.levels.get(0).getWave(0);
         this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1, 3, 1));
         this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 10, 5));
         this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic3, 6, 2));
