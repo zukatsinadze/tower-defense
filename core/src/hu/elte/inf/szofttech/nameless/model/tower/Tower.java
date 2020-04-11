@@ -40,7 +40,7 @@ public class Tower {
         this.range = range;
         this.price = price;
         this.XP = XP;
-        this.position = new Vector2(0,0);
+        this.position = new Vector2(0, 0);
         targets = new ArrayList<Enemy>();
         center = new Point2D.Float();
         this.setPosition(new Vector2(x, y));
@@ -128,7 +128,7 @@ public class Tower {
         long end = System.currentTimeMillis();
         for (Enemy enemy : this.targets) {
             if (intersects(enemy)) {
-                if (enemy.isAlive() && !enemy.end() && (end - this.start) > 100 * attackSpeed) {
+                if (enemy.hasSpawned() && enemy.isAlive() && !enemy.end() && (end - this.start) > 100 * attackSpeed) {
 //                    System.out.println("Attacked!");
                     enemy.attacked(damage);
                     drawAttack(enemy.getPos());

@@ -4,10 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class Wave {
+    private static final float spawnTime = 0.5f;
+
     private final List<Enemy> enemies;
+    private int nextIndex;
+    private float nextTime;
 
     public Wave(List<Enemy> enemies) {
         this.enemies = enemies;
+        this.nextIndex = 0;
+        this.nextTime = spawnTime;
     }
 
     /**
@@ -26,6 +32,14 @@ public final class Wave {
     }
 
     public void moveAll(float time) {
+        if (this.nextIndex < this.size()) {
+            this.nextTime += time;
+            if (this.nextTime >= spawnTime) {
+                this.get(this.nextIndex).spawn();
+                ++this.nextIndex;
+                this.nextTime -= spawnTime;
+            }
+        }
         this.enemies.forEach(enemy -> enemy.move(time));
     }
 

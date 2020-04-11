@@ -19,6 +19,7 @@ public class Enemy {
     private int speed;
     private int health;
     private EnemyPos pos;
+    private boolean spawned;
 
     public static enum EnemyType {
         RED,
@@ -37,6 +38,7 @@ public class Enemy {
         this.pos = pos;
         this.sprite = new GDSprite(texture);
         this.sprite.setSize(Config.tileSize / 2, Config.tileSize);
+        this.spawned = false;
     }
 
     public GDSprite getSprite() {
@@ -147,10 +149,12 @@ public class Enemy {
      * @param time moves the enemy
      */
     public void move(float time) {
-        if (isAlive())
-            pos.move(this.speed, time);
-        if (end())
+        if (this.spawned && this.isAlive()) {
+            this.pos.move(this.speed, time);
+        }
+        if (this.end()) {
             Game.getInstance().getDamaged(this.damage);
+        }
     }
 
     /**
@@ -173,4 +177,11 @@ public class Enemy {
         return this.pos.end();
     }
 
+    public boolean hasSpawned() {
+        return this.spawned;
+    }
+
+    public void spawn() {
+        this.spawned = true;
+    }
 }
