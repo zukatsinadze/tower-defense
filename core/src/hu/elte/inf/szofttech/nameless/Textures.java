@@ -8,6 +8,7 @@ public final class Textures {
 
     public static final Texture tile = new Texture("tile.png");
     public static final Texture path = new Texture("path.jpg");
+    public static final Texture mainMenuBackground = new Texture("background.jpg");
 
     public static final Texture redBalloon = new Texture("red.png");
     public static final Texture pinkBalloon = new Texture("pink.png");
