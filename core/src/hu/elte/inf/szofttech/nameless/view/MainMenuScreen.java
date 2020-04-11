@@ -67,7 +67,7 @@ public final class MainMenuScreen extends ScreenAdapter {
             }
         });
 
-        outputLabel = new Label("Press a Button",mySkin);
+        outputLabel = new Label("",mySkin);
         stage.addActor(startButton);
         stage.addActor(exitButton);
         stage.addActor(outputLabel);
