@@ -5,8 +5,9 @@
 - [x] Set up CI
 - [ ] Integrate JUnit
 - [x] Finish up `Game` class
-- [ ] Set up GUI
-- [x] Add levels
+- [x] render main menu screen
+- [ ] render game screen
+- [ ] Add different levels
 - [ ] Show weapons while attacking enemies
 - [ ] Implement special abilities
 - [ ] ...
@@ -18,10 +19,12 @@
 - [ ] Better way to show attacks(?)
 - [ ] Special Abilities, maybe next milestone(?)
 
-## Su and Szumi:
+## Su:
 - [ ] GUI
-- [x] Levels
+- [x] Add waves and enemies
 
+## Szumi:
+- [ ] Add different levels
 
 ## Resources:
 
