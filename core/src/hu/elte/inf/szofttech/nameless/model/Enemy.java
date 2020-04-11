@@ -159,7 +159,9 @@ public class Enemy {
      */
     public void draw(SpriteBatch spriteBatch) {
         if (isAlive() && !end()) {
-            sprite.setVec(Utils.convertFromGrid(pos.getPos()));
+            Vector2 v = Utils.convertFromGrid(pos.getPos());
+            sprite.setX(v.x + Config.tileSize / 4);
+            sprite.setY(v.y);
             sprite.draw(spriteBatch);
         }
     }
