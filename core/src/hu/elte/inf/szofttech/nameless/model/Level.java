@@ -15,6 +15,10 @@ public final class Level {
         this.waves = waves;
     }
 
+    public Path getPath() { return path; }
+
+    public List<Wave> getWaves() { return waves; }
+
     public Grid getGrid() {
         return this.grid;
     }

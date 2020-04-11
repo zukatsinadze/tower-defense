@@ -1,12 +1,15 @@
 package hu.elte.inf.szofttech.nameless;
 
 import hu.elte.inf.szofttech.nameless.model.Enemy;
+import hu.elte.inf.szofttech.nameless.model.Level;
 import hu.elte.inf.szofttech.nameless.model.Path;
 import hu.elte.inf.szofttech.nameless.model.Wave;
 
-import java.io.File;  // Import the File class
-import java.io.FileNotFoundException;  // Import this class to handle errors
-import java.util.Scanner; // Import the Scanner class to read text files
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 
 /**
@@ -14,35 +17,37 @@ import java.util.Scanner; // Import the Scanner class to read text files
  */
 public class ReadLevels {
 
-    private Path.Builder path;
-    private Wave.Builder wave;
+    private final List<Level> levelList;
 
     public ReadLevels() {
-        this.path = new Path.Builder();
-        this.wave = new Wave.Builder(this.path.build());
+        this.levelList = new ArrayList<>();
     }
 
-    public Path getPath() {
-        return this.path.build();
+    public List<Level> getLevelList() {
+        return this.levelList;
     }
 
-    public Wave getWave() {
-        return this.wave.build();
-    }
 
     public void read() {
         try {
             File myObj = new File("core/assets/levels.txt");
             Scanner myReader = new Scanner(myObj);
-            int num = Integer.parseInt(myReader.next());
-            for (int i = 0; i < num / 2; i++) {
-                path.add(Integer.parseInt(myReader.next()),Integer.parseInt(myReader.next()));
-            }
-            for (int i = 0; i < 5; i++) {
-                int enemyNum = Integer.parseInt(myReader.next());
-                for (int j = 0; j < enemyNum; j++) {
-                    wave.add(Enemy.EnemyType.values()[i]);
+            List<Wave> waveList = new ArrayList<>();
+            Path.Builder path = new Path.Builder();
+            for (int k = 0; k < 5; k++) {
+                int num = Integer.parseInt(myReader.next());
+                for (int i = 0; i < num / 2; i++) {
+                    path.add(Integer.parseInt(myReader.next()),Integer.parseInt(myReader.next()));
                 }
+                Wave.Builder wave = new Wave.Builder(path.build());
+                for (int i = 0; i < 5; i++) {
+                    int enemyNum = Integer.parseInt(myReader.next());
+                    for (int j = 0; j < enemyNum; j++) {
+                        wave.add(Enemy.EnemyType.values()[i]);
+                    }
+                    waveList.add(wave.build());
+                }
+                levelList.add(new Level(path.build(),waveList));
             }
             myReader.close();
         } catch (FileNotFoundException e) {
