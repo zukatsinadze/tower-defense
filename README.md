@@ -6,7 +6,7 @@
 - [ ] Integrate JUnit
 - [x] Finish up `Game` class
 - [ ] Set up GUI
-- [ ] Add levels
+- [x] Add levels
 - [ ] Show weapons while attacking enemies
 - [ ] Implement special abilities
 - [ ] ...
