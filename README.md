@@ -11,6 +11,18 @@
 - [ ] Implement special abilities
 - [ ] ...
 
+# UPDATED: 4.11.2020
+
+## Zuka:
+- [ ] JUnit
+- [ ] Better way to show attacks(?)
+- [ ] Special Abilities, maybe next milestone(?)
+
+## Su and Szumi:
+- [ ] GUI
+- [ ] Levels
+
+
 ## Resources:
 
 - https://blog.noynoy.org/setting-up-kotlin-junit-mockito-gitlab-ci-for-libgdx-projects/
