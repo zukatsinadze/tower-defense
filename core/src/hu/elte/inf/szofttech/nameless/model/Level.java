@@ -1,5 +1,7 @@
 package hu.elte.inf.szofttech.nameless.model;
 
+import hu.elte.inf.szofttech.nameless.Config;
+
 import java.util.List;
 
 public final class Level {
@@ -7,8 +9,8 @@ public final class Level {
     private final Path path;
     private final List<Wave> waves;
 
-    public Level(int width, int height, Path path, List<Wave> waves) {
-        this.grid = new Grid(width, height);
+    public Level(Path path, List<Wave> waves) {
+        this.grid = new Grid(Config.gridWidth, Config.gridHeight);
         this.path = path;
         this.waves = waves;
     }
