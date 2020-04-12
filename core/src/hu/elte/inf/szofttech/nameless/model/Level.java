@@ -3,7 +3,6 @@ package hu.elte.inf.szofttech.nameless.model;
 import java.util.List;
 import hu.elte.inf.szofttech.nameless.Config;
 
-
 public final class Level {
     private final Grid grid;
     private final Path path;

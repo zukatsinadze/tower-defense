@@ -1,9 +1,9 @@
 package hu.elte.inf.szofttech.nameless;
 
 import java.awt.*;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.GridPoint2;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Utils {
 
