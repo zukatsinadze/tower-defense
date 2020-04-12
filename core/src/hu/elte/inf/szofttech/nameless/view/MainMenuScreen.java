@@ -4,34 +4,39 @@ import hu.elte.inf.szofttech.nameless.Main;
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Textures;
 
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 
 /**
  * rendering menu
  */
 public final class MainMenuScreen extends ScreenAdapter {
-    private Stage stage;
-    private final Main game;
+
+    private final Main main;
     private Label outputLabel;
+    private final Stage stage;
+    private final FitViewport viewport;
     private final OrthographicCamera camera;
 
-    public MainMenuScreen(Main game) {
-        this.game = game;
-        this.camera = new OrthographicCamera();
-        this.stage = new Stage(new ScreenViewport());
-        this.camera.setToOrtho(false, Config.screenWidth, Config.screenHeight);
+    public MainMenuScreen(Main main) {
+        this.main = main;
+        this.camera = this.main.getCamera();
+        this.viewport = this.main.getFitViewport();
+        this.stage = new Stage(this.viewport);
         this.createButton();
     }
 
@@ -48,7 +53,7 @@ public final class MainMenuScreen extends ScreenAdapter {
         startButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new GameScreen(game));
+                main.setScreen(new GameScreen(main));
                 dispose();
                 return true;
             }
@@ -77,14 +82,24 @@ public final class MainMenuScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
-        game.getBatch().setProjectionMatrix(camera.combined);
+        main.getBatch().setProjectionMatrix(camera.combined);
 
-        game.getBatch().begin();
-        game.getBatch().draw(Textures.mainMenuBackground, 0, 0, Config.screenWidth, Config.screenHeight);
-        game.getBatch().end();
+        // deal with window resize
+        main.getBatch().setTransformMatrix(this.camera.view);
+        main.getBatch().setProjectionMatrix(this.camera.projection);
+
+        main.getBatch().begin();
+        main.getBatch().draw(Textures.mainMenuBackground, 0, 0, Config.screenWidth, Config.screenHeight);
+        main.getBatch().end();
 
         stage.act();
         stage.draw();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        this.viewport.update(width, height);
+        this.camera.update();
     }
 
     @Override

@@ -3,7 +3,9 @@ package hu.elte.inf.szofttech.nameless;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
+
 import hu.elte.inf.szofttech.nameless.model.Path;
 import hu.elte.inf.szofttech.nameless.model.Wave;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
@@ -13,8 +15,7 @@ import hu.elte.inf.szofttech.nameless.model.Level;
  * read path coordinates and enemies information from a file
  */
 public final class ReadLevels {
-    private ReadLevels() {
-    }
+    private ReadLevels() { }
 
     public static List<Level> read() {
         List<Level> levels = new ArrayList<>(5);

@@ -2,16 +2,12 @@ package hu.elte.inf.szofttech.nameless.view;
 
 import hu.elte.inf.szofttech.nameless.Main;
 import hu.elte.inf.szofttech.nameless.Game;
-import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Textures;
-
-import com.badlogic.gdx.utils.viewport.Viewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -45,15 +41,14 @@ public class GameScreen extends ScreenAdapter {
     private String moneyString;
     private BitmapFont moneyFont;
 
-    private Stage stage;
-    private final Game game;
+    public State state;
     private final Main main;
-    private int row_height;
-    private int col_width;
+    private final Game game;
+    private final Stage stage;
     private Label outputLabel;
-    private Viewport viewport;
-    public State state = State.RUN;
-    private InputProcessor inputProcessor;
+    private final int col_width;
+    private final int row_height;
+    private final FitViewport viewport;
     private final OrthographicCamera camera;
 
     // pause and resume button attribute
@@ -63,22 +58,23 @@ public class GameScreen extends ScreenAdapter {
     private final float PAUSE_RESUME_BUTTON_Y1 = PAUSE_RESUME_BUTTON_HEIGHT * new Float(0.2);
 
     public GameScreen(Main main) {
+
         this.life = 100;
         this.money = 100;
+        this.state = State.RUN;
         this.lifeString = "Life: 100";
         this.moneyString = "Money: 100";
         this.lifeFont = new BitmapFont();
         this.moneyFont = new BitmapFont();
 
-        this.row_height = Gdx.graphics.getWidth() / 20;
         this.col_width = Gdx.graphics.getWidth() / 20;
+        this.row_height = Gdx.graphics.getWidth() / 20;
 
         this.main = main;
         this.game = Game.getInstance();
-        this.viewport = new ScreenViewport();
+        this.camera = this.main.getCamera();
+        this.viewport = this.main.getFitViewport();
         this.stage = new Stage(this.viewport);
-        this.camera = new OrthographicCamera();
-        this.camera.setToOrtho(false, Config.screenWidth, Config.screenHeight);
 
         this.createButton();
     }
@@ -141,16 +137,20 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-
         this.camera.update();
-        game.render(this.main.getBatch());
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         this.main.getBatch().setProjectionMatrix(camera.combined);
+
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        game.render(this.main.getBatch());
 
         if (state != State.PAUSE) {
             game.moveWave(delta);
             game.startShooting();
         }
+
+        // deal with window resize
+        main.getBatch().setTransformMatrix(this.camera.view);
+        main.getBatch().setProjectionMatrix(this.camera.projection);
 
         main.getBatch().begin();
         this.lifeFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -163,6 +163,12 @@ public class GameScreen extends ScreenAdapter {
 
         stage.act();
         stage.draw();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        this.viewport.update(width, height);
+        this.camera.update();
     }
 
     @Override
