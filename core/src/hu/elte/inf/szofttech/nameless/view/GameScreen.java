@@ -2,11 +2,8 @@ package hu.elte.inf.szofttech.nameless.view;
 
 import hu.elte.inf.szofttech.nameless.Main;
 import hu.elte.inf.szofttech.nameless.Game;
-import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Textures;
 
-import com.badlogic.gdx.utils.viewport.Viewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -15,6 +12,7 @@ import com.badlogic.gdx.InputProcessor;
 
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
@@ -23,7 +21,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-
 
 /**
  * rendering game
@@ -75,10 +72,9 @@ public class GameScreen extends ScreenAdapter {
 
         this.main = main;
         this.game = Game.getInstance();
-        this.viewport = new ScreenViewport();
+        this.camera = this.main.getCamera();
         this.stage = new Stage(this.viewport);
-        this.camera = new OrthographicCamera();
-        this.camera.setToOrtho(false, Config.screenWidth, Config.screenHeight);
+        this.viewport = this.main.getViewport();
 
         this.createButton();
     }
@@ -171,8 +167,8 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void resize(int width, int height) {
-        this.viewport.update(width, height);
         this.camera.update();
+        this.viewport.update(width, height);
     }
 
     @Override

@@ -1,15 +1,15 @@
 package hu.elte.inf.szofttech.nameless.view;
 
-import com.badlogic.gdx.utils.viewport.Viewport;
 import hu.elte.inf.szofttech.nameless.Main;
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Textures;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -19,8 +19,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
-
-
 /**
  * rendering menu
  */
@@ -29,14 +27,13 @@ public final class MainMenuScreen extends ScreenAdapter {
     private final Main main;
     private Label outputLabel;
     private Viewport viewport;
-    private final OrthographicCamera camera;
+    private OrthographicCamera camera;
 
     public MainMenuScreen(Main main) {
         this.main = main;
-        this.viewport = new ScreenViewport();
-        this.camera = new OrthographicCamera();
+        this.camera = this.main.getCamera();
+        this.viewport = this.main.getViewport();
         this.stage = new Stage(new ScreenViewport());
-        this.camera.setToOrtho(false, Config.screenWidth, Config.screenHeight);
         this.createButton();
     }
 
@@ -98,8 +95,8 @@ public final class MainMenuScreen extends ScreenAdapter {
 
     @Override
     public void resize(int width, int height) {
-        this.viewport.update(width, height);
         this.camera.update();
+        this.viewport.update(width, height);
     }
 
     @Override
