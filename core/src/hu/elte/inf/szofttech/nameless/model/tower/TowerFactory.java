@@ -13,7 +13,8 @@ public class TowerFactory {
         AdvancedCatchFire,
         AdvancedRingOfFire,
         AdvancedSlowBalloons,
-        AdvancedFreezeBalloons
+        AdvancedFreezeBalloons,
+        Default
     }
 
     /**
