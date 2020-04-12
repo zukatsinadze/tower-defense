@@ -2,6 +2,7 @@ package hu.elte.inf.szofttech.nameless.view;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import hu.elte.inf.szofttech.nameless.Main;
 import hu.elte.inf.szofttech.nameless.Game;
@@ -34,6 +36,10 @@ public class GameScreen extends ScreenAdapter {
         STOPPED
     }
 
+    private int life;
+    private String lifeString;
+    BitmapFont bitmapFontName;
+
     private Stage stage;
     private final Game g;
     private final Main game;
@@ -50,40 +56,45 @@ public class GameScreen extends ScreenAdapter {
     private final float PAUSE_RESUME_BUTTON_Y1 = PAUSE_RESUME_BUTTON_HEIGHT * new Float(0.3);
 
     public GameScreen(Main game) {
+        this.life = 100;
+        this.lifeString = "Life: 100";
+        this.bitmapFontName = new BitmapFont();
+
         this.game = game;
         this.g = Game.getInstance();
         this.camera = new OrthographicCamera();
+        this.stage = new Stage(new ScreenViewport());
         this.camera.setToOrtho(false, Config.screenWidth, Config.screenHeight);
+
         this.createButton();
     }
 
     public void createButton() {
         Gdx.input.setInputProcessor(stage);
-        int row_height = Gdx.graphics.getWidth() / 12;
-        int col_width = Gdx.graphics.getWidth() / 12;
+        int row_height = Gdx.graphics.getWidth() / 20;
+        int col_width = Gdx.graphics.getWidth() / 20;
         Skin mySkin = new Skin(Gdx.files.internal("skin/flat-earth-ui.json"));
 
         // Sell Tower Button
         Button sellTowerButton = new TextButton("Sell Tower",mySkin);
-        sellTowerButton.setSize(col_width*4,row_height);
-        sellTowerButton.setPosition(col_width*7,Gdx.graphics.getHeight()-row_height*3);
+        sellTowerButton.setSize(col_width*3,row_height);
+        sellTowerButton.setPosition(col_width*10,Gdx.graphics.getHeight()-row_height*11);
         sellTowerButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new GameScreen(game));
-                dispose();
+                // TO DO
                 return true;
             }
         });
 
         // upgrade tower Button
         Button upgradeTowerButton = new TextButton("Upgrade Tower",mySkin);
-        upgradeTowerButton.setSize(col_width*4,row_height);
-        upgradeTowerButton.setPosition(col_width*7,Gdx.graphics.getHeight()-row_height*5);
+        upgradeTowerButton.setSize(col_width*3,row_height);
+        upgradeTowerButton.setPosition(col_width*14,Gdx.graphics.getHeight()-row_height*11);
         upgradeTowerButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                System.exit(0);
+                // TO DO
                 return true;
             }
         });
@@ -116,8 +127,8 @@ public class GameScreen extends ScreenAdapter {
         }
         game.getBatch().end();
 
-//        stage.act();
-//        stage.draw();
+        stage.act();
+        stage.draw();
     }
 
     public void update() {
