@@ -49,6 +49,7 @@ public class Tower {
 
     /**
      * drawing function for SpriteBatch
+     *
      * @param spriteBatch
      */
     public void draw(SpriteBatch spriteBatch) {
@@ -169,6 +170,7 @@ public class Tower {
 
     /**
      * method for drawing red circle near enemy, when it is attacked
+     *
      * @param p1
      */
     private void drawAttack(Vector2 p1) {
@@ -178,7 +180,8 @@ public class Tower {
         ShapeRenderer shapeRenderer = new ShapeRenderer();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.WHITE);
-        shapeRenderer.circle(p1.x, p1.y, 10);
+//        shapeRenderer.circle(p1.x, p1.y, 10);
+        shapeRenderer.line(this.getPosition().x, this.getPosition().y, p1.x, p1.y);
         shapeRenderer.end();
     }
 
