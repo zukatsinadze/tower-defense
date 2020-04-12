@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 public final class Textures {
     private Textures() { }
 
-    public static final Texture pauseButton = new Texture("pause_button.png");
-    public static final Texture resumeButton = new Texture("resume_button.png");
+    public static final Texture pauseButton = new Texture("pause_button2.png");
+    public static final Texture resumeButton = new Texture("resume_button1.png");
 
     public static final Texture tile = new Texture("path.jpg");
     public static final Texture path = new Texture("tile2.jpg");

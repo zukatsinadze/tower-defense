@@ -2,24 +2,25 @@ package hu.elte.inf.szofttech.nameless.view;
 
 import hu.elte.inf.szofttech.nameless.Main;
 import hu.elte.inf.szofttech.nameless.Game;
+import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Textures;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-
 
 /**
  * rendering game
@@ -41,14 +42,15 @@ public class GameScreen extends ScreenAdapter {
     private String moneyString;
     private BitmapFont moneyFont;
 
-    public State state;
-    private final Main main;
-    private final Game game;
-    private final Stage stage;
+    private Stage stage;
+    private final Game g;
+    private final Main game;
+    private int row_height;
+    private int col_width;
     private Label outputLabel;
-    private final int col_width;
-    private final int row_height;
-    private final FitViewport viewport;
+    private Viewport viewport;
+    public State state = State.RUN;
+    private InputProcessor inputProcessor;
     private final OrthographicCamera camera;
 
     // pause and resume button attribute
@@ -57,24 +59,23 @@ public class GameScreen extends ScreenAdapter {
     private final float PAUSE_RESUME_BUTTON_X1 = PAUSE_RESUME_BUTTON_WIDTH * new Float(12.6);
     private final float PAUSE_RESUME_BUTTON_Y1 = PAUSE_RESUME_BUTTON_HEIGHT * new Float(0.2);
 
-    public GameScreen(Main main) {
-
+    public GameScreen(Main game) {
         this.life = 100;
         this.money = 100;
-        this.state = State.RUN;
         this.lifeString = "Life: 100";
         this.moneyString = "Money: 100";
         this.lifeFont = new BitmapFont();
         this.moneyFont = new BitmapFont();
 
-        this.col_width = Gdx.graphics.getWidth() / 20;
         this.row_height = Gdx.graphics.getWidth() / 20;
+        this.col_width = Gdx.graphics.getWidth() / 20;
 
-        this.main = main;
-        this.game = Game.getInstance();
-        this.camera = this.main.getCamera();
-        this.viewport = this.main.getFitViewport();
+        this.game = game;
+        this.g = Game.getInstance();
+        this.camera = new OrthographicCamera();
+        this.viewport = new ScreenViewport();
         this.stage = new Stage(this.viewport);
+        this.camera.setToOrtho(false, Config.screenWidth, Config.screenHeight);
 
         this.createButton();
     }
@@ -87,18 +88,26 @@ public class GameScreen extends ScreenAdapter {
         ImageButton pauseButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.pauseButton)));
         pauseButton.setPosition(PAUSE_RESUME_BUTTON_X1, PAUSE_RESUME_BUTTON_Y1);
         pauseButton.setSize(PAUSE_RESUME_BUTTON_WIDTH, PAUSE_RESUME_BUTTON_HEIGHT);
+        //pauseButton.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(Textures.pauseButton));
         pauseButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                if (button == Input.Buttons.LEFT) {
-                    if (state == State.RUN) {
-                        state = State.PAUSE;
-                        pauseButton.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(Textures.resumeButton));
-                    } else {
-                        state = State.RUN;
-                        pauseButton.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(Textures.pauseButton));
+
+                Vector3 mousePos = new Vector3(x,y,0);
+                camera.unproject(mousePos, viewport.getScreenX(), viewport.getScreenY(), viewport.getScreenWidth(), viewport.getScreenHeight());
+
+                if (mousePos.x > PAUSE_RESUME_BUTTON_X1 && mousePos.x < PAUSE_RESUME_BUTTON_X1 + PAUSE_RESUME_BUTTON_WIDTH &&
+                        mousePos.y > PAUSE_RESUME_BUTTON_Y1 && mousePos.y < PAUSE_RESUME_BUTTON_Y1 + PAUSE_RESUME_BUTTON_HEIGHT) {
+                    if (button == Input.Buttons.LEFT) {
+                        if (state == State.RUN) {
+                            pause();
+                            pauseButton.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(Textures.pauseButton));
+                        } else {
+                            resume();
+                            pauseButton.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(Textures.resumeButton));
+                        }
+                        return true;
                     }
-                    return true;
                 }
                 return false;
             }
@@ -138,38 +147,46 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         this.camera.update();
-        this.main.getBatch().setProjectionMatrix(camera.combined);
-
+        this.game.getBatch().setProjectionMatrix(camera.combined);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        game.render(this.main.getBatch());
+
+        g.render(this.game.getBatch());
+        g.moveWave(delta);
+        g.startShooting();
 
         if (state != State.PAUSE) {
-            game.moveWave(delta);
-            game.startShooting();
+            update();
         }
 
-        // deal with window resize
-        main.getBatch().setTransformMatrix(this.camera.view);
-        main.getBatch().setProjectionMatrix(this.camera.projection);
-
-        main.getBatch().begin();
+        game.getBatch().begin();
         this.lifeFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
         this.lifeFont.getData().setScale(new Float(1.5),new Float(1.5));
         this.moneyFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
         this.moneyFont.getData().setScale(new Float(1.5),new Float(1.5));
-        this.lifeFont.draw(main.getBatch(), lifeString, this.col_width*18,Gdx.graphics.getHeight()-this.row_height);
-        this.moneyFont.draw(main.getBatch(), moneyString, this.col_width*18,Gdx.graphics.getHeight()-this.row_height*2);
-        main.getBatch().end();
+        this.lifeFont.draw(game.getBatch(), lifeString, this.col_width*18,Gdx.graphics.getHeight()-this.row_height);
+        this.moneyFont.draw(game.getBatch(), moneyString, this.col_width*18,Gdx.graphics.getHeight()-this.row_height*2);
+//        if (state == State.PAUSE) {
+//            game.getBatch().draw(Textures.resumeButton, PAUSE_RESUME_BUTTON_X1, PAUSE_RESUME_BUTTON_Y1, PAUSE_RESUME_BUTTON_WIDTH, PAUSE_RESUME_BUTTON_HEIGHT);
+//        } else {
+//            game.getBatch().draw(Textures.pauseButton, PAUSE_RESUME_BUTTON_X1, PAUSE_RESUME_BUTTON_Y1, PAUSE_RESUME_BUTTON_WIDTH, PAUSE_RESUME_BUTTON_HEIGHT);
+//        }
+        game.getBatch().end();
 
         stage.act();
         stage.draw();
     }
 
-    @Override
-    public void resize(int width, int height) {
-        this.viewport.update(width, height);
-        this.camera.update();
+    public void update() {
+        // TO DO
     }
+
+    @Override
+    public void pause() {
+        state = State.PAUSE;
+    }
+
+    @Override
+    public void resume() { state = State.RUN; }
 
     @Override
     public void dispose() {

@@ -1,9 +1,9 @@
 package hu.elte.inf.szofttech.nameless.desktop;
 
-import hu.elte.inf.szofttech.nameless.Main;
-import hu.elte.inf.szofttech.nameless.Config;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import hu.elte.inf.szofttech.nameless.Config;
+import hu.elte.inf.szofttech.nameless.Main;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
