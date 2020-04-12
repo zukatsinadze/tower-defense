@@ -48,8 +48,8 @@ public class GameScreen extends ScreenAdapter {
     private Stage stage;
     private final Game game;
     private final Main main;
-    private int row_height;
     private int col_width;
+    private int row_height;
     private Label outputLabel;
     private Viewport viewport;
     public State state = State.RUN;
@@ -70,8 +70,8 @@ public class GameScreen extends ScreenAdapter {
         this.lifeFont = new BitmapFont();
         this.moneyFont = new BitmapFont();
 
-        this.row_height = Gdx.graphics.getWidth() / 20;
         this.col_width = Gdx.graphics.getWidth() / 20;
+        this.row_height = Gdx.graphics.getWidth() / 20;
 
         this.main = main;
         this.game = Game.getInstance();
@@ -152,6 +152,10 @@ public class GameScreen extends ScreenAdapter {
             game.startShooting();
         }
 
+        // deal with window resize
+        main.getBatch().setTransformMatrix(this.camera.view);
+        main.getBatch().setProjectionMatrix(this.camera.projection);
+
         main.getBatch().begin();
         this.lifeFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
         this.lifeFont.getData().setScale(new Float(1.5),new Float(1.5));
@@ -163,6 +167,12 @@ public class GameScreen extends ScreenAdapter {
 
         stage.act();
         stage.draw();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        this.viewport.update(width, height);
+        this.camera.update();
     }
 
     @Override
