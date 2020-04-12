@@ -24,18 +24,18 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 public final class MainMenuScreen extends ScreenAdapter {
     private Stage stage;
     private final Main game;
-    private final OrthographicCamera camera;
     private Label outputLabel;
+    private final OrthographicCamera camera;
 
     public MainMenuScreen(Main game) {
         this.game = game;
         this.camera = new OrthographicCamera();
         this.stage = new Stage(new ScreenViewport());
         this.camera.setToOrtho(false, Config.screenWidth, Config.screenHeight);
-        create();
+        this.createButton();
     }
 
-    public void create () {
+    public void createButton() {
         Gdx.input.setInputProcessor(stage);
         int row_height = Gdx.graphics.getWidth() / 12;
         int col_width = Gdx.graphics.getWidth() / 12;

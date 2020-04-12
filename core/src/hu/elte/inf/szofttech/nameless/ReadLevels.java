@@ -9,8 +9,6 @@ import hu.elte.inf.szofttech.nameless.model.Wave;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.Level;
 
-
-
 /**
  * read path coordinates and enemies information from a file
  */

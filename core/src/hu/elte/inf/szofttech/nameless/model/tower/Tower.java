@@ -16,7 +16,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import static hu.elte.inf.szofttech.nameless.Utils.convertFromGrid;
 
-
 public class Tower {
     private SpecialAbility specialAbility;
     private int attackTimer = 1;
