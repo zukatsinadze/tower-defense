@@ -46,16 +46,42 @@ public class Game {
         this.wave = this.levels.get(0).getWave(0);
         this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1, 3, 1));
         this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 10, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic3, 6, 2));
-        this.deployedTowers.get(0).setTargets(new ArrayList<>(this.wave.getEnemies()));
+        setTargets();
+    }
+    public int getPlayerLife() {
+        return playerLife;
     }
 
+    public List<Enemy> getEnemies() {
+        return enemies;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void addMoney(int bounty) {
+        this.money += bounty;
+    }
+
+    public List<Tower> getDeployedTowers() {
+        return deployedTowers;
+    }
+
+    /**
+     * method for rendering map, enemies and tower
+     * @param spriteBatch
+     */
     public void render(SpriteBatch spriteBatch) {
         displayMap(spriteBatch);
         displayEnemies(spriteBatch);
         displayTowers(spriteBatch);
     }
 
+    /**
+     * method for drawing towers, used in render() function
+     * @param spriteBatch
+     */
     private void displayTowers(SpriteBatch spriteBatch) {
         spriteBatch.begin();
         for (Tower tower : deployedTowers)
@@ -63,6 +89,10 @@ public class Game {
         spriteBatch.end();
     }
 
+    /**
+     * method for drawing enemies, used in render() function
+     * @param spriteBatch
+     */
     private void displayEnemies(SpriteBatch spriteBatch) {
         spriteBatch.begin();
         for (int i = 0; i < this.wave.size(); ++i) {
@@ -71,6 +101,10 @@ public class Game {
         spriteBatch.end();
     }
 
+    /**
+     * method for drawing map
+     * @param spriteBatch
+     */
     private void displayMap(SpriteBatch spriteBatch) {
         // rendering tiles
         spriteBatch.begin();
@@ -92,6 +126,10 @@ public class Game {
         spriteBatch.end();
     }
 
+    /**
+     * method for adding new tower into deployedTowers list
+     * @param tower
+     */
     public void deployTower(Tower tower) {
         if (canBuyTower(tower)) {
             money -= tower.getPrice();
@@ -99,49 +137,61 @@ public class Game {
         }
     }
 
+    /**
+     * setting targets for all deployed towers
+     */
+    private void setTargets() {
+        for (Tower t: deployedTowers){
+            t.setTargets(new ArrayList<>(this.wave.getEnemies()));
+        }
+    }
+
+    /**
+     * Checking if player has enough money for buying tower
+     * @param tower
+     * @return boolean
+     */
     public boolean canBuyTower(Tower tower) {
         return money >= tower.getPrice();
     }
 
+    /**
+     * getting damaged, when enemy reaches the end
+     * @param damage
+     */
     public void getDamaged(int damage) {
         playerLife -= damage;
     }
 
-    public void buildTower(Tower towerToBuild, Point point) {
-        Vector2 position = Utils.PointToVector2(point);
-        towerToBuild.setPosition(position);
-        towerToBuild.setCenter((float) point.x + Config.tileSize / 2, (float) point.y + Config.tileSize / 2);
-        towerToBuild.getPosition().set(Utils.PointToVector2(point));
-        deployTower(towerToBuild);
-    }
+//    /**
+//     * Building tower
+//     * @param towerToBuild
+//     * @param point
+//     */
+//    public void buildTower(Tower towerToBuild, Point point) {
+//        Vector2 position = Utils.PointToVector2(point);
+//        towerToBuild.setPosition(position);
+//        towerToBuild.setCenter((float) point.x + Config.tileSize / 2, (float) point.y + Config.tileSize / 2);
+//        towerToBuild.getPosition().set(Utils.PointToVector2(point));
+//        deployTower(towerToBuild);
+//    }
 
+    /**
+     * moving all enemies
+     * @param delta
+     */
     public void moveWave(float delta) {
         this.wave.moveAll(delta);
     }
 
+    /**
+     * all towers are starting to shoot at acquired enemies, if they are in range
+     */
     public void startShooting() {
-        for (Tower tower : deployedTowers)
+        for (Tower tower : deployedTowers){
             tower.shoot();
-    }
+//            System.out.println("Tower " + tower.getPosition() + " started shooting");
+        }
 
-    public int getPlayerLife() {
-        return playerLife;
     }
-
-    public List<Enemy> getEnemies() {
-        return enemies;
-    }
-
-    public int getMoney() {
-        return money;
-    }
-
-    public void addMoney(int bounty) {
-        this.money += bounty;
-    }
-
-    public List<Tower> getDeployedTowers() {
-        return deployedTowers;
-    }
-
 }

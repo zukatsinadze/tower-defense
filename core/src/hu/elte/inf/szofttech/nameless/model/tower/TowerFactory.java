@@ -16,6 +16,13 @@ public class TowerFactory {
         AdvancedFreezeBalloons
     }
 
+    /**
+     * creating tower
+     * @param towerType, type of tower from enum TowerType
+     * @param x, x-coordinate
+     * @param y, y-coordinate
+     * @return created Tower
+     */
     public static Tower createTower(TowerType towerType, int x, int y) {
         int XP;
         int price;

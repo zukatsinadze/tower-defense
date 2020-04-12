@@ -23,16 +23,32 @@ public class Utils {
         return new Vector2(pos.x * Config.tileSize, pos.y * Config.tileSize);
     }
 
+    /**
+     * converting to grid coordinates
+     * @param x
+     * @param y
+     * @return
+     */
     public static Point convertToGrid(float x, float y){
         int newX = (int) x / Config.tileSize * Config.tileSize;
         int newY = (int) y / Config.tileSize * Config.tileSize;
         return new Point(newX, newY);
     }
 
+    /**
+     * Getting center of tile
+     * @param position
+     * @return
+     */
     public static Vector2 getCenterOfTile(Vector2 position){
         return new Vector2(position.x - Config.tileSize / 2, position.y - Config.tileSize / 2);
     }
 
+    /**
+     * Finding center coordinates of sprite
+     * @param sprite
+     * @return Vector2, coordinates of center
+     */
     public static Vector2 getCenterOfSprite(Sprite sprite){
         float x = sprite.getX() - sprite.getWidth() / 2f;
         float y = sprite.getY() - sprite.getHeight() / 2f;

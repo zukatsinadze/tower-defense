@@ -47,6 +47,10 @@ public class Tower {
         this.specialAbility = specialAbility;
     }
 
+    /**
+     * drawing function for SpriteBatch
+     * @param spriteBatch
+     */
     public void draw(SpriteBatch spriteBatch) {
         sprite.setX(position.x);
         sprite.setY(position.y);
@@ -156,13 +160,17 @@ public class Tower {
      */
     public boolean intersects(Enemy enemy) {
         Vector2 enemyCoord = enemy.getPos();
-        System.out.println(enemyCoord + " " + this.position);
+//        System.out.println(enemyCoord + " " + this.position);
         float cornerDistance = (enemyCoord.x - this.position.x / 100) * (enemyCoord.x - this.position.x / 100) +
                 (enemyCoord.y - this.position.y / 100) * (enemyCoord.y - this.position.y / 100);
-        int nrange = range / 2;
+        int nrange = range / 5;
         return (cornerDistance <= nrange * nrange);
     }
 
+    /**
+     * method for drawing red circle near enemy, when it is attacked
+     * @param p1
+     */
     private void drawAttack(Vector2 p1) {
         p1 = convertFromGrid(p1);
         p1.x = p1.x + Config.tileSize / 2;
