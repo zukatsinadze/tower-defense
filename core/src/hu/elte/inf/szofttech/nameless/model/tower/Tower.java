@@ -177,7 +177,7 @@ public class Tower {
         p1.y = p1.y + Config.tileSize / 2;
         ShapeRenderer shapeRenderer = new ShapeRenderer();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(Color.RED);
+        shapeRenderer.setColor(Color.WHITE);
         shapeRenderer.circle(p1.x, p1.y, 10);
         shapeRenderer.end();
     }

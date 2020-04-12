@@ -163,18 +163,17 @@ public class Game {
         playerLife -= damage;
     }
 
-//    /**
-//     * Building tower
-//     * @param towerToBuild
-//     * @param point
-//     */
-//    public void buildTower(Tower towerToBuild, Point point) {
-//        Vector2 position = Utils.PointToVector2(point);
-//        towerToBuild.setPosition(position);
-//        towerToBuild.setCenter((float) point.x + Config.tileSize / 2, (float) point.y + Config.tileSize / 2);
-//        towerToBuild.getPosition().set(Utils.PointToVector2(point));
-//        deployTower(towerToBuild);
-//    }
+    /**
+     * Building tower
+     * @param towerToBuild
+     * @param point
+     */
+    public void buildTower(Tower towerToBuild, Point point) {
+        Vector2 position = Utils.PointToVector2(point);
+        towerToBuild.setPosition(position);
+        towerToBuild.setCenter((float) point.x + Config.tileSize / 2, (float) point.y + Config.tileSize / 2);
+        deployTower(towerToBuild);
+    }
 
     /**
      * moving all enemies
