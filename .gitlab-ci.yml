@@ -21,11 +21,12 @@ build:
   only:
     - master
     - develop
+    - testing
 
 test:
   stage: test
   script:
-    - ./gradlew check
+    - ./gradlew clean tests:test
 
 after_script:
   - echo "End CI"
