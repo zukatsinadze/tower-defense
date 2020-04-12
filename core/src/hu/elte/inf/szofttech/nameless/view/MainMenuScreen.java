@@ -1,23 +1,18 @@
 package hu.elte.inf.szofttech.nameless.view;
 
-import hu.elte.inf.szofttech.nameless.Main;
-import hu.elte.inf.szofttech.nameless.Config;
-import hu.elte.inf.szofttech.nameless.Textures;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.utils.viewport.Viewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import hu.elte.inf.szofttech.nameless.Config;
+import hu.elte.inf.szofttech.nameless.Main;
+import hu.elte.inf.szofttech.nameless.Textures;
 
 /**
  * rendering menu
@@ -26,14 +21,10 @@ public final class MainMenuScreen extends ScreenAdapter {
     private Stage stage;
     private final Main main;
     private Label outputLabel;
-    private Viewport viewport;
-    private OrthographicCamera camera;
 
     public MainMenuScreen(Main main) {
         this.main = main;
-        this.camera = this.main.getCamera();
-        this.viewport = this.main.getViewport();
-        this.stage = new Stage(new ScreenViewport());
+        this.stage = new Stage(this.main.getViewport());
         this.createButton();
     }
 
@@ -44,12 +35,12 @@ public final class MainMenuScreen extends ScreenAdapter {
         Skin mySkin = new Skin(Gdx.files.internal("skin/flat-earth-ui.json"));
 
         // Start Button
-        Button startButton = new TextButton("Start Game",mySkin);
-        startButton.setSize(col_width*4,row_height);
-        startButton.setPosition(col_width*7,Gdx.graphics.getHeight()-row_height*3);
-        startButton.addListener(new InputListener(){
+        Button startButton = new TextButton("Start Game", mySkin);
+        startButton.setSize(col_width * 4, row_height);
+        startButton.setPosition(col_width * 7, Gdx.graphics.getHeight() - row_height * 3);
+        startButton.addListener(new InputListener() {
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 main.setScreen(new GameScreen(main));
                 dispose();
                 return true;
@@ -57,18 +48,18 @@ public final class MainMenuScreen extends ScreenAdapter {
         });
 
         // Exit Button
-        Button exitButton = new TextButton("Exit Game",mySkin);
-        exitButton.setSize(col_width*4,row_height);
-        exitButton.setPosition(col_width*7,Gdx.graphics.getHeight()-row_height*5);
-        exitButton.addListener(new InputListener(){
+        Button exitButton = new TextButton("Exit Game", mySkin);
+        exitButton.setSize(col_width * 4, row_height);
+        exitButton.setPosition(col_width * 7, Gdx.graphics.getHeight() - row_height * 5);
+        exitButton.addListener(new InputListener() {
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 System.exit(0);
                 return true;
             }
         });
 
-        outputLabel = new Label("",mySkin);
+        outputLabel = new Label("", mySkin);
         stage.addActor(startButton);
         stage.addActor(exitButton);
         stage.addActor(outputLabel);
@@ -78,12 +69,11 @@ public final class MainMenuScreen extends ScreenAdapter {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        camera.update();
-        main.getBatch().setProjectionMatrix(camera.combined);
+        this.main.getViewport().getCamera().update();
 
         // deal with window resize
-        main.getBatch().setTransformMatrix(this.camera.view);
-        main.getBatch().setProjectionMatrix(this.camera.projection);
+        main.getBatch().setTransformMatrix(this.main.getViewport().getCamera().view);
+        main.getBatch().setProjectionMatrix(this.main.getViewport().getCamera().projection);
 
         main.getBatch().begin();
         main.getBatch().draw(Textures.mainMenuBackground, 0, 0, Config.screenWidth, Config.screenHeight);
@@ -95,8 +85,8 @@ public final class MainMenuScreen extends ScreenAdapter {
 
     @Override
     public void resize(int width, int height) {
-        this.camera.update();
-        this.viewport.update(width, height);
+        this.main.getViewport().getCamera().update();
+        this.main.getViewport().update(width, height);
     }
 
     @Override
