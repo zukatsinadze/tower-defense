@@ -46,6 +46,7 @@ public class Game {
         this.wave = this.levels.get(0).getWave(0);
         this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1, 3, 1));
         this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 10, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 1, 5));
         setTargets();
     }
     public int getPlayerLife() {
@@ -135,6 +136,21 @@ public class Game {
             money -= tower.getPrice();
             deployedTowers.add(tower);
         }
+    }
+
+    /**
+     * selling tower
+     * @param t Tower
+     */
+    public void sellTower(Tower t) {
+        List<Tower> newDeployedTowers = new ArrayList<>();
+        for (Tower tower : deployedTowers) {
+            if (tower != t) {
+                newDeployedTowers.add(tower);
+            }
+        }
+        this.deployedTowers = newDeployedTowers;
+        this.money += t.getPrice();
     }
 
     /**
