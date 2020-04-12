@@ -21,7 +21,7 @@ import static hu.elte.inf.szofttech.nameless.model.tower.TowerFactory.TowerType;
 public class Game {
     private static Game instance;
 
-    private int money = 90;
+    private int money = 100;
     private int playerLife = 100;
     private final Path path;
     private final Wave wave;
