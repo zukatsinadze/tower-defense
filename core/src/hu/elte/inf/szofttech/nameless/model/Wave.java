@@ -1,7 +1,7 @@
 package hu.elte.inf.szofttech.nameless.model;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 public final class Wave {
     private static final float spawnTime = 0.5f;

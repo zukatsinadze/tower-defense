@@ -1,10 +1,10 @@
 package hu.elte.inf.szofttech.nameless.model;
 
+import java.awt.*;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Vector2;
 
-import java.awt.*;
 
 public class GDSprite extends Sprite {
 

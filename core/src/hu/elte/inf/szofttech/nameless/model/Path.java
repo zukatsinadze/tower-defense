@@ -1,12 +1,11 @@
 package hu.elte.inf.szofttech.nameless.model;
 
-import com.badlogic.gdx.math.GridPoint2;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+import java.util.List;
+import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.function.Consumer;
+import com.badlogic.gdx.math.GridPoint2;
 
 public final class Path {
     private final List<GridPoint2> points;

@@ -1,8 +1,8 @@
 package hu.elte.inf.szofttech.nameless.model;
 
+import java.util.List;
 import hu.elte.inf.szofttech.nameless.Config;
 
-import java.util.List;
 
 public final class Level {
     private final Grid grid;

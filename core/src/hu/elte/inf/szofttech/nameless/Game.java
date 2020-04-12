@@ -1,18 +1,18 @@
 package hu.elte.inf.szofttech.nameless;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import java.awt.*;
+import java.util.List;
+import java.util.ArrayList;
+
 import com.badlogic.gdx.math.Vector2;
-import hu.elte.inf.szofttech.nameless.model.Enemy;
-import hu.elte.inf.szofttech.nameless.model.Level;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import hu.elte.inf.szofttech.nameless.model.Path;
 import hu.elte.inf.szofttech.nameless.model.Wave;
+import hu.elte.inf.szofttech.nameless.model.Enemy;
+import hu.elte.inf.szofttech.nameless.model.Level;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 import hu.elte.inf.szofttech.nameless.model.tower.TowerFactory;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-
 import static hu.elte.inf.szofttech.nameless.model.tower.TowerFactory.TowerType;
 
 /**

@@ -1,11 +1,11 @@
 package hu.elte.inf.szofttech.nameless.model;
 
-import com.badlogic.gdx.math.GridPoint2;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
 import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+import com.badlogic.gdx.math.GridPoint2;
 
 public final class  Grid {
     private final int width;

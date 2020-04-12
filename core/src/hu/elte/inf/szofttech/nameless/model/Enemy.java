@@ -1,12 +1,13 @@
 package hu.elte.inf.szofttech.nameless.model;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import hu.elte.inf.szofttech.nameless.Game;
+import hu.elte.inf.szofttech.nameless.Utils;
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Textures;
-import hu.elte.inf.szofttech.nameless.Utils;
+
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * the behavior of enemy

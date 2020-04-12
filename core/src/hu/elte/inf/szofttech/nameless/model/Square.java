@@ -1,9 +1,9 @@
 package hu.elte.inf.szofttech.nameless.model;
 
+import java.util.Optional;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 
-import java.util.Optional;
 
 public final class Square {
     private Optional<Tower> tower;

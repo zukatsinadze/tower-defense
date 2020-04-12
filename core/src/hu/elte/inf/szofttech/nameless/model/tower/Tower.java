@@ -1,17 +1,18 @@
 package hu.elte.inf.szofttech.nameless.model.tower;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
+import java.util.ArrayList;
+import java.awt.geom.Point2D;
+
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.GDSprite;
 
-import java.awt.geom.Point2D;
-import java.util.ArrayList;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import static hu.elte.inf.szofttech.nameless.Utils.convertFromGrid;
 

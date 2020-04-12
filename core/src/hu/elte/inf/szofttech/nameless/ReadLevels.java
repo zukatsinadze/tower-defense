@@ -1,14 +1,14 @@
 package hu.elte.inf.szofttech.nameless;
 
-import com.badlogic.gdx.Gdx;
-import hu.elte.inf.szofttech.nameless.model.Enemy;
-import hu.elte.inf.szofttech.nameless.model.Level;
-import hu.elte.inf.szofttech.nameless.model.Path;
-import hu.elte.inf.szofttech.nameless.model.Wave;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.ArrayList;
+import com.badlogic.gdx.Gdx;
+import hu.elte.inf.szofttech.nameless.model.Path;
+import hu.elte.inf.szofttech.nameless.model.Wave;
+import hu.elte.inf.szofttech.nameless.model.Enemy;
+import hu.elte.inf.szofttech.nameless.model.Level;
+
 
 
 /**

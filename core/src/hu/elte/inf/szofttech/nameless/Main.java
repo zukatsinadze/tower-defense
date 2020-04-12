@@ -3,7 +3,6 @@ package hu.elte.inf.szofttech.nameless;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import hu.elte.inf.szofttech.nameless.view.GameScreen;
 import hu.elte.inf.szofttech.nameless.view.MainMenuScreen;
 
 public final class Main extends Game {
