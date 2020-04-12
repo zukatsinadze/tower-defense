@@ -139,6 +139,7 @@ public class GameScreen extends ScreenAdapter {
     public void render(float delta) {
 
         this.camera.update();
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.render(this.main.getBatch());
         this.main.getBatch().setProjectionMatrix(camera.combined);
