@@ -8,7 +8,6 @@ import hu.elte.inf.szofttech.nameless.view.MainMenuScreen;
 public final class Main extends Game {
     private SpriteBatch batch;
     private BitmapFont font;
-
     @Override
     public void create() {
         batch = new SpriteBatch();
