@@ -5,22 +5,25 @@ import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Textures;
 
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.utils.viewport.Viewport;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+
 
 /**
  * rendering game
@@ -43,8 +46,8 @@ public class GameScreen extends ScreenAdapter {
     private BitmapFont moneyFont;
 
     private Stage stage;
-    private final Game g;
-    private final Main game;
+    private final Game game;
+    private final Main main;
     private int row_height;
     private int col_width;
     private Label outputLabel;
@@ -59,7 +62,7 @@ public class GameScreen extends ScreenAdapter {
     private final float PAUSE_RESUME_BUTTON_X1 = PAUSE_RESUME_BUTTON_WIDTH * new Float(12.6);
     private final float PAUSE_RESUME_BUTTON_Y1 = PAUSE_RESUME_BUTTON_HEIGHT * new Float(0.2);
 
-    public GameScreen(Main game) {
+    public GameScreen(Main main) {
         this.life = 100;
         this.money = 100;
         this.lifeString = "Life: 100";
@@ -70,11 +73,11 @@ public class GameScreen extends ScreenAdapter {
         this.row_height = Gdx.graphics.getWidth() / 20;
         this.col_width = Gdx.graphics.getWidth() / 20;
 
-        this.game = game;
-        this.g = Game.getInstance();
-        this.camera = new OrthographicCamera();
+        this.main = main;
+        this.game = Game.getInstance();
         this.viewport = new ScreenViewport();
         this.stage = new Stage(this.viewport);
+        this.camera = new OrthographicCamera();
         this.camera.setToOrtho(false, Config.screenWidth, Config.screenHeight);
 
         this.createButton();
@@ -88,26 +91,18 @@ public class GameScreen extends ScreenAdapter {
         ImageButton pauseButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.pauseButton)));
         pauseButton.setPosition(PAUSE_RESUME_BUTTON_X1, PAUSE_RESUME_BUTTON_Y1);
         pauseButton.setSize(PAUSE_RESUME_BUTTON_WIDTH, PAUSE_RESUME_BUTTON_HEIGHT);
-        //pauseButton.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(Textures.pauseButton));
         pauseButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-
-                Vector3 mousePos = new Vector3(x,y,0);
-                camera.unproject(mousePos, viewport.getScreenX(), viewport.getScreenY(), viewport.getScreenWidth(), viewport.getScreenHeight());
-
-                if (mousePos.x > PAUSE_RESUME_BUTTON_X1 && mousePos.x < PAUSE_RESUME_BUTTON_X1 + PAUSE_RESUME_BUTTON_WIDTH &&
-                        mousePos.y > PAUSE_RESUME_BUTTON_Y1 && mousePos.y < PAUSE_RESUME_BUTTON_Y1 + PAUSE_RESUME_BUTTON_HEIGHT) {
-                    if (button == Input.Buttons.LEFT) {
-                        if (state == State.RUN) {
-                            pause();
-                            pauseButton.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(Textures.pauseButton));
-                        } else {
-                            resume();
-                            pauseButton.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(Textures.resumeButton));
-                        }
-                        return true;
+                if (button == Input.Buttons.LEFT) {
+                    if (state == State.RUN) {
+                        state = State.PAUSE;
+                        pauseButton.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(Textures.resumeButton));
+                    } else {
+                        state = State.RUN;
+                        pauseButton.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(Textures.pauseButton));
                     }
+                    return true;
                 }
                 return false;
             }
@@ -146,47 +141,29 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        this.camera.update();
-        this.game.getBatch().setProjectionMatrix(camera.combined);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        g.render(this.game.getBatch());
-        g.moveWave(delta);
-        g.startShooting();
+        this.camera.update();
+        game.render(this.main.getBatch());
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        this.main.getBatch().setProjectionMatrix(camera.combined);
 
         if (state != State.PAUSE) {
-            update();
+            game.moveWave(delta);
+            game.startShooting();
         }
 
-        game.getBatch().begin();
+        main.getBatch().begin();
         this.lifeFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
         this.lifeFont.getData().setScale(new Float(1.5),new Float(1.5));
         this.moneyFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
         this.moneyFont.getData().setScale(new Float(1.5),new Float(1.5));
-        this.lifeFont.draw(game.getBatch(), lifeString, this.col_width*18,Gdx.graphics.getHeight()-this.row_height);
-        this.moneyFont.draw(game.getBatch(), moneyString, this.col_width*18,Gdx.graphics.getHeight()-this.row_height*2);
-//        if (state == State.PAUSE) {
-//            game.getBatch().draw(Textures.resumeButton, PAUSE_RESUME_BUTTON_X1, PAUSE_RESUME_BUTTON_Y1, PAUSE_RESUME_BUTTON_WIDTH, PAUSE_RESUME_BUTTON_HEIGHT);
-//        } else {
-//            game.getBatch().draw(Textures.pauseButton, PAUSE_RESUME_BUTTON_X1, PAUSE_RESUME_BUTTON_Y1, PAUSE_RESUME_BUTTON_WIDTH, PAUSE_RESUME_BUTTON_HEIGHT);
-//        }
-        game.getBatch().end();
+        this.lifeFont.draw(main.getBatch(), lifeString, this.col_width*18,Gdx.graphics.getHeight()-this.row_height);
+        this.moneyFont.draw(main.getBatch(), moneyString, this.col_width*18,Gdx.graphics.getHeight()-this.row_height*2);
+        main.getBatch().end();
 
         stage.act();
         stage.draw();
     }
-
-    public void update() {
-        // TO DO
-    }
-
-    @Override
-    public void pause() {
-        state = State.PAUSE;
-    }
-
-    @Override
-    public void resume() { state = State.RUN; }
 
     @Override
     public void dispose() {
