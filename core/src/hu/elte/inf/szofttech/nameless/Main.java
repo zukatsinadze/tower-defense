@@ -15,21 +15,20 @@ public final class Main extends Game {
 
     private BitmapFont font;
     private SpriteBatch batch;
-    private final OrthographicCamera camera = new OrthographicCamera();
-
-
-    private final FitViewport fitViewport = new FitViewport(Config.screenWidth, Config.screenHeight, camera);
+    private OrthographicCamera camera;
+    private FitViewport fitViewport;
 
     public OrthographicCamera getCamera() { return camera; }
-
     public FitViewport getFitViewport() { return fitViewport; }
 
     @Override
     public void create() {
         font = new BitmapFont();
         batch = new SpriteBatch();
-        this.setScreen(new MainMenuScreen(this));
+        this.camera = new OrthographicCamera();
         this.camera.setToOrtho(false, Config.screenWidth, Config.screenHeight);
+        this.fitViewport = new FitViewport(Config.screenWidth, Config.screenHeight, camera);
+        this.setScreen(new MainMenuScreen(this));
     }
 
     @Override
