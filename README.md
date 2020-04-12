@@ -3,21 +3,21 @@
 ## TODO:
 
 - [x] Set up CI
-- [ ] Integrate JUnit
+- [x] Integrate JUnit
 - [x] Finish up `Game` class
 - [x] render main menu screen
 - [ ] render game screen
 - [ ] Add different levels
-- [ ] Show weapons while attacking enemies
 - [ ] Implement special abilities
 - [ ] ...
 
 # UPDATED: 4.11.2020
 
 ## Zuka:
-- [ ] JUnit
-- [ ] Better way to show attacks(?)
+- [x] JUnit
+- [x] Better way to show attacks(?)
 - [ ] Special Abilities, maybe next milestone(?)
+- [ ] Add more tests
 
 ## Su:
 - [ ] GUI
