@@ -73,8 +73,8 @@ public class GameScreen extends ScreenAdapter {
         this.main = main;
         this.game = Game.getInstance();
         this.camera = this.main.getCamera();
-        this.stage = new Stage(this.viewport);
         this.viewport = this.main.getViewport();
+        this.stage = new Stage(this.viewport);
 
         this.createButton();
     }
