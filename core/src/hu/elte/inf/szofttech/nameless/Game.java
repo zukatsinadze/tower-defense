@@ -206,7 +206,7 @@ public class Game {
         });
 
         // rendering home
-        //spriteBatch.draw(Textures.home,path.getLast().x,path.getLast().y,Config.tileSize, Config.tileSize);
+        spriteBatch.draw(Textures.home,path.getLast().x,path.getLast().y,Config.tileSize, Config.tileSize);
 
         spriteBatch.end();
     }
