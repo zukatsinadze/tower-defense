@@ -40,8 +40,8 @@ public class GameScreen extends ScreenAdapter {
     private Stage stage;
     private final Game game;
     private final Main main;
-    private int col_width;
-    private int row_height;
+    private float col_width;
+    private float row_height;
     private Label outputLabel;
     public State state = State.RUN;
     private InputProcessor inputProcessor;
@@ -119,6 +119,19 @@ public class GameScreen extends ScreenAdapter {
             }
         });
         stage.addActor(upgradeTowerButton);
+
+        // Next Wave Button
+        Button nextWaveButton = new TextButton("Next Wave", mySkin);
+        nextWaveButton.setSize(this.col_width * 2.8f, this.row_height);
+        nextWaveButton.setPosition(this.col_width * 17, Gdx.graphics.getHeight() - this.row_height * 7);
+        nextWaveButton.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                // TO DO
+                return true;
+            }
+        });
+        stage.addActor(nextWaveButton);
 
         outputLabel = new Label("", mySkin);
         stage.addActor(outputLabel);
