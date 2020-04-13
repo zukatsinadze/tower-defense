@@ -132,7 +132,7 @@ public class Tower {
         for (Enemy enemy : this.targets) {
             if (intersects(enemy)) {
                 if (enemy.hasSpawned() && enemy.isAlive() && !enemy.end()
-                        && this.attackTimer > 20.0 / this.attackSpeed) {
+                        && this.attackTimer > 10.0 / this.attackSpeed) {
                     this.attackTimer = 0;
                     enemy.attacked(damage);
                     drawAttack(enemy.getPos());
