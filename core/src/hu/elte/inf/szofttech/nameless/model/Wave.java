@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public final class Wave {
-    private static final float spawnTime = 0.1f;
+    private static final float spawnTime = 0.5f;
 
     private final List<Enemy> enemies;
     private int nextIndex;
