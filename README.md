@@ -7,6 +7,8 @@
 - [x] Finish up `Game` class
 - [x] render main menu screen
 - [ ] render game screen
+- [ ] sell tower
+- [ ] place tower
 - [ ] Add different levels
 - [ ] Implement special abilities
 - [ ] ...
