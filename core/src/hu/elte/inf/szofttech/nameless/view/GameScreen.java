@@ -36,13 +36,13 @@ public class GameScreen extends ScreenAdapter {
     private BitmapFont moneyFont;
     private BitmapFont waveFont;
     private BitmapFont levelFont;
-
+    private Skin mySkin;
     private Stage stage;
     private final Game game;
     private final Main main;
     private float col_width;
     private float row_height;
-    private Label outputLabel;
+    private Label lifeLabel;
     public State state = State.RUN;
     private InputProcessor inputProcessor;
 
@@ -64,13 +64,13 @@ public class GameScreen extends ScreenAdapter {
         this.main = main;
         this.game = Game.getInstance();
         this.stage = new Stage(this.main.getViewport());
+        this.mySkin = new Skin(Gdx.files.internal("skin/flat-earth-ui.json"));
 
         this.createButton();
     }
 
     public void createButton() {
         Gdx.input.setInputProcessor(stage);
-        Skin mySkin = new Skin(Gdx.files.internal("skin/flat-earth-ui.json"));
 
         // pause Button
         ImageButton pauseButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.pauseButton)));
@@ -145,9 +145,6 @@ public class GameScreen extends ScreenAdapter {
             }
         });
         stage.addActor(nextLevelButton);
-
-        outputLabel = new Label("", mySkin);
-        stage.addActor(outputLabel);
     }
 
     @Override
@@ -183,6 +180,12 @@ public class GameScreen extends ScreenAdapter {
 
         this.waveFont.draw(main.getBatch(), "Wave: " + String.valueOf(this.game.getCurrentWave()), this.col_width * 18, Gdx.graphics.getHeight() - this.row_height * 4);
         this.levelFont.draw(main.getBatch(), "Level: " + String.valueOf(this.game.getCurrentLevel()), this.col_width * 18, Gdx.graphics.getHeight() - this.row_height * 3);
+
+
+        lifeLabel = new Label("Life", mySkin);
+        lifeLabel.setFontScale(3f);
+        lifeLabel.setPosition(this.col_width * 18, Gdx.graphics.getHeight() - this.row_height);
+        stage.addActor(lifeLabel);
 
         this.main.getBatch().end();
 
