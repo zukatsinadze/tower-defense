@@ -7,9 +7,7 @@
 - [x] Finish up `Game` class
 - [x] render main menu screen
 - [ ] render game screen
-- [ ] sell tower
-- [ ] place tower
-- [ ] render tower scope
+- [ ] dynamic tower(place sell scope)
 - [ ] dynamic data(life money wave level)
 - [ ] Add different levels
 - [ ] Implement special abilities
@@ -25,7 +23,7 @@
 
 ## Su:
 - [ ] GUI
-- [ ] dynamic life and money
+- [x] dynamic life and money
 - [ ] dynamic wave and level
 - [x] Add waves and enemies
 
