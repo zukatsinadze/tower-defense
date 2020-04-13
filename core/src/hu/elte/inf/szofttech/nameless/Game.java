@@ -1,5 +1,6 @@
 package hu.elte.inf.szofttech.nameless;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
@@ -163,12 +164,15 @@ public class Game {
 //            setTargets();
 //        }
 
+        Texture tile = Textures.tiles.get(this.currentLevel - 1);
+        Texture pathTile = Textures.paths.get(this.currentLevel - 1);
+
         this.path = this.levels.get(currentLevel - 1).getPath();
         spriteBatch.begin();
         for (int i = 0; i < Config.gridWidth; ++i) {
             for (int j = 0; j < Config.gridHeight; ++j) {
                 if (!path.onPath(i, j)) {
-                    spriteBatch.draw(Textures.tile,
+                    spriteBatch.draw(tile,
                             i * Config.tileSize, j * Config.tileSize,
                             Config.tileSize, Config.tileSize);
                 }
@@ -177,7 +181,7 @@ public class Game {
 
         // rendering path tiles
         this.path.forEach(p -> {
-            spriteBatch.draw(Textures.path,
+            spriteBatch.draw(pathTile,
                     p.x * Config.tileSize, p.y * Config.tileSize,
                     Config.tileSize, Config.tileSize);
         });

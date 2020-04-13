@@ -2,27 +2,35 @@ package hu.elte.inf.szofttech.nameless;
 
 import com.badlogic.gdx.graphics.Texture;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class Textures {
-    private Textures() { }
+    private Textures() {
+    }
 
     public static final Texture pauseButton = new Texture("pause_button.png");
     public static final Texture resumeButton = new Texture("resume_button.png");
 
-//    public static final Texture tile = new Texture("tile6.jpg");
-//    public static final Texture path = new Texture("tile0.jpg");
+    public static final List<Texture> tiles = new ArrayList<>(5);
+    public static final List<Texture> paths = new ArrayList<>(5);
 
-//    public static final Texture tile = new Texture("tile6.jpg");
-//    public static final Texture path = new Texture("tile1.jpg");
+    static {
+        tiles.add(new Texture("tile6.jpg"));
+        paths.add(new Texture("tile0.jpg"));
 
-//    public static final Texture tile = new Texture("tile6.jpg");
-//    public static final Texture path = new Texture("tile2.jpg");
+        tiles.add(new Texture("tile6.jpg"));
+        paths.add(new Texture("tile1.jpg"));
 
-//    public static final Texture tile = new Texture("tile0.jpg");
-//    public static final Texture path = new Texture("tile4.jpg");
+        tiles.add(new Texture("tile6.jpg"));
+        paths.add(new Texture("tile2.jpg"));
 
-    public static final Texture tile = new Texture("tile0.jpg");
-    public static final Texture path = new Texture("tile5.jpg");
+        tiles.add(new Texture("tile0.jpg"));
+        paths.add(new Texture("tile4.jpg"));
 
+        tiles.add(new Texture("tile0.jpg"));
+        paths.add(new Texture("tile5.jpg"));
+    }
 
     public static final Texture mainMenuBackground = new Texture("background.jpg");
     public static final Texture home = new Texture("home.png");
