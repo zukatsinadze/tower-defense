@@ -122,8 +122,8 @@ public class GameScreen extends ScreenAdapter {
 
         // Next Wave Button
         Button nextWaveButton = new TextButton("Next Wave", mySkin);
-        nextWaveButton.setSize(this.col_width * 2.8f, this.row_height);
-        nextWaveButton.setPosition(this.col_width * 17, Gdx.graphics.getHeight() - this.row_height * 7);
+        nextWaveButton.setSize(this.col_width * 2.4f, this.row_height);
+        nextWaveButton.setPosition(this.col_width * 17.4f, Gdx.graphics.getHeight() - this.row_height * 7);
         nextWaveButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

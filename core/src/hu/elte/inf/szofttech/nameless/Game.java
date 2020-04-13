@@ -195,12 +195,17 @@ public class Game {
                 }
             }
         }
+
         // rendering path tiles
         this.path.forEach(p -> {
             spriteBatch.draw(Textures.path,
                     p.x * Config.tileSize, p.y * Config.tileSize,
                     Config.tileSize, Config.tileSize);
         });
+
+        // rendering home
+        //spriteBatch.draw(Textures.home,path.getLast().x,path.getLast().y,Config.tileSize, Config.tileSize);
+
         spriteBatch.end();
     }
 
