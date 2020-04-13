@@ -1,18 +1,18 @@
 package hu.elte.inf.szofttech.nameless;
 
-import java.awt.*;
-import java.util.List;
-import java.util.ArrayList;
-
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
-import hu.elte.inf.szofttech.nameless.model.Path;
-import hu.elte.inf.szofttech.nameless.model.Wave;
+import com.badlogic.gdx.math.Vector2;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.Level;
+import hu.elte.inf.szofttech.nameless.model.Path;
+import hu.elte.inf.szofttech.nameless.model.Wave;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 import hu.elte.inf.szofttech.nameless.model.tower.TowerFactory;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import static hu.elte.inf.szofttech.nameless.model.tower.TowerFactory.TowerType;
 
 /**
@@ -46,51 +46,15 @@ public class Game {
     private Game() {
         instance = this;
 
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1, 3, 1));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 10, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 1, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 8, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 5, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 8, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 10, 3));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 2, 7));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 3, 3));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1, 3, 1));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 10, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 1, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 8, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 5, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 8, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 10, 3));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 2, 7));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 3, 3));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1, 3, 1));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 10, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 1, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 8, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 5, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 8, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 10, 3));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 2, 7));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 3, 3));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1, 3, 1));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 10, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 1, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 8, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 5, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 8, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 10, 3));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 2, 7));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 3, 3));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1, 3, 1));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 10, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 1, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 8, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 5, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 8, 5));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 10, 3));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 2, 7));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 3, 3));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1, 4, 2));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 11, 6));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 2, 6));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 9, 6));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 6, 6));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 9, 6));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 11, 4));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 3, 8));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 4, 4));
 
         setTargets();
     }
@@ -287,9 +251,9 @@ public class Game {
     /**
      * all towers are starting to shoot at acquired enemies, if they are in range
      */
-    public void startShooting() {
+    public void startShooting(float delta) {
         for (Tower tower : deployedTowers){
-            tower.shoot();
+            tower.shoot(delta);
 //            System.out.println("Tower " + tower.getPosition() + " started shooting");
         }
 
