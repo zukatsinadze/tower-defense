@@ -186,8 +186,27 @@ public class Game {
                     Config.tileSize, Config.tileSize);
         });
 
+        float homeX = path.getLast().x;
+        float homeY = path.getLast().y;
+        int dirX = path.getSecondToLast().x;
+        int dirY = path.getSecondToLast().y;
+
+        if (homeX < dirX) {
+            homeX -= 0.5f;
+        }
+        if (homeX > dirX) {
+            homeX += 0.5f;
+        }
+        if (homeY < dirY) {
+            homeY -= 0.5f;
+        }
+        if (homeY > dirY) {
+            homeY += 0.5f;
+        }
+
         // rendering home
-        spriteBatch.draw(Textures.home, path.getLast().x * Config.tileSize, path.getLast().y * Config.tileSize,
+        spriteBatch.draw(Textures.home,
+                homeX * Config.tileSize, homeY * Config.tileSize,
                 Config.tileSize, Config.tileSize);
 
         spriteBatch.end();

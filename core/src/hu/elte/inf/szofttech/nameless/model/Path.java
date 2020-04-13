@@ -1,11 +1,12 @@
 package hu.elte.inf.szofttech.nameless.model;
 
-import java.util.Set;
-import java.util.List;
-import java.util.HashSet;
-import java.util.ArrayList;
-import java.util.function.Consumer;
 import com.badlogic.gdx.math.GridPoint2;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.function.Consumer;
 
 public final class Path {
     private final List<GridPoint2> points;
@@ -30,6 +31,10 @@ public final class Path {
 
     public GridPoint2 getLast() {
         return this.get(this.length() - 1);
+    }
+
+    public GridPoint2 getSecondToLast() {
+        return this.get(this.length() - 2);
     }
 
     public void forEach(Consumer<GridPoint2> func) {
