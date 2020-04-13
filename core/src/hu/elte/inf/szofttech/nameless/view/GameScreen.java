@@ -127,7 +127,7 @@ public class GameScreen extends ScreenAdapter {
         nextWaveButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                // TO DO
+                game.nextWave();
                 return true;
             }
         });
