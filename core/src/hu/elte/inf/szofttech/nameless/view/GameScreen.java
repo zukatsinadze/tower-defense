@@ -2,11 +2,9 @@ package hu.elte.inf.szofttech.nameless.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
 
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -17,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.Main;
+import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Textures;
 
 /**
@@ -32,10 +31,6 @@ public class GameScreen extends ScreenAdapter {
         STOPPED
     }
 
-    private BitmapFont lifeFont;
-    private BitmapFont moneyFont;
-    private BitmapFont waveFont;
-    private BitmapFont levelFont;
     private Skin mySkin;
     private Stage stage;
     private final Game game;
@@ -43,8 +38,10 @@ public class GameScreen extends ScreenAdapter {
     private float col_width;
     private float row_height;
     private Label lifeLabel;
+    private Label moneyLabel;
+    private Label waveLabel;
+    private Label levelLabel;
     public State state = State.RUN;
-    private InputProcessor inputProcessor;
 
     // pause and resume button attribute
     private final float PAUSE_RESUME_BUTTON_WIDTH = Gdx.graphics.getWidth() / 14.0f;
@@ -53,10 +50,6 @@ public class GameScreen extends ScreenAdapter {
     private final float PAUSE_RESUME_BUTTON_Y1 = PAUSE_RESUME_BUTTON_HEIGHT * 0.2f;
 
     public GameScreen(Main main) {
-        this.lifeFont = new BitmapFont();
-        this.moneyFont = new BitmapFont();
-        this.waveFont = new BitmapFont();
-        this.levelFont = new BitmapFont();
 
         this.col_width = Gdx.graphics.getWidth() / 20.0f;
         this.row_height = Gdx.graphics.getWidth() / 20.0f;
@@ -165,27 +158,22 @@ public class GameScreen extends ScreenAdapter {
         }
 
         this.main.getBatch().begin();
-        this.lifeFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-        this.lifeFont.getData().setScale(1.2f, 1.2f);
-        this.moneyFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-        this.moneyFont.getData().setScale(1.2f, 1.2f);
 
-        this.waveFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-        this.waveFont.getData().setScale(1.2f, 1.2f);
-        this.levelFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-        this.levelFont.getData().setScale(1.2f, 1.2f);
-
-        this.lifeFont.draw(main.getBatch(), "Life: " + String.valueOf(this.game.getLife()), this.col_width * 18, Gdx.graphics.getHeight() - this.row_height);
-        this.moneyFont.draw(main.getBatch(), "Money: " + String.valueOf(this.game.getMoney()), this.col_width * 18, Gdx.graphics.getHeight() - this.row_height * 2);
-
-        this.waveFont.draw(main.getBatch(), "Wave: " + String.valueOf(this.game.getCurrentWave()), this.col_width * 18, Gdx.graphics.getHeight() - this.row_height * 4);
-        this.levelFont.draw(main.getBatch(), "Level: " + String.valueOf(this.game.getCurrentLevel()), this.col_width * 18, Gdx.graphics.getHeight() - this.row_height * 3);
-
-
-        lifeLabel = new Label("Life", mySkin);
-        lifeLabel.setFontScale(3f);
-        lifeLabel.setPosition(this.col_width * 18, Gdx.graphics.getHeight() - this.row_height);
+        lifeLabel = new Label("Life:" + String.valueOf(this.game.getLife()), this.mySkin,"button", Config.white);
+        lifeLabel.setPosition(this.col_width * 17.6f, Gdx.graphics.getHeight() - this.row_height * 2);
         stage.addActor(lifeLabel);
+
+        moneyLabel = new Label("Money:" + String.valueOf(this.game.getMoney()), this.mySkin,"button", Config.white);
+        moneyLabel.setPosition(this.col_width * 17.6f, Gdx.graphics.getHeight() - this.row_height * 3);
+        stage.addActor(moneyLabel);
+
+        waveLabel = new Label("Wave:" + String.valueOf(this.game.getCurrentWave()), this.mySkin,"button", Config.white);
+        waveLabel.setPosition(this.col_width * 17.6f, Gdx.graphics.getHeight() - this.row_height * 4);
+        stage.addActor(waveLabel);
+
+        levelLabel = new Label("Level:" + String.valueOf(this.game.getCurrentLevel()), this.mySkin,"button", Config.white);
+        levelLabel.setPosition(this.col_width * 17.6f, Gdx.graphics.getHeight() - this.row_height * 5);
+        stage.addActor(levelLabel);
 
         this.main.getBatch().end();
 
