@@ -118,9 +118,6 @@ public class Game {
     private void displayEnemies(SpriteBatch spriteBatch) {
         spriteBatch.begin();
         this.wave = currentWave();
-//        if (currentWave().hasEnded()) {
-//            nextWave();
-//        }
         for (int i = 0; i < this.wave.size(); ++i) {
             this.wave.get(i).draw(spriteBatch);
         }
@@ -140,9 +137,16 @@ public class Game {
      * Changing wave
      */
     public void nextWave() {
-        if (currentWave + 1 <= 10) {
+        if (currentWave + 1 <= 10 && this.wave.hasEnded()) {
             currentWave++;
             this.wave = currentWave();
+            setTargets();
+        }
+        else if (currentWave == 10 && this.wave.hasEnded()) {
+            currentLevel++;
+            currentWave = 1;
+            this.life = 100;
+            this.money = 100;
             setTargets();
         }
     }
@@ -154,11 +158,11 @@ public class Game {
      */
     private void displayMap(SpriteBatch spriteBatch) {
         // rendering tiles
-        if (this.levels.get(currentLevel - 1).hasEnded()) {
-            currentLevel++;
-            currentWave = 1;
-            setTargets();
-        }
+//        if (this.levels.get(currentLevel - 1).hasEnded()) {
+//            currentLevel++;
+//            currentWave = 1;
+//            setTargets();
+//        }
 
         this.path = this.levels.get(currentLevel - 1).getPath();
         spriteBatch.begin();
