@@ -32,11 +32,7 @@ public class GameScreen extends ScreenAdapter {
         STOPPED
     }
 
-    private int life;
-    private int money;
-    private String lifeString;
     private BitmapFont lifeFont;
-    private String moneyString;
     private BitmapFont moneyFont;
 
     private Stage stage;
@@ -55,10 +51,6 @@ public class GameScreen extends ScreenAdapter {
     private final float PAUSE_RESUME_BUTTON_Y1 = PAUSE_RESUME_BUTTON_HEIGHT * 0.2f;
 
     public GameScreen(Main main) {
-        this.life = 100;
-        this.money = 100;
-        this.lifeString = "Life: 100";
-        this.moneyString = "Money: 100";
         this.lifeFont = new BitmapFont();
         this.moneyFont = new BitmapFont();
 
@@ -150,8 +142,8 @@ public class GameScreen extends ScreenAdapter {
         this.lifeFont.getData().setScale(1.5f, 1.5f);
         this.moneyFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
         this.moneyFont.getData().setScale(1.5f, 1.5f);
-        this.lifeFont.draw(main.getBatch(), lifeString, this.col_width * 18, Gdx.graphics.getHeight() - this.row_height);
-        this.moneyFont.draw(main.getBatch(), moneyString, this.col_width * 18, Gdx.graphics.getHeight() - this.row_height * 2);
+        this.lifeFont.draw(main.getBatch(), "Life: " + String.valueOf(this.game.getMoney()), this.col_width * 18, Gdx.graphics.getHeight() - this.row_height);
+        this.moneyFont.draw(main.getBatch(), "Money: " + String.valueOf(this.game.getMoney()), this.col_width * 18, Gdx.graphics.getHeight() - this.row_height * 2);
         this.main.getBatch().end();
 
         stage.act();
