@@ -61,8 +61,8 @@ public class Tower {
     }
 
     public void setPosition(Vector2 position) {
-        this.position.x = position.x * 100;
-        this.position.y = position.y * 100;
+        this.position.x = position.x * Config.tileSize;
+        this.position.y = position.y * Config.tileSize;
         sprite.setX(position.x);
         sprite.setY(position.y);
     }
