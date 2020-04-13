@@ -166,10 +166,12 @@ public class Game {
     /**
      * Changing wave
      */
-    private void nextWave() {
-        currentWave++;
-        this.wave = currentWave();
-        setTargets();
+    public void nextWave() {
+        if (currentWave + 1 <= 10){
+            currentWave++;
+            this.wave = currentWave();
+            setTargets();
+        }
     }
 
     /**
