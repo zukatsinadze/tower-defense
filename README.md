@@ -10,7 +10,7 @@
 - [ ] sell tower
 - [ ] place tower
 - [ ] render tower scope
-- [ ] life and money change with game
+- [ ] dynamic data(life money wave level)
 - [ ] Add different levels
 - [ ] Implement special abilities
 - [ ] ...
@@ -25,6 +25,8 @@
 
 ## Su:
 - [ ] GUI
+- [ ] dynamic life and money
+- [ ] dynamic wave and level
 - [x] Add waves and enemies
 
 ## Szumi:
