@@ -58,6 +58,7 @@ public class Game {
 
         setTargets();
     }
+
     public int getLife() {
         return life;
     }
@@ -74,9 +75,13 @@ public class Game {
         this.money += bounty;
     }
 
-    public int getCurrentWave() { return currentWave; }
+    public int getCurrentWave() {
+        return currentWave;
+    }
 
-    public int getCurrentLevel() { return currentLevel; }
+    public int getCurrentLevel() {
+        return currentLevel;
+    }
 
     public List<Tower> getDeployedTowers() {
         return deployedTowers;
@@ -84,6 +89,7 @@ public class Game {
 
     /**
      * method for rendering map, enemies and tower
+     *
      * @param spriteBatch
      */
     public void render(SpriteBatch spriteBatch) {
@@ -94,6 +100,7 @@ public class Game {
 
     /**
      * method for drawing towers, used in render() function
+     *
      * @param spriteBatch
      */
     private void displayTowers(SpriteBatch spriteBatch) {
@@ -105,6 +112,7 @@ public class Game {
 
     /**
      * method for drawing enemies, used in render() function
+     *
      * @param spriteBatch
      */
     private void displayEnemies(SpriteBatch spriteBatch) {
@@ -121,6 +129,7 @@ public class Game {
 
     /**
      * return current wave
+     *
      * @return Wave
      */
     private Wave currentWave() {
@@ -131,7 +140,7 @@ public class Game {
      * Changing wave
      */
     public void nextWave() {
-        if (currentWave + 1 <= 10){
+        if (currentWave + 1 <= 10) {
             currentWave++;
             this.wave = currentWave();
             setTargets();
@@ -140,11 +149,12 @@ public class Game {
 
     /**
      * method for drawing map
+     *
      * @param spriteBatch
      */
     private void displayMap(SpriteBatch spriteBatch) {
         // rendering tiles
-        if (this.levels.get(currentLevel - 1).hasEnded()){
+        if (this.levels.get(currentLevel - 1).hasEnded()) {
             currentLevel++;
             currentWave = 1;
             setTargets();
@@ -170,13 +180,15 @@ public class Game {
         });
 
         // rendering home
-        spriteBatch.draw(Textures.home,path.getLast().x,path.getLast().y,Config.tileSize, Config.tileSize);
+        spriteBatch.draw(Textures.home, path.getLast().x * Config.tileSize, path.getLast().y * Config.tileSize,
+                Config.tileSize, Config.tileSize);
 
         spriteBatch.end();
     }
 
     /**
      * method for adding new tower into deployedTowers list
+     *
      * @param tower
      */
     public void deployTower(Tower tower) {
@@ -188,6 +200,7 @@ public class Game {
 
     /**
      * selling tower
+     *
      * @param t Tower
      */
     public void sellTower(Tower t) {
@@ -206,13 +219,14 @@ public class Game {
      */
     private void setTargets() {
         this.wave = this.levels.get(currentLevel - 1).getWave(currentWave - 1);
-        for (Tower t: deployedTowers){
+        for (Tower t : deployedTowers) {
             t.setTargets(new ArrayList<>(this.wave.getEnemies()));
         }
     }
 
     /**
      * Checking if player has enough money for buying tower
+     *
      * @param tower
      * @return boolean
      */
@@ -222,6 +236,7 @@ public class Game {
 
     /**
      * getting damaged, when enemy reaches the end
+     *
      * @param damage
      */
     public void getDamaged(int damage) {
@@ -230,6 +245,7 @@ public class Game {
 
     /**
      * Building tower
+     *
      * @param towerToBuild
      * @param point
      */
@@ -242,6 +258,7 @@ public class Game {
 
     /**
      * moving all enemies
+     *
      * @param delta
      */
     public void moveWave(float delta) {
@@ -252,7 +269,7 @@ public class Game {
      * all towers are starting to shoot at acquired enemies, if they are in range
      */
     public void startShooting(float delta) {
-        for (Tower tower : deployedTowers){
+        for (Tower tower : deployedTowers) {
             tower.shoot(delta);
 //            System.out.println("Tower " + tower.getPosition() + " started shooting");
         }
