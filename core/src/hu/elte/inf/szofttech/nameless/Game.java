@@ -141,8 +141,7 @@ public class Game {
             currentWave++;
             this.wave = currentWave();
             setTargets();
-        }
-        else if (currentWave == 10 && this.wave.hasEnded()) {
+        } else if (currentWave == 10 && this.wave.hasEnded()) {
             currentLevel++;
             currentWave = 1;
             this.life = 100;
@@ -256,7 +255,9 @@ public class Game {
     public void buildTower(Tower towerToBuild, Point point) {
         Vector2 position = Utils.PointToVector2(point);
         towerToBuild.setPosition(position);
-        towerToBuild.setCenter((float) point.x + Config.tileSize / 2, (float) point.y + Config.tileSize / 2);
+        towerToBuild.setCenter(
+                (float) point.x + Config.tileSize / 2.0f,
+                (float) point.y + Config.tileSize / 2.0f);
         deployTower(towerToBuild);
     }
 

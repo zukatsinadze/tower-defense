@@ -58,8 +58,8 @@ public class GameScreen extends ScreenAdapter {
         this.waveFont = new BitmapFont();
         this.levelFont = new BitmapFont();
 
-        this.col_width = Gdx.graphics.getWidth() / 20;
-        this.row_height = Gdx.graphics.getWidth() / 20;
+        this.col_width = Gdx.graphics.getWidth() / 20.0f;
+        this.row_height = Gdx.graphics.getWidth() / 20.0f;
 
         this.main = main;
         this.game = Game.getInstance();
