@@ -32,7 +32,7 @@ public class Tower {
     public Tower(Texture texture, int XP, int price, int damage, int range, int attackSpeed, int x, int y,
                  SpecialAbility specialAbility) {
         this.sprite = new GDSprite(texture);
-        this.sprite.setSize(Config.tileSize, Config.tileSize);
+        this.sprite.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
         this.damage = damage;
         this.attackSpeed = attackSpeed;
         this.range = range;
@@ -51,7 +51,7 @@ public class Tower {
      * @param spriteBatch
      */
     public void draw(SpriteBatch spriteBatch) {
-        sprite.setX(position.x);
+        sprite.setX(position.x + Config.tileSize / 8.0f);
         sprite.setY(position.y);
         sprite.draw(spriteBatch);
     }
