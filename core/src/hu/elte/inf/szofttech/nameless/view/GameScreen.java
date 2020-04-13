@@ -151,7 +151,7 @@ public class GameScreen extends ScreenAdapter {
 
         if (state != State.PAUSE) {
             game.moveWave(delta);
-            game.startShooting();
+            game.startShooting(delta);
         }
 
         this.main.getBatch().begin();

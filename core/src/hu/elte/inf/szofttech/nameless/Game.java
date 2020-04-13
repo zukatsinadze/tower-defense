@@ -1,18 +1,18 @@
 package hu.elte.inf.szofttech.nameless;
 
-import java.awt.*;
-import java.util.List;
-import java.util.ArrayList;
-
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
-import hu.elte.inf.szofttech.nameless.model.Path;
-import hu.elte.inf.szofttech.nameless.model.Wave;
+import com.badlogic.gdx.math.Vector2;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.Level;
+import hu.elte.inf.szofttech.nameless.model.Path;
+import hu.elte.inf.szofttech.nameless.model.Wave;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 import hu.elte.inf.szofttech.nameless.model.tower.TowerFactory;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import static hu.elte.inf.szofttech.nameless.model.tower.TowerFactory.TowerType;
 
 /**
@@ -287,9 +287,9 @@ public class Game {
     /**
      * all towers are starting to shoot at acquired enemies, if they are in range
      */
-    public void startShooting() {
+    public void startShooting(float delta) {
         for (Tower tower : deployedTowers){
-            tower.shoot();
+            tower.shoot(delta);
 //            System.out.println("Tower " + tower.getPosition() + " started shooting");
         }
 

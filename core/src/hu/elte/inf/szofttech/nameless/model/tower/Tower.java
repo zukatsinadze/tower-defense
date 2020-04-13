@@ -1,24 +1,23 @@
 package hu.elte.inf.szofttech.nameless.model.tower;
 
-import java.util.ArrayList;
-import java.awt.geom.Point2D;
-
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.GDSprite;
 
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
 
 import static hu.elte.inf.szofttech.nameless.Utils.convertFromGrid;
 
 public class Tower {
     private SpecialAbility specialAbility;
-    private int attackTimer = 1;
+    private float attackTimer = 0;
     private int XP;
     private int price;
     private int damage;
@@ -29,7 +28,6 @@ public class Tower {
     private GDSprite sprite;
     private Point2D.Float center;
     private ArrayList<Enemy> targets = null;
-    private long start = System.currentTimeMillis();
 
     public Tower(Texture texture, int XP, int price, int damage, int range, int attackSpeed, int x, int y,
                  SpecialAbility specialAbility) {
@@ -69,7 +67,7 @@ public class Tower {
         sprite.setY(position.y);
     }
 
-    public int getAttackTimer() {
+    public float getAttackTimer() {
         return attackTimer;
     }
 
@@ -129,19 +127,19 @@ public class Tower {
     /**
      * Shooting at the enemies
      */
-    public void shoot() {
-        long end = System.currentTimeMillis();
+    public void shoot(float delta) {
+        this.attackTimer += delta;
         for (Enemy enemy : this.targets) {
             if (intersects(enemy)) {
-                if (enemy.hasSpawned() && enemy.isAlive() && !enemy.end() && (end - this.start) > 100 * attackSpeed) {
-//                    System.out.println("Attacked!");
+                if (enemy.hasSpawned() && enemy.isAlive() && !enemy.end()
+                        && this.attackTimer > 20.0 / this.attackSpeed) {
+                    this.attackTimer = 0;
                     enemy.attacked(damage);
                     drawAttack(enemy.getPos());
                     if (!enemy.isAlive()) {
                         this.XP += enemy.getXP();
                         Game.getInstance().addMoney(enemy.getMoney());
                     }
-                    this.start = end;
                 }
             }
         }
