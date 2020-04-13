@@ -1,9 +1,10 @@
 package hu.elte.inf.szofttech.nameless;
 
-import java.awt.*;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.GridPoint2;
+import com.badlogic.gdx.math.Vector2;
+
+import java.awt.*;
 
 public class Utils {
 
@@ -41,7 +42,7 @@ public class Utils {
      * @return
      */
     public static Vector2 getCenterOfTile(Vector2 position){
-        return new Vector2(position.x - Config.tileSize / 2, position.y - Config.tileSize / 2);
+        return new Vector2(position.x - Config.tileSize / 2.0f, position.y - Config.tileSize / 2.0f);
     }
 
     /**

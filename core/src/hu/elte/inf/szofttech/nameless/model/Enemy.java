@@ -38,7 +38,7 @@ public class Enemy {
         this.health = health;
         this.pos = pos;
         this.sprite = new GDSprite(texture);
-        this.sprite.setSize(Config.tileSize / 2, Config.tileSize);
+        this.sprite.setSize(Config.tileSize / 2.0f, Config.tileSize);
         this.spawned = false;
     }
 
@@ -166,7 +166,7 @@ public class Enemy {
     public void draw(SpriteBatch spriteBatch) {
         if (isAlive() && !end()) {
             Vector2 v = Utils.convertFromGrid(pos.getPos());
-            sprite.setX(v.x + Config.tileSize / 4);
+            sprite.setX(v.x + Config.tileSize / 4.0f);
             sprite.setY(v.y);
             sprite.draw(spriteBatch);
         }
