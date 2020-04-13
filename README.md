@@ -6,9 +6,9 @@
 - [x] Integrate JUnit
 - [x] Finish up `Game` class
 - [x] render main menu screen
-- [ ] render game screen
+- [x] render game screen
 - [ ] dynamic tower(place sell scope)
-- [ ] dynamic data(life money wave level)
+- [x] dynamic data(life money wave level)
 - [ ] Add different levels
 - [ ] Implement special abilities
 - [ ] ...
@@ -26,7 +26,7 @@
 - [x] dynamic life and money
 - [ ] dynamic wave and level
 - [x] Add waves and enemies
-- [ ] when current wave is on, player can not click next wave button 
+- [x] when current wave is on, player can not click next wave button 
 
 ## Szumi:
 - [ ] Add different levels
