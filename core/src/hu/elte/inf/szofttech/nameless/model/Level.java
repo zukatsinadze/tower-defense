@@ -25,4 +25,12 @@ public final class Level {
     public Grid getGrid() {
         return this.grid;
     }
+
+    public boolean hasEnded() {
+        for (Wave w: waves){
+            if (!w.hasEnded())
+                return false;
+        }
+        return true;
+    }
 }

@@ -31,6 +31,14 @@ public final class Wave {
         return this.enemies;
     }
 
+    public boolean hasEnded() {
+        for (Enemy e : enemies) {
+            if (e.isAlive() && !e.end())
+                return false;
+        }
+        return true;
+    }
+
     public void moveAll(float time) {
         if (this.nextIndex < this.size()) {
             this.nextTime += time;

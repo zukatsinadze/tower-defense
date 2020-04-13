@@ -153,7 +153,8 @@ public class Enemy {
         if (this.spawned && this.isAlive()) {
             this.pos.move(this.speed, time);
         }
-        if (this.end()) {
+        if (this.end() && this.spawned) {
+            this.spawned = false;
             Game.getInstance().getDamaged(this.damage);
         }
     }

@@ -26,8 +26,8 @@ public class Game {
 
     private int currentWave = 1;
     private int currentLevel = 1;
-    private final Path path;
-    private final Wave wave;
+    private Path path;
+    private Wave wave;
     private List<Enemy> enemies = new ArrayList<>();
     private List<Tower> deployedTowers = new ArrayList<>();
     private final List<Level> levels = ReadLevels.read();
@@ -45,11 +45,53 @@ public class Game {
      */
     private Game() {
         instance = this;
-        this.path = this.levels.get(0).getPath();
-        this.wave = this.levels.get(0).getWave(0);
+
         this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1, 3, 1));
         this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 10, 5));
         this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 1, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 8, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 5, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 8, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 10, 3));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 2, 7));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 3, 3));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1, 3, 1));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 10, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 1, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 8, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 5, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 8, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 10, 3));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 2, 7));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 3, 3));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1, 3, 1));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 10, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 1, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 8, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 5, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 8, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 10, 3));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 2, 7));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 3, 3));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1, 3, 1));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 10, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 1, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 8, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 5, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 8, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 10, 3));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 2, 7));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 3, 3));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1, 3, 1));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 10, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 1, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 8, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 5, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 8, 5));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 10, 3));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 2, 7));
+        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 3, 3));
+
         setTargets();
     }
     public int getLife() {
@@ -103,10 +145,31 @@ public class Game {
      */
     private void displayEnemies(SpriteBatch spriteBatch) {
         spriteBatch.begin();
+        this.wave = currentWave();
+        if (currentWave().hasEnded()) {
+            nextWave();
+        }
         for (int i = 0; i < this.wave.size(); ++i) {
             this.wave.get(i).draw(spriteBatch);
         }
         spriteBatch.end();
+    }
+
+    /**
+     * return current wave
+     * @return Wave
+     */
+    private Wave currentWave() {
+        return this.levels.get(currentLevel - 1).getWave(currentWave - 1);
+    }
+
+    /**
+     * Changing wave
+     */
+    private void nextWave() {
+        currentWave++;
+        this.wave = currentWave();
+        setTargets();
     }
 
     /**
@@ -115,6 +178,13 @@ public class Game {
      */
     private void displayMap(SpriteBatch spriteBatch) {
         // rendering tiles
+        if (this.levels.get(currentLevel - 1).hasEnded()){
+            currentLevel++;
+            currentWave = 1;
+            setTargets();
+        }
+
+        this.path = this.levels.get(currentLevel - 1).getPath();
         spriteBatch.begin();
         for (int i = 0; i < Config.gridWidth; ++i) {
             for (int j = 0; j < Config.gridHeight; ++j) {
@@ -164,6 +234,7 @@ public class Game {
      * setting targets for all deployed towers
      */
     private void setTargets() {
+        this.wave = this.levels.get(currentLevel - 1).getWave(currentWave - 1);
         for (Tower t: deployedTowers){
             t.setTargets(new ArrayList<>(this.wave.getEnemies()));
         }
