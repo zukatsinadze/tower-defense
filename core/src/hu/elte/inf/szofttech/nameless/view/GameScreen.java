@@ -96,8 +96,8 @@ public class GameScreen extends ScreenAdapter {
 
         // Sell Tower Button
         Button sellTowerButton = new TextButton("Sell Tower", mySkin);
-        sellTowerButton.setSize(this.col_width * 3, this.row_height);
-        sellTowerButton.setPosition(this.col_width * 10, Gdx.graphics.getHeight() - this.row_height * 11);
+        sellTowerButton.setSize(this.col_width * 2.8f, this.row_height);
+        sellTowerButton.setPosition(this.col_width * 10.5f, Gdx.graphics.getHeight() - this.row_height * 10.8f);
         sellTowerButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -110,7 +110,7 @@ public class GameScreen extends ScreenAdapter {
         // Upgrade Tower Button
         Button upgradeTowerButton = new TextButton("Upgrade Tower", mySkin);
         upgradeTowerButton.setSize(this.col_width * 3, this.row_height);
-        upgradeTowerButton.setPosition(this.col_width * 14, Gdx.graphics.getHeight() - this.row_height * 11);
+        upgradeTowerButton.setPosition(this.col_width * 14.2f, Gdx.graphics.getHeight() - this.row_height * 10.8f);
         upgradeTowerButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -132,6 +132,19 @@ public class GameScreen extends ScreenAdapter {
             }
         });
         stage.addActor(nextWaveButton);
+
+        // Next Level Button
+        Button nextLevelButton = new TextButton("Next Level", mySkin);
+        nextLevelButton.setSize(this.col_width * 2.4f, this.row_height);
+        nextLevelButton.setPosition(this.col_width * 17.4f, Gdx.graphics.getHeight() - this.row_height * 8.5f);
+        nextLevelButton.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                //game.nextLevel();
+                return true;
+            }
+        });
+        stage.addActor(nextLevelButton);
 
         outputLabel = new Label("", mySkin);
         stage.addActor(outputLabel);
