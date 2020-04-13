@@ -118,9 +118,9 @@ public class Game {
     private void displayEnemies(SpriteBatch spriteBatch) {
         spriteBatch.begin();
         this.wave = currentWave();
-        if (currentWave().hasEnded()) {
-            nextWave();
-        }
+//        if (currentWave().hasEnded()) {
+//            nextWave();
+//        }
         for (int i = 0; i < this.wave.size(); ++i) {
             this.wave.get(i).draw(spriteBatch);
         }
