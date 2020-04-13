@@ -2,8 +2,8 @@ package hu.elte.inf.szofttech.nameless;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import hu.elte.inf.szofttech.nameless.view.MainMenuScreen;
 
 public final class Main extends Game {

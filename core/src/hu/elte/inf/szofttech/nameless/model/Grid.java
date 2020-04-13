@@ -1,6 +1,5 @@
 package hu.elte.inf.szofttech.nameless.model;
 
-
 import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.IntStream;

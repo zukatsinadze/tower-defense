@@ -4,7 +4,6 @@ import java.util.Optional;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 
-
 public final class Square {
     private Optional<Tower> tower;
     private GDSprite sprite;

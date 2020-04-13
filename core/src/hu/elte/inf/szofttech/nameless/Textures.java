@@ -29,7 +29,6 @@ public final class Textures {
 //    public static final Texture tile = new Texture("tile6.jpg");
 //    public static final Texture path = new Texture("tile2.jpg");
 
-
     public static final Texture mainMenuBackground = new Texture("background.jpg");
 
     public static final Texture redBalloon = new Texture("red.png");
