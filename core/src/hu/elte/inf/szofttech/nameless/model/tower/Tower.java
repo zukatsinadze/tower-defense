@@ -172,14 +172,15 @@ public class Tower {
      * @param p1
      */
     private void drawAttack(Vector2 p1) {
+        float halfTile = Config.tileSize / 2.0f;
         p1 = convertFromGrid(p1);
-        p1.x = p1.x + Config.tileSize / 2;
-        p1.y = p1.y + Config.tileSize / 2;
+        p1.x = p1.x + halfTile;
+        p1.y = p1.y + halfTile;
         ShapeRenderer shapeRenderer = new ShapeRenderer();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.WHITE);
 //        shapeRenderer.circle(p1.x, p1.y, 10);
-        shapeRenderer.line(this.getPosition().x, this.getPosition().y, p1.x, p1.y);
+        shapeRenderer.line(this.getPosition().x + halfTile, this.getPosition().y + halfTile, p1.x, p1.y);
         shapeRenderer.end();
     }
 
