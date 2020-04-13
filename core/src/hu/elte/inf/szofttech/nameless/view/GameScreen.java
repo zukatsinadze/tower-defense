@@ -34,6 +34,8 @@ public class GameScreen extends ScreenAdapter {
 
     private BitmapFont lifeFont;
     private BitmapFont moneyFont;
+    private BitmapFont waveFont;
+    private BitmapFont levelFont;
 
     private Stage stage;
     private final Game game;
@@ -53,6 +55,8 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(Main main) {
         this.lifeFont = new BitmapFont();
         this.moneyFont = new BitmapFont();
+        this.waveFont = new BitmapFont();
+        this.levelFont = new BitmapFont();
 
         this.col_width = Gdx.graphics.getWidth() / 20;
         this.row_height = Gdx.graphics.getWidth() / 20;
@@ -139,11 +143,21 @@ public class GameScreen extends ScreenAdapter {
 
         this.main.getBatch().begin();
         this.lifeFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-        this.lifeFont.getData().setScale(1.5f, 1.5f);
+        this.lifeFont.getData().setScale(1.2f, 1.2f);
         this.moneyFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-        this.moneyFont.getData().setScale(1.5f, 1.5f);
-        this.lifeFont.draw(main.getBatch(), "Life: " + String.valueOf(this.game.getMoney()), this.col_width * 18, Gdx.graphics.getHeight() - this.row_height);
+        this.moneyFont.getData().setScale(1.2f, 1.2f);
+
+        this.waveFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+        this.waveFont.getData().setScale(1.2f, 1.2f);
+        this.levelFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+        this.levelFont.getData().setScale(1.2f, 1.2f);
+
+        this.lifeFont.draw(main.getBatch(), "Life: " + String.valueOf(this.game.getLife()), this.col_width * 18, Gdx.graphics.getHeight() - this.row_height);
         this.moneyFont.draw(main.getBatch(), "Money: " + String.valueOf(this.game.getMoney()), this.col_width * 18, Gdx.graphics.getHeight() - this.row_height * 2);
+
+        this.waveFont.draw(main.getBatch(), "Wave: " + String.valueOf(this.game.getCurrentWave()), this.col_width * 18, Gdx.graphics.getHeight() - this.row_height * 4);
+        this.levelFont.draw(main.getBatch(), "Level: " + String.valueOf(this.game.getCurrentLevel()), this.col_width * 18, Gdx.graphics.getHeight() - this.row_height * 3);
+
         this.main.getBatch().end();
 
         stage.act();

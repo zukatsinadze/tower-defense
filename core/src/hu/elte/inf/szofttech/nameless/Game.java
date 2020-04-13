@@ -21,10 +21,13 @@ import static hu.elte.inf.szofttech.nameless.model.tower.TowerFactory.TowerType;
 public class Game {
     private static Game instance;
 
+    private int life = 100;
+    private int money = 100;
+
+    private int currentWave = 1;
+    private int currentLevel = 1;
     private final Path path;
     private final Wave wave;
-    private int money = 100;
-    private int playerLife = 100;
     private List<Enemy> enemies = new ArrayList<>();
     private List<Tower> deployedTowers = new ArrayList<>();
     private final List<Level> levels = ReadLevels.read();
@@ -49,8 +52,8 @@ public class Game {
         this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 1, 5));
         setTargets();
     }
-    public int getPlayerLife() {
-        return playerLife;
+    public int getLife() {
+        return life;
     }
 
     public List<Enemy> getEnemies() {
@@ -64,6 +67,10 @@ public class Game {
     public void addMoney(int bounty) {
         this.money += bounty;
     }
+
+    public int getCurrentWave() { return currentWave; }
+
+    public int getCurrentLevel() { return currentLevel; }
 
     public List<Tower> getDeployedTowers() {
         return deployedTowers;
@@ -176,7 +183,7 @@ public class Game {
      * @param damage
      */
     public void getDamaged(int damage) {
-        playerLife -= damage;
+        life -= damage;
     }
 
     /**

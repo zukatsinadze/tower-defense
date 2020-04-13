@@ -18,8 +18,6 @@ package de.tomgrill.gdxtesting.tests;
 
 import static org.junit.Assert.assertEquals;
 
-import com.badlogic.gdx.math.Vector2;
-import hu.elte.inf.szofttech.nameless.model.*;
 import hu.elte.inf.szofttech.nameless.*;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 import hu.elte.inf.szofttech.nameless.model.tower.TowerFactory;
@@ -37,13 +35,13 @@ public class GameTest {
     @Test
     public void testEnemy(){
         Game g = Game.getInstance();
-        assertEquals(g.getPlayerLife(), 100);
+        assertEquals(g.getLife(), 100);
         assertEquals(g.getMoney(), 100);
         g.addMoney(100);
         assertEquals(g.getMoney(), 200);
         Tower t = TowerFactory.createTower(TowerFactory.TowerType.Basic1, 1, 1);
         assertEquals(g.canBuyTower(t), true);
         g.getDamaged(10);
-        assertEquals(g.getPlayerLife(), 90);
+        assertEquals(g.getLife(), 90);
     }
 }
