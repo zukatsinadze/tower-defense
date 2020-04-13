@@ -26,6 +26,7 @@
 - [x] dynamic life and money
 - [ ] dynamic wave and level
 - [x] Add waves and enemies
+- [ ] when current wave is on, player can not click next wave button 
 
 ## Szumi:
 - [ ] Add different levels
