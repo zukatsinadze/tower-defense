@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -58,6 +59,10 @@ public class GameScreen extends ScreenAdapter {
         this.game = Game.getInstance();
         this.stage = new Stage(this.main.getViewport());
         this.mySkin = new Skin(Gdx.files.internal("skin/flat-earth-ui.json"));
+        this.lifeLabel = new Label("", this.mySkin,"button", Color.WHITE);
+        this.moneyLabel = new Label("", this.mySkin,"button", Color.WHITE);
+        this.waveLabel = new Label("", this.mySkin,"button", Color.WHITE);
+        this.levelLabel = new Label("", this.mySkin,"button", Color.WHITE);
 
         this.createButton();
     }
@@ -159,20 +164,20 @@ public class GameScreen extends ScreenAdapter {
 
         this.main.getBatch().begin();
 
-        lifeLabel = new Label("Life:" + String.valueOf(this.game.getLife()), this.mySkin,"button", Config.white);
         lifeLabel.setPosition(this.col_width * 17.6f, Gdx.graphics.getHeight() - this.row_height * 2);
+        lifeLabel.setText("Life:" + String.valueOf(this.game.getLife()));
         stage.addActor(lifeLabel);
 
-        moneyLabel = new Label("Money:" + String.valueOf(this.game.getMoney()), this.mySkin,"button", Config.white);
         moneyLabel.setPosition(this.col_width * 17.6f, Gdx.graphics.getHeight() - this.row_height * 3);
+        moneyLabel.setText("Money:" + String.valueOf(this.game.getMoney()));
         stage.addActor(moneyLabel);
 
-        waveLabel = new Label("Wave:" + String.valueOf(this.game.getCurrentWave()), this.mySkin,"button", Config.white);
         waveLabel.setPosition(this.col_width * 17.6f, Gdx.graphics.getHeight() - this.row_height * 4);
+        waveLabel.setText("Wave:" + String.valueOf(this.game.getCurrentWave()));
         stage.addActor(waveLabel);
 
-        levelLabel = new Label("Level:" + String.valueOf(this.game.getCurrentLevel()), this.mySkin,"button", Config.white);
         levelLabel.setPosition(this.col_width * 17.6f, Gdx.graphics.getHeight() - this.row_height * 5);
+        levelLabel.setText("Level:" + String.valueOf(this.game.getCurrentLevel()));
         stage.addActor(levelLabel);
 
         this.main.getBatch().end();
