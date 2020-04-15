@@ -136,6 +136,7 @@ public class Game {
 
     /**
      * Changing wave
+     * Works only when current wave is finished
      */
     public void nextWave() {
         if (currentWave + 1 <= 10 && this.wave.hasEnded()) {
@@ -145,8 +146,13 @@ public class Game {
         }
     }
 
+    /**
+     * Changing level
+     * Works only when current level is finished
+     */
     public void nextLevel() {
-        if (currentWave == 10 && this.wave.hasEnded()) {
+//        if (currentWave == 10 && this.wave.hasEnded()) {
+        if (this.levels.get(currentLevel-1).hasEnded()) {
             currentLevel++;
             currentWave = 1;
             this.life = 100;
@@ -161,13 +167,6 @@ public class Game {
      * @param spriteBatch
      */
     private void displayMap(SpriteBatch spriteBatch) {
-        // rendering tiles
-//        if (this.levels.get(currentLevel - 1).hasEnded()) {
-//            currentLevel++;
-//            currentWave = 1;
-//            setTargets();
-//        }
-
         Texture tile = Textures.tiles.get(this.currentLevel - 1);
         Texture pathTile = Textures.paths.get(this.currentLevel - 1);
 
@@ -303,7 +302,6 @@ public class Game {
     public void startShooting(float delta) {
         for (Tower tower : deployedTowers) {
             tower.shoot(delta);
-//            System.out.println("Tower " + tower.getPosition() + " started shooting");
         }
 
     }
