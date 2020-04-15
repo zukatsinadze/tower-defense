@@ -7,29 +7,31 @@
 - [x] Finish up `Game` class
 - [x] render main menu screen
 - [x] render game screen
-- [ ] dynamic tower(place sell scope)
 - [x] dynamic data(life money wave level)
-- [ ] Add different levels
+- [x] Add different levels
+- [x] dynamic life and money
+- [x] dynamic wave and level
+- [x] Add waves and enemies
+- [x] when current wave is on, player can not click next wave button 
 - [ ] Implement special abilities
+- [ ] dynamic tower(place sell scope)
+- [ ] Finish game somehow
 - [ ] ...
 
-# UPDATED: 4.11.2020
+# UPDATED: 4.15.2020
 
 ## Zuka:
-- [x] JUnit
-- [x] Better way to show attacks(?)
 - [ ] Special Abilities, maybe next milestone(?)
 - [ ] Add more tests
+- [ ] placing towers
 
 ## Su:
 - [ ] GUI
-- [x] dynamic life and money
-- [ ] dynamic wave and level
-- [x] Add waves and enemies
-- [x] when current wave is on, player can not click next wave button 
+- [ ] render three basic towers
+
 
 ## Szumi:
-- [ ] Add different levels
+
 
 ## Resources:
 
