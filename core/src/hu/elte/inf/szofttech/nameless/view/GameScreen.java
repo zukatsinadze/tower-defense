@@ -138,7 +138,7 @@ public class GameScreen extends ScreenAdapter {
         nextLevelButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                //game.nextLevel();
+                game.nextLevel();
                 return true;
             }
         });

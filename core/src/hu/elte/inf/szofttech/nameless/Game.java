@@ -142,7 +142,11 @@ public class Game {
             currentWave++;
             this.wave = currentWave();
             setTargets();
-        } else if (currentWave == 10 && this.wave.hasEnded()) {
+        }
+    }
+
+    public void nextLevel() {
+        if (currentWave == 10 && this.wave.hasEnded()) {
             currentLevel++;
             currentWave = 1;
             this.life = 100;
