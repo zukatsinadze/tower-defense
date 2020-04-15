@@ -24,6 +24,7 @@
 - [ ] Special Abilities, maybe next milestone(?)
 - [ ] Add more tests
 - [ ] placing towers
+- [ ] add test logging
 
 ## Su:
 - [ ] GUI
