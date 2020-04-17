@@ -59,10 +59,10 @@ public class GameScreen extends ScreenAdapter {
         this.game = Game.getInstance();
         this.stage = new Stage(this.main.getViewport());
         this.mySkin = new Skin(Gdx.files.internal("skin/flat-earth-ui.json"));
-        this.lifeLabel = new Label("", this.mySkin,"button", Color.WHITE);
-        this.moneyLabel = new Label("", this.mySkin,"button", Color.WHITE);
-        this.waveLabel = new Label("", this.mySkin,"button", Color.WHITE);
-        this.levelLabel = new Label("", this.mySkin,"button", Color.WHITE);
+        this.lifeLabel = new Label("", this.mySkin,"button", Config.button_blue);
+        this.moneyLabel = new Label("", this.mySkin,"button", Config.button_blue);
+        this.waveLabel = new Label("", this.mySkin,"button", Config.button_blue);
+        this.levelLabel = new Label("", this.mySkin,"button", Config.button_blue);
 
         this.createButton();
     }

@@ -19,4 +19,6 @@ public class Config {
     public static Color normal = new Color(1f, 1f, 1f, 1f);
     public static Color clear = new Color(0, 0, 0, 1f);
     public static Color clearer = new Color(0, 0, 0, 0f);
+    //public static Color button_blue = new Color(25/255.0f,110/255.0f,247/255.0f,1);
+    public static Color button_blue = new Color(12/255.0f,149/255.0f,240/255.0f,1);
 }
