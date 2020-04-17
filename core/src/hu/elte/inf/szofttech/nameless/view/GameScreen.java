@@ -164,6 +164,11 @@ public class GameScreen extends ScreenAdapter {
 
         this.main.getBatch().begin();
 
+        // three basic towers
+        this.main.getBatch().draw(Textures.basic1, this.col_width * 5.5f, Gdx.graphics.getHeight() - this.row_height * 10.8f, Config.tileSize * 3 / 4.0f, Config.tileSize);
+        this.main.getBatch().draw(Textures.basic2, this.col_width * 7, Gdx.graphics.getHeight() - this.row_height * 10.8f, Config.tileSize * 3 / 4.0f, Config.tileSize);
+        this.main.getBatch().draw(Textures.basic3, this.col_width * 8.5f, Gdx.graphics.getHeight() - this.row_height * 10.8f, Config.tileSize * 3 / 4.0f, Config.tileSize);
+
         lifeLabel.setPosition(this.col_width * 17.6f, Gdx.graphics.getHeight() - this.row_height * 2);
         lifeLabel.setText("Life:" + String.valueOf(this.game.getLife()));
         stage.addActor(lifeLabel);
