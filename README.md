@@ -18,17 +18,15 @@
 - [ ] Finish game somehow
 - [ ] ...
 
-# UPDATED: 4.15.2020
+# UPDATED: 4.18.2020
 
 ## Zuka:
-- [ ] Special Abilities, maybe next milestone(?)
 - [ ] Add more tests
-- [ ] placing towers
-- [ ] add test logging
+- [x] placing towers
 
 ## Su:
 - [ ] GUI
-- [ ] render three basic towers
+- [x] render three basic towers
 
 
 ## Szumi:
