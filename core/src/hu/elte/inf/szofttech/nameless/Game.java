@@ -180,7 +180,7 @@ public class Game {
             for (int j = 0; j < Config.gridHeight; ++j) {
                 if (!path.onPath(i, j)) {
                     spriteBatch.draw(tile,
-                            i * Config.tileSize, j * Config.tileSize,
+                            i * Config.tileSize, Config.guiHeight + j * Config.tileSize,
                             Config.tileSize, Config.tileSize);
                 }
             }
@@ -189,7 +189,7 @@ public class Game {
         // rendering path tiles
         this.path.forEach(p -> {
             spriteBatch.draw(pathTile,
-                    p.x * Config.tileSize, p.y * Config.tileSize,
+                    p.x * Config.tileSize, Config.guiHeight + p.y * Config.tileSize,
                     Config.tileSize, Config.tileSize);
         });
 
@@ -213,7 +213,7 @@ public class Game {
 
         // rendering home
         spriteBatch.draw(Textures.home,
-                homeX * Config.tileSize, homeY * Config.tileSize,
+                homeX * Config.tileSize, Config.guiHeight + homeY * Config.tileSize,
                 Config.tileSize, Config.tileSize);
 
         spriteBatch.end();
@@ -239,8 +239,8 @@ public class Game {
      * @param y, y-coordinate of tower
      */
     public void sellTower(int x, int y) {
-        float xPos =  ((int) x / Config.tileSize) * Config.tileSize;
-        float yPos =((int) y / Config.tileSize) * Config.tileSize;
+        float xPos = (float) (x / Config.tileSize) * Config.tileSize;
+        float yPos = (float) ((y - Config.guiHeight) / Config.tileSize) * Config.tileSize;
         List<Tower> newDeployedTowers = new ArrayList<>();
         for (Tower tower : deployedTowers) {
             if (tower.getPosition().x != xPos || tower.getPosition().y != yPos) {
@@ -292,7 +292,7 @@ public class Game {
     public void buildTower(TowerType towerToBuild, Point point) {
         Vector2 position = Utils.PointToVector2(point);
         int x =  (int) position.x / Config.tileSize;
-        int y = (int) position.y / Config.tileSize;
+        int y = (int) (position.y - Config.guiHeight) / Config.tileSize;
         Tower t = TowerFactory.createTower(towerToBuild, x, y);
         deployTower(t);
     }

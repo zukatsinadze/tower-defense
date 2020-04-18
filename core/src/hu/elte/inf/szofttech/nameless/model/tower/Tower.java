@@ -55,7 +55,7 @@ public class Tower {
      */
     public void draw(SpriteBatch spriteBatch) {
         sprite.setX(position.x + Config.tileSize / 8.0f);
-        sprite.setY(position.y);
+        sprite.setY(Config.guiHeight + position.y);
         sprite.draw(spriteBatch);
     }
 
@@ -178,12 +178,14 @@ public class Tower {
         float halfTile = Config.tileSize / 2.0f;
         p1 = convertFromGrid(p1);
         p1.x = p1.x + halfTile;
-        p1.y = p1.y + halfTile;
+        p1.y = Config.guiHeight + p1.y + halfTile;
         ShapeRenderer shapeRenderer = new ShapeRenderer();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.WHITE);
 //        shapeRenderer.circle(p1.x, p1.y, 10);
-        shapeRenderer.line(this.getPosition().x + halfTile, this.getPosition().y + halfTile, p1.x, p1.y);
+        shapeRenderer.line(
+                this.getPosition().x + halfTile, Config.guiHeight + this.getPosition().y + halfTile,
+                p1.x, p1.y);
         shapeRenderer.end();
     }
 
