@@ -188,9 +188,11 @@ public class Game {
 
         // rendering path tiles
         this.path.forEach(p -> {
-            spriteBatch.draw(pathTile,
-                    p.x * Config.tileSize, Config.guiHeight + p.y * Config.tileSize,
-                    Config.tileSize, Config.tileSize);
+            if (p.x >= 0 && p.x <= Config.gridWidth && p.y >= 0 && p.y <= Config.gridHeight) {
+                spriteBatch.draw(pathTile,
+                        p.x * Config.tileSize, Config.guiHeight + p.y * Config.tileSize,
+                        Config.tileSize, Config.tileSize);
+            }
         });
 
         float homeX = path.getLast().x;
