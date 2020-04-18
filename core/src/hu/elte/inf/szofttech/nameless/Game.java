@@ -235,17 +235,23 @@ public class Game {
     /**
      * selling tower
      *
-     * @param t Tower
+     * @param x, x-coordinate of tower
+     * @param y, y-coordinate of tower
      */
-    public void sellTower(Tower t) {
+    public void sellTower(int x, int y) {
+        float xPos =  ((int) x / Config.tileSize) * Config.tileSize;
+        float yPos =((int) y / Config.tileSize) * Config.tileSize;
         List<Tower> newDeployedTowers = new ArrayList<>();
         for (Tower tower : deployedTowers) {
-            if (tower != t) {
+            if (tower.getPosition().x != xPos || tower.getPosition().y != yPos) {
                 newDeployedTowers.add(tower);
+                System.out.println();
+            }
+            else {
+                this.money += tower.getPrice();
             }
         }
         this.deployedTowers = newDeployedTowers;
-        this.money += t.getPrice();
     }
 
     /**

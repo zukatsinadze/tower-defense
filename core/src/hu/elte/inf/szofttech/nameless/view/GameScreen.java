@@ -76,6 +76,7 @@ public class GameScreen extends ScreenAdapter {
 
     public void createButton() {
         Gdx.input.setInputProcessor(stage);
+//        InputProcessor in = Gdx.input.getInputProcessor();
 
         // pause Button
         ImageButton pauseButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.pauseButton)));
@@ -106,7 +107,17 @@ public class GameScreen extends ScreenAdapter {
         sellTowerButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                // TO DO
+                if (state == State.PREWAVE) {
+                    InputAdapter input = new InputAdapter() {
+                        @Override
+                        public boolean touchDown(int x, int y, int pointer, int button) {
+                            Game.getInstance().sellTower(x, Gdx.graphics.getHeight() - y);
+                            Gdx.input.setInputProcessor(stage);
+                            return true;
+                        }
+                    };
+                    Gdx.input.setInputProcessor(input);
+                }
                 return true;
             }
         });
@@ -152,7 +163,7 @@ public class GameScreen extends ScreenAdapter {
         });
         stage.addActor(nextLevelButton);
 
-        InputProcessor in = Gdx.input.getInputProcessor();
+
 
         // basic1 Tower
         ImageButton basic1Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic1)));
@@ -168,7 +179,7 @@ public class GameScreen extends ScreenAdapter {
                         public boolean touchDown(int x, int y, int pointer, int button) {
                             Game.getInstance().buildTower(TowerFactory.TowerType.Basic1,
                                     new Point(x, Gdx.graphics.getHeight() - y));
-                            Gdx.input.setInputProcessor(in);
+                            Gdx.input.setInputProcessor(stage);
                             return true;
                         }
                     };
@@ -194,7 +205,7 @@ public class GameScreen extends ScreenAdapter {
                         public boolean touchDown(int x, int y, int pointer, int button) {
                             Game.getInstance().buildTower(TowerFactory.TowerType.Basic2,
                                     new Point(x, Gdx.graphics.getHeight() - y));
-                            Gdx.input.setInputProcessor(in);
+                            Gdx.input.setInputProcessor(stage);
                             return true;
                         }
                     };
@@ -219,7 +230,7 @@ public class GameScreen extends ScreenAdapter {
                         public boolean touchDown(int x, int y, int pointer, int button) {
                             Game.getInstance().buildTower(TowerFactory.TowerType.Basic3,
                                     new Point(x, Gdx.graphics.getHeight() - y));
-                            Gdx.input.setInputProcessor(in);
+                            Gdx.input.setInputProcessor(stage);
                             return true;
                         }
                     };
