@@ -23,7 +23,7 @@ public class Game {
     private static Game instance;
 
     private int life = 100;
-    private int money = 100;
+    private int money = 10000000;
 
     private int currentWave = 1;
     private int currentLevel = 1;
@@ -47,15 +47,15 @@ public class Game {
     private Game() {
         instance = this;
 
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1, 4, 2));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 11, 6));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 2, 6));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 9, 6));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 6, 6));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 9, 6));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 11, 4));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 3, 8));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 4, 4));
+//        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1, 4, 2));
+//        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 11, 6));
+//        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 2, 6));
+//        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 9, 6));
+//        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 6, 6));
+//        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 9, 6));
+//        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 11, 4));
+//        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 3, 8));
+//        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 4, 4));
 
         setTargets();
     }
@@ -78,6 +78,10 @@ public class Game {
 
     public int getCurrentWave() {
         return currentWave;
+    }
+
+    public Wave getWave() {
+        return wave;
     }
 
     public int getCurrentLevel() {
@@ -151,8 +155,8 @@ public class Game {
      * Works only when current level is finished
      */
     public void nextLevel() {
-//        if (currentWave == 10 && this.wave.hasEnded()) {
         if (this.levels.get(currentLevel-1).hasEnded()) {
+            deployedTowers = new ArrayList<>();
             currentLevel++;
             currentWave = 1;
             this.life = 100;
@@ -224,6 +228,7 @@ public class Game {
         if (canBuyTower(tower)) {
             money -= tower.getPrice();
             deployedTowers.add(tower);
+            setTargets();
         }
     }
 
@@ -278,13 +283,12 @@ public class Game {
      * @param towerToBuild
      * @param point
      */
-    public void buildTower(Tower towerToBuild, Point point) {
+    public void buildTower(TowerType towerToBuild, Point point) {
         Vector2 position = Utils.PointToVector2(point);
-        towerToBuild.setPosition(position);
-        towerToBuild.setCenter(
-                (float) point.x + Config.tileSize / 2.0f,
-                (float) point.y + Config.tileSize / 2.0f);
-        deployTower(towerToBuild);
+        int x =  (int) position.x / Config.tileSize;
+        int y = (int) position.y / Config.tileSize;
+        Tower t = TowerFactory.createTower(towerToBuild, x, y);
+        deployTower(t);
     }
 
     /**
