@@ -23,7 +23,7 @@ public class Game {
     private static Game instance;
 
     private int life = 100;
-    private int money = 10000000;
+    private int money = 100;
 
     private int currentWave = 1;
     private int currentLevel = 1;
