@@ -12,6 +12,7 @@ import hu.elte.inf.szofttech.nameless.model.tower.TowerFactory;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import static hu.elte.inf.szofttech.nameless.model.tower.TowerFactory.TowerType;
@@ -32,6 +33,7 @@ public class Game {
     private List<Enemy> enemies = new ArrayList<>();
     private List<Tower> deployedTowers = new ArrayList<>();
     private final List<Level> levels = ReadLevels.read();
+    private ArrayList<Enemy> targets = null;
 
     public static Game getInstance() {
         if (instance == null) {
@@ -151,7 +153,7 @@ public class Game {
      * Works only when current level is finished
      */
     public void nextLevel() {
-        if (this.levels.get(currentLevel-1).hasEnded()) {
+        if (this.levels.get(currentLevel - 1).hasEnded()) {
             deployedTowers = new ArrayList<>();
             currentLevel++;
             currentWave = 1;
@@ -241,8 +243,7 @@ public class Game {
             if (tower.getPosition().x != xPos || tower.getPosition().y != yPos) {
                 newDeployedTowers.add(tower);
                 System.out.println();
-            }
-            else {
+            } else {
                 this.money += tower.getPrice();
             }
         }
@@ -254,8 +255,9 @@ public class Game {
      */
     private void setTargets() {
         this.wave = this.levels.get(currentLevel - 1).getWave(currentWave - 1);
+        this.targets = new ArrayList<>(this.wave.getEnemies());
         for (Tower t : deployedTowers) {
-            t.setTargets(new ArrayList<>(this.wave.getEnemies()));
+            t.setTargets(this.targets);
         }
     }
 
@@ -286,7 +288,7 @@ public class Game {
      */
     public void buildTower(TowerType towerToBuild, Point point) {
         Vector2 position = Utils.PointToVector2(point);
-        int x =  (int) position.x / Config.tileSize;
+        int x = (int) position.x / Config.tileSize;
         int y = (int) (position.y - Config.guiHeight) / Config.tileSize;
         Tower t = TowerFactory.createTower(towerToBuild, x, y);
         deployTower(t);
@@ -299,6 +301,7 @@ public class Game {
      */
     public void moveWave(float delta) {
         this.wave.moveAll(delta);
+        this.targets.sort(Comparator.comparingDouble(e -> this.path.distanceToEnd(e.getPos())));
     }
 
     /**
