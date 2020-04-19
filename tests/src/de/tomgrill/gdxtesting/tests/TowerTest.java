@@ -49,7 +49,7 @@ public class TowerTest {
         assertEquals(nullTower, null);
         assertEquals(t.getRange(), 10);
         assertEquals(t.getPrice(), 75);
-        assertEquals(t.getPosition(), new Vector2(140, 140));
+        assertEquals(t.getPosition(), new Vector2(146, 146));
         assertEquals(t.getDamage(), 10);
         t.setTargets(enemies);
         assertEquals(t.getTarget(), enemies);
