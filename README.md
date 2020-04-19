@@ -13,22 +13,23 @@
 - [x] dynamic wave and level
 - [x] Add waves and enemies
 - [x] when current wave is on, player can not click next wave button 
-- [ ] Implement special abilities
-- [ ] dynamic tower(place sell scope)
+- [x] render three basic towers
+- [x] placing towers
+- [x] dynamic tower(place sell scope)
 - [ ] Finish game somehow
+- [ ] Add more tests
+- [ ] Implement special abilities
 - [ ] ...
 
-# UPDATED: 4.15.2020
+# UPDATED: 4.18.2020
 
 ## Zuka:
-- [ ] Special Abilities, maybe next milestone(?)
 - [ ] Add more tests
-- [ ] placing towers
-- [ ] add test logging
+
 
 ## Su:
 - [ ] GUI
-- [ ] render three basic towers
+
 
 
 ## Szumi:

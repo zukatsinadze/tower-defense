@@ -1,23 +1,27 @@
 package hu.elte.inf.szofttech.nameless.view;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.*;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.Main;
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Textures;
+import hu.elte.inf.szofttech.nameless.model.tower.TowerFactory;
+
+import java.awt.*;
 
 /**
  * rendering game
@@ -29,7 +33,8 @@ public class GameScreen extends ScreenAdapter {
         RUN,
         PAUSE,
         RESUME,
-        STOPPED
+        STOPPED,
+        PREWAVE
     }
 
     private Skin mySkin;
@@ -42,7 +47,7 @@ public class GameScreen extends ScreenAdapter {
     private Label moneyLabel;
     private Label waveLabel;
     private Label levelLabel;
-    public State state = State.RUN;
+    public State state;
 
     // pause and resume button attribute
     private final float PAUSE_RESUME_BUTTON_WIDTH = Gdx.graphics.getWidth() / 14.0f;
@@ -59,16 +64,19 @@ public class GameScreen extends ScreenAdapter {
         this.game = Game.getInstance();
         this.stage = new Stage(this.main.getViewport());
         this.mySkin = new Skin(Gdx.files.internal("skin/flat-earth-ui.json"));
-        this.lifeLabel = new Label("", this.mySkin,"button", Config.button_blue);
-        this.moneyLabel = new Label("", this.mySkin,"button", Config.button_blue);
-        this.waveLabel = new Label("", this.mySkin,"button", Config.button_blue);
-        this.levelLabel = new Label("", this.mySkin,"button", Config.button_blue);
+        this.lifeLabel = new Label("", this.mySkin, "button", Config.button_blue);
+        this.moneyLabel = new Label("", this.mySkin, "button", Config.button_blue);
+        this.waveLabel = new Label("", this.mySkin, "button", Config.button_blue);
+        this.levelLabel = new Label("", this.mySkin, "button", Config.button_blue);
 
         this.createButton();
+        state = State.PREWAVE;
     }
+
 
     public void createButton() {
         Gdx.input.setInputProcessor(stage);
+//        InputProcessor in = Gdx.input.getInputProcessor();
 
         // pause Button
         ImageButton pauseButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.pauseButton)));
@@ -81,7 +89,7 @@ public class GameScreen extends ScreenAdapter {
                     if (state == State.RUN) {
                         state = State.PAUSE;
                         pauseButton.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(Textures.resumeButton));
-                    } else {
+                    } else if (state != State.PREWAVE) {
                         state = State.RUN;
                         pauseButton.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(Textures.pauseButton));
                     }
@@ -99,7 +107,17 @@ public class GameScreen extends ScreenAdapter {
         sellTowerButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                // TO DO
+                if (state == State.PREWAVE) {
+                    InputAdapter input = new InputAdapter() {
+                        @Override
+                        public boolean touchDown(int x, int y, int pointer, int button) {
+                            Game.getInstance().sellTower(x, Gdx.graphics.getHeight() - y);
+                            Gdx.input.setInputProcessor(stage);
+                            return true;
+                        }
+                    };
+                    Gdx.input.setInputProcessor(input);
+                }
                 return true;
             }
         });
@@ -125,6 +143,7 @@ public class GameScreen extends ScreenAdapter {
         nextWaveButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                state = State.RUN;
                 game.nextWave();
                 return true;
             }
@@ -143,6 +162,84 @@ public class GameScreen extends ScreenAdapter {
             }
         });
         stage.addActor(nextLevelButton);
+
+
+
+        // basic1 Tower
+        ImageButton basic1Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic1)));
+        basic1Button.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
+        basic1Button.setPosition(this.col_width * 5.5f, Gdx.graphics.getHeight() - this.row_height * 10.8f);
+        basic1Button.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+
+                if (state == State.PREWAVE) {
+                    InputAdapter input = new InputAdapter() {
+                        @Override
+                        public boolean touchDown(int x, int y, int pointer, int button) {
+                            Game.getInstance().buildTower(TowerFactory.TowerType.Basic1,
+                                    new Point(x, Gdx.graphics.getHeight() - y));
+                            Gdx.input.setInputProcessor(stage);
+                            return true;
+                        }
+                    };
+                    Gdx.input.setInputProcessor(input);
+                }
+                return true;
+            }
+        });
+        stage.addActor(basic1Button);
+
+
+        // basic2 Tower
+        ImageButton basic2Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic2)));
+        basic2Button.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
+        basic2Button.setPosition(this.col_width * 7, Gdx.graphics.getHeight() - this.row_height * 10.8f);
+        basic2Button.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+
+                if (state == State.PREWAVE) {
+                    InputAdapter input = new InputAdapter() {
+                        @Override
+                        public boolean touchDown(int x, int y, int pointer, int button) {
+                            Game.getInstance().buildTower(TowerFactory.TowerType.Basic2,
+                                    new Point(x, Gdx.graphics.getHeight() - y));
+                            Gdx.input.setInputProcessor(stage);
+                            return true;
+                        }
+                    };
+                    Gdx.input.setInputProcessor(input);
+                }
+                return true;
+            }
+        });
+        stage.addActor(basic2Button);
+
+        // basic3 Tower
+        ImageButton basic3Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic3)));
+        basic3Button.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
+        basic3Button.setPosition(this.col_width * 8.5f, Gdx.graphics.getHeight() - this.row_height * 10.8f);
+        basic3Button.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+
+                if (state == State.PREWAVE) {
+                    InputAdapter input = new InputAdapter() {
+                        @Override
+                        public boolean touchDown(int x, int y, int pointer, int button) {
+                            Game.getInstance().buildTower(TowerFactory.TowerType.Basic3,
+                                    new Point(x, Gdx.graphics.getHeight() - y));
+                            Gdx.input.setInputProcessor(stage);
+                            return true;
+                        }
+                    };
+                    Gdx.input.setInputProcessor(input);
+                }
+                return true;
+            }
+        });
+        stage.addActor(basic3Button);
     }
 
     @Override
@@ -157,9 +254,13 @@ public class GameScreen extends ScreenAdapter {
 
         this.game.render(this.main.getBatch());
 
-        if (state != State.PAUSE) {
+        if (state == State.RUN) {
             game.moveWave(delta);
             game.startShooting(delta);
+        }
+
+        if (Game.getInstance().getWave().hasEnded()) {
+            state = State.PREWAVE;
         }
 
         this.main.getBatch().begin();

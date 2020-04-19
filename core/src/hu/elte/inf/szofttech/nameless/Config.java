@@ -7,11 +7,14 @@ import com.badlogic.gdx.graphics.Color;
  */
 public class Config {
     public static final int tileSize = 70;
-    public static final int gridWidth = 16;
-    public static final int gridHeight = 9;
+    public static final int gridWidth = 13;
+    public static final int gridHeight = 7;
     public static final int screenWidth = 1120;
     public static final int screenHeight = 630;
 
+    public static final int guiX = 840;
+    public static final int guiWidth = 280;
+    public static final int guiHeight = 140;
 
     public static Color white = new Color(1f, 1f, 1f, .5f);
     public static Color green = new Color(.5f, 1, .5f, 1f); //slowed ailment
@@ -20,5 +23,5 @@ public class Config {
     public static Color clear = new Color(0, 0, 0, 1f);
     public static Color clearer = new Color(0, 0, 0, 0f);
     //public static Color button_blue = new Color(25/255.0f,110/255.0f,247/255.0f,1);
-    public static Color button_blue = new Color(12/255.0f,149/255.0f,240/255.0f,1);
+    public static Color button_blue = new Color(12 / 255.0f, 149 / 255.0f, 240 / 255.0f, 1);
 }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Game;
@@ -24,6 +25,7 @@ public class Tower {
     private int range;
     private int attackSpeed;
     private Boolean upgraded = false;
+    private GridPoint2 gridPos;
     private Vector2 position;
     private GDSprite sprite;
     private Point2D.Float center;
@@ -38,6 +40,7 @@ public class Tower {
         this.range = range;
         this.price = price;
         this.XP = XP;
+        this.gridPos = new GridPoint2(x, y);
         this.position = new Vector2(0, 0);
         targets = new ArrayList<Enemy>();
         center = new Point2D.Float();
@@ -52,7 +55,7 @@ public class Tower {
      */
     public void draw(SpriteBatch spriteBatch) {
         sprite.setX(position.x + Config.tileSize / 8.0f);
-        sprite.setY(position.y);
+        sprite.setY(Config.guiHeight + position.y);
         sprite.draw(spriteBatch);
     }
 
@@ -160,10 +163,10 @@ public class Tower {
     public boolean intersects(Enemy enemy) {
         Vector2 enemyCoord = enemy.getPos();
 //        System.out.println(enemyCoord + " " + this.position);
-        float cornerDistance = (enemyCoord.x - this.position.x / 100) * (enemyCoord.x - this.position.x / 100) +
-                (enemyCoord.y - this.position.y / 100) * (enemyCoord.y - this.position.y / 100);
-        int nrange = range / 5;
-        return (cornerDistance <= nrange * nrange);
+        float distance = (enemyCoord.x - this.gridPos.x) * (enemyCoord.x - this.gridPos.x) +
+                (enemyCoord.y - this.gridPos.y) * (enemyCoord.y - this.gridPos.y);
+        float nrange = range / 4.0f;
+        return (distance <= nrange * nrange);
     }
 
     /**
@@ -175,12 +178,14 @@ public class Tower {
         float halfTile = Config.tileSize / 2.0f;
         p1 = convertFromGrid(p1);
         p1.x = p1.x + halfTile;
-        p1.y = p1.y + halfTile;
+        p1.y = Config.guiHeight + p1.y + halfTile;
         ShapeRenderer shapeRenderer = new ShapeRenderer();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.WHITE);
 //        shapeRenderer.circle(p1.x, p1.y, 10);
-        shapeRenderer.line(this.getPosition().x + halfTile, this.getPosition().y + halfTile, p1.x, p1.y);
+        shapeRenderer.line(
+                this.getPosition().x + halfTile, Config.guiHeight + this.getPosition().y + halfTile,
+                p1.x, p1.y);
         shapeRenderer.end();
     }
 

@@ -47,15 +47,15 @@ public class Game {
     private Game() {
         instance = this;
 
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1, 4, 2));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 11, 6));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 2, 6));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 9, 6));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 6, 6));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 9, 6));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 11, 4));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 3, 8));
-        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 4, 4));
+//        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1, 4, 2));
+//        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 11, 6));
+//        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 2, 6));
+//        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 9, 6));
+//        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 6, 6));
+//        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 9, 6));
+//        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 11, 4));
+//        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 3, 8));
+//        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 4, 4));
 
         setTargets();
     }
@@ -78,6 +78,10 @@ public class Game {
 
     public int getCurrentWave() {
         return currentWave;
+    }
+
+    public Wave getWave() {
+        return wave;
     }
 
     public int getCurrentLevel() {
@@ -151,8 +155,8 @@ public class Game {
      * Works only when current level is finished
      */
     public void nextLevel() {
-//        if (currentWave == 10 && this.wave.hasEnded()) {
         if (this.levels.get(currentLevel-1).hasEnded()) {
+            deployedTowers = new ArrayList<>();
             currentLevel++;
             currentWave = 1;
             this.life = 100;
@@ -176,7 +180,7 @@ public class Game {
             for (int j = 0; j < Config.gridHeight; ++j) {
                 if (!path.onPath(i, j)) {
                     spriteBatch.draw(tile,
-                            i * Config.tileSize, j * Config.tileSize,
+                            i * Config.tileSize, Config.guiHeight + j * Config.tileSize,
                             Config.tileSize, Config.tileSize);
                 }
             }
@@ -184,9 +188,11 @@ public class Game {
 
         // rendering path tiles
         this.path.forEach(p -> {
-            spriteBatch.draw(pathTile,
-                    p.x * Config.tileSize, p.y * Config.tileSize,
-                    Config.tileSize, Config.tileSize);
+            if (p.x >= 0 && p.x <= Config.gridWidth && p.y >= 0 && p.y <= Config.gridHeight) {
+                spriteBatch.draw(pathTile,
+                        p.x * Config.tileSize, Config.guiHeight + p.y * Config.tileSize,
+                        Config.tileSize, Config.tileSize);
+            }
         });
 
         float homeX = path.getLast().x;
@@ -209,7 +215,7 @@ public class Game {
 
         // rendering home
         spriteBatch.draw(Textures.home,
-                homeX * Config.tileSize, homeY * Config.tileSize,
+                homeX * Config.tileSize, Config.guiHeight + homeY * Config.tileSize,
                 Config.tileSize, Config.tileSize);
 
         spriteBatch.end();
@@ -224,23 +230,30 @@ public class Game {
         if (canBuyTower(tower)) {
             money -= tower.getPrice();
             deployedTowers.add(tower);
+            setTargets();
         }
     }
 
     /**
      * selling tower
      *
-     * @param t Tower
+     * @param x, x-coordinate of tower
+     * @param y, y-coordinate of tower
      */
-    public void sellTower(Tower t) {
+    public void sellTower(int x, int y) {
+        float xPos = (float) (x / Config.tileSize) * Config.tileSize;
+        float yPos = (float) ((y - Config.guiHeight) / Config.tileSize) * Config.tileSize;
         List<Tower> newDeployedTowers = new ArrayList<>();
         for (Tower tower : deployedTowers) {
-            if (tower != t) {
+            if (tower.getPosition().x != xPos || tower.getPosition().y != yPos) {
                 newDeployedTowers.add(tower);
+                System.out.println();
+            }
+            else {
+                this.money += tower.getPrice();
             }
         }
         this.deployedTowers = newDeployedTowers;
-        this.money += t.getPrice();
     }
 
     /**
@@ -278,13 +291,12 @@ public class Game {
      * @param towerToBuild
      * @param point
      */
-    public void buildTower(Tower towerToBuild, Point point) {
+    public void buildTower(TowerType towerToBuild, Point point) {
         Vector2 position = Utils.PointToVector2(point);
-        towerToBuild.setPosition(position);
-        towerToBuild.setCenter(
-                (float) point.x + Config.tileSize / 2.0f,
-                (float) point.y + Config.tileSize / 2.0f);
-        deployTower(towerToBuild);
+        int x =  (int) position.x / Config.tileSize;
+        int y = (int) (position.y - Config.guiHeight) / Config.tileSize;
+        Tower t = TowerFactory.createTower(towerToBuild, x, y);
+        deployTower(t);
     }
 
     /**
