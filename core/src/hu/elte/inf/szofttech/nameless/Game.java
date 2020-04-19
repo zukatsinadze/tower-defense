@@ -111,8 +111,10 @@ public class Game {
      * @param spriteBatch
      */
     private void displayTowers(SpriteBatch spriteBatch) {
+        spriteBatch.begin();
         for (Tower tower : deployedTowers)
             tower.draw(spriteBatch);
+        spriteBatch.end();
     }
 
     /**
@@ -121,10 +123,12 @@ public class Game {
      * @param spriteBatch
      */
     private void displayEnemies(SpriteBatch spriteBatch) {
+        spriteBatch.begin();
         this.wave = currentWave();
         for (int i = 0; i < this.wave.size(); ++i) {
             this.wave.get(i).draw(spriteBatch);
         }
+        spriteBatch.end();
     }
 
     /**
@@ -173,6 +177,7 @@ public class Game {
         Texture pathTile = Textures.paths.get(this.currentLevel - 1);
 
         this.path = this.levels.get(currentLevel - 1).getPath();
+        spriteBatch.begin();
         for (int i = 0; i < Config.gridWidth; ++i) {
             for (int j = 0; j < Config.gridHeight; ++j) {
                 if (!path.onPath(i, j)) {
@@ -214,6 +219,8 @@ public class Game {
         spriteBatch.draw(Textures.home,
                 homeX * Config.tileSize, Config.guiHeight + homeY * Config.tileSize,
                 Config.tileSize, Config.tileSize);
+
+        spriteBatch.end();
     }
 
     /**

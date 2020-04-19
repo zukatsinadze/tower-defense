@@ -1,23 +1,21 @@
 package hu.elte.inf.szofttech.nameless.view;
 
-import com.badlogic.gdx.*;
-
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-
+import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.Main;
-import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Textures;
 import hu.elte.inf.szofttech.nameless.model.tower.TowerFactory;
 
@@ -59,7 +57,6 @@ public class GameScreen extends ScreenAdapter {
     private final float PAUSE_RESUME_BUTTON_Y1 = PAUSE_RESUME_BUTTON_HEIGHT * 0.2f;
 
     public GameScreen(Main main) {
-
         this.col_width = Gdx.graphics.getWidth() / 20.0f;
         this.row_height = Gdx.graphics.getWidth() / 20.0f;
 
@@ -79,7 +76,6 @@ public class GameScreen extends ScreenAdapter {
         this.createButton();
         state = State.PREWAVE;
     }
-
 
     public void createButton() {
         Gdx.input.setInputProcessor(stage);
@@ -170,7 +166,6 @@ public class GameScreen extends ScreenAdapter {
         stage.addActor(nextLevelButton);
 
 
-
         // basic1 Tower
         ImageButton basic1Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic1)));
         basic1Button.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
@@ -195,7 +190,6 @@ public class GameScreen extends ScreenAdapter {
             }
         });
         stage.addActor(basic1Button);
-
 
         // basic2 Tower
         ImageButton basic2Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic2)));
@@ -250,7 +244,7 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor( 176 / 255.0f, 223 / 255.0f, 247 / 255.0f, 1);
+        Gdx.gl.glClearColor(176 / 255.0f, 223 / 255.0f, 247 / 255.0f, 1);
         //Gdx.gl.glClearColor( 173 / 255.0f, 245 / 255.0f, 175 / 255.0f, 1);
         //Gdx.gl.glClearColor( 169 / 255.0f, 240 / 255.0f, 153 / 255.0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -260,7 +254,6 @@ public class GameScreen extends ScreenAdapter {
         this.main.getBatch().setTransformMatrix(this.main.getViewport().getCamera().view);
         this.main.getBatch().setProjectionMatrix(this.main.getViewport().getCamera().projection);
 
-        this.main.getBatch().begin();
         this.game.render(this.main.getBatch());
 
         if (state == State.RUN) {
@@ -296,8 +289,6 @@ public class GameScreen extends ScreenAdapter {
         levelLabel.setPosition(this.col_width * 17.6f, Gdx.graphics.getHeight() - this.row_height * 5);
         levelLabel.setText("Level:" + String.valueOf(this.game.getCurrentLevel()));
         stage.addActor(levelLabel);
-
-        this.main.getBatch().end();
 
         stage.act();
         stage.draw();
