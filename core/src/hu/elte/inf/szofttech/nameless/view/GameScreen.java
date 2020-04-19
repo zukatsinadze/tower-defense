@@ -76,7 +76,6 @@ public class GameScreen extends ScreenAdapter {
 
     public void createButton() {
         Gdx.input.setInputProcessor(stage);
-//        InputProcessor in = Gdx.input.getInputProcessor();
 
         // pause Button
         ImageButton pauseButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.pauseButton)));
@@ -244,7 +243,9 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor( 176 / 255.0f, 223 / 255.0f, 247 / 255.0f, 1);
+        //Gdx.gl.glClearColor( 173 / 255.0f, 245 / 255.0f, 175 / 255.0f, 1);
+        //Gdx.gl.glClearColor( 169 / 255.0f, 240 / 255.0f, 153 / 255.0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         this.main.getViewport().getCamera().update();
 
@@ -252,6 +253,8 @@ public class GameScreen extends ScreenAdapter {
         this.main.getBatch().setTransformMatrix(this.main.getViewport().getCamera().view);
         this.main.getBatch().setProjectionMatrix(this.main.getViewport().getCamera().projection);
 
+        this.main.getBatch().begin();
+        //main.getBatch().draw(Textures.mainMenuBackground, 0, 0, Config.screenWidth, Config.screenHeight);
         this.game.render(this.main.getBatch());
 
         if (state == State.RUN) {
@@ -263,7 +266,8 @@ public class GameScreen extends ScreenAdapter {
             state = State.PREWAVE;
         }
 
-        this.main.getBatch().begin();
+//        this.main.getBatch().begin();
+//        main.getBatch().draw(Textures.mainMenuBackground, 0, 0, Config.screenWidth, Config.screenHeight);
 
         // three basic towers
         this.main.getBatch().draw(Textures.basic1_display, this.col_width * 5.5f, Gdx.graphics.getHeight() - this.row_height * 10.8f, Config.tileSize * 3 / 4.0f, Config.tileSize);
