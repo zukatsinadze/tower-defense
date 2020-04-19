@@ -70,6 +70,11 @@ public class Enemy {
         return this.pos.getPos();
     }
 
+    /**
+     * @param path the path the enemy follows
+     * @param type the type of the enemy
+     * @return the created enemy
+     */
     public static Enemy createEnemy(Path path, EnemyType type) {
         int XP;
         int money;
@@ -179,10 +184,16 @@ public class Enemy {
         return this.pos.end();
     }
 
+    /**
+     * @return true if the enemy has spawned
+     */
     public boolean hasSpawned() {
         return this.spawned;
     }
 
+    /**
+     * Spawn the enemy
+     */
     public void spawn() {
         this.spawned = true;
     }

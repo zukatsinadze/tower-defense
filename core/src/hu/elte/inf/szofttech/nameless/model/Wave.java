@@ -31,6 +31,9 @@ public final class Wave {
         return this.enemies;
     }
 
+    /**
+     * @return true if all the enemies has reached the end of the path
+     */
     public boolean hasEnded() {
         for (Enemy e : enemies) {
             if (e.isAlive() && !e.end())
@@ -39,6 +42,11 @@ public final class Wave {
         return true;
     }
 
+    /**
+     * Move all the spawned enemies forward, while spawning enemies every half second
+     *
+     * @param time the amount of time passed
+     */
     public void moveAll(float time) {
         if (this.nextIndex < this.size()) {
             this.nextTime += time;
@@ -58,6 +66,9 @@ public final class Wave {
         private final Path path;
         private final List<Enemy> enemies;
 
+        /**
+         * @param path the path that the enemies follow
+         */
         public Builder(Path path) {
             this.path = path;
             this.enemies = new ArrayList<>();
@@ -67,6 +78,12 @@ public final class Wave {
             return new Wave(this.enemies);
         }
 
+        /**
+         * Add an enemy based on its type
+         *
+         * @param enemyType the type of the enemy to add to the wave
+         * @return this builder
+         */
         public Builder add(Enemy.EnemyType enemyType) {
             this.enemies.add(Enemy.createEnemy(this.path, enemyType));
             return this;
