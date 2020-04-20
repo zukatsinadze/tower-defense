@@ -322,4 +322,20 @@ public class Game {
         }
 
     }
+
+    /**
+     * check if player lost
+     * @return boolean
+     */
+    public boolean hasLost() {
+        return this.life <= 0;
+    }
+
+    /**
+     * check if player won
+     * @return boolean
+     */
+    public boolean hasWon() {
+        return this.life > 0 && this.currentLevel == this.levels.size() && this.wave.hasEnded();
+    }
 }
