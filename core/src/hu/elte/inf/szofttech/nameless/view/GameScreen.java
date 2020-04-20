@@ -246,6 +246,13 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+
+        if (game.hasLost()) {
+            main.setScreen(new GameOverScreen(main));
+        } else if (game.hasWon()) {
+            main.setScreen(new GameOverScreen(main));
+        }
+
         Gdx.gl.glClearColor(176 / 255.0f, 223 / 255.0f, 247 / 255.0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         this.main.getViewport().getCamera().update();

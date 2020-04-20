@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import hu.elte.inf.szofttech.nameless.view.GameOverScreen;
 import hu.elte.inf.szofttech.nameless.view.MainMenuScreen;
 
 public final class Main extends Game {

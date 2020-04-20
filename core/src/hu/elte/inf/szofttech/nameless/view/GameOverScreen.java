@@ -19,12 +19,12 @@ import hu.elte.inf.szofttech.nameless.Textures;
 /**
  * rendering menu
  */
-public final class MainMenuScreen extends ScreenAdapter {
+public final class GameOverScreen extends ScreenAdapter {
     private Stage stage;
     private final Main main;
     private Label outputLabel;
 
-    public MainMenuScreen(Main main) {
+    public GameOverScreen(Main main) {
         this.main = main;
         this.stage = new Stage(this.main.getViewport());
         this.createButton();
@@ -37,7 +37,7 @@ public final class MainMenuScreen extends ScreenAdapter {
         Skin mySkin = new Skin(Gdx.files.internal("skin/flat-earth-ui.json"));
 
         // Start Button
-        Button startButton = new TextButton("Start Game", mySkin);
+        Button startButton = new TextButton("Restart Game", mySkin);
         startButton.setSize(col_width * 4, row_height);
         startButton.setPosition(col_width * 7, Gdx.graphics.getHeight() - row_height * 3);
         startButton.addListener(new InputListener() {
