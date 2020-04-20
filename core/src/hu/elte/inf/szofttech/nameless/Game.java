@@ -297,8 +297,10 @@ public class Game {
         Vector2 position = Utils.PointToVector2(point);
         int x = (int) position.x / Config.tileSize;
         int y = (int) (position.y - Config.guiHeight) / Config.tileSize;
-        Tower t = TowerFactory.createTower(towerToBuild, x, y);
-        deployTower(t);
+        if (!path.onPath(x, y)) {
+            Tower t = TowerFactory.createTower(towerToBuild, x, y);
+            deployTower(t);
+        }
     }
 
     /**
