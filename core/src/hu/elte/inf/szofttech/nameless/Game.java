@@ -297,8 +297,10 @@ public class Game {
         Vector2 position = Utils.PointToVector2(point);
         int x = (int) position.x / Config.tileSize;
         int y = (int) (position.y - Config.guiHeight) / Config.tileSize;
-        Tower t = TowerFactory.createTower(towerToBuild, x, y);
-        deployTower(t);
+        if (!path.onPath(x, y)) {
+            Tower t = TowerFactory.createTower(towerToBuild, x, y);
+            deployTower(t);
+        }
     }
 
     /**
@@ -319,5 +321,21 @@ public class Game {
             tower.shoot(delta);
         }
 
+    }
+
+    /**
+     * check if player lost
+     * @return boolean
+     */
+    public boolean hasLost() {
+        return this.life <= 0;
+    }
+
+    /**
+     * check if player won
+     * @return boolean
+     */
+    public boolean hasWon() {
+        return this.life > 0 && this.currentLevel == this.levels.size() && this.wave.hasEnded();
     }
 }
