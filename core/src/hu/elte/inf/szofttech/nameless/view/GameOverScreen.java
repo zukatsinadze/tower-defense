@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
+import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.Main;
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Textures;
@@ -29,22 +30,23 @@ public final class GameOverScreen extends ScreenAdapter {
         this.win = win;
         this.main = main;
         this.stage = new Stage(this.main.getViewport());
-        this.createButton();
+        this.createButtons();
     }
 
-    public void createButton() {
+    public void createButtons() {
         Gdx.input.setInputProcessor(stage);
         int row_height = Gdx.graphics.getWidth() / 12;
         int col_width = Gdx.graphics.getWidth() / 12;
         Skin mySkin = new Skin(Gdx.files.internal("skin/flat-earth-ui.json"));
 
-        // Start Button
+        // Restart Button
         Button restartButton = new TextButton("Restart Game", mySkin);
         restartButton.setSize(col_width * 4, row_height);
         restartButton.setPosition(col_width * 7, Gdx.graphics.getHeight() - row_height * 3);
         restartButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                Game.getInstance().restart();
                 main.setScreen(new GameScreen(main));
                 dispose();
                 return true;

@@ -21,19 +21,19 @@ import static hu.elte.inf.szofttech.nameless.model.tower.TowerFactory.TowerType;
  * connecting all other classes
  */
 public class Game {
+    private Path path;
+    private Wave wave;
     private static Game instance;
 
     private int life = 10;
     private int money = 100;
-
     private int currentWave = 1;
     private int currentLevel = 1;
-    private Path path;
-    private Wave wave;
+
+    private ArrayList<Enemy> targets = null;
     private List<Enemy> enemies = new ArrayList<>();
     private List<Tower> deployedTowers = new ArrayList<>();
-    private final List<Level> levels = ReadLevels.read();
-    private ArrayList<Enemy> targets = null;
+    private List<Level> levels = ReadLevels.read();
 
     public static Game getInstance() {
         if (instance == null) {
@@ -337,5 +337,20 @@ public class Game {
      */
     public boolean hasWon() {
         return this.life > 0 && this.currentLevel == this.levels.size() && this.wave.hasEnded();
+    }
+
+
+    /**
+     * reset game state
+     */
+    public void restart() {
+        this.life = 100;
+        this.money = 100;
+        this.targets = null;
+        this.currentWave = 1;
+        this.currentLevel = 1;
+        this.levels = ReadLevels.read();
+        this.enemies = new ArrayList<>();
+        this.deployedTowers = new ArrayList<>();
     }
 }

@@ -27,10 +27,10 @@ public final class MainMenuScreen extends ScreenAdapter {
     public MainMenuScreen(Main main) {
         this.main = main;
         this.stage = new Stage(this.main.getViewport());
-        this.createButton();
+        this.createButtons();
     }
 
-    public void createButton() {
+    public void createButtons() {
         Gdx.input.setInputProcessor(stage);
         int row_height = Gdx.graphics.getWidth() / 12;
         int col_width = Gdx.graphics.getWidth() / 12;
