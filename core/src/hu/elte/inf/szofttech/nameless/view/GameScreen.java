@@ -149,7 +149,7 @@ public class GameScreen extends ScreenAdapter {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 state = State.RUN;
-                game.nextWave();
+                Game.getInstance().nextWave();
                 return true;
             }
         });
@@ -162,7 +162,7 @@ public class GameScreen extends ScreenAdapter {
         nextLevelButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                game.nextLevel();
+                Game.getInstance().nextLevel();
                 return true;
             }
         });
