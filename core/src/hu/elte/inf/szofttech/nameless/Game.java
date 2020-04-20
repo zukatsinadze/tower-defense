@@ -1,20 +1,20 @@
 package hu.elte.inf.szofttech.nameless;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-import hu.elte.inf.szofttech.nameless.model.Enemy;
-import hu.elte.inf.szofttech.nameless.model.Level;
-import hu.elte.inf.szofttech.nameless.model.Path;
-import hu.elte.inf.szofttech.nameless.model.Wave;
-import hu.elte.inf.szofttech.nameless.model.tower.Tower;
-import hu.elte.inf.szofttech.nameless.model.tower.TowerFactory;
-
 import java.awt.*;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import hu.elte.inf.szofttech.nameless.model.Wave;
+import hu.elte.inf.szofttech.nameless.model.Path;
+import hu.elte.inf.szofttech.nameless.model.Enemy;
+import hu.elte.inf.szofttech.nameless.model.Level;
+import hu.elte.inf.szofttech.nameless.model.tower.Tower;
+import hu.elte.inf.szofttech.nameless.model.tower.TowerFactory;
 import static hu.elte.inf.szofttech.nameless.model.tower.TowerFactory.TowerType;
 
 /**
@@ -23,7 +23,7 @@ import static hu.elte.inf.szofttech.nameless.model.tower.TowerFactory.TowerType;
 public class Game {
     private static Game instance;
 
-    private int life = 100;
+    private int life = 10;
     private int money = 100;
 
     private int currentWave = 1;

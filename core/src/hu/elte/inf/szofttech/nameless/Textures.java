@@ -1,9 +1,9 @@
 package hu.elte.inf.szofttech.nameless;
 
-import com.badlogic.gdx.graphics.Texture;
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
+
+import com.badlogic.gdx.graphics.Texture;
 
 public final class Textures {
     private Textures() {

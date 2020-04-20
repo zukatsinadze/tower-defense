@@ -12,19 +12,21 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
-import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Main;
+import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Textures;
 
 /**
- * rendering menu
+ * rendering game over screen
  */
 public final class GameOverScreen extends ScreenAdapter {
     private Stage stage;
     private final Main main;
+    private final Boolean win;
     private Label outputLabel;
 
-    public GameOverScreen(Main main) {
+    public GameOverScreen(Main main, Boolean win) {
+        this.win = win;
         this.main = main;
         this.stage = new Stage(this.main.getViewport());
         this.createButton();
@@ -37,10 +39,10 @@ public final class GameOverScreen extends ScreenAdapter {
         Skin mySkin = new Skin(Gdx.files.internal("skin/flat-earth-ui.json"));
 
         // Start Button
-        Button startButton = new TextButton("Restart Game", mySkin);
-        startButton.setSize(col_width * 4, row_height);
-        startButton.setPosition(col_width * 7, Gdx.graphics.getHeight() - row_height * 3);
-        startButton.addListener(new InputListener() {
+        Button restartButton = new TextButton("Restart Game", mySkin);
+        restartButton.setSize(col_width * 4, row_height);
+        restartButton.setPosition(col_width * 7, Gdx.graphics.getHeight() - row_height * 3);
+        restartButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 main.setScreen(new GameScreen(main));
@@ -48,6 +50,7 @@ public final class GameOverScreen extends ScreenAdapter {
                 return true;
             }
         });
+        stage.addActor(restartButton);
 
         // Exit Button
         Button exitButton = new TextButton("Exit Game", mySkin);
@@ -60,11 +63,7 @@ public final class GameOverScreen extends ScreenAdapter {
                 return true;
             }
         });
-
-        outputLabel = new Label("", mySkin);
-        stage.addActor(startButton);
         stage.addActor(exitButton);
-        stage.addActor(outputLabel);
     }
 
     @Override

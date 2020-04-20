@@ -48,6 +48,7 @@ public final class MainMenuScreen extends ScreenAdapter {
                 return true;
             }
         });
+        stage.addActor(startButton);
 
         // Exit Button
         Button exitButton = new TextButton("Exit Game", mySkin);
@@ -60,11 +61,7 @@ public final class MainMenuScreen extends ScreenAdapter {
                 return true;
             }
         });
-
-        outputLabel = new Label("", mySkin);
-        stage.addActor(startButton);
         stage.addActor(exitButton);
-        stage.addActor(outputLabel);
     }
 
     @Override

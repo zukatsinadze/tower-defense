@@ -1,25 +1,26 @@
 package hu.elte.inf.szofttech.nameless.view;
 
+import java.awt.*;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import hu.elte.inf.szofttech.nameless.Config;
-import hu.elte.inf.szofttech.nameless.Game;
+
 import hu.elte.inf.szofttech.nameless.Main;
+import hu.elte.inf.szofttech.nameless.Game;
+import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Textures;
 import hu.elte.inf.szofttech.nameless.model.tower.TowerFactory;
-
-import java.awt.*;
 
 /**
  * rendering game
@@ -35,8 +36,9 @@ public class GameScreen extends ScreenAdapter {
         PREWAVE
     }
 
-    private Skin mySkin;
+    public State state;
     private Stage stage;
+    private Skin mySkin;
     private final Game game;
     private final Main main;
     private float col_width;
@@ -50,7 +52,6 @@ public class GameScreen extends ScreenAdapter {
     private Label basic1Money;
     private Label basic2Money;
     private Label basic3Money;
-    public State state;
 
     // pause and resume button attribute
     private final float PAUSE_RESUME_BUTTON_WIDTH = Gdx.graphics.getWidth() / 14.0f;
@@ -248,9 +249,9 @@ public class GameScreen extends ScreenAdapter {
     public void render(float delta) {
 
         if (game.hasLost()) {
-            main.setScreen(new GameOverScreen(main));
+            main.setScreen(new GameOverScreen(main, true));
         } else if (game.hasWon()) {
-            main.setScreen(new GameOverScreen(main));
+            main.setScreen(new GameOverScreen(main, false));
         }
 
         Gdx.gl.glClearColor(176 / 255.0f, 223 / 255.0f, 247 / 255.0f, 1);
@@ -307,9 +308,4 @@ public class GameScreen extends ScreenAdapter {
         this.main.getViewport().update(width, height);
     }
 
-    @Override
-    public void dispose() {
-        Textures.pauseButton.dispose();
-        Textures.resumeButton.dispose();
-    }
 }
