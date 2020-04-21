@@ -25,7 +25,7 @@ public class Game {
     private Wave wave;
     private static Game instance;
 
-    private int life = 10;
+    private int life = 100;
     private int money = 100;
     private int currentWave = 1;
     private int currentLevel = 1;
@@ -346,7 +346,7 @@ public class Game {
     public void restart() {
         this.life = 100;
         this.money = 100;
-        this.targets = null;
+        setTargets();
         this.currentWave = 1;
         this.currentLevel = 1;
         this.levels = ReadLevels.read();
