@@ -66,6 +66,8 @@ public class Enemy {
         return speed;
     }
 
+    public void setSpeed(int newSpeed) { this.speed = newSpeed; }
+
     public Vector2 getPos() {
         return this.pos.getPos();
     }

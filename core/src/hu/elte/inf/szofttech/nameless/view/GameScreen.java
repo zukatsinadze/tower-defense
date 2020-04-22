@@ -20,6 +20,7 @@ import hu.elte.inf.szofttech.nameless.Main;
 import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Textures;
+import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.tower.TowerFactory;
 
 /**
@@ -148,8 +149,13 @@ public class GameScreen extends ScreenAdapter {
         nextWaveButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                state = State.RUN;
-                Game.getInstance().nextWave();
+                if (state == State.PREWAVE){
+                    state = State.RUN;
+                    Game.getInstance().nextWave();
+                }
+                else {
+                    Game.getInstance().fastForward();
+                }
                 return true;
             }
         });

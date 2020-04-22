@@ -31,7 +31,6 @@ public class Game {
     private int currentLevel = 1;
 
     private ArrayList<Enemy> targets = null;
-    private List<Enemy> enemies = new ArrayList<>();
     private List<Tower> deployedTowers = new ArrayList<>();
     private List<Level> levels = ReadLevels.read();
 
@@ -64,10 +63,6 @@ public class Game {
 
     public int getLife() {
         return life;
-    }
-
-    public List<Enemy> getEnemies() {
-        return enemies;
     }
 
     public int getMoney() {
@@ -150,6 +145,14 @@ public class Game {
             this.wave = currentWave();
             setTargets();
         }
+    }
+
+    /**
+     * Fast forward current wave
+     */
+    public void fastForward() {
+        for (Enemy e: this.wave.getEnemies())
+            e.setSpeed(e.getSpeed() * 10);
     }
 
     /**
@@ -350,7 +353,6 @@ public class Game {
         this.currentWave = 1;
         this.currentLevel = 1;
         this.levels = ReadLevels.read();
-        this.enemies = new ArrayList<>();
         this.deployedTowers = new ArrayList<>();
     }
 }
