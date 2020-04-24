@@ -28,12 +28,15 @@ test:
 
 deploy:
   stage: deploy
-  scripts:
+  script:
     - ./gradlew desktop:dist
   artifacts:
     paths:
       - desktop/build/libs/*.jar
     expire_in: 1 week
+  only:
+    - master
+    - develop
 
 after_script:
   - echo "End CI"
