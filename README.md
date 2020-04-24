@@ -16,16 +16,16 @@
 - [x] render three basic towers
 - [x] placing towers
 - [x] dynamic tower(place sell scope)
-- [ ] Finish game somehow
+- [x] Finish game somehow
 - [ ] Add more tests
 - [ ] Implement special abilities
 - [ ] ...
 
-# UPDATED: 4.18.2020
+# UPDATED: 4.24.2020
 
 ## Zuka:
 - [ ] Add more tests
-
+- [ ] fix CI artifacts
 
 ## Su:
 - [ ] GUI
