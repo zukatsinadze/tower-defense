@@ -16,10 +16,6 @@ build:
   stage: build
   script:
     - ./gradlew assemble
-  artifacts:
-    paths:
-      - build/libs/*.jar
-    expire_in: 1 week
   only:
     - master
     - develop
@@ -28,6 +24,15 @@ test:
   stage: test
   script:
     - ./gradlew clean tests:test
+
+deploy:
+  stage: deploy
+  scripts:
+    - ./gradlew desktop:dist
+  artifacts:
+    paths:
+      - desktop/build/libs/*.jar
+    expire_in: 1 week
 
 after_script:
   - echo "End CI"
