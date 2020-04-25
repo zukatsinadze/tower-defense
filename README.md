@@ -17,23 +17,25 @@
 - [x] placing towers
 - [x] dynamic tower(place sell scope)
 - [x] Finish game somehow
+- [x] fix CI artifacts
 - [ ] Add more tests
 - [ ] Implement special abilities
 - [ ] ...
 
-# UPDATED: 4.24.2020
+# UPDATED: 4.25.2020
 
 ## Zuka:
 - [ ] Add more tests
-- [ ] fix CI artifacts
+
+
 
 ## Su:
-- [ ] GUI
+- [ ] InputListener for towers without making them buttons
 
 
 
 ## Szumi:
-
+- [ ] work on SpecialAbility classes
 
 ## Resources:
 
