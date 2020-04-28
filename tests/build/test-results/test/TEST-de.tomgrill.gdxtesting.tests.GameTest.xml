@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="de.tomgrill.gdxtesting.tests.GameTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2020-04-12T12:01:25" hostname="HU-00002951" time="1.372">
-  <properties/>
-  <testcase name="testEnemy" classname="de.tomgrill.gdxtesting.tests.GameTest" time="1.355"/>
-  <testcase name="oneEqualsOne" classname="de.tomgrill.gdxtesting.tests.GameTest" time="0.001"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

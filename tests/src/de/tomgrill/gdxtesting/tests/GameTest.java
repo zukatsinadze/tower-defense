@@ -33,7 +33,7 @@ public class GameTest {
     }
 
     @Test
-    public void testEnemy(){
+    public void testGame() {
         Game g = Game.getInstance();
         assertEquals(g.getLife(), 100);
         assertEquals(g.getMoney(), 100);
@@ -43,5 +43,43 @@ public class GameTest {
         assertEquals(g.canBuyTower(t), true);
         g.getDamaged(10);
         assertEquals(g.getLife(), 90);
+    }
+
+    @Test
+    public void towersTest() {
+        Game g = Game.getInstance();
+        g.addMoney(100000);
+        g.deployTower(TowerFactory.createTower(TowerFactory.TowerType.Basic1, 4, 2));
+        g.deployTower(TowerFactory.createTower(TowerFactory.TowerType.Basic2, 11, 6));
+        g.deployTower(TowerFactory.createTower(TowerFactory.TowerType.Basic2, 2, 6));
+        assertEquals(3, g.getDeployedTowers().size());
+        g.addMoney(-10000000);
+        g.deployTower(TowerFactory.createTower(TowerFactory.TowerType.Basic2, 2, 6));
+        assertEquals(3, g.getDeployedTowers().size());
+        assertEquals(false, g.canBuyTower(TowerFactory.createTower(TowerFactory.TowerType.Basic2, 2, 6)));
+    }
+
+    @Test
+    public void enemiesTest() {
+        Game g = Game.getInstance();
+        assertEquals(10, g.getWave().get(0).getSpeed());
+        g.fastForward();
+        assertEquals(100, g.getWave().get(0).getSpeed());
+        assertEquals(5, g.getWave().size());
+        g.nextWave();
+        assertEquals(5, g.getWave().size());
+        g.nextWave();
+        assertEquals(5, g.getWave().getEnemies().size());
+        g.nextWave();
+        assertEquals(5, g.getWave().getEnemies().size());
+    }
+
+    @Test
+    public void finishGameTest() {
+        Game g = Game.getInstance();
+        assertEquals(false, g.hasLost());
+        assertEquals(false, g.hasWon());
+        g.getDamaged(100);
+        assertEquals(true, g.hasLost());
     }
 }
