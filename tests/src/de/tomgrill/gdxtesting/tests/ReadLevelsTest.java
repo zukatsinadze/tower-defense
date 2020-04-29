@@ -4,8 +4,6 @@ import hu.elte.inf.szofttech.nameless.ReadLevels;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import hu.elte.inf.szofttech.nameless.model.Level;
-
-import java.awt.*;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;

@@ -42,14 +42,6 @@ public class Enemy {
         this.spawned = false;
     }
 
-    public GDSprite getSprite() {
-        return sprite;
-    }
-
-    public void setSprite(GDSprite sprite) {
-        this.sprite = sprite;
-    }
-
     public int getXP() {
         return XP;
     }
