@@ -21,7 +21,6 @@ public final class GameOverScreen extends ScreenAdapter {
     private Stage stage;
     private final Main main;
     private final Boolean win;
-    private Label outputLabel;
 
     public GameOverScreen(Main main, Boolean win) {
         this.win = win;

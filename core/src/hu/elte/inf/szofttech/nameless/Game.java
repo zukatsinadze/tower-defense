@@ -47,17 +47,6 @@ public class Game {
      */
     private Game() {
         instance = this;
-
-//        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic1, 4, 2));
-//        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 11, 6));
-//        this.deployedTowers.add(TowerFactory.createTower(TowerType.Basic2, 2, 6));
-//        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 9, 6));
-//        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 6, 6));
-//        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 9, 6));
-//        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 11, 4));
-//        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedCatchFire, 3, 8));
-//        this.deployedTowers.add(TowerFactory.createTower(TowerType.AdvancedExplosion, 4, 4));
-
         setTargets();
     }
 

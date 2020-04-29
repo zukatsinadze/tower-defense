@@ -31,8 +31,6 @@ public class GameScreen extends ScreenAdapter {
     public enum State {
         RUN,
         PAUSE,
-        RESUME,
-        STOPPED,
         PREWAVE
     }
 
@@ -148,11 +146,10 @@ public class GameScreen extends ScreenAdapter {
         nextWaveButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if (state == State.PREWAVE){
+                if (state == State.PREWAVE) {
                     state = State.RUN;
                     Game.getInstance().nextWave();
-                }
-                else {
+                } else {
                     Game.getInstance().fastForward();
                 }
                 return true;

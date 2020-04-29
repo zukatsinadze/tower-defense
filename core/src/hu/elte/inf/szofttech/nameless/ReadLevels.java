@@ -3,6 +3,7 @@ package hu.elte.inf.szofttech.nameless;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import hu.elte.inf.szofttech.nameless.model.Path;
 import hu.elte.inf.szofttech.nameless.model.Wave;

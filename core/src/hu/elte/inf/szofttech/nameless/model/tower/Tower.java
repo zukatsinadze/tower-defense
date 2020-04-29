@@ -70,28 +70,8 @@ public class Tower {
         sprite.setY(position.y);
     }
 
-    public float getAttackTimer() {
-        return attackTimer;
-    }
-
-    public void setAttackTimer(int attackTimer) {
-        this.attackTimer = attackTimer;
-    }
-
-    public GDSprite getSprite() {
-        return sprite;
-    }
-
-    public void setSprite(GDSprite sprite) {
-        this.sprite = sprite;
-    }
-
     public int getPrice() {
         return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
     }
 
     public int getDamage() {
@@ -102,10 +82,6 @@ public class Tower {
         return range;
     }
 
-    public float getAttackSpeed() {
-        return attackSpeed;
-    }
-
     public ArrayList<Enemy> getTarget() {
         return targets;
     }
@@ -114,9 +90,6 @@ public class Tower {
         this.targets = targets;
     }
 
-    public void setCenter(float x, float y) {
-        center.setLocation(x, y);
-    }
 
     /**
      * @param b Enemy
@@ -162,7 +135,6 @@ public class Tower {
      */
     public boolean intersects(Enemy enemy) {
         Vector2 enemyCoord = enemy.getPos();
-//        System.out.println(enemyCoord + " " + this.position);
         float distance = (enemyCoord.x - this.gridPos.x) * (enemyCoord.x - this.gridPos.x) +
                 (enemyCoord.y - this.gridPos.y) * (enemyCoord.y - this.gridPos.y);
         float nrange = range / 4.0f;
@@ -182,7 +154,6 @@ public class Tower {
         ShapeRenderer shapeRenderer = new ShapeRenderer();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.WHITE);
-//        shapeRenderer.circle(p1.x, p1.y, 10);
         shapeRenderer.line(
                 this.getPosition().x + halfTile, Config.guiHeight + this.getPosition().y + halfTile,
                 p1.x, p1.y);

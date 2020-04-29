@@ -22,7 +22,6 @@ import hu.elte.inf.szofttech.nameless.Textures;
 public final class MainMenuScreen extends ScreenAdapter {
     private Stage stage;
     private final Main main;
-    private Label outputLabel;
 
     public MainMenuScreen(Main main) {
         this.main = main;
