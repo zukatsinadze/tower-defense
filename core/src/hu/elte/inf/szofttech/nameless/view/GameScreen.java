@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import hu.elte.inf.szofttech.nameless.Main;
@@ -39,8 +40,6 @@ public class GameScreen extends ScreenAdapter {
     private Skin mySkin;
     private final Game game;
     private final Main main;
-    private float col_width;
-    private float row_height;
 
     private Label lifeLabel;
     private Label moneyLabel;
@@ -58,8 +57,6 @@ public class GameScreen extends ScreenAdapter {
     private final float PAUSE_RESUME_BUTTON_Y1 = PAUSE_RESUME_BUTTON_HEIGHT * 0.2f;
 
     public GameScreen(Main main) {
-        this.col_width = Gdx.graphics.getWidth() / 20.0f;
-        this.row_height = Gdx.graphics.getWidth() / 20.0f;
 
         this.main = main;
         this.game = Game.getInstance();
@@ -105,8 +102,8 @@ public class GameScreen extends ScreenAdapter {
 
         // Sell Tower Button
         Button sellTowerButton = new TextButton("Sell Tower", mySkin);
-        sellTowerButton.setSize(this.col_width * 2.8f, this.row_height);
-        sellTowerButton.setPosition(this.col_width * 10.5f, Gdx.graphics.getHeight() - this.row_height * 10.8f);
+        sellTowerButton.setSize(Config.col_width * 2.8f, Config.row_height);
+        sellTowerButton.setPosition(Config.col_width * 10.5f, Gdx.graphics.getHeight() - Config.row_height * 10.8f);
         sellTowerButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -128,8 +125,8 @@ public class GameScreen extends ScreenAdapter {
 
         // Upgrade Tower Button
         Button upgradeTowerButton = new TextButton("Upgrade Tower", mySkin);
-        upgradeTowerButton.setSize(this.col_width * 3, this.row_height);
-        upgradeTowerButton.setPosition(this.col_width * 14.2f, Gdx.graphics.getHeight() - this.row_height * 10.8f);
+        upgradeTowerButton.setSize(Config.col_width * 3, Config.row_height);
+        upgradeTowerButton.setPosition(Config.col_width * 14.2f, Gdx.graphics.getHeight() - Config.row_height * 10.8f);
         upgradeTowerButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -141,8 +138,8 @@ public class GameScreen extends ScreenAdapter {
 
         // Next Wave Button
         Button nextWaveButton = new TextButton("Next Wave", mySkin);
-        nextWaveButton.setSize(this.col_width * 2.4f, this.row_height);
-        nextWaveButton.setPosition(this.col_width * 17.3f, Gdx.graphics.getHeight() - this.row_height * 7);
+        nextWaveButton.setSize(Config.col_width * 2.4f, Config.row_height);
+        nextWaveButton.setPosition(Config.col_width * 17.3f, Gdx.graphics.getHeight() - Config.row_height * 7);
         nextWaveButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -159,8 +156,8 @@ public class GameScreen extends ScreenAdapter {
 
         // Next Level Button
         Button nextLevelButton = new TextButton("Next Level", mySkin);
-        nextLevelButton.setSize(this.col_width * 2.4f, this.row_height);
-        nextLevelButton.setPosition(this.col_width * 17.3f, Gdx.graphics.getHeight() - this.row_height * 8.5f);
+        nextLevelButton.setSize(Config.col_width * 2.4f, Config.row_height);
+        nextLevelButton.setPosition(Config.col_width * 17.3f, Gdx.graphics.getHeight() - Config.row_height * 8.5f);
         nextLevelButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -174,7 +171,7 @@ public class GameScreen extends ScreenAdapter {
         // basic1 Tower
         ImageButton basic1Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic1_display)));
         basic1Button.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
-        basic1Button.setPosition(this.col_width * 5.5f, Gdx.graphics.getHeight() - this.row_height * 10.7f);
+        basic1Button.setPosition(Config.col_width * 5.5f, Gdx.graphics.getHeight() - Config.row_height * 10.7f);
         basic1Button.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -194,12 +191,39 @@ public class GameScreen extends ScreenAdapter {
                 return true;
             }
         });
+//        basic1Button.addListener(new InputListener() {
+//            @Override
+//            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+//
+//                if (state == State.PREWAVE) {
+//                    ImageButton basic1Deployed = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic1_display)));
+//                    basic1Deployed.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
+//                    basic1Deployed.setPosition(Config.col_width * 5.5f, Gdx.graphics.getHeight() - Config.row_height * 10.7f);
+//                    InputAdapter input = new InputAdapter() {
+//                        @Override
+//                        public boolean touchDown(int x, int y, int pointer, int button) {
+//                            Game.getInstance().buildTower(TowerFactory.TowerType.Basic1,
+//                                    new Point(x, Gdx.graphics.getHeight() - y));
+//                            Gdx.input.setInputProcessor(stage);
+//                            return true;
+//                        }
+//                    };
+//                    Gdx.input.setInputProcessor(input);
+//                }
+//                return true;
+//            }
+//        });
+//        basic1Button.addListener(new DragListener() {
+//            public void drag(InputEvent event, float x, float y, int pointer) {
+//                basic1Button.moveBy(x - Config.tileSize * 3 / 4.0f / 2, y - Config.tileSize / 2);
+//            }
+//        });
         stage.addActor(basic1Button);
 
         // basic2 Tower
         ImageButton basic2Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic2_display)));
         basic2Button.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
-        basic2Button.setPosition(this.col_width * 7, Gdx.graphics.getHeight() - this.row_height * 10.7f);
+        basic2Button.setPosition(Config.col_width * 7, Gdx.graphics.getHeight() - Config.row_height * 10.7f);
         basic2Button.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -224,7 +248,7 @@ public class GameScreen extends ScreenAdapter {
         // basic3 Tower
         ImageButton basic3Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic3_display)));
         basic3Button.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
-        basic3Button.setPosition(this.col_width * 8.5f, Gdx.graphics.getHeight() - this.row_height * 10.7f);
+        basic3Button.setPosition(Config.col_width * 8.5f, Gdx.graphics.getHeight() - Config.row_height * 10.7f);
         basic3Button.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -275,28 +299,28 @@ public class GameScreen extends ScreenAdapter {
             state = State.PREWAVE;
         }
 
-        basic1Money.setPosition(this.col_width * 5.8f, Gdx.graphics.getHeight() - this.row_height * 11.2f);
+        basic1Money.setPosition(Config.col_width * 5.8f, Gdx.graphics.getHeight() - Config.row_height * 11.2f);
         stage.addActor(basic1Money);
 
-        basic2Money.setPosition(this.col_width * 7.3f, Gdx.graphics.getHeight() - this.row_height * 11.2f);
+        basic2Money.setPosition(Config.col_width * 7.3f, Gdx.graphics.getHeight() - Config.row_height * 11.2f);
         stage.addActor(basic2Money);
 
-        basic3Money.setPosition(this.col_width * 8.8f, Gdx.graphics.getHeight() - this.row_height * 11.2f);
+        basic3Money.setPosition(Config.col_width * 8.8f, Gdx.graphics.getHeight() - Config.row_height * 11.2f);
         stage.addActor(basic3Money);
 
-        lifeLabel.setPosition(this.col_width * 17.4f, Gdx.graphics.getHeight() - this.row_height * 2);
+        lifeLabel.setPosition(Config.col_width * 17.4f, Gdx.graphics.getHeight() - Config.row_height * 2);
         lifeLabel.setText("Life:" + String.valueOf(this.game.getLife()));
         stage.addActor(lifeLabel);
 
-        moneyLabel.setPosition(this.col_width * 17.4f, Gdx.graphics.getHeight() - this.row_height * 3);
+        moneyLabel.setPosition(Config.col_width * 17.4f, Gdx.graphics.getHeight() - Config.row_height * 3);
         moneyLabel.setText("Money:" + String.valueOf(this.game.getMoney()));
         stage.addActor(moneyLabel);
 
-        waveLabel.setPosition(this.col_width * 17.4f, Gdx.graphics.getHeight() - this.row_height * 4);
+        waveLabel.setPosition(Config.col_width * 17.4f, Gdx.graphics.getHeight() - Config.row_height * 4);
         waveLabel.setText("Wave:" + String.valueOf(this.game.getCurrentWave()));
         stage.addActor(waveLabel);
 
-        levelLabel.setPosition(this.col_width * 17.4f, Gdx.graphics.getHeight() - this.row_height * 5);
+        levelLabel.setPosition(Config.col_width * 17.4f, Gdx.graphics.getHeight() - Config.row_height * 5);
         levelLabel.setText("Level:" + String.valueOf(this.game.getCurrentLevel()));
         stage.addActor(levelLabel);
 
