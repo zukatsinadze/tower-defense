@@ -62,9 +62,6 @@ public class GameTest {
     @Test
     public void enemiesTest() {
         Game g = Game.getInstance();
-        assertEquals(10, g.getWave().get(0).getSpeed());
-        g.fastForward();
-        assertEquals(100, g.getWave().get(0).getSpeed());
         assertEquals(5, g.getWave().size());
         g.nextWave();
         assertEquals(5, g.getWave().size());
