@@ -137,14 +137,6 @@ public class Game {
     }
 
     /**
-     * Fast forward current wave
-     */
-    public void fastForward() {
-        for (Enemy e: this.wave.getEnemies())
-            e.setSpeed(e.getSpeed() * 10);
-    }
-
-    /**
      * Changing level
      * Works only when current level is finished
      */

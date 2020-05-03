@@ -39,7 +39,8 @@ public class GameScreen extends ScreenAdapter {
         PREWAVE
     }
 
-    public State state;
+    private State state;
+    private boolean isFastForwarded;
     private Stage stage;
     private Skin mySkin;
     private final Game game;
@@ -76,7 +77,8 @@ public class GameScreen extends ScreenAdapter {
         this.basic3Money = new Label("125", this.mySkin, "button", Config.button_blue);
 
         this.createButton();
-        state = State.PREWAVE;
+        this.state = State.PREWAVE;
+        this.isFastForwarded = false;
     }
 
     public void createButton() {
@@ -151,7 +153,7 @@ public class GameScreen extends ScreenAdapter {
                     state = State.RUN;
                     Game.getInstance().nextWave();
                 } else {
-                    Game.getInstance().fastForward();
+                    isFastForwarded = !isFastForwarded;
                 }
                 return true;
             }
@@ -278,6 +280,9 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        if (isFastForwarded) {
+            delta *= 5;
+        }
 
         if (game.hasLost()) {
             main.setScreen(new GameOverScreen(main, true));
@@ -301,7 +306,8 @@ public class GameScreen extends ScreenAdapter {
         }
 
         if (Game.getInstance().getWave().hasEnded()) {
-            state = State.PREWAVE;
+            this.state = State.PREWAVE;
+            this.isFastForwarded = false;
         }
 
         basic1Money.setPosition(Config.col_width * 5.8f, Gdx.graphics.getHeight() - Config.row_height * 11.2f);
