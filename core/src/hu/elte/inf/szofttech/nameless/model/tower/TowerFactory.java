@@ -19,9 +19,10 @@ public class TowerFactory {
 
     /**
      * creating tower
+     *
      * @param towerType, type of tower from enum TowerType
-     * @param x, x-coordinate
-     * @param y, y-coordinate
+     * @param x,         x-coordinate
+     * @param y,         y-coordinate
      * @return created Tower
      */
     public static Tower createTower(TowerType towerType, int x, int y) {
@@ -63,15 +64,15 @@ public class TowerFactory {
                 range = 20;
                 damage = 10;
                 attackspeed = 12;
-                tower = new Tower(Textures.advanced11, XP, price, damage, range, attackspeed, x, y, new Teleport());
+                tower = new Tower(Textures.advanced11, XP, price, damage, range, attackspeed, x, y, new SlowBalloons());
                 return tower;
             case AdvancedExplosion:
                 XP = 20;
                 price = 125;
                 range = 10;
-                damage = 18;
+                damage = 20;
                 attackspeed = 10;
-                tower = new Tower(Textures.advanced12, XP, price, damage, range, attackspeed, x, y, new Explosion());
+                tower = new Tower(Textures.advanced12, XP, price, damage, range, attackspeed, x, y, new FreezeBalloons());
                 return tower;
             case AdvancedCatchFire:
                 XP = 20;
@@ -79,15 +80,15 @@ public class TowerFactory {
                 range = 18;
                 damage = 15;
                 attackspeed = 12;
-                tower = new Tower(Textures.advanced21, XP, price, damage, range, attackspeed, x, y, new CatchFire());
+                tower = new Tower(Textures.advanced21, XP, price, damage, range, attackspeed, x, y, new Teleport());
                 return tower;
             case AdvancedRingOfFire:
                 XP = 25;
                 price = 150;
                 range = 12;
-                damage = 20;
+                damage = 18;
                 attackspeed = 8;
-                tower = new Tower(Textures.advanced22, XP, price, damage, range, attackspeed, x, y, new RingOfFire());
+                tower = new Tower(Textures.advanced22, XP, price, damage, range, attackspeed, x, y, new Explosion());
                 return tower;
             case AdvancedSlowBalloons:
                 XP = 25;
@@ -95,7 +96,7 @@ public class TowerFactory {
                 range = 15;
                 damage = 10;
                 attackspeed = 20;
-                tower = new Tower(Textures.advanced31, XP, price, damage, range, attackspeed, x, y, new SlowBalloons());
+                tower = new Tower(Textures.advanced31, XP, price, damage, range, attackspeed, x, y, new CatchFire());
                 return tower;
             case AdvancedFreezeBalloons:
                 XP = 30;
@@ -103,7 +104,7 @@ public class TowerFactory {
                 range = 8;
                 damage = 8;
                 attackspeed = 30;
-                tower = new Tower(Textures.advanced32, XP, price, damage, range, attackspeed, x, y, new FreezeBalloons());
+                tower = new Tower(Textures.advanced32, XP, price, damage, range, attackspeed, x, y, new RingOfFire());
                 return tower;
             default:
                 return tower;
