@@ -272,23 +272,21 @@ public class Game {
     }
 
     /**
-     * @return user created towers
-     */
-    public List<Tower> getTower() { return this.deployedTowers; }
-    /**
-     * Building tower
+     * Building a tower
      *
      * @param towerToBuild
      * @param point
      */
-    public void buildTower(TowerType towerToBuild, Point point) {
+    public Tower buildTower(TowerType towerToBuild, Point point) {
+        Tower tower = null;
         Vector2 position = Utils.PointToVector2(point);
         int x = (int) position.x / Config.tileSize;
         int y = (int) (position.y - Config.guiHeight) / Config.tileSize;
         if (!path.onPath(x, y)) {
-            Tower t = TowerFactory.createTower(towerToBuild, x, y);
-            deployTower(t);
+            tower = TowerFactory.createTower(towerToBuild, x, y);
+            deployTower(tower);
         }
+        return tower;
     }
 
     /**

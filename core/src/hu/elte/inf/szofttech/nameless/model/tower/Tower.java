@@ -1,30 +1,31 @@
 package hu.elte.inf.szofttech.nameless.model.tower;
 
+import java.util.ArrayList;
+import java.awt.geom.Point2D;
+
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.GridPoint2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.GridPoint2;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.GDSprite;
 
-import java.awt.geom.Point2D;
-import java.util.ArrayList;
-
 import static hu.elte.inf.szofttech.nameless.Utils.convertFromGrid;
 
 public class Tower extends Actor {
-    private SpecialAbility specialAbility;
-    private float attackTimer = 0;
     private int XP;
     private int price;
     private int damage;
     private int range;
     private int attackSpeed;
+    private float attackTimer = 0;
+    private SpecialAbility specialAbility;
     private Boolean upgraded = false;
     private GridPoint2 gridPos;
     private Vector2 position;
@@ -55,7 +56,7 @@ public class Tower extends Actor {
     /**
      * drawing function for SpriteBatch
      *
-     * @param spriteBatch
+     * @param batch, parentAlphs
      */
     @Override
     public void draw(Batch batch, float parentAlpha) {

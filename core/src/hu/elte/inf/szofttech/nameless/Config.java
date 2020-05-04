@@ -16,4 +16,5 @@ public class Config {
     public static final float row_height = Gdx.graphics.getWidth() / 20.0f;
     public static final int guiHeight = screenHeight - tileSize * gridHeight;
     public static Color button_blue = new Color(12 / 255.0f, 149 / 255.0f, 240 / 255.0f, 1);
+    public static Color background = new Color(176 / 255.0f, 223 / 255.0f, 247 / 255.0f, 1);
 }
