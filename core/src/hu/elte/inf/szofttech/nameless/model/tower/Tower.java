@@ -63,6 +63,10 @@ public class Tower extends Actor {
         return this.gridPos;
     }
 
+    public Vector2 getPosition() {
+        return new Vector2(super.getX(), super.getY());
+    }
+
     public int getPrice() {
         return price;
     }
