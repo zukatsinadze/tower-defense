@@ -24,6 +24,11 @@ public class Tower extends Actor {
     private int range;
     private int attackSpeed;
     private float attackTimer = 0;
+<<<<<<< Updated upstream
+=======
+    private SpecialAbility specialAbility;
+
+>>>>>>> Stashed changes
     private Boolean upgraded = false;
     private SpecialAbility specialAbility;
     private GDSprite sprite;
