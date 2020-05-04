@@ -2,10 +2,11 @@ package hu.elte.inf.szofttech.nameless.model.tower;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 
 import static hu.elte.inf.szofttech.nameless.Utils.convertFromGrid;
 
-public class Tower {
+public class Tower extends Actor {
     private SpecialAbility specialAbility;
     private float attackTimer = 0;
     private int XP;
@@ -33,6 +34,7 @@ public class Tower {
 
     public Tower(Texture texture, int XP, int price, int damage, int range, int attackSpeed, int x, int y,
                  SpecialAbility specialAbility) {
+        super();
         this.sprite = new GDSprite(texture);
         this.sprite.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
         this.damage = damage;
@@ -41,6 +43,8 @@ public class Tower {
         this.price = price;
         this.XP = XP;
         this.gridPos = new GridPoint2(x, y);
+        super.setBounds(this.gridPos.x * Config.tileSize, this.gridPos.y * Config.tileSize,
+                Config.tileSize, Config.tileSize);
         this.position = new Vector2(0, 0);
         targets = new ArrayList<Enemy>();
         center = new Point2D.Float();
@@ -53,10 +57,11 @@ public class Tower {
      *
      * @param spriteBatch
      */
-    public void draw(SpriteBatch spriteBatch) {
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
         sprite.setX(position.x + Config.tileSize / 8.0f);
         sprite.setY(Config.guiHeight + position.y);
-        sprite.draw(spriteBatch);
+        sprite.draw(batch);
     }
 
     public Vector2 getPosition() {

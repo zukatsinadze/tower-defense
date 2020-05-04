@@ -97,7 +97,7 @@ public class Game {
     private void displayTowers(SpriteBatch spriteBatch) {
         spriteBatch.begin();
         for (Tower tower : deployedTowers)
-            tower.draw(spriteBatch);
+            tower.draw(spriteBatch, 1);
         spriteBatch.end();
     }
 
