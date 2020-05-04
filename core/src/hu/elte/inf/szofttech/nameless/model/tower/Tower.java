@@ -34,7 +34,6 @@ public class Tower extends Actor {
 
     public Tower(Texture texture, int XP, int price, int damage, int range, int attackSpeed, int x, int y,
                  SpecialAbility specialAbility) {
-        super();
         this.sprite = new GDSprite(texture);
         this.sprite.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
         this.damage = damage;
@@ -43,7 +42,8 @@ public class Tower extends Actor {
         this.price = price;
         this.XP = XP;
         this.gridPos = new GridPoint2(x, y);
-        super.setBounds(this.gridPos.x * Config.tileSize, this.gridPos.y * Config.tileSize,
+        super.setBounds(
+                this.gridPos.x * Config.tileSize, Config.guiHeight + this.gridPos.y * Config.tileSize,
                 Config.tileSize, Config.tileSize);
         this.position = new Vector2(0, 0);
         targets = new ArrayList<Enemy>();
