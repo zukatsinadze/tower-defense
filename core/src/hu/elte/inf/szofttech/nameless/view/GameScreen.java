@@ -228,6 +228,24 @@ public class GameScreen extends ScreenAdapter {
                         public boolean touchDown(int x, int y, int pointer, int button) {
                             Tower tower = Game.getInstance().buildTower(TowerFactory.TowerType.Basic2,
                                     new Point(x, Gdx.graphics.getHeight() - y));
+                            tower.addListener(new InputListener() {
+                                @Override
+                                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                    Button slowBalloons = new TextButton("Teleport", mySkin);
+                                    slowBalloons.setColor(Config.button_blue);
+                                    slowBalloons.setSize(Config.col_width, Config.row_height);
+                                    slowBalloons.setPosition(Config.col_width * 5f, Gdx.graphics.getHeight() - Config.row_height * 5.5f);
+                                    stage.addActor(slowBalloons);
+
+                                    Button freezeBalloons = new TextButton("Explosion", mySkin);
+                                    freezeBalloons.setColor(Config.background);
+                                    freezeBalloons.setSize(Config.col_width, Config.row_height);
+                                    freezeBalloons.setPosition(Config.col_width * 5f, Gdx.graphics.getHeight() - Config.row_height * 8.5f);
+                                    stage.addActor(freezeBalloons);
+                                    return true;
+                                }
+                            });
+                            stage.addActor(tower);
                             Gdx.input.setInputProcessor(stage);
                             return true;
                         }
@@ -253,6 +271,24 @@ public class GameScreen extends ScreenAdapter {
                         public boolean touchDown(int x, int y, int pointer, int button) {
                             Tower tower = Game.getInstance().buildTower(TowerFactory.TowerType.Basic3,
                                     new Point(x, Gdx.graphics.getHeight() - y));
+                            tower.addListener(new InputListener() {
+                                @Override
+                                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                    Button slowBalloons = new TextButton("Poison", mySkin);
+                                    slowBalloons.setColor(Config.button_blue);
+                                    slowBalloons.setSize(Config.col_width, Config.row_height);
+                                    slowBalloons.setPosition(Config.col_width * 5f, Gdx.graphics.getHeight() - Config.row_height * 5.5f);
+                                    stage.addActor(slowBalloons);
+
+                                    Button freezeBalloons = new TextButton("Fire", mySkin);
+                                    freezeBalloons.setColor(Config.background);
+                                    freezeBalloons.setSize(Config.col_width, Config.row_height);
+                                    freezeBalloons.setPosition(Config.col_width * 5f, Gdx.graphics.getHeight() - Config.row_height * 8.5f);
+                                    stage.addActor(freezeBalloons);
+                                    return true;
+                                }
+                            });
+                            stage.addActor(tower);
                             Gdx.input.setInputProcessor(stage);
                             return true;
                         }
@@ -297,6 +333,13 @@ public class GameScreen extends ScreenAdapter {
             this.isFastForwarded = false;
         }
 
+        this.renderLabels();
+
+        stage.act();
+        stage.draw();
+    }
+
+    public void renderLabels() {
         basic1Money.setPosition(Config.col_width * 5.8f, Gdx.graphics.getHeight() - Config.row_height * 11.2f);
         stage.addActor(basic1Money);
 
@@ -321,11 +364,7 @@ public class GameScreen extends ScreenAdapter {
         levelLabel.setPosition(Config.col_width * 17.4f, Gdx.graphics.getHeight() - Config.row_height * 5);
         levelLabel.setText("Level:" + String.valueOf(this.game.getCurrentLevel()));
         stage.addActor(levelLabel);
-
-        stage.act();
-        stage.draw();
     }
-
     @Override
     public void resize(int width, int height) {
         this.main.getViewport().getCamera().update();
