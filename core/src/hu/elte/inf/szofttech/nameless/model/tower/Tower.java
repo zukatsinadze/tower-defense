@@ -1,7 +1,6 @@
 package hu.elte.inf.szofttech.nameless.model.tower;
 
 import java.util.ArrayList;
-import java.awt.geom.Point2D;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.GridPoint2;
@@ -11,8 +10,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Game;
+import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.GDSprite;
 
@@ -25,18 +24,14 @@ public class Tower extends Actor {
     private int range;
     private int attackSpeed;
     private float attackTimer = 0;
-    private SpecialAbility specialAbility;
     private Boolean upgraded = false;
-    private GridPoint2 gridPos;
-    private Vector2 position;
+    private SpecialAbility specialAbility;
     private GDSprite sprite;
-    private Point2D.Float center;
+    private GridPoint2 gridPos;
     private ArrayList<Enemy> targets = null;
 
     public Tower(Texture texture, int XP, int price, int damage, int range, int attackSpeed, int x, int y,
                  SpecialAbility specialAbility) {
-        this.sprite = new GDSprite(texture);
-        this.sprite.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
         this.damage = damage;
         this.attackSpeed = attackSpeed;
         this.range = range;
@@ -44,12 +39,12 @@ public class Tower extends Actor {
         this.XP = XP;
         this.gridPos = new GridPoint2(x, y);
         super.setBounds(
-                this.gridPos.x * Config.tileSize, Config.guiHeight + this.gridPos.y * Config.tileSize,
+                this.gridPos.x * Config.tileSize,
+                Config.guiHeight + this.gridPos.y * Config.tileSize,
                 Config.tileSize, Config.tileSize);
-        this.position = new Vector2(0, 0);
-        targets = new ArrayList<Enemy>();
-        center = new Point2D.Float();
-        this.setPosition(new Vector2(x, y));
+        this.sprite = new GDSprite(texture);
+        this.sprite.setSize(super.getWidth() * 3 / 4.0f, super.getHeight());
+        this.targets = new ArrayList<Enemy>();
         this.specialAbility = specialAbility;
     }
 
@@ -57,23 +52,21 @@ public class Tower extends Actor {
      * drawing function for SpriteBatch
      *
      * @param batch, parentAlphs
+
      */
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        sprite.setX(position.x + Config.tileSize / 8.0f);
-        sprite.setY(Config.guiHeight + position.y);
+        sprite.setX(super.getX() + Config.tileSize / 8.0f);
+        sprite.setY(super.getY());
         sprite.draw(batch);
     }
 
-    public Vector2 getPosition() {
-        return position;
+    public GridPoint2 getGridPos() {
+        return this.gridPos;
     }
 
-    public void setPosition(Vector2 position) {
-        this.position.x = position.x * Config.tileSize;
-        this.position.y = position.y * Config.tileSize;
-        sprite.setX(position.x);
-        sprite.setY(position.y);
+    public Vector2 getPosition() {
+        return new Vector2(super.getX(), super.getY());
     }
 
     public int getPrice() {
@@ -135,9 +128,10 @@ public class Tower extends Actor {
     }
 
     /**
+     * Decides if enemy is in tower's shooting range
+     *
      * @param enemy
      * @return boolean
-     * Decides if enemy is in tower's shooting range
      */
     public boolean intersects(Enemy enemy) {
         Vector2 enemyCoord = enemy.getPos();
@@ -161,7 +155,7 @@ public class Tower extends Actor {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.WHITE);
         shapeRenderer.line(
-                this.getPosition().x + halfTile, Config.guiHeight + this.getPosition().y + halfTile,
+                super.getX() + halfTile, super.getY() + halfTile,
                 p1.x, p1.y);
         shapeRenderer.end();
     }

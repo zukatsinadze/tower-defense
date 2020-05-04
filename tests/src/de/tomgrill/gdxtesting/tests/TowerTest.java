@@ -2,7 +2,7 @@ package de.tomgrill.gdxtesting.tests;
 
 import static org.junit.Assert.assertEquals;
 
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.GridPoint2;
 import hu.elte.inf.szofttech.nameless.model.*;
 import hu.elte.inf.szofttech.nameless.model.tower.*;
 import org.junit.Test;
@@ -29,11 +29,11 @@ public class TowerTest {
         ArrayList<Enemy> enemies = new ArrayList<>();
         enemies.add(e);
         Tower t = TowerFactory.createTower(TowerFactory.TowerType.Basic1, 2, 2);
-        Tower nullTower = TowerFactory.createTower(TowerFactory.TowerType.Default, 0,0);
+        Tower nullTower = TowerFactory.createTower(TowerFactory.TowerType.Default, 0, 0);
         assertEquals(nullTower, null);
         assertEquals(t.getRange(), 10);
         assertEquals(t.getPrice(), 75);
-        assertEquals(t.getPosition(), new Vector2(146, 146));
+        assertEquals(t.getGridPos(), new GridPoint2(2, 2));
         assertEquals(t.getDamage(), 10);
         t.setTargets(enemies);
         assertEquals(t.getTarget(), enemies);
