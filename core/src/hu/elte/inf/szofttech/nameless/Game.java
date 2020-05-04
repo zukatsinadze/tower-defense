@@ -227,11 +227,11 @@ public class Game {
      * @param y, y-coordinate of tower
      */
     public void sellTower(int x, int y) {
-        float xPos = (float) (x / Config.tileSize) * Config.tileSize;
-        float yPos = (float) ((y - Config.guiHeight) / Config.tileSize) * Config.tileSize;
+        int xPos = x / Config.tileSize;
+        int yPos = (y - Config.guiHeight) / Config.tileSize;
         List<Tower> newDeployedTowers = new ArrayList<>();
         for (Tower tower : deployedTowers) {
-            if (tower.getPosition().x != xPos || tower.getPosition().y != yPos) {
+            if (tower.getGridPos().x != xPos || tower.getGridPos().y != yPos) {
                 newDeployedTowers.add(tower);
                 System.out.println();
             } else {
