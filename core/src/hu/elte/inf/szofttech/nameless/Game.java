@@ -213,11 +213,9 @@ public class Game {
      * @param tower
      */
     public void deployTower(Tower tower) {
-        if (canBuyTower(tower)) {
-            money -= tower.getPrice();
-            deployedTowers.add(tower);
-            setTargets();
-        }
+        money -= tower.getPrice();
+        deployedTowers.add(tower);
+        setTargets();
     }
 
     /**
@@ -226,19 +224,18 @@ public class Game {
      * @param x, x-coordinate of tower
      * @param y, y-coordinate of tower
      */
-    public void sellTower(int x, int y) {
+    public Tower sellTower(int x, int y) {
+        Tower soldTower = null;
         int xPos = x / Config.tileSize;
         int yPos = (y - Config.guiHeight) / Config.tileSize;
-        List<Tower> newDeployedTowers = new ArrayList<>();
-        for (Tower tower : deployedTowers) {
-            if (tower.getGridPos().x != xPos || tower.getGridPos().y != yPos) {
-                newDeployedTowers.add(tower);
-                System.out.println();
-            } else {
-                this.money += tower.getPrice();
+        for (int i = 0; i < this.deployedTowers.size(); i++) {
+            if (deployedTowers.get(i).getGridPos().x == xPos && deployedTowers.get(i).getGridPos().y == yPos) {
+                this.money += deployedTowers.get(i).getPrice();
+                soldTower = deployedTowers.get(i);
+                deployedTowers.remove(i);
             }
         }
-        this.deployedTowers = newDeployedTowers;
+        return soldTower;
     }
 
     /**
@@ -284,9 +281,12 @@ public class Game {
         int y = (int) (position.y - Config.guiHeight) / Config.tileSize;
         if (!path.onPath(x, y)) {
             tower = TowerFactory.createTower(towerToBuild, x, y);
-            deployTower(tower);
+            if (this.canBuyTower(tower)) {
+                deployTower(tower);
+                return tower;
+            }
         }
-        return tower;
+        return null;
     }
 
     /**
@@ -306,7 +306,6 @@ public class Game {
         for (Tower tower : deployedTowers) {
             tower.shoot(delta);
         }
-
     }
 
     /**
