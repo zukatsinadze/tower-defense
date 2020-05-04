@@ -86,19 +86,6 @@ public class Game {
     public void render(SpriteBatch spriteBatch) {
         displayMap(spriteBatch);
         displayEnemies(spriteBatch);
-        displayTowers(spriteBatch);
-    }
-
-    /**
-     * method for drawing towers, used in render() function
-     *
-     * @param spriteBatch
-     */
-    private void displayTowers(SpriteBatch spriteBatch) {
-        spriteBatch.begin();
-        for (Tower tower : deployedTowers)
-            tower.draw(spriteBatch, 1);
-        spriteBatch.end();
     }
 
     /**
