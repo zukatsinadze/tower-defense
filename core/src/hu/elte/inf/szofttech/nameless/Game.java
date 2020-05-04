@@ -272,6 +272,10 @@ public class Game {
     }
 
     /**
+     * @return user created towers
+     */
+    public List<Tower> getTower() { return this.deployedTowers; }
+    /**
      * Building tower
      *
      * @param towerToBuild

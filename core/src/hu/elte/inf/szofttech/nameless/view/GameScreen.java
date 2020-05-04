@@ -75,16 +75,24 @@ public class GameScreen extends ScreenAdapter {
         this.basic1Money = new Label("75", this.mySkin, "button", Config.button_blue);
         this.basic2Money = new Label("100", this.mySkin, "button", Config.button_blue);
         this.basic3Money = new Label("125", this.mySkin, "button", Config.button_blue);
-
-        this.createButton();
+        Gdx.input.setInputProcessor(stage);
+        this.createButtons();
         this.state = State.PREWAVE;
         this.isFastForwarded = false;
     }
 
-    public void createButton() {
-        Gdx.input.setInputProcessor(stage);
+    public void createButtons() {
+        this.pauseButton();
+        this.sellTowerButton();
+        this.upgradeTowerButton();
+        this.nextWaveButton();
+        this.nextLevelButton();
+        this.basic1Display();
+        this.basic2Display();
+        this.basic3Display();
+    }
 
-        // pause Button
+    public void pauseButton() {
         ImageButton pauseButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.pauseButton)));
         pauseButton.setPosition(PAUSE_RESUME_BUTTON_X1, PAUSE_RESUME_BUTTON_Y1);
         pauseButton.setSize(PAUSE_RESUME_BUTTON_WIDTH, PAUSE_RESUME_BUTTON_HEIGHT);
@@ -105,8 +113,9 @@ public class GameScreen extends ScreenAdapter {
             }
         });
         stage.addActor(pauseButton);
+    }
 
-        // Sell Tower Button
+    public void sellTowerButton() {
         Button sellTowerButton = new TextButton("Sell Tower", mySkin);
         sellTowerButton.setSize(Config.col_width * 2.8f, Config.row_height);
         sellTowerButton.setPosition(Config.col_width * 10.5f, Gdx.graphics.getHeight() - Config.row_height * 10.8f);
@@ -128,8 +137,9 @@ public class GameScreen extends ScreenAdapter {
             }
         });
         stage.addActor(sellTowerButton);
+    }
 
-        // Upgrade Tower Button
+    public void upgradeTowerButton() {
         Button upgradeTowerButton = new TextButton("Upgrade Tower", mySkin);
         upgradeTowerButton.setSize(Config.col_width * 3, Config.row_height);
         upgradeTowerButton.setPosition(Config.col_width * 14.2f, Gdx.graphics.getHeight() - Config.row_height * 10.8f);
@@ -141,8 +151,9 @@ public class GameScreen extends ScreenAdapter {
             }
         });
         stage.addActor(upgradeTowerButton);
+    }
 
-        // Next Wave Button
+    public void nextWaveButton() {
         Button nextWaveButton = new TextButton("Next Wave", mySkin);
         nextWaveButton.setSize(Config.col_width * 2.4f, Config.row_height);
         nextWaveButton.setPosition(Config.col_width * 17.3f, Gdx.graphics.getHeight() - Config.row_height * 7);
@@ -159,8 +170,9 @@ public class GameScreen extends ScreenAdapter {
             }
         });
         stage.addActor(nextWaveButton);
+    }
 
-        // Next Level Button
+    public void nextLevelButton() {
         Button nextLevelButton = new TextButton("Next Level", mySkin);
         nextLevelButton.setSize(Config.col_width * 2.4f, Config.row_height);
         nextLevelButton.setPosition(Config.col_width * 17.3f, Gdx.graphics.getHeight() - Config.row_height * 8.5f);
@@ -172,8 +184,9 @@ public class GameScreen extends ScreenAdapter {
             }
         });
         stage.addActor(nextLevelButton);
+    }
 
-
+    public void basic1Display() {
         // basic1 Tower
         ImageButton basic1Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic1)));
         basic1Button.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
@@ -197,36 +210,10 @@ public class GameScreen extends ScreenAdapter {
                 return true;
             }
         });
-//        basic1Button.addListener(new InputListener() {
-//            @Override
-//            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-//                ImageButton basic1Deployed = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic1)));
-//                basic1Deployed.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
-//                basic1Deployed.setPosition(Config.col_width * 5.5f, Gdx.graphics.getHeight() - Config.row_height * 10.7f);
-//                stage.addActor(basic1Deployed);
-//                basic1Deployed.addListener(new DragListener() {
-//                    public void drag(InputEvent event, float x, float y, int pointer) {
-//                        basic1Deployed.moveBy(x - Config.tileSize * 3 / 4.0f / 2, y - Config.tileSize / 2);
-//                    }
-//                    public void dragStop(InputEvent event, float x, float y, int pointer) {
-//                        removeActor(basic1Deployed);
-//                        Game.getInstance().buildTower(TowerFactory.TowerType.Basic1,
-//                                new Point((int)x, (int)(Gdx.graphics.getHeight() - y)));
-//                        //Gdx.input.setInputProcessor(stage);
-//                    }
-//                });
-//                return true;
-//            }
-//            @Override
-//            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-//                Game.getInstance().buildTower(TowerFactory.TowerType.Basic1,
-//                        new Point((int)x, (int)(Gdx.graphics.getHeight() - y)));
-//                Gdx.input.setInputProcessor(stage);
-//            }
+        stage.addActor(basic1Button);
+    }
 
-//        });
-//        stage.addActor(basic1Button);
-
+    public void basic2Display() {
         // basic2 Tower
         ImageButton basic2Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic2)));
         basic2Button.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
@@ -251,8 +238,9 @@ public class GameScreen extends ScreenAdapter {
             }
         });
         stage.addActor(basic2Button);
+    }
 
-        // basic3 Tower
+    public void basic3Display() {
         ImageButton basic3Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic3)));
         basic3Button.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
         basic3Button.setPosition(Config.col_width * 8.5f, Gdx.graphics.getHeight() - Config.row_height * 10.7f);
