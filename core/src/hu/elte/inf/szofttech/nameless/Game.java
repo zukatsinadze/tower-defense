@@ -1,11 +1,9 @@
 package hu.elte.inf.szofttech.nameless;
 
-import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -197,12 +195,21 @@ public class Game {
     /**
      * method for adding new tower into deployedTowers list
      *
-     * @param tower
+     * @param towerToBuild
+     * @param x
+     * @param y
      */
-    public void deployTower(Tower tower) {
-        money -= tower.getPrice();
-        deployedTowers.add(tower);
-        setTargets();
+    public Tower deployTower(TowerType towerToBuild, int x, int y) {
+        if (!this.path.onPath(x, y)) {
+            Tower tower = TowerFactory.createTower(towerToBuild, x, y);
+            if (this.canBuyTower(tower)) {
+                this.money -= tower.getPrice();
+                this.deployedTowers.add(tower);
+                setTargets();
+                return tower;
+            }
+        }
+        return null;
     }
 
     /**
@@ -261,19 +268,10 @@ public class Game {
      * @param towerToBuild
      * @param point
      */
-    public Tower buildTower(TowerType towerToBuild, Point point) {
-        Tower tower = null;
-        Vector2 position = Utils.PointToVector2(point);
-        int x = (int) position.x / Config.tileSize;
-        int y = (int) (position.y - Config.guiHeight) / Config.tileSize;
-        if (!path.onPath(x, y)) {
-            tower = TowerFactory.createTower(towerToBuild, x, y);
-            if (this.canBuyTower(tower)) {
-                deployTower(tower);
-                return tower;
-            }
-        }
-        return null;
+    public Tower buildTower(TowerType towerToBuild, float posX, float posY) {
+        int x = (int) posX / Config.tileSize;
+        int y = (int) (posY - Config.guiHeight) / Config.tileSize;
+        return this.deployTower(towerToBuild, x, y);
     }
 
     /**
@@ -297,6 +295,7 @@ public class Game {
 
     /**
      * check if player lost
+     *
      * @return boolean
      */
     public boolean hasLost() {
@@ -305,6 +304,7 @@ public class Game {
 
     /**
      * check if player won
+     *
      * @return boolean
      */
     public boolean hasWon() {

@@ -49,12 +49,12 @@ public class GameTest {
     public void towersTest() {
         Game g = Game.getInstance();
         g.addMoney(100000);
-        g.deployTower(TowerFactory.createTower(TowerFactory.TowerType.Basic1, 4, 2));
-        g.deployTower(TowerFactory.createTower(TowerFactory.TowerType.Basic2, 11, 6));
-        g.deployTower(TowerFactory.createTower(TowerFactory.TowerType.Basic2, 2, 6));
+        g.deployTower(TowerFactory.TowerType.Basic1, 4, 2);
+        g.deployTower(TowerFactory.TowerType.Basic2, 11, 6);
+        g.deployTower(TowerFactory.TowerType.Basic2, 2, 6);
         assertEquals(3, g.getDeployedTowers().size());
         g.addMoney(-10000000);
-        g.deployTower(TowerFactory.createTower(TowerFactory.TowerType.Basic2, 2, 6));
+        g.deployTower(TowerFactory.TowerType.Basic2, 2, 6);
         assertEquals(3, g.getDeployedTowers().size());
         assertEquals(false, g.canBuyTower(TowerFactory.createTower(TowerFactory.TowerType.Basic2, 2, 6)));
     }

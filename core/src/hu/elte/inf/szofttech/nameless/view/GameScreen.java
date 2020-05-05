@@ -1,12 +1,9 @@
 package hu.elte.inf.szofttech.nameless.view;
 
-import java.awt.*;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -178,15 +175,14 @@ public class GameScreen extends ScreenAdapter {
     /**
      * Creating towers in event listener function
      *
-     * @param x mouse position x
-     * @param y mouse position y
+     * @param x         mouse position x
+     * @param y         mouse position y
      * @param towerType what type of tower need to be created
-     * @param t1 text of the function of tower
-     * @param t2 text of the function of tower
+     * @param t1        text of the function of tower
+     * @param t2        text of the function of tower
      */
     public void createTower(int x, int y, TowerFactory.TowerType towerType, String t1, String t2) {
-        Tower tower = Game.getInstance().buildTower(towerType,
-                new Point(x, Gdx.graphics.getHeight() - y));
+        Tower tower = Game.getInstance().buildTower(towerType, x, Gdx.graphics.getHeight() - y);
         if (tower != null) {
             tower.addListener(new InputListener() {
                 @Override
@@ -222,7 +218,7 @@ public class GameScreen extends ScreenAdapter {
                 if (state == State.PREWAVE) {
                     InputAdapter input = new InputAdapter() {
                         @Override
-                         public boolean touchDown(int x, int y, int pointer, int button) {
+                        public boolean touchDown(int x, int y, int pointer, int button) {
                             createTower(x, y, TowerFactory.TowerType.Basic1, "Slow", "Freeze");
                             Gdx.input.setInputProcessor(stage);
                             return true;
