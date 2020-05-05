@@ -127,6 +127,7 @@ public class Game {
      */
     public void nextLevel() {
         if (this.levels.get(currentLevel - 1).hasEnded()) {
+            removeTowers();
             deployedTowers = new ArrayList<>();
             currentLevel++;
             currentWave = 1;
@@ -324,6 +325,11 @@ public class Game {
         this.currentWave = 1;
         this.currentLevel = 1;
         this.levels = ReadLevels.read();
+        removeTowers();
         this.deployedTowers = new ArrayList<>();
+    }
+
+    private void removeTowers() {
+        this.deployedTowers.forEach(Tower::remove);
     }
 }
