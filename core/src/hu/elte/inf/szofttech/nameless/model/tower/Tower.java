@@ -8,7 +8,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import hu.elte.inf.szofttech.nameless.Config;
-import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.GDSprite;
 
@@ -89,6 +88,10 @@ public class Tower extends Actor {
         this.targets = targets;
     }
 
+    public void gainXP(int xp) {
+        this.xp += xp;
+    }
+
     public void setUpgrade1(Button upgrade1) { this.upgrade1 = upgrade1; }
 
     public void setUpgrade2(Button upgrade2) { this.upgrade2 = upgrade2; }
@@ -103,12 +106,7 @@ public class Tower extends Actor {
                 if (enemy.hasSpawned() && enemy.isAlive() && !enemy.end()
                         && this.attackTimer > 10.0 / this.type.attackSpeed) {
                     this.attackTimer = 0;
-                    this.type.attackAbility.attack(this, enemy, targets.stream()).forEach(attackedEnemy -> {
-                        if (!attackedEnemy.isAlive()) {
-                            this.xp += attackedEnemy.getXP();
-                            Game.getInstance().addMoney(enemy.getMoney());
-                        }
-                    });
+                    this.type.attackAbility.attack(this, enemy, this.targets);
                 }
             }
         }

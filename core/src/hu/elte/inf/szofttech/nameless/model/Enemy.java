@@ -8,13 +8,14 @@ import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.Utils;
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Textures;
+import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 
 /**
  * the behavior of enemy
  */
 public class Enemy {
     private GDSprite sprite;
-    private int XP;
+    private int xp;
     private int money;
     private int damage;
     private int speed;
@@ -30,8 +31,8 @@ public class Enemy {
         YELLOW
     }
 
-    private Enemy(Texture texture, int XP, int money, int damage, int speed, int health, EnemyPos pos) {
-        this.XP = XP;
+    private Enemy(Texture texture, int xp, int money, int damage, int speed, int health, EnemyPos pos) {
+        this.xp = xp;
         this.pos = pos;
         this.money = money;
         this.damage = damage;
@@ -43,7 +44,7 @@ public class Enemy {
     }
 
     public int getXP() {
-        return XP;
+        return xp;
     }
 
     public int getMoney() {
@@ -132,8 +133,12 @@ public class Enemy {
     /**
      * @param damage handle the situation that the enemy got attacked
      */
-    public void attacked(int damage) {
-        this.health -= damage;
+    public void attacked(Tower tower) {
+        this.health -= tower.getDamage();
+        if (!this.isAlive()) {
+            tower.gainXP(this.xp);
+            Game.getInstance().addMoney(this.money);
+        }
     }
 
     /**

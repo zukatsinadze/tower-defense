@@ -2,7 +2,7 @@ package hu.elte.inf.szofttech.nameless.model.tower;
 
 import hu.elte.inf.szofttech.nameless.model.Enemy;
 
-import java.util.stream.Stream;
+import java.util.Collection;
 
 public interface AttackAbility {
     /**
@@ -10,5 +10,5 @@ public interface AttackAbility {
      * @param targets other enemies
      * @return the enemies attacked
      */
-    Stream<Enemy> attack(Tower tower, Enemy enemy, Stream<Enemy> targets);
+    void attack(Tower tower, Enemy enemy, Collection<Enemy> targets);
 }
