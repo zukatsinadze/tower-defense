@@ -28,7 +28,7 @@ public class EnemyTest {
         assertEquals(e.isAlive(), true);
         assertEquals(e.getSpeed(),8);
         assertEquals(e.getPos(), new Vector2(0,2));
-        assertEquals(e.end(), false);
+        assertEquals(e.ended(), false);
         e.attacked(new Tower(TowerType.Basic1, 1, 1));
         assertEquals(e.isAlive(), true);
         e.attacked(new Tower(TowerType.AdvancedSlow, 2, 2));

@@ -17,7 +17,7 @@ public class EnemyPosTest {
                 .add(0, 2).add(1, 2).add(2, 2).add(2, 3).add(3, 3)
                 .add(4, 3).add(5, 3).add(5, 2).add(6, 2).build();
         EnemyPos ep = new EnemyPos(p);
-        assertEquals(false, ep.end());
+        assertEquals(false, ep.ended());
         assertEquals(new Vector2(0,2), ep.getPos());
         ep.move(10,10);
         assertEquals(new Vector2(1,2), ep.getPos());
@@ -26,6 +26,6 @@ public class EnemyPosTest {
         assertEquals(new Vector2(2,2), ep.getPos());
         for (int i = 0; i < 100; ++i)
             ep.move(10,10);
-        assertEquals(true, ep.end());
+        assertEquals(true, ep.ended());
     }
 }
