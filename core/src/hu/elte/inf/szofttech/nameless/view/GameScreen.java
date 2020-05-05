@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -188,15 +189,15 @@ public class GameScreen extends ScreenAdapter {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     Button upgrade1 = new TextButton(t1, mySkin);
-                    upgrade1.setColor(Config.button_blue);
+                    //upgrade1.setColor(Color.BLUE);
                     upgrade1.setSize(Config.col_width, Config.row_height);
-                    upgrade1.setPosition(tower.getPosition().x , tower.getPosition().y);
+                    upgrade1.setPosition(tower.getPosition().x * 1.3f, tower.getPosition().y * 1.1f);
                     stage.addActor(upgrade1);
 
                     Button upgrade2 = new TextButton(t2, mySkin);
-                    upgrade2.setColor(Config.background);
+                    //upgrade2.setColor(new Color(245 / 255.0f, 93 / 255.0f, 139 / 255.0f, 1));
                     upgrade2.setSize(Config.col_width, Config.row_height);
-                    upgrade2.setPosition(Config.col_width * 5f, Gdx.graphics.getHeight() - Config.row_height * 8.5f);
+                    upgrade2.setPosition(tower.getPosition().x * 1.3f, tower.getPosition().y * 0.9f);
                     stage.addActor(upgrade2);
                     return true;
                 }
