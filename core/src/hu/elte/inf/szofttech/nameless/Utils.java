@@ -27,4 +27,10 @@ public class Utils {
         return new Vector2(position.x - Config.tileSize / 2.0f, position.y - Config.tileSize / 2.0f);
     }
 
+    public static boolean inRange(float range, Vector2 a, Vector2 b) {
+        float distX = a.x - b.x;
+        float distY = a.y - b.y;
+        float distSqr = distX * distX + distY * distY;
+        return distSqr <= range * range;
+    }
 }

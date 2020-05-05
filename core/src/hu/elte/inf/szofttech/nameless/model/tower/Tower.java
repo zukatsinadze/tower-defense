@@ -76,9 +76,13 @@ public class Tower extends Actor {
         return this.type.range;
     }
 
-    public Button getUpgrade1() { return this.upgrade1; }
+    public Button getUpgrade1() {
+        return this.upgrade1;
+    }
 
-    public Button getUpgrade2() { return this.upgrade2; }
+    public Button getUpgrade2() {
+        return this.upgrade2;
+    }
 
     public ArrayList<Enemy> getTarget() {
         return targets;
@@ -88,13 +92,17 @@ public class Tower extends Actor {
         this.targets = targets;
     }
 
+    public void setUpgrade1(Button upgrade1) {
+        this.upgrade1 = upgrade1;
+    }
+
+    public void setUpgrade2(Button upgrade2) {
+        this.upgrade2 = upgrade2;
+    }
+
     public void gainXP(int xp) {
         this.xp += xp;
     }
-
-    public void setUpgrade1(Button upgrade1) { this.upgrade1 = upgrade1; }
-
-    public void setUpgrade2(Button upgrade2) { this.upgrade2 = upgrade2; }
 
     /**
      * Shooting at the enemies
@@ -102,12 +110,9 @@ public class Tower extends Actor {
     public void shoot(float delta) {
         this.attackTimer += delta;
         for (Enemy enemy : this.targets) {
-            if (intersects(enemy)) {
-                if (enemy.hasSpawned() && enemy.isAlive() && !enemy.end()
-                        && this.attackTimer > 10.0 / this.type.attackSpeed) {
-                    this.attackTimer = 0;
-                    this.type.attackAbility.attack(this, enemy, this.targets);
-                }
+            if (this.attackTimer > 10.0 / this.type.attackSpeed && enemy.canBeAttacked() && this.intersects(enemy)) {
+                this.attackTimer = 0;
+                this.type.attackAbility.attack(this, enemy, this.targets);
             }
         }
     }

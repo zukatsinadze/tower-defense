@@ -65,7 +65,7 @@ public class EnemyPos {
         }
     }
 
-    public boolean end() {
+    public boolean ended() {
         return this.pos.equals(Utils.gridToVector(this.path.getLast()));
     }
 

@@ -155,7 +155,7 @@ public class Enemy {
         if (this.spawned && this.isAlive()) {
             this.pos.move(this.speed, time);
         }
-        if (this.end() && this.spawned) {
+        if (this.ended() && this.spawned) {
             this.spawned = false;
             Game.getInstance().getDamaged(this.damage);
         }
@@ -166,7 +166,7 @@ public class Enemy {
      *                    and draw enemy if it is alive and not finished the path yet/
      */
     public void draw(SpriteBatch spriteBatch) {
-        if (isAlive() && !end()) {
+        if (isAlive() && !ended()) {
             Vector2 v = Utils.convertFromGrid(pos.getPos());
             sprite.setX(v.x + Config.tileSize / 4.0f);
             sprite.setY(Config.guiHeight + v.y);
@@ -177,8 +177,8 @@ public class Enemy {
     /**
      * @return whether enemy moves to an end
      */
-    public boolean end() {
-        return this.pos.end();
+    public boolean ended() {
+        return this.pos.ended();
     }
 
     /**
@@ -193,5 +193,13 @@ public class Enemy {
      */
     public void spawn() {
         this.spawned = true;
+    }
+
+
+    /**
+     * @return true if the enemy can be attacked
+     */
+    public boolean canBeAttacked() {
+        return this.hasSpawned() && this.isAlive() && !this.ended();
     }
 }

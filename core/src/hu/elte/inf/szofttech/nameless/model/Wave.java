@@ -38,7 +38,7 @@ public final class Wave {
      */
     public boolean hasEnded() {
         for (Enemy e : enemies) {
-            if (e.isAlive() && !e.end())
+            if (e.isAlive() && !e.ended())
                 return false;
         }
         return true;
