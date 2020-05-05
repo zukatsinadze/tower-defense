@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
@@ -18,34 +17,25 @@ import hu.elte.inf.szofttech.nameless.model.GDSprite;
 import static hu.elte.inf.szofttech.nameless.Utils.convertFromGrid;
 
 public class Tower extends Actor {
-    private int XP;
-    private int price;
-    private int damage;
-    private int range;
-    private int attackSpeed;
+    private TowerType type;
+    private int xp;
     private float attackTimer = 0;
     private Boolean upgraded = false;
-    private SpecialAbility specialAbility;
     private GDSprite sprite;
     private GridPoint2 gridPos;
     private ArrayList<Enemy> targets = null;
 
-    public Tower(Texture texture, int XP, int price, int damage, int range, int attackSpeed, int x, int y,
-                 SpecialAbility specialAbility) {
-        this.damage = damage;
-        this.attackSpeed = attackSpeed;
-        this.range = range;
-        this.price = price;
-        this.XP = XP;
+    public Tower(TowerType type, int x, int y) {
+        this.type = type;
+        this.xp = 0;
         this.gridPos = new GridPoint2(x, y);
         super.setBounds(
                 this.gridPos.x * Config.tileSize,
                 Config.guiHeight + this.gridPos.y * Config.tileSize,
                 Config.tileSize, Config.tileSize);
-        this.sprite = new GDSprite(texture);
+        this.sprite = new GDSprite(this.type.texture);
         this.sprite.setSize(super.getWidth() * 3 / 4.0f, super.getHeight());
-        this.targets = new ArrayList<Enemy>();
-        this.specialAbility = specialAbility;
+        this.targets = new ArrayList<>();
     }
 
     /**
@@ -70,15 +60,15 @@ public class Tower extends Actor {
     }
 
     public int getPrice() {
-        return price;
+        return this.type.price;
     }
 
     public int getDamage() {
-        return damage;
+        return this.type.damage;
     }
 
     public int getRange() {
-        return range;
+        return this.type.range;
     }
 
     public ArrayList<Enemy> getTarget() {
@@ -95,8 +85,7 @@ public class Tower extends Actor {
      *          If tower is upgraded, it has specialAbility, which is called by this method.
      */
     public void specialAttack(Enemy b) {
-        if (upgraded)
-            specialAbility.specialAttack(b);
+        //
     }
 
     /**
@@ -107,12 +96,12 @@ public class Tower extends Actor {
         for (Enemy enemy : this.targets) {
             if (intersects(enemy)) {
                 if (enemy.hasSpawned() && enemy.isAlive() && !enemy.end()
-                        && this.attackTimer > 10.0 / this.attackSpeed) {
+                        && this.attackTimer > 10.0 / this.type.attackSpeed) {
                     this.attackTimer = 0;
-                    enemy.attacked(damage);
+                    enemy.attacked(this.type.damage);
                     drawAttack(enemy.getPos());
                     if (!enemy.isAlive()) {
-                        this.XP += enemy.getXP();
+                        this.xp += enemy.getXP();
                         Game.getInstance().addMoney(enemy.getMoney());
                     }
                 }
@@ -120,11 +109,16 @@ public class Tower extends Actor {
         }
     }
 
+    public boolean canUpgrade(TowerType type) {
+        return this.xp > type.xp;
+    }
+
     /**
      * Upgrading tower
      */
-    public void upgradeTower() {
-        //
+    public void upgradeTower(TowerType type) {
+        this.type = type;
+        this.sprite.setTexture(type.texture);
     }
 
     /**
@@ -137,7 +131,7 @@ public class Tower extends Actor {
         Vector2 enemyCoord = enemy.getPos();
         float distance = (enemyCoord.x - this.gridPos.x) * (enemyCoord.x - this.gridPos.x) +
                 (enemyCoord.y - this.gridPos.y) * (enemyCoord.y - this.gridPos.y);
-        float nrange = range / 4.0f;
+        float nrange = this.type.range / 4.0f;
         return (distance <= nrange * nrange);
     }
 
@@ -159,5 +153,4 @@ public class Tower extends Actor {
                 p1.x, p1.y);
         shapeRenderer.end();
     }
-
 }
