@@ -189,15 +189,13 @@ public class GameScreen extends ScreenAdapter {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     Button upgrade1 = new TextButton(t1, mySkin);
-                    //upgrade1.setColor(Color.BLUE);
-                    upgrade1.setSize(Config.col_width, Config.row_height);
-                    upgrade1.setPosition(tower.getPosition().x * 1.3f, tower.getPosition().y * 1.1f);
+                    upgrade1.setSize(Config.col_width * 1.8f, Config.row_height);
+                    upgrade1.setPosition(tower.getPosition().x + 75f, tower.getPosition().y + 40f);
                     stage.addActor(upgrade1);
 
                     Button upgrade2 = new TextButton(t2, mySkin);
-                    //upgrade2.setColor(new Color(245 / 255.0f, 93 / 255.0f, 139 / 255.0f, 1));
-                    upgrade2.setSize(Config.col_width, Config.row_height);
-                    upgrade2.setPosition(tower.getPosition().x * 1.3f, tower.getPosition().y * 0.9f);
+                    upgrade2.setSize(Config.col_width * 1.8f, Config.row_height);
+                    upgrade2.setPosition(tower.getPosition().x + 75f, tower.getPosition().y - 25f);
                     stage.addActor(upgrade2);
                     return true;
                 }

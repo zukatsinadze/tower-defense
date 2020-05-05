@@ -15,24 +15,22 @@ public final class Textures {
     public static final List<Texture> paths = new ArrayList<>(5);
 
     static {
+        tiles.add(new Texture("tile1.jpg"));
+        paths.add(new Texture("path4.jpg"));
 
-        tiles.add(new Texture("tile9.jpg"));
-        paths.add(new Texture("tile7.jpg"));
+        tiles.add(new Texture("tile1.jpg"));
+        paths.add(new Texture("path1.jpg"));
 
-        tiles.add(new Texture("tile6.jpg"));
-        paths.add(new Texture("tile8.jpg"));
+        tiles.add(new Texture("tile1.jpg"));
+        paths.add(new Texture("path6.jpg"));
 
-        tiles.add(new Texture("tile6.jpg"));
-        paths.add(new Texture("tile7.jpg"));
+        tiles.add(new Texture("tile1.jpg"));
+        paths.add(new Texture("path8.jpg"));
 
-        tiles.add(new Texture("tile6.jpg"));
-        paths.add(new Texture("tile0.jpg"));
 
-        tiles.add(new Texture("tile6.jpg"));
-        paths.add(new Texture("tile0.jpg"));
+        tiles.add(new Texture("tile1.jpg"));
+        paths.add(new Texture("path7.jpg"));
 
-//        tiles.add(new Texture("tile6.jpg"));
-//        paths.add(new Texture("tile5.jpg"));
     }
 
     public static final Texture home = new Texture("home.png");
