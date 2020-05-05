@@ -51,8 +51,8 @@ public class Tower extends Actor {
     /**
      * drawing function for SpriteBatch
      *
-     * @param batch, parentAlphs
-
+     * @param batch
+     * @param parentAlpha
      */
     @Override
     public void draw(Batch batch, float parentAlpha) {
