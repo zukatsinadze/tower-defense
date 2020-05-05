@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import com.badlogic.gdx.math.Vector2;
 import hu.elte.inf.szofttech.nameless.model.*;
+import hu.elte.inf.szofttech.nameless.model.tower.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -28,9 +29,9 @@ public class EnemyTest {
         assertEquals(e.getSpeed(),8);
         assertEquals(e.getPos(), new Vector2(0,2));
         assertEquals(e.end(), false);
-        e.attacked(10);
+        e.attacked(new Tower(TowerType.Basic1, 1, 1));
         assertEquals(e.isAlive(), true);
-        e.attacked(30);
+        e.attacked(new Tower(TowerType.AdvancedSlow, 2, 2));
         assertEquals(e.isAlive(), false);
         assertEquals(e.hasSpawned(), false);
         e.spawn();
