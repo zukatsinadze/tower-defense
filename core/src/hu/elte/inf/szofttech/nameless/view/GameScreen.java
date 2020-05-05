@@ -175,6 +175,43 @@ public class GameScreen extends ScreenAdapter {
         stage.addActor(nextLevelButton);
     }
 
+    /**
+     * Creating towers in event listener function
+     *
+     * @param x mouse position x
+     * @param y mouse position y
+     * @param towerType what type of tower need to be created
+     * @param t1 text of the function of tower
+     * @param t2 text of the function of tower
+     */
+    public void createTower(int x, int y, TowerFactory.TowerType towerType, String t1, String t2) {
+        Tower tower = Game.getInstance().buildTower(towerType,
+                new Point(x, Gdx.graphics.getHeight() - y));
+        if (tower != null) {
+            tower.addListener(new InputListener() {
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    Button slowBalloons = new TextButton(t1, mySkin);
+                    slowBalloons.setColor(Config.button_blue);
+                    slowBalloons.setSize(Config.col_width, Config.row_height);
+                    slowBalloons.setPosition(Config.col_width * 5f, Gdx.graphics.getHeight() - Config.row_height * 5.5f);
+                    stage.addActor(slowBalloons);
+
+                    Button freezeBalloons = new TextButton(t2, mySkin);
+                    freezeBalloons.setColor(Config.background);
+                    freezeBalloons.setSize(Config.col_width, Config.row_height);
+                    freezeBalloons.setPosition(Config.col_width * 5f, Gdx.graphics.getHeight() - Config.row_height * 8.5f);
+                    stage.addActor(freezeBalloons);
+                    return true;
+                }
+            });
+            stage.addActor(tower);
+        }
+    }
+
+    /**
+     * Creating basic1 tower displayed on the bar
+     */
     public void basic1Display() {
         ImageButton basic1Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic1)));
         basic1Button.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
@@ -186,28 +223,7 @@ public class GameScreen extends ScreenAdapter {
                     InputAdapter input = new InputAdapter() {
                         @Override
                          public boolean touchDown(int x, int y, int pointer, int button) {
-                            Tower tower = Game.getInstance().buildTower(TowerFactory.TowerType.Basic1,
-                                    new Point(x, Gdx.graphics.getHeight() - y));
-                            if (tower != null) {
-                                tower.addListener(new InputListener() {
-                                    @Override
-                                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                        Button slowBalloons = new TextButton("Slow", mySkin);
-                                        slowBalloons.setColor(Config.button_blue);
-                                        slowBalloons.setSize(Config.col_width, Config.row_height);
-                                        slowBalloons.setPosition(Config.col_width * 5f, Gdx.graphics.getHeight() - Config.row_height * 5.5f);
-                                        stage.addActor(slowBalloons);
-
-                                        Button freezeBalloons = new TextButton("Freeze", mySkin);
-                                        freezeBalloons.setColor(Config.background);
-                                        freezeBalloons.setSize(Config.col_width, Config.row_height);
-                                        freezeBalloons.setPosition(Config.col_width * 5f, Gdx.graphics.getHeight() - Config.row_height * 8.5f);
-                                        stage.addActor(freezeBalloons);
-                                        return true;
-                                    }
-                                });
-                                stage.addActor(tower);
-                            }
+                            createTower(x, y, TowerFactory.TowerType.Basic1, "Slow", "Freeze");
                             Gdx.input.setInputProcessor(stage);
                             return true;
                         }
@@ -220,6 +236,9 @@ public class GameScreen extends ScreenAdapter {
         stage.addActor(basic1Button);
     }
 
+    /**
+     * Creating basic2 tower displayed on the bar
+     */
     public void basic2Display() {
         ImageButton basic2Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic2)));
         basic2Button.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
@@ -231,28 +250,7 @@ public class GameScreen extends ScreenAdapter {
                     InputAdapter input = new InputAdapter() {
                         @Override
                         public boolean touchDown(int x, int y, int pointer, int button) {
-                            Tower tower = Game.getInstance().buildTower(TowerFactory.TowerType.Basic2,
-                                    new Point(x, Gdx.graphics.getHeight() - y));
-                            if (tower != null) {
-                                tower.addListener(new InputListener() {
-                                    @Override
-                                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                        Button slowBalloons = new TextButton("Teleport", mySkin);
-                                        slowBalloons.setColor(Config.button_blue);
-                                        slowBalloons.setSize(Config.col_width, Config.row_height);
-                                        slowBalloons.setPosition(Config.col_width * 5f, Gdx.graphics.getHeight() - Config.row_height * 5.5f);
-                                        stage.addActor(slowBalloons);
-
-                                        Button freezeBalloons = new TextButton("Explosion", mySkin);
-                                        freezeBalloons.setColor(Config.background);
-                                        freezeBalloons.setSize(Config.col_width, Config.row_height);
-                                        freezeBalloons.setPosition(Config.col_width * 5f, Gdx.graphics.getHeight() - Config.row_height * 8.5f);
-                                        stage.addActor(freezeBalloons);
-                                        return true;
-                                    }
-                                });
-                                stage.addActor(tower);
-                            }
+                            createTower(x, y, TowerFactory.TowerType.Basic2, "Teleport", "Explosion");
                             Gdx.input.setInputProcessor(stage);
                             return true;
                         }
@@ -265,6 +263,9 @@ public class GameScreen extends ScreenAdapter {
         stage.addActor(basic2Button);
     }
 
+    /**
+     * Creating basic3 tower displayed on the bar
+     */
     public void basic3Display() {
         ImageButton basic3Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic3)));
         basic3Button.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
@@ -276,28 +277,7 @@ public class GameScreen extends ScreenAdapter {
                     InputAdapter input = new InputAdapter() {
                         @Override
                         public boolean touchDown(int x, int y, int pointer, int button) {
-                            Tower tower = Game.getInstance().buildTower(TowerFactory.TowerType.Basic3,
-                                    new Point(x, Gdx.graphics.getHeight() - y));
-                            if (tower != null) {
-                                tower.addListener(new InputListener() {
-                                    @Override
-                                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                        Button slowBalloons = new TextButton("Poison", mySkin);
-                                        slowBalloons.setColor(Config.button_blue);
-                                        slowBalloons.setSize(Config.col_width, Config.row_height);
-                                        slowBalloons.setPosition(Config.col_width * 5f, Gdx.graphics.getHeight() - Config.row_height * 5.5f);
-                                        stage.addActor(slowBalloons);
-
-                                        Button freezeBalloons = new TextButton("Fire", mySkin);
-                                        freezeBalloons.setColor(Config.background);
-                                        freezeBalloons.setSize(Config.col_width, Config.row_height);
-                                        freezeBalloons.setPosition(Config.col_width * 5f, Gdx.graphics.getHeight() - Config.row_height * 8.5f);
-                                        stage.addActor(freezeBalloons);
-                                        return true;
-                                    }
-                                });
-                                stage.addActor(tower);
-                            }
+                            createTower(x, y, TowerFactory.TowerType.Basic2, "Poison", "Fire");
                             Gdx.input.setInputProcessor(stage);
                             return true;
                         }
