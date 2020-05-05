@@ -35,7 +35,7 @@ public class Tower extends Actor {
                 Config.tileSize, Config.tileSize);
         this.sprite = new GDSprite(this.type.texture);
         this.sprite.setSize(super.getWidth() * 3 / 4.0f, super.getHeight());
-        this.targets = new ArrayList<Enemy>();
+        this.targets = new ArrayList<>();
     }
 
     /**
@@ -109,11 +109,16 @@ public class Tower extends Actor {
         }
     }
 
+    public boolean canUpgrade(TowerType type) {
+        return this.xp > type.xp;
+    }
+
     /**
      * Upgrading tower
      */
-    public void upgradeTower() {
-        //
+    public void upgradeTower(TowerType type) {
+        this.type = type;
+        this.sprite.setTexture(type.texture);
     }
 
     /**
