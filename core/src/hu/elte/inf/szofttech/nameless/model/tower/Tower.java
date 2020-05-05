@@ -74,6 +74,10 @@ public class Tower extends Actor {
         return this.type.range;
     }
 
+    public Button getUpgrade1() { return this.upgrade1; }
+
+    public Button getUpgrade2() { return this.upgrade2; }
+
     public ArrayList<Enemy> getTarget() {
         return targets;
     }
@@ -82,6 +86,9 @@ public class Tower extends Actor {
         this.targets = targets;
     }
 
+    public void setUpgrade1(Button upgrade1) { this.upgrade1 = upgrade1; }
+
+    public void setUpgrade2(Button upgrade2) { this.upgrade2 = upgrade2; }
 
     /**
      * @param b Enemy

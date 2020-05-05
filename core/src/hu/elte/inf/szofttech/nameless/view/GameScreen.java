@@ -126,6 +126,8 @@ public class GameScreen extends ScreenAdapter {
                         public boolean touchDown(int x, int y, int pointer, int button) {
                             Tower soldTower = Game.getInstance().sellTower(x, Gdx.graphics.getHeight() - y);
                             if (soldTower != null) {
+                                soldTower.getUpgrade1().remove();
+                                soldTower.getUpgrade2().remove();
                                 soldTower.remove();
                             }
                             Gdx.input.setInputProcessor(stage);
@@ -194,16 +196,18 @@ public class GameScreen extends ScreenAdapter {
                     if ( !clicked ) {
                         clicked = true;
                         upgrade1 = new TextButton(t1, mySkin);
-                        //upgrade1.getSkin().getFont("button").getData().setScale(0.8f, 0.8f);
+                        //upgrade1.getSkin(). setScale(0.8f, 0.8f);
                         upgrade1.setSize(Config.col_width * 1.5f, Config.row_height * 0.8f);
                         upgrade1.setPosition(tower.getPosition().x + 75f, tower.getPosition().y + 40f);
                         stage.addActor(upgrade1);
+                        tower.setUpgrade1(upgrade1);
 
                         upgrade2 = new TextButton(t2, mySkin);
-                        //upgrade1.getSkin().getFont("button").getData().setScale(0.8f, 0.8f);
+                        upgrade1.setScale(0.8f, 0.8f);
                         upgrade2.setSize(Config.col_width * 1.5f, Config.row_height * 0.8f);
                         upgrade2.setPosition(tower.getPosition().x + 75f, tower.getPosition().y - 25f);
                         stage.addActor(upgrade2);
+                        tower.setUpgrade2(upgrade2);
                     } else {
                         clicked = false;
                         upgrade1.remove();
