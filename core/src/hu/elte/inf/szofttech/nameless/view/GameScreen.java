@@ -190,7 +190,7 @@ public class GameScreen extends ScreenAdapter {
                     Button upgrade1 = new TextButton(t1, mySkin);
                     upgrade1.setColor(Config.button_blue);
                     upgrade1.setSize(Config.col_width, Config.row_height);
-                    upgrade1.setPosition(tower.getPosition().x, tower.getPosition().y);
+                    upgrade1.setPosition(tower.getPosition().x , tower.getPosition().y);
                     stage.addActor(upgrade1);
 
                     Button upgrade2 = new TextButton(t2, mySkin);

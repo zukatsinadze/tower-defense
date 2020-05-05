@@ -17,7 +17,7 @@ import hu.elte.inf.szofttech.nameless.Main;
 import hu.elte.inf.szofttech.nameless.Textures;
 
 /**
- * rendering menu
+ * Rendering starting menu
  */
 public final class MainMenuScreen extends ScreenAdapter {
     private Stage stage;

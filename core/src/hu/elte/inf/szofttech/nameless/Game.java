@@ -16,7 +16,7 @@ import hu.elte.inf.szofttech.nameless.model.tower.TowerFactory;
 import static hu.elte.inf.szofttech.nameless.model.tower.TowerFactory.TowerType;
 
 /**
- * connecting all other classes
+ * Connecting all other classes
  */
 public class Game {
     private Path path;
@@ -214,7 +214,7 @@ public class Game {
     }
 
     /**
-     * selling tower
+     * Selling tower
      *
      * @param x, x-coordinate of tower
      * @param y, y-coordinate of tower
@@ -234,7 +234,7 @@ public class Game {
     }
 
     /**
-     * setting targets for all deployed towers
+     * Setting targets for all deployed towers
      */
     private void setTargets() {
         this.wave = this.levels.get(currentLevel - 1).getWave(currentWave - 1);
@@ -255,7 +255,7 @@ public class Game {
     }
 
     /**
-     * getting damaged, when enemy reaches the end
+     * Getting damaged, when enemy reaches the end
      *
      * @param damage
      */
@@ -267,7 +267,8 @@ public class Game {
      * Building a tower
      *
      * @param towerToBuild
-     * @param point
+     * @param posX
+     * @param posY
      */
     public Tower buildTower(TowerType towerToBuild, float posX, float posY) {
         int x = (int) posX / Config.tileSize;
@@ -295,7 +296,7 @@ public class Game {
     }
 
     /**
-     * check if player lost
+     * Checking if the player lost
      *
      * @return boolean
      */
@@ -304,7 +305,7 @@ public class Game {
     }
 
     /**
-     * check if player won
+     * Checking if the player won
      *
      * @return boolean
      */
@@ -314,7 +315,7 @@ public class Game {
 
 
     /**
-     * reset game state
+     * Resetting game state
      */
     public void restart() {
         this.life = 100;

@@ -32,11 +32,11 @@ public class Enemy {
 
     private Enemy(Texture texture, int XP, int money, int damage, int speed, int health, EnemyPos pos) {
         this.XP = XP;
+        this.pos = pos;
         this.money = money;
         this.damage = damage;
         this.speed = speed;
         this.health = health;
-        this.pos = pos;
         this.sprite = new GDSprite(texture);
         this.sprite.setSize(Config.tileSize / 2.0f, Config.tileSize);
         this.spawned = false;

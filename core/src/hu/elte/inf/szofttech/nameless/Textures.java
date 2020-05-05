@@ -31,13 +31,13 @@ public final class Textures {
         paths.add(new Texture("tile5.jpg"));
     }
 
-    public static final Texture mainMenuBackground = new Texture("background.jpg");
     public static final Texture home = new Texture("home.png");
     public static final Texture redBalloon = new Texture("red.png");
     public static final Texture pinkBalloon = new Texture("pink.png");
     public static final Texture blueBalloon = new Texture("blue.png");
     public static final Texture whiteBalloon = new Texture("white.png");
     public static final Texture yellowBalloon = new Texture("yellow.png");
+    public static final Texture mainMenuBackground = new Texture("background.jpg");
 
     public static final Texture basic1 = new Texture("basic1.png");
     public static final Texture basic2 = new Texture("basic2.png");

@@ -15,7 +15,7 @@ import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Textures;
 
 /**
- * rendering game over screen
+ * Rendering game over screen
  */
 public final class GameOverScreen extends ScreenAdapter {
     private Stage stage;
