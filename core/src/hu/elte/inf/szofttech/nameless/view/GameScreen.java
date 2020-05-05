@@ -22,7 +22,7 @@ import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Textures;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
-import hu.elte.inf.szofttech.nameless.model.tower.TowerFactory;
+import hu.elte.inf.szofttech.nameless.model.tower.TowerType;
 
 /**
  * rendering game
@@ -182,7 +182,7 @@ public class GameScreen extends ScreenAdapter {
      * @param t1        text of the function of tower
      * @param t2        text of the function of tower
      */
-    public void createTower(int x, int y, TowerFactory.TowerType towerType, String t1, String t2) {
+    public void createTower(int x, int y, TowerType towerType, String t1, String t2) {
         Tower tower = Game.getInstance().buildTower(towerType, x, Gdx.graphics.getHeight() - y);
         if (tower != null) {
             tower.addListener(new InputListener() {
@@ -220,7 +220,7 @@ public class GameScreen extends ScreenAdapter {
                     InputAdapter input = new InputAdapter() {
                         @Override
                         public boolean touchDown(int x, int y, int pointer, int button) {
-                            createTower(x, y, TowerFactory.TowerType.Basic1, "Slow", "Freeze");
+                            createTower(x, y, TowerType.Basic1, "Slow", "Freeze");
                             Gdx.input.setInputProcessor(stage);
                             return true;
                         }
@@ -247,7 +247,7 @@ public class GameScreen extends ScreenAdapter {
                     InputAdapter input = new InputAdapter() {
                         @Override
                         public boolean touchDown(int x, int y, int pointer, int button) {
-                            createTower(x, y, TowerFactory.TowerType.Basic2, "Teleport", "Explosion");
+                            createTower(x, y, TowerType.Basic2, "Teleport", "Explosion");
                             Gdx.input.setInputProcessor(stage);
                             return true;
                         }
@@ -274,7 +274,7 @@ public class GameScreen extends ScreenAdapter {
                     InputAdapter input = new InputAdapter() {
                         @Override
                         public boolean touchDown(int x, int y, int pointer, int button) {
-                            createTower(x, y, TowerFactory.TowerType.Basic3, "Poison", "Fire");
+                            createTower(x, y, TowerType.Basic3, "Poison", "Fire");
                             Gdx.input.setInputProcessor(stage);
                             return true;
                         }

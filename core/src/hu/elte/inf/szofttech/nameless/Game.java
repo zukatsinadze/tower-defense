@@ -12,8 +12,7 @@ import hu.elte.inf.szofttech.nameless.model.Path;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.Level;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
-import hu.elte.inf.szofttech.nameless.model.tower.TowerFactory;
-import static hu.elte.inf.szofttech.nameless.model.tower.TowerFactory.TowerType;
+import hu.elte.inf.szofttech.nameless.model.tower.TowerType;
 
 /**
  * Connecting all other classes
@@ -203,7 +202,7 @@ public class Game {
     public Tower deployTower(TowerType towerToBuild, int x, int y) {
         if (!this.path.onPath(x, y) && !this.deployedTowers.stream()
                 .anyMatch(tower -> tower.getGridPos().x == x && tower.getGridPos().y == y)) {
-            Tower tower = TowerFactory.createTower(towerToBuild, x, y);
+            Tower tower = new Tower(towerToBuild, x, y);
             if (this.canBuyTower(tower)) {
                 this.money -= tower.getPrice();
                 this.deployedTowers.add(tower);
