@@ -200,7 +200,8 @@ public class Game {
      * @param y
      */
     public Tower deployTower(TowerType towerToBuild, int x, int y) {
-        if (!this.path.onPath(x, y)) {
+        if (!this.path.onPath(x, y) && !this.deployedTowers.stream()
+                .anyMatch(tower -> tower.getGridPos().x == x && tower.getGridPos().y == y)) {
             Tower tower = TowerFactory.createTower(towerToBuild, x, y);
             if (this.canBuyTower(tower)) {
                 this.money -= tower.getPrice();
