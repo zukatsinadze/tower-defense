@@ -1,19 +1,18 @@
 package hu.elte.inf.szofttech.nameless.model.tower;
 
-import java.util.ArrayList;
-
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.GridPoint2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-
+import com.badlogic.gdx.math.GridPoint2;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.Config;
+import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.GDSprite;
+
+import java.util.ArrayList;
 
 import static hu.elte.inf.szofttech.nameless.Utils.convertFromGrid;
 
@@ -54,6 +53,10 @@ public class Tower extends Actor {
         sprite.draw(batch);
     }
 
+    public TowerType getType() {
+        return this.type;
+    }
+
     public GridPoint2 getGridPos() {
         return this.gridPos;
     }
@@ -91,14 +94,6 @@ public class Tower extends Actor {
     public void setUpgrade2(Button upgrade2) { this.upgrade2 = upgrade2; }
 
     /**
-     * @param b Enemy
-     *          If tower is upgraded, it has specialAbility, which is called by this method.
-     */
-    public void specialAttack(Enemy b) {
-        //
-    }
-
-    /**
      * Shooting at the enemies
      */
     public void shoot(float delta) {
@@ -108,12 +103,12 @@ public class Tower extends Actor {
                 if (enemy.hasSpawned() && enemy.isAlive() && !enemy.end()
                         && this.attackTimer > 10.0 / this.type.attackSpeed) {
                     this.attackTimer = 0;
-                    enemy.attacked(this.type.damage);
-                    drawAttack(enemy.getPos());
-                    if (!enemy.isAlive()) {
-                        this.xp += enemy.getXP();
-                        Game.getInstance().addMoney(enemy.getMoney());
-                    }
+                    this.type.attackAbility.attack(this, enemy, targets.stream()).forEach(attackedEnemy -> {
+                        if (!attackedEnemy.isAlive()) {
+                            this.xp += attackedEnemy.getXP();
+                            Game.getInstance().addMoney(enemy.getMoney());
+                        }
+                    });
                 }
             }
         }
@@ -146,11 +141,11 @@ public class Tower extends Actor {
     }
 
     /**
-     * method for drawing red circle near enemy, when it is attacked
+     * method for drawing line to the enemy attacked
      *
      * @param p1
      */
-    private void drawAttack(Vector2 p1) {
+    public void drawAttack(Vector2 p1) {
         float halfTile = Config.tileSize / 2.0f;
         p1 = convertFromGrid(p1);
         p1.x = p1.x + halfTile;
