@@ -19,11 +19,6 @@ public class UtilsTest {
     }
 
     @Test
-    public void PointToVector2Test() {
-        assertEquals(new Vector2(5,5), Utils.PointToVector2(new Point(5, 5)));
-    }
-
-    @Test
     public void convertFromGridTest() {
         assertEquals(new Vector2(365,365), Utils.convertFromGrid(new Vector2(5, 5)));
     }
