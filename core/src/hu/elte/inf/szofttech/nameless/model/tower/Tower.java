@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
@@ -17,8 +18,10 @@ import hu.elte.inf.szofttech.nameless.model.GDSprite;
 import static hu.elte.inf.szofttech.nameless.Utils.convertFromGrid;
 
 public class Tower extends Actor {
-    private TowerType type;
     private int xp;
+    private TowerType type;
+    private Button upgrade1 = null;
+    private Button upgrade2 = null;
     private float attackTimer = 0;
     private Boolean upgraded = false;
     private GDSprite sprite;

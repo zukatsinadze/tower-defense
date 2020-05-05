@@ -194,12 +194,14 @@ public class GameScreen extends ScreenAdapter {
                     if ( !clicked ) {
                         clicked = true;
                         upgrade1 = new TextButton(t1, mySkin);
-                        upgrade1.setSize(Config.col_width * 1.8f, Config.row_height);
+                        //upgrade1.getSkin().getFont("button").getData().setScale(0.8f, 0.8f);
+                        upgrade1.setSize(Config.col_width * 1.5f, Config.row_height * 0.8f);
                         upgrade1.setPosition(tower.getPosition().x + 75f, tower.getPosition().y + 40f);
                         stage.addActor(upgrade1);
 
                         upgrade2 = new TextButton(t2, mySkin);
-                        upgrade2.setSize(Config.col_width * 1.8f, Config.row_height);
+                        //upgrade1.getSkin().getFont("button").getData().setScale(0.8f, 0.8f);
+                        upgrade2.setSize(Config.col_width * 1.5f, Config.row_height * 0.8f);
                         upgrade2.setPosition(tower.getPosition().x + 75f, tower.getPosition().y - 25f);
                         stage.addActor(upgrade2);
                     } else {
