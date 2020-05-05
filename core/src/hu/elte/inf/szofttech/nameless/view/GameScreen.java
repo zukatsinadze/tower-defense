@@ -186,17 +186,27 @@ public class GameScreen extends ScreenAdapter {
         Tower tower = Game.getInstance().buildTower(towerType, x, Gdx.graphics.getHeight() - y);
         if (tower != null) {
             tower.addListener(new InputListener() {
+                boolean clicked = false;
+                Button upgrade1 = null;
+                Button upgrade2 = null;
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    Button upgrade1 = new TextButton(t1, mySkin);
-                    upgrade1.setSize(Config.col_width * 1.8f, Config.row_height);
-                    upgrade1.setPosition(tower.getPosition().x + 75f, tower.getPosition().y + 40f);
-                    stage.addActor(upgrade1);
+                    if ( !clicked ) {
+                        clicked = true;
+                        upgrade1 = new TextButton(t1, mySkin);
+                        upgrade1.setSize(Config.col_width * 1.8f, Config.row_height);
+                        upgrade1.setPosition(tower.getPosition().x + 75f, tower.getPosition().y + 40f);
+                        stage.addActor(upgrade1);
 
-                    Button upgrade2 = new TextButton(t2, mySkin);
-                    upgrade2.setSize(Config.col_width * 1.8f, Config.row_height);
-                    upgrade2.setPosition(tower.getPosition().x + 75f, tower.getPosition().y - 25f);
-                    stage.addActor(upgrade2);
+                        upgrade2 = new TextButton(t2, mySkin);
+                        upgrade2.setSize(Config.col_width * 1.8f, Config.row_height);
+                        upgrade2.setPosition(tower.getPosition().x + 75f, tower.getPosition().y - 25f);
+                        stage.addActor(upgrade2);
+                    } else {
+                        clicked = false;
+                        upgrade1.remove();
+                        upgrade2.remove();
+                    }
                     return true;
                 }
             });
