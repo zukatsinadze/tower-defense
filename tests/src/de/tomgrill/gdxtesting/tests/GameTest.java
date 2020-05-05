@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 
 import hu.elte.inf.szofttech.nameless.*;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
-import hu.elte.inf.szofttech.nameless.model.tower.TowerFactory;
+import hu.elte.inf.szofttech.nameless.model.tower.TowerType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -39,7 +39,7 @@ public class GameTest {
         assertEquals(g.getMoney(), 100);
         g.addMoney(100);
         assertEquals(g.getMoney(), 200);
-        Tower t = TowerFactory.createTower(TowerFactory.TowerType.Basic1, 1, 1);
+        Tower t = new Tower(TowerType.Basic1, 1, 1);
         assertEquals(g.canBuyTower(t), true);
         g.getDamaged(10);
         assertEquals(g.getLife(), 90);

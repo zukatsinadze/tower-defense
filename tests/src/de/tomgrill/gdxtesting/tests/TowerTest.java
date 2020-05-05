@@ -28,9 +28,7 @@ public class TowerTest {
         Enemy e2 = Enemy.createEnemy(p2, Enemy.EnemyType.BLUE);
         ArrayList<Enemy> enemies = new ArrayList<>();
         enemies.add(e);
-        Tower t = TowerFactory.createTower(TowerFactory.TowerType.Basic1, 2, 2);
-        Tower nullTower = TowerFactory.createTower(TowerFactory.TowerType.Default, 0, 0);
-        assertEquals(nullTower, null);
+        Tower t = new Tower(TowerType.Basic1, 2, 2);
         assertEquals(t.getRange(), 10);
         assertEquals(t.getPrice(), 75);
         assertEquals(t.getGridPos(), new GridPoint2(2, 2));
