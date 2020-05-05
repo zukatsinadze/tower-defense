@@ -187,17 +187,17 @@ public class GameScreen extends ScreenAdapter {
             tower.addListener(new InputListener() {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    Button slowBalloons = new TextButton(t1, mySkin);
-                    slowBalloons.setColor(Config.button_blue);
-                    slowBalloons.setSize(Config.col_width, Config.row_height);
-                    slowBalloons.setPosition(Config.col_width * 5f, Gdx.graphics.getHeight() - Config.row_height * 5.5f);
-                    stage.addActor(slowBalloons);
+                    Button upgrade1 = new TextButton(t1, mySkin);
+                    upgrade1.setColor(Config.button_blue);
+                    upgrade1.setSize(Config.col_width, Config.row_height);
+                    upgrade1.setPosition(tower.getPosition().x, tower.getPosition().y);
+                    stage.addActor(upgrade1);
 
-                    Button freezeBalloons = new TextButton(t2, mySkin);
-                    freezeBalloons.setColor(Config.background);
-                    freezeBalloons.setSize(Config.col_width, Config.row_height);
-                    freezeBalloons.setPosition(Config.col_width * 5f, Gdx.graphics.getHeight() - Config.row_height * 8.5f);
-                    stage.addActor(freezeBalloons);
+                    Button upgrade2 = new TextButton(t2, mySkin);
+                    upgrade2.setColor(Config.background);
+                    upgrade2.setSize(Config.col_width, Config.row_height);
+                    upgrade2.setPosition(Config.col_width * 5f, Gdx.graphics.getHeight() - Config.row_height * 8.5f);
+                    stage.addActor(upgrade2);
                     return true;
                 }
             });
@@ -273,7 +273,7 @@ public class GameScreen extends ScreenAdapter {
                     InputAdapter input = new InputAdapter() {
                         @Override
                         public boolean touchDown(int x, int y, int pointer, int button) {
-                            createTower(x, y, TowerFactory.TowerType.Basic2, "Poison", "Fire");
+                            createTower(x, y, TowerFactory.TowerType.Basic3, "Poison", "Fire");
                             Gdx.input.setInputProcessor(stage);
                             return true;
                         }
