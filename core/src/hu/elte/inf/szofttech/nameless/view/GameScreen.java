@@ -213,7 +213,7 @@ public class GameScreen extends ScreenAdapter {
      * Creating basic1 tower displayed on the bar
      */
     public void basic1Display() {
-        ImageButton basic1Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic1)));
+        ImageButton basic1Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic1_display)));
         basic1Button.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
         basic1Button.setPosition(Config.col_width * 5.5f, Gdx.graphics.getHeight() - Config.row_height * 10.7f);
         basic1Button.addListener(new InputListener() {
@@ -240,7 +240,7 @@ public class GameScreen extends ScreenAdapter {
      * Creating basic2 tower displayed on the bar
      */
     public void basic2Display() {
-        ImageButton basic2Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic2)));
+        ImageButton basic2Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic2_display)));
         basic2Button.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
         basic2Button.setPosition(Config.col_width * 7, Gdx.graphics.getHeight() - Config.row_height * 10.7f);
         basic2Button.addListener(new InputListener() {
@@ -267,7 +267,7 @@ public class GameScreen extends ScreenAdapter {
      * Creating basic3 tower displayed on the bar
      */
     public void basic3Display() {
-        ImageButton basic3Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic3)));
+        ImageButton basic3Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic3_display)));
         basic3Button.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
         basic3Button.setPosition(Config.col_width * 8.5f, Gdx.graphics.getHeight() - Config.row_height * 10.7f);
         basic3Button.addListener(new InputListener() {

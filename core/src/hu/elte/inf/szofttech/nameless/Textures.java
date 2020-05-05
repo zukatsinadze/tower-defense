@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.Texture;
 
 public final class Textures {
-    private Textures() {
-    }
+    private Textures() { }
 
     public static final Texture pauseButton = new Texture("pause_button.png");
     public static final Texture resumeButton = new Texture("resume_button.png");
@@ -43,9 +42,9 @@ public final class Textures {
     public static final Texture basic1 = new Texture("basic1.png");
     public static final Texture basic2 = new Texture("basic2.png");
     public static final Texture basic3 = new Texture("basic3.png");
-//    public static final Texture basic1_display = new Texture("basic1_display.png");
-//    public static final Texture basic2_display = new Texture("basic2_display.png");
-//    public static final Texture basic3_display = new Texture("basic3_display.png");
+    public static final Texture basic1_display = new Texture("basic1_display.png");
+    public static final Texture basic2_display = new Texture("basic2_display.png");
+    public static final Texture basic3_display = new Texture("basic3_display.png");
     public static final Texture advanced11 = new Texture("advanced11.png");
     public static final Texture advanced12 = new Texture("advanced12.png");
     public static final Texture advanced21 = new Texture("advanced21.png");

@@ -11,11 +11,10 @@ import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.Level;
 
 /**
- * read path coordinates and enemies information from a file
+ * Reading path coordinates and enemies information from a file
  */
 public final class ReadLevels {
-    private ReadLevels() {
-    }
+    private ReadLevels() { }
 
     public static List<Level> read() {
         List<Level> levels = new ArrayList<>(5);
