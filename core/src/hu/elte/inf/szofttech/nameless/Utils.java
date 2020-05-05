@@ -1,7 +1,5 @@
 package hu.elte.inf.szofttech.nameless;
 
-import java.awt.*;
-
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.GridPoint2;
 
@@ -9,10 +7,6 @@ public class Utils {
 
     public static Vector2 gridToVector(GridPoint2 gp) {
         return new Vector2(gp.x, gp.y);
-    }
-
-    public static Vector2 PointToVector2(Point p) {
-        return new Vector2(p.x, p.y);
     }
 
     /**
