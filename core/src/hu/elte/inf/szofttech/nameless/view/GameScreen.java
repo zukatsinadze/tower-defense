@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -196,15 +195,15 @@ public class GameScreen extends ScreenAdapter {
                     if ( !clicked ) {
                         clicked = true;
                         upgrade1 = new TextButton(t1, mySkin);
-                        //upgrade1.getSkin(). setScale(0.8f, 0.8f);
-                        upgrade1.setSize(Config.col_width * 1.5f, Config.row_height * 0.8f);
+                        upgrade1.setScale(0.6f,0.6f);
+                        upgrade1.setSize(Config.col_width * 1.5f, Config.row_height * 0.7f);
                         upgrade1.setPosition(tower.getPosition().x + 75f, tower.getPosition().y + 40f);
                         stage.addActor(upgrade1);
                         tower.setUpgrade1(upgrade1);
 
                         upgrade2 = new TextButton(t2, mySkin);
-                        upgrade1.setScale(0.8f, 0.8f);
-                        upgrade2.setSize(Config.col_width * 1.5f, Config.row_height * 0.8f);
+                        upgrade1.setScale(0.6f, 0.6f);
+                        upgrade2.setSize(Config.col_width * 1.5f, Config.row_height * 0.7f);
                         upgrade2.setPosition(tower.getPosition().x + 75f, tower.getPosition().y - 25f);
                         stage.addActor(upgrade2);
                         tower.setUpgrade2(upgrade2);
@@ -225,8 +224,8 @@ public class GameScreen extends ScreenAdapter {
      */
     public void basic1Display() {
         ImageButton basic1Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic1_display)));
-        basic1Button.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
-        basic1Button.setPosition(Config.col_width * 5.5f, Gdx.graphics.getHeight() - Config.row_height * 10.7f);
+        basic1Button.setSize(Config.tileSize, Config.tileSize);
+        basic1Button.setPosition(Config.col_width * 5.3f, Gdx.graphics.getHeight() - Config.row_height * 10.7f);
         basic1Button.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -252,7 +251,7 @@ public class GameScreen extends ScreenAdapter {
      */
     public void basic2Display() {
         ImageButton basic2Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic2_display)));
-        basic2Button.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
+        basic2Button.setSize(Config.tileSize, Config.tileSize);
         basic2Button.setPosition(Config.col_width * 7, Gdx.graphics.getHeight() - Config.row_height * 10.7f);
         basic2Button.addListener(new InputListener() {
             @Override
@@ -279,7 +278,7 @@ public class GameScreen extends ScreenAdapter {
      */
     public void basic3Display() {
         ImageButton basic3Button = new ImageButton(new TextureRegionDrawable(new TextureRegion(Textures.basic3_display)));
-        basic3Button.setSize(Config.tileSize * 3 / 4.0f, Config.tileSize);
+        basic3Button.setSize(Config.tileSize, Config.tileSize);
         basic3Button.setPosition(Config.col_width * 8.5f, Gdx.graphics.getHeight() - Config.row_height * 10.7f);
         basic3Button.addListener(new InputListener() {
             @Override

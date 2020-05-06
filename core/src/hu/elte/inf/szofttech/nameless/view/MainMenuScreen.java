@@ -36,7 +36,10 @@ public final class MainMenuScreen extends ScreenAdapter {
         Skin mySkin = new Skin(Gdx.files.internal("skin/flat-earth-ui.json"));
 
         // Start Button
-        Button startButton = new TextButton("Start Game", mySkin);
+        TextButton startButton = new TextButton("Start Game", mySkin);
+        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle(startButton.getStyle());
+        style.font = mySkin.getFont("title");
+        startButton.setStyle(style);
         startButton.setSize(col_width * 4, row_height);
         startButton.setPosition(col_width * 7, Gdx.graphics.getHeight() - row_height * 3);
         startButton.addListener(new InputListener() {
@@ -50,7 +53,8 @@ public final class MainMenuScreen extends ScreenAdapter {
         stage.addActor(startButton);
 
         // Exit Button
-        Button exitButton = new TextButton("Exit Game", mySkin);
+        TextButton exitButton = new TextButton("Exit Game", mySkin);
+        exitButton.setStyle(style);
         exitButton.setSize(col_width * 4, row_height);
         exitButton.setPosition(col_width * 7, Gdx.graphics.getHeight() - row_height * 5);
         exitButton.addListener(new InputListener() {

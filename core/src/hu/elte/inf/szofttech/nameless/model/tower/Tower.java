@@ -80,9 +80,7 @@ public class Tower extends Actor {
         return this.upgrade1;
     }
 
-    public Button getUpgrade2() {
-        return this.upgrade2;
-    }
+    public Button getUpgrade2() { return this.upgrade2; }
 
     public ArrayList<Enemy> getTarget() {
         return targets;

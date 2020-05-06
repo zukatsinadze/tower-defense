@@ -41,12 +41,12 @@ public final class Textures {
     public static final Texture yellowBalloon = new Texture("yellow.png");
     public static final Texture mainMenuBackground = new Texture("background.jpg");
 
-    public static final Texture basic1 = new Texture("basic1.png");
-    public static final Texture basic2 = new Texture("basic2.png");
-    public static final Texture basic3 = new Texture("basic3.png");
-    public static final Texture basic1_display = new Texture("basic1_display.png");
-    public static final Texture basic2_display = new Texture("basic2_display.png");
-    public static final Texture basic3_display = new Texture("basic3_display.png");
+    public static final Texture basic1 = new Texture("basic4.png");
+    public static final Texture basic2 = new Texture("basic5.png");
+    public static final Texture basic3 = new Texture("basic7.png");
+    public static final Texture basic1_display = new Texture("basic4.png");
+    public static final Texture basic2_display = new Texture("basic5.png");
+    public static final Texture basic3_display = new Texture("basic7.png");
     public static final Texture advanced11 = new Texture("advanced11.png");
     public static final Texture advanced12 = new Texture("advanced12.png");
     public static final Texture advanced21 = new Texture("advanced21.png");
