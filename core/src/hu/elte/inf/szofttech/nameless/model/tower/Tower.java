@@ -35,7 +35,7 @@ public class Tower extends Actor {
                 Config.guiHeight + this.gridPos.y * Config.tileSize,
                 Config.tileSize, Config.tileSize);
         this.sprite = new GDSprite(this.type.texture);
-        this.sprite.setSize(super.getWidth() * 3 / 4.0f, super.getHeight());
+        this.sprite.setSize(super.getWidth(), super.getHeight());
         this.targets = new ArrayList<>();
     }
 
@@ -47,7 +47,7 @@ public class Tower extends Actor {
      */
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        sprite.setX(super.getX() + Config.tileSize / 8.0f);
+        sprite.setX(super.getX());
         sprite.setY(super.getY());
         sprite.draw(batch);
     }

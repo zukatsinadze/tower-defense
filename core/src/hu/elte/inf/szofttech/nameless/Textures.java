@@ -16,10 +16,10 @@ public final class Textures {
 
     static {
         tiles.add(new Texture("tile1.jpg"));
-        paths.add(new Texture("path4.jpg"));
+        paths.add(new Texture("path1.jpg"));
 
         tiles.add(new Texture("tile1.jpg"));
-        paths.add(new Texture("path1.jpg"));
+        paths.add(new Texture("path4.jpg"));
 
         tiles.add(new Texture("tile1.jpg"));
         paths.add(new Texture("path6.jpg"));
@@ -30,7 +30,6 @@ public final class Textures {
 
         tiles.add(new Texture("tile1.jpg"));
         paths.add(new Texture("path7.jpg"));
-
     }
 
     public static final Texture home = new Texture("home.png");
@@ -41,12 +40,9 @@ public final class Textures {
     public static final Texture yellowBalloon = new Texture("yellow.png");
     public static final Texture mainMenuBackground = new Texture("background.jpg");
 
-    public static final Texture basic1 = new Texture("basic4.png");
-    public static final Texture basic2 = new Texture("basic5.png");
-    public static final Texture basic3 = new Texture("basic7.png");
-    public static final Texture basic1_display = new Texture("basic4.png");
-    public static final Texture basic2_display = new Texture("basic5.png");
-    public static final Texture basic3_display = new Texture("basic7.png");
+    public static final Texture basic1 = new Texture("basic1.png");
+    public static final Texture basic2 = new Texture("basic2.png");
+    public static final Texture basic3 = new Texture("basic3.png");
     public static final Texture advanced11 = new Texture("advanced11.png");
     public static final Texture advanced12 = new Texture("advanced12.png");
     public static final Texture advanced21 = new Texture("advanced21.png");
