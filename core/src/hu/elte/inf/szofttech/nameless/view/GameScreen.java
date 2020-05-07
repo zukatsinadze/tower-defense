@@ -20,6 +20,7 @@ import hu.elte.inf.szofttech.nameless.Main;
 import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Textures;
+import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 import hu.elte.inf.szofttech.nameless.model.tower.TowerType;
 
@@ -37,7 +38,6 @@ public class GameScreen extends ScreenAdapter {
 
     private State state;
     private Stage stage;
-    private Skin mySkin;
     private final Game game;
     private final Main main;
     private boolean isFastForwarded;
@@ -50,7 +50,6 @@ public class GameScreen extends ScreenAdapter {
     private Label basic1Money;
     private Label basic2Money;
     private Label basic3Money;
-
     private final float PAUSE_RESUME_BUTTON_WIDTH = Gdx.graphics.getWidth() / 14.0f;
     private final float PAUSE_RESUME_BUTTON_HEIGHT = Gdx.graphics.getWidth() / 14.0f;
     private final float PAUSE_RESUME_BUTTON_X1 = PAUSE_RESUME_BUTTON_WIDTH * 12.6f;
@@ -60,15 +59,14 @@ public class GameScreen extends ScreenAdapter {
         this.main = main;
         this.game = Game.getInstance();
         this.stage = new Stage(this.main.getViewport());
-        this.mySkin = new Skin(Gdx.files.internal("skin/flat-earth-ui.json"));
-        this.lifeLabel = new Label("", this.mySkin, "button", Config.button_blue);
-        this.moneyLabel = new Label("", this.mySkin, "button", Config.button_blue);
-        this.waveLabel = new Label("", this.mySkin, "button", Config.button_blue);
-        this.levelLabel = new Label("", this.mySkin, "button", Config.button_blue);
+        this.lifeLabel = new Label("", Config.skin, "button", Config.button_blue);
+        this.moneyLabel = new Label("", Config.skin, "button", Config.button_blue);
+        this.waveLabel = new Label("", Config.skin, "button", Config.button_blue);
+        this.levelLabel = new Label("", Config.skin, "button", Config.button_blue);
 
-        this.basic1Money = new Label("75", this.mySkin, "button", Config.button_blue);
-        this.basic2Money = new Label("100", this.mySkin, "button", Config.button_blue);
-        this.basic3Money = new Label("125", this.mySkin, "button", Config.button_blue);
+        this.basic1Money = new Label("75", Config.skin, "button", Config.button_blue);
+        this.basic2Money = new Label("100", Config.skin, "button", Config.button_blue);
+        this.basic3Money = new Label("125", Config.skin, "button", Config.button_blue);
 
         Gdx.input.setInputProcessor(stage);
         this.createButtons();
@@ -113,7 +111,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     public void sellTowerButton() {
-        Button sellTowerButton = new TextButton("Sell Tower", mySkin);
+        Button sellTowerButton = new TextButton("Sell Tower", Config.skin);
         sellTowerButton.setSize(Config.col_width * 2.8f, Config.row_height);
         sellTowerButton.setPosition(Config.col_width * 10.5f, Gdx.graphics.getHeight() - Config.row_height * 10.8f);
         sellTowerButton.addListener(new InputListener() {
@@ -142,7 +140,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     public void nextWaveButton() {
-        Button nextWaveButton = new TextButton("Next Wave", mySkin);
+        Button nextWaveButton = new TextButton("Next Wave", Config.skin);
         nextWaveButton.setSize(Config.col_width * 2.4f, Config.row_height);
         nextWaveButton.setPosition(Config.col_width * 17.3f, Gdx.graphics.getHeight() - Config.row_height * 7);
         nextWaveButton.addListener(new InputListener() {
@@ -161,7 +159,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     public void nextLevelButton() {
-        Button nextLevelButton = new TextButton("Next Level", mySkin);
+        Button nextLevelButton = new TextButton("Next Level", Config.skin);
         nextLevelButton.setSize(Config.col_width * 2.4f, Config.row_height);
         nextLevelButton.setPosition(Config.col_width * 17.3f, Gdx.graphics.getHeight() - Config.row_height * 8.5f);
         nextLevelButton.addListener(new InputListener() {
@@ -187,6 +185,7 @@ public class GameScreen extends ScreenAdapter {
         Tower tower = Game.getInstance().buildTower(towerType, x, Gdx.graphics.getHeight() - y);
         if (tower != null) {
             tower.addListener(new InputListener() {
+                Label XPLabel;
                 boolean clicked = false;
                 Button upgrade1 = null;
                 Button upgrade2 = null;
@@ -194,14 +193,20 @@ public class GameScreen extends ScreenAdapter {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     if ( !clicked ) {
                         clicked = true;
-                        upgrade1 = new TextButton(t1, mySkin);
+                        XPLabel = new Label("", Config.skin, "font", Config.button_blue);
+                        XPLabel.setPosition(tower.getPosition().x + Config.col_width / 1.5f, tower.getPosition().y + 70f);
+                        XPLabel.setText(String.valueOf(tower.getXP()));
+                        stage.addActor(XPLabel);
+                        tower.setXPLabel(XPLabel);
+
+                        upgrade1 = new TextButton(t1, Config.skin);
                         upgrade1.setScale(0.6f,0.6f);
                         upgrade1.setSize(Config.col_width * 1.5f, Config.row_height * 0.7f);
                         upgrade1.setPosition(tower.getPosition().x + 75f, tower.getPosition().y + 40f);
                         stage.addActor(upgrade1);
                         tower.setUpgrade1(upgrade1);
 
-                        upgrade2 = new TextButton(t2, mySkin);
+                        upgrade2 = new TextButton(t2, Config.skin);
                         upgrade1.setScale(0.6f, 0.6f);
                         upgrade2.setSize(Config.col_width * 1.5f, Config.row_height * 0.7f);
                         upgrade2.setPosition(tower.getPosition().x + 75f, tower.getPosition().y - 25f);
@@ -209,6 +214,7 @@ public class GameScreen extends ScreenAdapter {
                         tower.setUpgrade2(upgrade2);
                     } else {
                         clicked = false;
+                        XPLabel.remove();
                         upgrade1.remove();
                         upgrade2.remove();
                     }
@@ -342,6 +348,8 @@ public class GameScreen extends ScreenAdapter {
      * Rendering texts on the screen
      */
     public void renderLabels() {
+        Game.getInstance().refreshXPLabel();
+
         basic1Money.setPosition(Config.col_width * 5.8f, Gdx.graphics.getHeight() - Config.row_height * 11.2f);
         stage.addActor(basic1Money);
 

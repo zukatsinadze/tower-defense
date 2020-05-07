@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.GDSprite;
@@ -17,13 +18,14 @@ import static hu.elte.inf.szofttech.nameless.Utils.convertFromGrid;
 
 public class Tower extends Actor {
     private int xp;
+    private Label XPLabel;
     private TowerType type;
-    private Button upgrade1 = null;
-    private Button upgrade2 = null;
-    private float attackTimer = 0;
-    private Boolean upgraded = false;
     private GDSprite sprite;
     private GridPoint2 gridPos;
+    private float attackTimer = 0;
+    private Button upgrade1 = null;
+    private Button upgrade2 = null;
+    private Boolean upgraded = false;
     private ArrayList<Enemy> targets = null;
 
     public Tower(TowerType type, int x, int y) {
@@ -64,9 +66,11 @@ public class Tower extends Actor {
         return new Vector2(super.getX(), super.getY());
     }
 
-    public int getPrice() {
-        return this.type.price;
+    public int getXP() {
+        return this.type.xp;
     }
+
+    public int getPrice() {  return this.type.price; }
 
     public int getDamage() {
         return this.type.damage;
@@ -86,6 +90,8 @@ public class Tower extends Actor {
         return targets;
     }
 
+    public void setXPLabel(Label XPLabel) { this.XPLabel = XPLabel; }
+
     public void setTargets(ArrayList<Enemy> targets) {
         this.targets = targets;
     }
@@ -98,9 +104,7 @@ public class Tower extends Actor {
         this.upgrade2 = upgrade2;
     }
 
-    public void gainXP(int xp) {
-        this.xp += xp;
-    }
+    public void gainXP(int xp) { this.xp += xp; }
 
     /**
      * Shooting at the enemies
