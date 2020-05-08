@@ -33,6 +33,10 @@ public class Enemy {
         this.spawned = false;
     }
 
+    public EnemyType getType() {
+        return this.type;
+    }
+
     public Vector2 getPos() {
         return this.pos.getPos();
     }
