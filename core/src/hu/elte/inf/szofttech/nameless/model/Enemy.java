@@ -1,5 +1,6 @@
 package hu.elte.inf.szofttech.nameless.model;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,7 +15,7 @@ import hu.elte.inf.szofttech.nameless.model.tower.Tower;
  * the behavior of enemy
  */
 public class Enemy {
-    private GDSprite sprite;
+    private Sprite sprite;
     private int xp;
     private int money;
     private int damage;
@@ -38,7 +39,7 @@ public class Enemy {
         this.damage = damage;
         this.speed = speed;
         this.health = health;
-        this.sprite = new GDSprite(texture);
+        this.sprite = new Sprite(texture);
         this.sprite.setSize(Config.tileSize / 2.0f, Config.tileSize);
         this.spawned = false;
     }
@@ -134,7 +135,7 @@ public class Enemy {
      * @param damage handle the situation that the enemy got attacked
      */
     public void attacked(Tower tower) {
-        this.health -= tower.getDamage();
+        this.health -= tower.getType().damage;
         if (!this.isAlive()) {
             tower.gainXP(this.xp);
             Game.getInstance().addMoney(this.money);

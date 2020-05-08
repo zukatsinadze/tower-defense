@@ -2,6 +2,7 @@ package hu.elte.inf.szofttech.nameless.model.tower;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
@@ -10,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
-import hu.elte.inf.szofttech.nameless.model.GDSprite;
 
 import java.util.ArrayList;
 
@@ -20,7 +20,7 @@ public class Tower extends Actor {
     private int xp;
     private Label XPLabel;
     private TowerType type;
-    private GDSprite sprite;
+    private Sprite sprite;
     private GridPoint2 gridPos;
     private float attackTimer = 0;
     private Button upgrade1 = null;
@@ -36,7 +36,7 @@ public class Tower extends Actor {
                 this.gridPos.x * Config.tileSize,
                 Config.guiHeight + this.gridPos.y * Config.tileSize,
                 Config.tileSize, Config.tileSize);
-        this.sprite = new GDSprite(this.type.texture);
+        this.sprite = new Sprite(this.type.texture);
         this.sprite.setSize(super.getWidth(), super.getHeight());
         this.targets = new ArrayList<>();
     }
@@ -66,24 +66,16 @@ public class Tower extends Actor {
         return this.xp;
     }
 
-    public int getPrice() {  return this.type.price; }
-
-    public int getDamage() {
-        return this.type.damage;
-    }
-
-    public int getRange() {
-        return this.type.range;
+    public TowerType getType() {
+        return this.type;
     }
 
     public Button getUpgrade1() {
         return this.upgrade1;
     }
 
-    public Button getUpgrade2() { return this.upgrade2; }
-
-    public ArrayList<Enemy> getTarget() {
-        return targets;
+    public Button getUpgrade2() {
+        return this.upgrade2;
     }
 
     public void refreshXPLabel() {
@@ -106,7 +98,9 @@ public class Tower extends Actor {
         this.upgrade2 = upgrade2;
     }
 
-    public void gainXP(int xp) { this.xp += xp; }
+    public void gainXP(int xp) {
+        this.xp += xp;
+    }
 
     /**
      * Shooting at the enemies

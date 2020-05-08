@@ -208,7 +208,7 @@ public class Game {
                 .anyMatch(tower -> tower.getGridPos().x == x && tower.getGridPos().y == y)) {
             Tower tower = new Tower(towerToBuild, x, y);
             if (this.canBuyTower(tower)) {
-                this.money -= tower.getPrice();
+                this.money -= tower.getType().price;
                 this.deployedTowers.add(tower);
                 setTargets();
                 return tower;
@@ -229,7 +229,7 @@ public class Game {
         int yPos = (y - Config.guiHeight) / Config.tileSize;
         for (int i = 0; i < this.deployedTowers.size(); i++) {
             if (deployedTowers.get(i).getGridPos().x == xPos && deployedTowers.get(i).getGridPos().y == yPos) {
-                this.money += deployedTowers.get(i).getPrice();
+                this.money += deployedTowers.get(i).getType().price;
                 soldTower = deployedTowers.get(i);
                 deployedTowers.remove(i);
             }
@@ -255,7 +255,7 @@ public class Game {
      * @return boolean
      */
     public boolean canBuyTower(Tower tower) {
-        return money >= tower.getPrice();
+        return money >= tower.getType().price;
     }
 
     /**
