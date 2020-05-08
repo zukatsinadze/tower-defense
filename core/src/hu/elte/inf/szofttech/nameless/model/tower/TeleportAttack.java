@@ -1,5 +1,5 @@
 package hu.elte.inf.szofttech.nameless.model.tower;
-import hu.elte.inf.szofttech.nameless.model.Enemy;
+import hu.elte.inf.szofttech.nameless.model.enemy.Enemy;
 
 import java.util.Collection;
 

@@ -1,4 +1,4 @@
-package hu.elte.inf.szofttech.nameless.model;
+package hu.elte.inf.szofttech.nameless.model.enemy;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
@@ -9,6 +9,7 @@ import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.Utils;
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Textures;
+import hu.elte.inf.szofttech.nameless.model.Path;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 
 /**

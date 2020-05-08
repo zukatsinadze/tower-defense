@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import hu.elte.inf.szofttech.nameless.model.Wave;
 import hu.elte.inf.szofttech.nameless.model.Path;
-import hu.elte.inf.szofttech.nameless.model.Enemy;
+import hu.elte.inf.szofttech.nameless.model.enemy.Enemy;
 import hu.elte.inf.szofttech.nameless.model.Level;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 import hu.elte.inf.szofttech.nameless.model.tower.TowerType;

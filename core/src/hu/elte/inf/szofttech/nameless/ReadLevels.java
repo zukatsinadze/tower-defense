@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import hu.elte.inf.szofttech.nameless.model.Path;
 import hu.elte.inf.szofttech.nameless.model.Wave;
-import hu.elte.inf.szofttech.nameless.model.Enemy;
+import hu.elte.inf.szofttech.nameless.model.enemy.Enemy;
 import hu.elte.inf.szofttech.nameless.model.Level;
 
 /**

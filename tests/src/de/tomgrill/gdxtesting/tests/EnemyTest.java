@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import com.badlogic.gdx.math.Vector2;
 import hu.elte.inf.szofttech.nameless.model.*;
+import hu.elte.inf.szofttech.nameless.model.enemy.*;
 import hu.elte.inf.szofttech.nameless.model.tower.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;

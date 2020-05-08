@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import hu.elte.inf.szofttech.nameless.Config;
-import hu.elte.inf.szofttech.nameless.model.Enemy;
+import hu.elte.inf.szofttech.nameless.model.enemy.Enemy;
 
 import java.util.ArrayList;
 

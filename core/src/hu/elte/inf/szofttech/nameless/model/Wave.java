@@ -1,5 +1,7 @@
 package hu.elte.inf.szofttech.nameless.model;
 
+import hu.elte.inf.szofttech.nameless.model.enemy.Enemy;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
