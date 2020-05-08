@@ -69,4 +69,9 @@ public class EnemyPos {
     public boolean ended() {
         return this.pos.equals(Utils.gridToVector(this.path.getLast()));
     }
+
+    public void teleportBack() {
+        this.next = Math.max(1, this.next - 3);
+        this.pos = Utils.gridToVector(this.path.get(this.next - 1));
+    }
 }

@@ -115,4 +115,8 @@ public class Enemy {
     public boolean canBeAttacked() {
         return this.hasSpawned() && this.isAlive() && !this.ended();
     }
+
+    public void teleportBack() {
+        this.pos.teleportBack();
+    }
 }

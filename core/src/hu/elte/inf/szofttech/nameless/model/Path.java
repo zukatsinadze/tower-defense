@@ -53,12 +53,20 @@ public final class Path {
     }
 
     /**
+     * @param pos a position
+     * @return the index of the closest grid point of the path
+     */
+    private int indexOfClosest(Vector2 pos) {
+        return IntStream.range(0, this.length())
+                .boxed().min(Comparator.comparingDouble(i -> taxicabDist(this.get(i), pos))).get();
+    }
+
+    /**
      * @param pos the position of the enemy
      * @return the distance to the end of the path
      */
     public float distanceToEnd(Vector2 pos) {
-        int iClosest = IntStream.range(0, this.length())
-                .boxed().min(Comparator.comparingDouble(i -> taxicabDist(this.get(i), pos))).get();
+        int iClosest = indexOfClosest(pos);
         GridPoint2 p = this.get(iClosest);
         if (iClosest == 0) {
             return this.length() - 1 - taxicabDist(p, pos);
@@ -75,7 +83,7 @@ public final class Path {
         }
     }
 
-    private float taxicabDist(GridPoint2 p, Vector2 pos) {
+    private static float taxicabDist(GridPoint2 p, Vector2 pos) {
         return Math.abs(p.x - pos.x) + Math.abs(p.y - pos.y);
     }
 

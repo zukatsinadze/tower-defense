@@ -8,5 +8,6 @@ public class TeleportAttack implements AttackAbility {
     public void attack(Tower tower, Enemy enemy, Collection<Enemy> targets) {
         enemy.attacked(tower);
         tower.drawAttack(enemy.getPos());
+        enemy.teleportBack();
     }
 }
