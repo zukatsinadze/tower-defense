@@ -25,8 +25,8 @@ public class TowerTest {
                 .add(0, 2).add(1, 2).add(2, 2).add(2, 3).add(3, 3)
                 .add(4, 3).add(5, 3).add(5, 2).add(6, 2).build();
         Path p2 = new Path.Builder().add(10, 10).build();
-        Enemy e = Enemy.createEnemy(p, Enemy.EnemyType.BLUE);
-        Enemy e2 = Enemy.createEnemy(p2, Enemy.EnemyType.BLUE);
+        Enemy e = new Enemy(p, EnemyType.BLUE);
+        Enemy e2 = new Enemy(p2, EnemyType.BLUE);
         ArrayList<Enemy> enemies = new ArrayList<>();
         enemies.add(e);
         Tower t = new Tower(TowerType.Basic1, 2, 2);

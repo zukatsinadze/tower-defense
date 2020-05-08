@@ -23,7 +23,7 @@ public class EnemyTest {
                 .add(0, 2).add(1, 2).add(2, 2).add(2, 3).add(3, 3)
                 .add(4, 3).add(5, 3).add(5, 2).add(6, 2).build();
 
-        Enemy e = new Enemy(p, Enemy.EnemyType.BLUE);
+        Enemy e = new Enemy(p, EnemyType.BLUE);
         assertEquals(e.getType().damage, 10);
         assertEquals(e.getType().money, 10);
         assertEquals(e.getType().speed, 8);
