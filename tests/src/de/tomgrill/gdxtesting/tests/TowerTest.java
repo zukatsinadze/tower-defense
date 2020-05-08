@@ -34,6 +34,8 @@ public class TowerTest {
         assertEquals(t.getType().price, 75);
         assertEquals(t.getType().damage, 10);
         assertEquals(t.getGridPos(), new GridPoint2(2, 2));
+        t.setTargets(enemies);
+        assertEquals(t.getTarget(), enemies);
         assertEquals(t.intersects(e), true);
         assertEquals(t.intersects(e2), false);
     }

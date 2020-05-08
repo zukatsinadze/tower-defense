@@ -13,6 +13,7 @@ import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.model.enemy.Enemy;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import static hu.elte.inf.szofttech.nameless.Utils.convertFromGrid;
 
@@ -78,6 +79,10 @@ public class Tower extends Actor {
         return this.upgrade2;
     }
 
+    public Collection<Enemy> getTargets() {
+        return this.targets;
+    }
+
     public void refreshXPLabel() {
         if (this.XPLabel != null){
             this.XPLabel.setText(String.valueOf(this.xp));
@@ -110,13 +115,9 @@ public class Tower extends Actor {
         for (Enemy enemy : this.targets) {
             if (this.attackTimer > 10.0 / this.type.attackSpeed && enemy.canBeAttacked() && this.intersects(enemy)) {
                 this.attackTimer = 0;
-                this.type.attackAbility.attack(this, enemy, this.targets);
+                this.type.attackAbility.attack(this, enemy);
             }
         }
-    }
-
-    public boolean canUpgrade(TowerType type) {
-        return this.xp > type.xp;
     }
 
     /**
