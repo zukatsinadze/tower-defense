@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -20,7 +19,6 @@ import hu.elte.inf.szofttech.nameless.Main;
 import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.Textures;
-import hu.elte.inf.szofttech.nameless.model.Enemy;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 import hu.elte.inf.szofttech.nameless.model.tower.TowerType;
 
@@ -194,10 +192,11 @@ public class GameScreen extends ScreenAdapter {
                     if ( !clicked ) {
                         clicked = true;
                         XPLabel = new Label("", Config.skin, "font", Config.button_blue);
-                        XPLabel.setPosition(tower.getPosition().x + Config.col_width / 1.5f, tower.getPosition().y + 70f);
+                        XPLabel.setPosition(tower.getPosition().x + Config.col_width / 1.69f, tower.getPosition().y + 75f);
                         XPLabel.setText(String.valueOf(tower.getXP()));
                         stage.addActor(XPLabel);
                         tower.setXPLabel(XPLabel);
+                        tower.refreshXPLabel();
 
                         upgrade1 = new TextButton(t1, Config.skin);
                         upgrade1.setScale(0.6f,0.6f);
@@ -348,7 +347,7 @@ public class GameScreen extends ScreenAdapter {
      * Rendering texts on the screen
      */
     public void renderLabels() {
-        Game.getInstance().refreshXPLabel();
+        Game.getInstance().refreshXPLabels();
 
         basic1Money.setPosition(Config.col_width * 5.8f, Gdx.graphics.getHeight() - Config.row_height * 11.2f);
         stage.addActor(basic1Money);

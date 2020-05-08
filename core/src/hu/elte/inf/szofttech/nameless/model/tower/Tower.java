@@ -54,10 +54,6 @@ public class Tower extends Actor {
         sprite.draw(batch);
     }
 
-    public TowerType getType() {
-        return this.type;
-    }
-
     public GridPoint2 getGridPos() {
         return this.gridPos;
     }
@@ -67,7 +63,7 @@ public class Tower extends Actor {
     }
 
     public int getXP() {
-        return this.type.xp;
+        return this.xp;
     }
 
     public int getPrice() {  return this.type.price; }
@@ -90,7 +86,13 @@ public class Tower extends Actor {
         return targets;
     }
 
-    public void setXPLabel(Label XPLabel) { this.XPLabel = XPLabel; }
+    public void refreshXPLabel() {
+        if (this.XPLabel != null){
+            this.XPLabel.setText(String.valueOf(this.xp));
+        }
+    }
+
+    public void setXPLabel(Label xpLabel) { this.XPLabel = xpLabel; }
 
     public void setTargets(ArrayList<Enemy> targets) {
         this.targets = targets;

@@ -7,7 +7,6 @@ import java.util.Comparator;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import hu.elte.inf.szofttech.nameless.model.Wave;
 import hu.elte.inf.szofttech.nameless.model.Path;
 import hu.elte.inf.szofttech.nameless.model.Enemy;
@@ -72,13 +71,12 @@ public class Game {
         return currentLevel;
     }
 
-    public List<Tower> getDeployedTowers() {
-        return deployedTowers;
-    }
-
-    public void refreshXPLabel() {
+    /**
+     * refresh value of XP of deployed towers
+     */
+    public void refreshXPLabels() {
         for (Tower t : deployedTowers) {
-            t.setXPLabel(new Label(String.valueOf(t.getXP()), Config.skin, "font", Config.button_blue));
+            t.refreshXPLabel();
         }
     }
     /**
