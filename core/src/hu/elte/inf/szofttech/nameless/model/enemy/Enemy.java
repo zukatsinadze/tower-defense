@@ -2,13 +2,11 @@ package hu.elte.inf.szofttech.nameless.model.enemy;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import hu.elte.inf.szofttech.nameless.Game;
 import hu.elte.inf.szofttech.nameless.Utils;
 import hu.elte.inf.szofttech.nameless.Config;
-import hu.elte.inf.szofttech.nameless.Textures;
 import hu.elte.inf.szofttech.nameless.model.Path;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 
@@ -16,49 +14,23 @@ import hu.elte.inf.szofttech.nameless.model.tower.Tower;
  * the behavior of enemy
  */
 public class Enemy {
+    private final EnemyType type;
     private Sprite sprite;
-    private int xp;
-    private int money;
-    private int damage;
-    private int speed;
     private int health;
     private EnemyPos pos;
     private boolean spawned;
 
-    public static enum EnemyType {
-        RED,
-        PINK,
-        BLUE,
-        WHITE,
-        YELLOW
-    }
-
-    private Enemy(Texture texture, int xp, int money, int damage, int speed, int health, EnemyPos pos) {
-        this.xp = xp;
-        this.pos = pos;
-        this.money = money;
-        this.damage = damage;
-        this.speed = speed;
-        this.health = health;
-        this.sprite = new Sprite(texture);
+    /**
+     * @param path the path the enemy follows
+     * @param type the type of the enemy
+     */
+    public Enemy(Path path, EnemyType type) {
+        this.type = type;
+        this.pos = new EnemyPos(path);
+        this.health = type.maxHealth;
+        this.sprite = new Sprite(type.texture);
         this.sprite.setSize(Config.tileSize / 2.0f, Config.tileSize);
         this.spawned = false;
-    }
-
-    public int getXP() {
-        return xp;
-    }
-
-    public int getMoney() {
-        return money;
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public int getSpeed() {
-        return speed;
     }
 
     public Vector2 getPos() {
@@ -66,80 +38,15 @@ public class Enemy {
     }
 
     /**
-     * @param path the path the enemy follows
-     * @param type the type of the enemy
-     * @return the created enemy
-     */
-    public static Enemy createEnemy(Path path, EnemyType type) {
-        int XP;
-        int money;
-        int damage;
-        int speed;
-        int health;
-        Enemy enemy = null;
-        EnemyPos pos = new EnemyPos(path);
-
-
-        switch (type) {
-            case RED:
-                XP = 1;
-                money = 5;
-                damage = 3;
-                speed = 10;
-                health = 10;
-                enemy = new Enemy(Textures.redBalloon, XP, money, damage, speed, health, pos);
-                return enemy;
-
-            case PINK:
-                XP = 2;
-                money = 8;
-                damage = 5;
-                speed = 15;
-                health = 15;
-                enemy = new Enemy(Textures.pinkBalloon, XP, money, damage, speed, health, pos);
-                return enemy;
-
-            case BLUE:
-                XP = 4;
-                money = 10;
-                damage = 10;
-                speed = 8;
-                health = 30;
-                enemy = new Enemy(Textures.blueBalloon, XP, money, damage, speed, health, pos);
-                return enemy;
-
-            case WHITE:
-                XP = 4;
-                money = 10;
-                damage = 10;
-                speed = 30;
-                health = 8;
-                enemy = new Enemy(Textures.whiteBalloon, XP, money, damage, speed, health, pos);
-                return enemy;
-
-            case YELLOW:
-                XP = 5;
-                money = 15;
-                damage = 15;
-                speed = 25;
-                health = 25;
-                enemy = new Enemy(Textures.yellowBalloon, XP, money, damage, speed, health, pos);
-                return enemy;
-
-            default:
-                return enemy;
-
-        }
-    }
-
-    /**
-     * @param damage handle the situation that the enemy got attacked
+     * handle the situation that the enemy got attacked
+     *
+     * @param tower
      */
     public void attacked(Tower tower) {
         this.health -= tower.getType().damage;
         if (!this.isAlive()) {
-            tower.gainXP(this.xp);
-            Game.getInstance().addMoney(this.money);
+            tower.gainXP(this.type.xp);
+            Game.getInstance().addMoney(this.type.money);
         }
     }
 
@@ -155,11 +62,11 @@ public class Enemy {
      */
     public void move(float time) {
         if (this.spawned && this.isAlive()) {
-            this.pos.move(this.speed, time);
+            this.pos.move(this.type.speed, time);
         }
         if (this.ended() && this.spawned) {
             this.spawned = false;
-            Game.getInstance().getDamaged(this.damage);
+            Game.getInstance().getDamaged(this.type.damage);
         }
     }
 

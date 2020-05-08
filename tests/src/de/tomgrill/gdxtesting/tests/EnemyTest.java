@@ -18,17 +18,17 @@ public class EnemyTest {
     }
 
     @Test
-    public void testEnemy(){
+    public void testEnemy() {
         Path p = new Path.Builder()
                 .add(0, 2).add(1, 2).add(2, 2).add(2, 3).add(3, 3)
                 .add(4, 3).add(5, 3).add(5, 2).add(6, 2).build();
 
-        Enemy e = Enemy.createEnemy(p, Enemy.EnemyType.BLUE);
-        assertEquals(e.getDamage(), 10);
-        assertEquals(e.getMoney(), 10);
+        Enemy e = new Enemy(p, Enemy.EnemyType.BLUE);
+        assertEquals(e.getType().damage, 10);
+        assertEquals(e.getType().money, 10);
+        assertEquals(e.getType().speed, 8);
         assertEquals(e.isAlive(), true);
-        assertEquals(e.getSpeed(),8);
-        assertEquals(e.getPos(), new Vector2(0,2));
+        assertEquals(e.getPos(), new Vector2(0, 2));
         assertEquals(e.ended(), false);
         e.attacked(new Tower(TowerType.Basic1, 1, 1));
         assertEquals(e.isAlive(), true);

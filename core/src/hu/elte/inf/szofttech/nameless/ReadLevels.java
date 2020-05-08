@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import hu.elte.inf.szofttech.nameless.model.Path;
 import hu.elte.inf.szofttech.nameless.model.Wave;
-import hu.elte.inf.szofttech.nameless.model.enemy.Enemy;
 import hu.elte.inf.szofttech.nameless.model.Level;
+import hu.elte.inf.szofttech.nameless.model.enemy.EnemyType;
 
 /**
  * Reading path coordinates and enemies information from a file
@@ -31,7 +31,7 @@ public final class ReadLevels {
                     for (int i = 0; i < 5; i++) {
                         int enemyNum = Integer.parseInt(myReader.next());
                         for (int j = 0; j < enemyNum; j++) {
-                            wave.add(Enemy.EnemyType.values()[i]);
+                            wave.add(EnemyType.values()[i]);
                         }
                     }
                     waveList.add(wave.build());

@@ -15,16 +15,16 @@ public class UtilsTest {
 
     @Test
     public void gridToVectorTest() {
-        assertEquals(new Vector2(5,5), Utils.gridToVector(new GridPoint2(5, 5)));
+        assertEquals(new Vector2(5, 5), Utils.gridToVector(new GridPoint2(5, 5)));
     }
 
     @Test
     public void convertFromGridTest() {
-        assertEquals(new Vector2(365,365), Utils.convertFromGrid(new Vector2(5, 5)));
+        assertEquals(new Vector2(365, 365), Utils.convertFromGrid(new Vector2(5, 5)));
     }
 
     @Test
     public void getCenterOfTileTest() {
-        assertEquals(new Vector2(328.5f,328.5f), Utils.getCenterOfTile(new Vector2(365, 365)));
+        assertEquals(new Vector2(328.5f, 328.5f), Utils.getCenterOfTile(new Vector2(365, 365)));
     }
 }

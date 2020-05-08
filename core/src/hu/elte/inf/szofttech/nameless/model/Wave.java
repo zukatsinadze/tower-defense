@@ -1,6 +1,7 @@
 package hu.elte.inf.szofttech.nameless.model;
 
 import hu.elte.inf.szofttech.nameless.model.enemy.Enemy;
+import hu.elte.inf.szofttech.nameless.model.enemy.EnemyType;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -89,8 +90,8 @@ public final class Wave {
          * @param enemyType the type of the enemy to add to the wave
          * @return this builder
          */
-        public Builder add(Enemy.EnemyType enemyType) {
-            this.enemies.add(Enemy.createEnemy(this.path, enemyType));
+        public Builder add(EnemyType enemyType) {
+            this.enemies.add(new Enemy(this.path, enemyType));
             return this;
         }
     }

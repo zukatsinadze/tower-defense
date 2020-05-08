@@ -13,20 +13,20 @@ import org.junit.runner.RunWith;
 public class EnemyPosTest {
 
     @Test
-    public void testEnemyPos(){
+    public void testEnemyPos() {
         Path p = new Path.Builder()
                 .add(0, 2).add(1, 2).add(2, 2).add(2, 3).add(3, 3)
                 .add(4, 3).add(5, 3).add(5, 2).add(6, 2).build();
         EnemyPos ep = new EnemyPos(p);
         assertEquals(false, ep.ended());
-        assertEquals(new Vector2(0,2), ep.getPos());
-        ep.move(10,10);
-        assertEquals(new Vector2(1,2), ep.getPos());
-        ep.move(10,10);
-        ep.move(10,10);
-        assertEquals(new Vector2(2,2), ep.getPos());
+        assertEquals(new Vector2(0, 2), ep.getPos());
+        ep.move(10, 10);
+        assertEquals(new Vector2(1, 2), ep.getPos());
+        ep.move(10, 10);
+        ep.move(10, 10);
+        assertEquals(new Vector2(2, 2), ep.getPos());
         for (int i = 0; i < 100; ++i)
-            ep.move(10,10);
+            ep.move(10, 10);
         assertEquals(true, ep.ended());
     }
 }
