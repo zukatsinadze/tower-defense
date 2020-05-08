@@ -29,12 +29,10 @@ public class TowerTest {
         ArrayList<Enemy> enemies = new ArrayList<>();
         enemies.add(e);
         Tower t = new Tower(TowerType.Basic1, 2, 2);
-        assertEquals(t.getRange(), 10);
-        assertEquals(t.getPrice(), 75);
+        assertEquals(t.getType().range, 10);
+        assertEquals(t.getType().price, 75);
+        assertEquals(t.getType().damage, 10);
         assertEquals(t.getGridPos(), new GridPoint2(2, 2));
-        assertEquals(t.getDamage(), 10);
-        t.setTargets(enemies);
-        assertEquals(t.getTarget(), enemies);
         assertEquals(t.intersects(e), true);
         assertEquals(t.intersects(e2), false);
     }
