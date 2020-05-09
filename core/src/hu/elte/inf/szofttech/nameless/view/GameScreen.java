@@ -218,7 +218,7 @@ public class GameScreen extends ScreenAdapter {
                         upgrade2.setPosition(tower.getPosition().x + 75f, tower.getPosition().y - 25f);
                         stage.addActor(upgrade2);
                         tower.setUpgrade2(upgrade2);
-                        upgrade1.addListener(new InputListener() {
+                        upgrade2.addListener(new InputListener() {
                             @Override
                             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                                 if ( tower.getXP() >= upgradedTower2.xp ) {
