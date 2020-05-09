@@ -9,8 +9,8 @@ import hu.elte.inf.szofttech.nameless.model.Path;
  */
 public class EnemyPos {
     private int next;
-    private Vector2 pos;
     private Path path;
+    private Vector2 pos;
 
     public EnemyPos(Path path) {
         // first element of path

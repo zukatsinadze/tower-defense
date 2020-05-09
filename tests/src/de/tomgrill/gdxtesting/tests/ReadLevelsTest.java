@@ -1,13 +1,11 @@
 package de.tomgrill.gdxtesting.tests;
 
-import hu.elte.inf.szofttech.nameless.ReadLevels;
+import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import hu.elte.inf.szofttech.nameless.model.Level;
-
-import java.util.List;
-
 import static org.junit.Assert.assertEquals;
+import hu.elte.inf.szofttech.nameless.ReadLevels;
+import hu.elte.inf.szofttech.nameless.model.Level;
 
 @RunWith(GdxTestRunner.class)
 public class ReadLevelsTest {

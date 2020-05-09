@@ -1,18 +1,17 @@
 package hu.elte.inf.szofttech.nameless.model;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
 import hu.elte.inf.szofttech.nameless.model.enemy.Enemy;
 import hu.elte.inf.szofttech.nameless.model.enemy.EnemyType;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 public final class Wave {
 
-    private final List<Enemy> enemies;
     private int nextIndex;
-    private final float spawnTime;
     private float nextTime;
+    private final float spawnTime;
+    private final List<Enemy> enemies;
 
     public Wave(List<Enemy> enemies) {
         this.enemies = enemies;

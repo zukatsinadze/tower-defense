@@ -9,8 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import hu.elte.inf.szofttech.nameless.model.Wave;
 import hu.elte.inf.szofttech.nameless.model.Path;
-import hu.elte.inf.szofttech.nameless.model.enemy.Enemy;
 import hu.elte.inf.szofttech.nameless.model.Level;
+import hu.elte.inf.szofttech.nameless.model.enemy.Enemy;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 import hu.elte.inf.szofttech.nameless.model.tower.TowerType;
 
@@ -28,8 +28,8 @@ public class Game {
     private int currentLevel = 1;
 
     private ArrayList<Enemy> targets = null;
-    private List<Tower> deployedTowers = new ArrayList<>();
     private List<Level> levels = ReadLevels.read();
+    private List<Tower> deployedTowers = new ArrayList<>();
 
     public static Game getInstance() {
         if (instance == null) {

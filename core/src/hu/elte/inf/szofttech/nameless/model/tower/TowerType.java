@@ -14,6 +14,7 @@ public enum TowerType {
     AdvancedPoison(Textures.advanced31, 25, 150, 15, 10, 20, new PoisonAttack()),
     AdvancedFire(Textures.advanced32, 30, 175, 8, 8, 30, new FireAttack());
 
+    //public final String name;
     public final Texture texture;
     public final int xp;
     public final int price;
@@ -24,6 +25,7 @@ public enum TowerType {
 
     TowerType(Texture texture, int xp, int price, int damage, int range, int attackSpeed,
               AttackAbility attackAbility) {
+        //this.name = name;
         this.texture = texture;
         this.xp = xp;
         this.price = price;

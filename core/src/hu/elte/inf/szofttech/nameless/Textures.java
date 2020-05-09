@@ -27,7 +27,6 @@ public final class Textures {
         tiles.add(new Texture("tile1.jpg"));
         paths.add(new Texture("path8.jpg"));
 
-
         tiles.add(new Texture("tile1.jpg"));
         paths.add(new Texture("path7.jpg"));
     }

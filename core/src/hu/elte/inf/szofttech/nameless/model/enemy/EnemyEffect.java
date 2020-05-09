@@ -3,14 +3,14 @@ package hu.elte.inf.szofttech.nameless.model.enemy;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 
 public abstract class EnemyEffect {
-    private final float duration;
     private float timer;
     private Tower source;
+    private final float duration;
 
     protected EnemyEffect(float duration) {
-        this.duration = duration;
         this.timer = 0;
         this.source = null;
+        this.duration = duration;
     }
 
     public final Tower getSource() {

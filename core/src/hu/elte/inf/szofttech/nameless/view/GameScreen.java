@@ -172,15 +172,14 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Creating towers in event listener function
-     *
-     * @param x         mouse position x
+     *  @param x         mouse position x
      * @param y         mouse position y
-     * @param towerType what type of tower need to be created
-     * @param t1        text of the function of tower
-     * @param t2        text of the function of tower
+     * @param createdTower what type of tower need to be created
+     * @param upgradedTower1        text of the function of tower
+     * @param upgradedTower2        text of the function of tower
      */
-    public void createTower(int x, int y, TowerType towerType, String t1, String t2) {
-        Tower tower = Game.getInstance().buildTower(towerType, x, Gdx.graphics.getHeight() - y);
+    public void createTower(int x, int y, TowerType createdTower, TowerType upgradedTower1, TowerType upgradedTower2) {
+        Tower tower = Game.getInstance().buildTower(createdTower, x, Gdx.graphics.getHeight() - y);
         if (tower != null) {
             tower.addListener(new InputListener() {
                 Label XPLabel;
@@ -198,19 +197,64 @@ public class GameScreen extends ScreenAdapter {
                         tower.setXPLabel(XPLabel);
                         tower.refreshXPLabel();
 
-                        upgrade1 = new TextButton(t1, Config.skin);
+                        upgrade1 = new TextButton(upgradedTower1, Config.skin);
                         upgrade1.setScale(0.6f,0.6f);
                         upgrade1.setSize(Config.col_width * 1.5f, Config.row_height * 0.7f);
                         upgrade1.setPosition(tower.getPosition().x + 75f, tower.getPosition().y + 40f);
                         stage.addActor(upgrade1);
                         tower.setUpgrade1(upgrade1);
-
-                        upgrade2 = new TextButton(t2, Config.skin);
+                        upgrade1.addListener(new InputListener() {
+                            @Override
+                            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                switch (upgradedTower1) {
+                                    case "Slow":
+                                        if ( tower.getXP() >= 15 ) {
+                                            tower.upgradeTower(TowerType.AdvancedSlow);
+                                        }
+                                        break;
+                                    case "Teleport":
+                                        if ( tower.getXP() >= 20 ) {
+                                            tower.upgradeTower(TowerType.AdvancedTeleport);
+                                        }
+                                        break;
+                                    case "Poison":
+                                        if ( tower.getXP() >= 20 ) {
+                                            tower.upgradeTower(TowerType.AdvancedPoison);
+                                        }
+                                        break;
+                                }
+                                return true;
+                            }
+                        });
+                        upgrade2 = new TextButton(upgradedTower2, Config.skin);
                         upgrade1.setScale(0.6f, 0.6f);
                         upgrade2.setSize(Config.col_width * 1.5f, Config.row_height * 0.7f);
                         upgrade2.setPosition(tower.getPosition().x + 75f, tower.getPosition().y - 25f);
                         stage.addActor(upgrade2);
                         tower.setUpgrade2(upgrade2);
+                        upgrade1.addListener(new InputListener() {
+                            @Override
+                            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                switch (upgradedTower2) {
+                                    case "Freeze":
+                                        if ( tower.getXP() >= 20 ) {
+                                            tower.upgradeTower(TowerType.AdvancedFreeze);
+                                        }
+                                        break;
+                                    case "Explosion":
+                                        if ( tower.getXP() >= 25 ) {
+                                            tower.upgradeTower(TowerType.AdvancedExplosion);
+                                        }
+                                        break;
+                                    case "Fire":
+                                        if ( tower.getXP() >= 30 ) {
+                                            tower.upgradeTower(TowerType.AdvancedFire);
+                                        }
+                                        break;
+                                }
+                                return true;
+                            }
+                        });
                     } else {
                         clicked = false;
                         XPLabel.remove();
@@ -238,7 +282,7 @@ public class GameScreen extends ScreenAdapter {
                     InputAdapter input = new InputAdapter() {
                         @Override
                         public boolean touchDown(int x, int y, int pointer, int button) {
-                            createTower(x, y, TowerType.Basic1, "Slow", "Freeze");
+                            createTower(x, y, TowerType.Basic1, );
                             Gdx.input.setInputProcessor(stage);
                             return true;
                         }

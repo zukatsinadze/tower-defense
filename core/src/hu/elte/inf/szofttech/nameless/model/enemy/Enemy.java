@@ -20,11 +20,11 @@ import java.util.stream.Collectors;
  * the behavior of enemy
  */
 public class Enemy {
-    private final EnemyType type;
-    private Sprite sprite;
     private int health;
     private EnemyPos pos;
+    private Sprite sprite;
     private boolean spawned;
+    private final EnemyType type;
     private final Map<EffectType, EnemyEffect> effects;
 
     /**
