@@ -39,7 +39,7 @@ public class Enemy {
         this.sprite.setSize(Config.tileSize / 2.0f, Config.tileSize);
         this.spawned = false;
         this.effects = Arrays.stream(EffectType.values())
-                .collect(Collectors.toMap(Function.identity(), EnemyEffect::new, (x, y) -> {
+                .collect(Collectors.toMap(Function.identity(), effect -> effect.effect.get(), (x, y) -> {
                     throw new IllegalStateException("Bug");
                 }, () -> new EnumMap<>(EffectType.class)));
     }

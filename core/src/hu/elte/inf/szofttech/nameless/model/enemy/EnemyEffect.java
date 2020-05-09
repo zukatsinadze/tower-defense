@@ -2,30 +2,30 @@ package hu.elte.inf.szofttech.nameless.model.enemy;
 
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 
-public class EnemyEffect {
-    private final EffectType type;
+public abstract class EnemyEffect {
+    private final float duration;
     private float timer;
     private Tower source;
 
-    protected EnemyEffect(EffectType type) {
-        this.type = type;
+    protected EnemyEffect(float duration) {
+        this.duration = duration;
         this.timer = 0;
         this.source = null;
     }
 
-    public Tower getSource() {
+    public final Tower getSource() {
         return this.source;
     }
 
     /**
      * @return true if the effect is currently active
      */
-    public boolean isActive() {
+    public final boolean isActive() {
         return this.timer > 0;
     }
 
     public void activate(Tower source) {
-        this.timer = this.type.time;
+        this.timer = this.duration;
         this.source = source;
     }
 
@@ -33,17 +33,24 @@ public class EnemyEffect {
         this.timer = Math.max(0, this.timer - delta);
     }
 
-    public double modifySpeed(int speed) {
+    public final double modifySpeed(int speed) {
         if (isActive()) {
-            return this.type.action.modifySpeed(speed);
+            return this.speedModifier(speed);
         } else {
             return speed;
         }
     }
 
-    public void affectEnemy(Enemy enemy) {
+    public final void affectEnemy(Enemy enemy) {
         if (isActive()) {
-            this.type.action.affectEnemy(enemy);
+            this.enemyEffect(enemy);
         }
+    }
+
+    protected double speedModifier(int speed) {
+        return speed;
+    }
+
+    protected void enemyEffect(Enemy enemy) {
     }
 }
