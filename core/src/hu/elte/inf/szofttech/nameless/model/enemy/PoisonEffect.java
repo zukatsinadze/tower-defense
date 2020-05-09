@@ -28,7 +28,7 @@ public class PoisonEffect extends EnemyEffect {
     protected void enemyEffect(Enemy enemy) {
         if (this.tickTimer > 0.5) {
             enemy.loseHealth(1);
-            this.tickTimer -= 0.5;
+            this.tickTimer = 0;
         }
     }
 }

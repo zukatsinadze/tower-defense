@@ -114,7 +114,7 @@ public class Tower extends Actor {
         this.attackTimer += delta;
         for (Enemy enemy : this.targets) {
             if (this.attackTimer > 10.0 / this.type.attackSpeed && enemy.canBeAttacked() && this.intersects(enemy)) {
-                this.attackTimer -= 10.0 / this.type.attackSpeed;
+                this.attackTimer = 0;
                 this.type.attackAbility.attack(this, enemy);
             }
         }
