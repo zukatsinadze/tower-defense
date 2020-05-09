@@ -10,6 +10,12 @@ import hu.elte.inf.szofttech.nameless.Config;
 import hu.elte.inf.szofttech.nameless.model.Path;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 
+import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 /**
  * the behavior of enemy
  */
@@ -19,6 +25,7 @@ public class Enemy {
     private int health;
     private EnemyPos pos;
     private boolean spawned;
+    private final Map<EffectType, EnemyEffect> effects;
 
     /**
      * @param path the path the enemy follows
@@ -31,6 +38,10 @@ public class Enemy {
         this.sprite = new Sprite(type.texture);
         this.sprite.setSize(Config.tileSize / 2.0f, Config.tileSize);
         this.spawned = false;
+        this.effects = Arrays.stream(EffectType.values())
+                .collect(Collectors.toMap(Function.identity(), EnemyEffect::new, (x, y) -> {
+                    throw new IllegalStateException("Bug");
+                }, () -> new EnumMap<>(EffectType.class)));
     }
 
     public EnemyType getType() {
@@ -41,16 +52,38 @@ public class Enemy {
         return this.pos.getPos();
     }
 
+    public void loseHealth(int damage) {
+        this.health -= damage;
+    }
+
     /**
      * handle the situation that the enemy got attacked
      *
-     * @param tower
+     * @param source
      */
-    public void attacked(Tower tower) {
-        this.health -= tower.getType().damage;
-        if (!this.isAlive()) {
-            tower.gainXP(this.type.xp);
-            Game.getInstance().addMoney(this.type.money);
+    public void attacked(Tower source) {
+        this.loseHealth(source.getType().damage);
+        checkDeath(source);
+    }
+
+    /**
+     * @param delta moves the enemy
+     */
+    public void move(float delta) {
+        if (this.spawned && this.isAlive()) {
+            this.effects.values().forEach(effect -> {
+                effect.tick(delta);
+                effect.affectEnemy(this);
+                checkDeath(effect.getSource());
+            });
+
+            double speed = this.effects.values().stream()
+                    .mapToDouble(effect -> effect.modifySpeed(this.type.speed)).min().getAsDouble();
+            this.pos.move(speed, delta);
+        }
+        if (this.ended() && this.spawned) {
+            this.spawned = false;
+            Game.getInstance().getDamaged(this.type.damage);
         }
     }
 
@@ -61,16 +94,10 @@ public class Enemy {
         return this.health > 0;
     }
 
-    /**
-     * @param time moves the enemy
-     */
-    public void move(float time) {
-        if (this.spawned && this.isAlive()) {
-            this.pos.move(this.type.speed, time);
-        }
-        if (this.ended() && this.spawned) {
-            this.spawned = false;
-            Game.getInstance().getDamaged(this.type.damage);
+    private void checkDeath(Tower source) {
+        if (!this.isAlive()) {
+            source.gainXP(this.type.xp);
+            Game.getInstance().addMoney(this.type.money);
         }
     }
 
@@ -118,5 +145,9 @@ public class Enemy {
 
     public void teleportBack() {
         this.pos.teleportBack();
+    }
+
+    public void applyEffect(Tower source, EffectType effect) {
+        this.effects.get(effect).activate(source);
     }
 }

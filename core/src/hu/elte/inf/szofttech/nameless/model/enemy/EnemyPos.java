@@ -23,13 +23,12 @@ public class EnemyPos {
         return this.pos;
     }
 
-    public void move(int speed, float time) {
+    public void move(double speed, float delta) {
         // time in seconds
         // speed in 0.1 square/second
         // distance in square
-        double distance;
+        double distance = speed * 0.1 * delta;
         Vector2 nextPos = Utils.gridToVector(this.path.get(this.next));
-        distance = speed * 0.1 * time;
 
         if (this.pos.x == nextPos.x) {
             // already moves to the end
