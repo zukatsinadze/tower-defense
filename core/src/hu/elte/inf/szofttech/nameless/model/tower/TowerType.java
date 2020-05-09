@@ -8,11 +8,11 @@ public enum TowerType {
     Basic2("basic2", Textures.basic2, 0, 100, 15, 12, 8, new NormalAttack()),
     Basic3("basic3", Textures.basic3, 0, 125, 8, 8, 20, new NormalAttack()),
     AdvancedSlow("Slow", Textures.advanced11, 15, 100, 10, 20, 12, new SlowAttack()),
-    AdvancedFreeze("Freeze", Textures.advanced12, 20, 125, 20, 10, 10, new FreezeAttack()),
-    AdvancedTeleport("Teleport", Textures.advanced21, 20, 125, 15, 18, 12, new TeleportAttack()),
-    AdvancedExplosion("Explosion", Textures.advanced22, 25, 150, 18, 12, 8, new ExplosionAttack()),
     AdvancedPoison("Poison", Textures.advanced31, 25, 150, 10, 15, 20, new PoisonAttack()),
-    AdvancedFire("Fire", Textures.advanced32, 30, 175, 8, 8, 30, new FireAttack());
+    AdvancedBoom("Boom", Textures.advanced22, 25, 150, 18, 12, 8, new BoomAttack()),
+    AdvancedTeleport("Teleport", Textures.advanced21, 20, 125, 15, 18, 12, new TeleportAttack()),
+    AdvancedFire("Fire", Textures.advanced32, 30, 175, 8, 8, 30, new FireAttack()),
+    AdvancedFreeze("Freeze", Textures.advanced12, 20, 125, 20, 10, 10, new FreezeAttack());
 
     public final String name;
     public final Texture texture;

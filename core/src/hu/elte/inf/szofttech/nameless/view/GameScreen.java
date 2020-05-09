@@ -197,7 +197,7 @@ public class GameScreen extends ScreenAdapter {
                         tower.setXPLabel(XPLabel);
                         tower.refreshXPLabel();
 
-                        upgrade1 = new TextButton(upgradedTower1, Config.skin);
+                        upgrade1 = new TextButton(upgradedTower1.name, Config.skin);
                         upgrade1.setScale(0.6f,0.6f);
                         upgrade1.setSize(Config.col_width * 1.5f, Config.row_height * 0.7f);
                         upgrade1.setPosition(tower.getPosition().x + 75f, tower.getPosition().y + 40f);
@@ -206,27 +206,13 @@ public class GameScreen extends ScreenAdapter {
                         upgrade1.addListener(new InputListener() {
                             @Override
                             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                switch (upgradedTower1) {
-                                    case "Slow":
-                                        if ( tower.getXP() >= 15 ) {
-                                            tower.upgradeTower(TowerType.AdvancedSlow);
-                                        }
-                                        break;
-                                    case "Teleport":
-                                        if ( tower.getXP() >= 20 ) {
-                                            tower.upgradeTower(TowerType.AdvancedTeleport);
-                                        }
-                                        break;
-                                    case "Poison":
-                                        if ( tower.getXP() >= 20 ) {
-                                            tower.upgradeTower(TowerType.AdvancedPoison);
-                                        }
-                                        break;
+                                if ( tower.getXP() >= upgradedTower1.xp ) {
+                                    tower.upgradeTower(upgradedTower1);
                                 }
                                 return true;
                             }
                         });
-                        upgrade2 = new TextButton(upgradedTower2, Config.skin);
+                        upgrade2 = new TextButton(upgradedTower2.name, Config.skin);
                         upgrade1.setScale(0.6f, 0.6f);
                         upgrade2.setSize(Config.col_width * 1.5f, Config.row_height * 0.7f);
                         upgrade2.setPosition(tower.getPosition().x + 75f, tower.getPosition().y - 25f);
@@ -235,22 +221,8 @@ public class GameScreen extends ScreenAdapter {
                         upgrade1.addListener(new InputListener() {
                             @Override
                             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                switch (upgradedTower2) {
-                                    case "Freeze":
-                                        if ( tower.getXP() >= 20 ) {
-                                            tower.upgradeTower(TowerType.AdvancedFreeze);
-                                        }
-                                        break;
-                                    case "Explosion":
-                                        if ( tower.getXP() >= 25 ) {
-                                            tower.upgradeTower(TowerType.AdvancedExplosion);
-                                        }
-                                        break;
-                                    case "Fire":
-                                        if ( tower.getXP() >= 30 ) {
-                                            tower.upgradeTower(TowerType.AdvancedFire);
-                                        }
-                                        break;
+                                if ( tower.getXP() >= upgradedTower2.xp ) {
+                                    tower.upgradeTower(upgradedTower2);
                                 }
                                 return true;
                             }
@@ -282,7 +254,7 @@ public class GameScreen extends ScreenAdapter {
                     InputAdapter input = new InputAdapter() {
                         @Override
                         public boolean touchDown(int x, int y, int pointer, int button) {
-                            createTower(x, y, TowerType.Basic1, );
+                            createTower(x, y, TowerType.Basic1, TowerType.AdvancedSlow, TowerType.AdvancedPoison);
                             Gdx.input.setInputProcessor(stage);
                             return true;
                         }
@@ -309,7 +281,7 @@ public class GameScreen extends ScreenAdapter {
                     InputAdapter input = new InputAdapter() {
                         @Override
                         public boolean touchDown(int x, int y, int pointer, int button) {
-                            createTower(x, y, TowerType.Basic2, "Teleport", "Explosion");
+                            createTower(x, y, TowerType.Basic2, TowerType.AdvancedBoom, TowerType.AdvancedTeleport);
                             Gdx.input.setInputProcessor(stage);
                             return true;
                         }
@@ -336,7 +308,7 @@ public class GameScreen extends ScreenAdapter {
                     InputAdapter input = new InputAdapter() {
                         @Override
                         public boolean touchDown(int x, int y, int pointer, int button) {
-                            createTower(x, y, TowerType.Basic3, "Poison", "Fire");
+                            createTower(x, y, TowerType.Basic3, TowerType.AdvancedFire, TowerType.AdvancedFreeze);
                             Gdx.input.setInputProcessor(stage);
                             return true;
                         }

@@ -3,7 +3,7 @@ package hu.elte.inf.szofttech.nameless.model.tower;
 import hu.elte.inf.szofttech.nameless.Utils;
 import hu.elte.inf.szofttech.nameless.model.enemy.Enemy;
 
-public class ExplosionAttack implements AttackAbility {
+public class BoomAttack implements AttackAbility {
     @Override
     public void attack(Tower tower, Enemy enemy) {
         tower.getTargets().forEach(target -> {
