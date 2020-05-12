@@ -71,6 +71,8 @@ public class Game {
         return currentLevel;
     }
 
+    public List<Tower> getDeployedTowers() { return deployedTowers; }
+
     /**
      * refresh value of XP of deployed towers
      */
@@ -149,7 +151,6 @@ public class Game {
         Texture tile = Textures.tiles.get(this.currentLevel - 1);
         Texture pathTile = Textures.paths.get(this.currentLevel - 1);
 
-        this.path = this.levels.get(currentLevel - 1).getPath();
         spriteBatch.begin();
         for (int i = 0; i < Config.gridWidth; ++i) {
             for (int j = 0; j < Config.gridHeight; ++j) {
@@ -242,6 +243,7 @@ public class Game {
      */
     private void setTargets() {
         this.wave = this.levels.get(currentLevel - 1).getWave(currentWave - 1);
+        this.path = this.levels.get(currentLevel - 1).getPath();
         this.targets = new ArrayList<>(this.wave.getEnemies());
         for (Tower t : deployedTowers) {
             t.setTargets(this.targets);
@@ -255,7 +257,7 @@ public class Game {
      * @return boolean
      */
     public boolean canBuyTower(Tower tower) {
-        return money >= tower.getType().price;
+        return this.money >= tower.getType().price;
     }
 
     /**
