@@ -1,6 +1,6 @@
 # Nameless
 
-## TODO:
+## TODO: Yeey, we are done!
 
 - [x] Set up CI
 - [x] Integrate JUnit
@@ -18,24 +18,23 @@
 - [x] dynamic tower(place sell scope)
 - [x] Finish game somehow
 - [x] fix CI artifacts
-- [ ] Add more tests
-- [ ] Implement special abilities
-- [ ] ...
+- [x] Add more tests
+- [x] Implement special abilities
+- [x] ...
 
-# UPDATED: 4.25.2020
+# UPDATED: 5.12.2020
 
 ## Zuka:
-- [ ] Add more tests
 
 
 
 ## Su:
-- [ ] InputListener for towers without making them buttons
 
 
 
 ## Szumi:
-- [ ] work on SpecialAbility classes
+
+
 
 ## Resources:
 
