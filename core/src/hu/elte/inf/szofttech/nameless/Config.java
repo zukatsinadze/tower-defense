@@ -16,6 +16,7 @@ public class Config {
     public static final float col_width = Gdx.graphics.getWidth() / 20.0f;
     public static final float row_height = Gdx.graphics.getWidth() / 20.0f;
     public static final int guiHeight = screenHeight - tileSize * gridHeight;
-    public static final Skin skin = new Skin(Gdx.files.internal("skin/flat-earth-ui.json"));;
+    public static final Skin skin = new Skin(Gdx.files.internal("skin/flat-earth-ui.json"));
+    ;
     public static final Color button_blue = new Color(12 / 255.0f, 149 / 255.0f, 240 / 255.0f, 1);
 }

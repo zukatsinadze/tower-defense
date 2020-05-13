@@ -1,4 +1,5 @@
 package hu.elte.inf.szofttech.nameless.model.tower;
+
 import hu.elte.inf.szofttech.nameless.model.enemy.Enemy;
 
 public class TeleportAttack implements AttackAbility {

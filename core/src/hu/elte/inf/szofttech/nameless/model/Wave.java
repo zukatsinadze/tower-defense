@@ -3,6 +3,7 @@ package hu.elte.inf.szofttech.nameless.model;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+
 import hu.elte.inf.szofttech.nameless.model.enemy.Enemy;
 import hu.elte.inf.szofttech.nameless.model.enemy.EnemyType;
 

@@ -26,7 +26,6 @@ public class Tower extends Actor {
     private float attackTimer = 0;
     private Button upgrade1 = null;
     private Button upgrade2 = null;
-    private Boolean upgraded = false;
     private ArrayList<Enemy> targets = null;
 
     public Tower(TowerType type, int x, int y) {
@@ -84,12 +83,14 @@ public class Tower extends Actor {
     }
 
     public void refreshXPLabel() {
-        if (this.XPLabel != null){
+        if (this.XPLabel != null) {
             this.XPLabel.setText(String.valueOf(this.xp));
         }
     }
 
-    public void setXPLabel(Label xpLabel) { this.XPLabel = xpLabel; }
+    public void setXPLabel(Label xpLabel) {
+        this.XPLabel = xpLabel;
+    }
 
     public void setTargets(ArrayList<Enemy> targets) {
         this.targets = targets;

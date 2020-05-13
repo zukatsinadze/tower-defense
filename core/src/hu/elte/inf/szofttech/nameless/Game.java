@@ -71,7 +71,9 @@ public class Game {
         return currentLevel;
     }
 
-    public List<Tower> getDeployedTowers() { return deployedTowers; }
+    public List<Tower> getDeployedTowers() {
+        return deployedTowers;
+    }
 
     /**
      * refresh value of XP of deployed towers
@@ -81,6 +83,7 @@ public class Game {
             t.refreshXPLabel();
         }
     }
+
     /**
      * method for rendering map, enemies and tower
      *

@@ -1,9 +1,12 @@
 package de.tomgrill.gdxtesting.tests;
 
 import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import static org.junit.Assert.assertEquals;
+
 import hu.elte.inf.szofttech.nameless.ReadLevels;
 import hu.elte.inf.szofttech.nameless.model.Level;
 

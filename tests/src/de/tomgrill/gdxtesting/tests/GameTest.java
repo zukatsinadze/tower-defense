@@ -18,7 +18,6 @@ package de.tomgrill.gdxtesting.tests;
 
 import static org.junit.Assert.assertEquals;
 
-import com.badlogic.gdx.Gdx;
 import hu.elte.inf.szofttech.nameless.*;
 import hu.elte.inf.szofttech.nameless.model.tower.Tower;
 import hu.elte.inf.szofttech.nameless.model.tower.TowerType;
@@ -50,12 +49,12 @@ public class GameTest {
     public void towersTest() {
         Game g = Game.getInstance();
         g.addMoney(100000);
-        Tower tower1 = g.deployTower(TowerType.Basic1,4, 2);
-        Tower tower2 = g.deployTower(TowerType.Basic1,11, 6);
-        Tower tower3 = g.deployTower(TowerType.Basic1,2, 6);
+        Tower tower1 = g.deployTower(TowerType.Basic1, 4, 2);
+        Tower tower2 = g.deployTower(TowerType.Basic1, 11, 6);
+        Tower tower3 = g.deployTower(TowerType.Basic1, 2, 6);
         assertEquals(3, g.getDeployedTowers().size());
         g.addMoney(-10000000);
-        Tower tower4 = g.buildTower(TowerType.Basic1,2, 6);
+        Tower tower4 = g.buildTower(TowerType.Basic1, 2, 6);
         assertEquals(3, g.getDeployedTowers().size());
     }
 

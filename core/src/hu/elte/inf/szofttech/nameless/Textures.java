@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.Texture;
 
 public final class Textures {
-    private Textures() { }
+    private Textures() {
+    }
 
     public static final Texture pauseButton = new Texture("pause_button.png");
     public static final Texture resumeButton = new Texture("resume_button.png");

@@ -20,7 +20,7 @@ public final class Level {
     }
 
     public boolean hasEnded() {
-        for (Wave w: waves){
+        for (Wave w : waves) {
             if (!w.hasEnded())
                 return false;
         }
